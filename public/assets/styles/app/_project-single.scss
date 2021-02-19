@@ -1,0 +1,480 @@
+/* -----------------------------------------------------------------
+    - Project Single
+----------------------------------------------------------------- */
+
+.header-fullscreen {
+  background-color: $black-color;
+  color: $white-color;
+  height: 100vh;
+  
+  &.header-page {
+    margin-top: 0;
+	  margin-bottom: 3rem;
+	  padding-bottom: 3rem;
+	
+	  @media only screen and (max-width: $small) {
+	    margin-bottom: 1.5rem;
+	    padding-bottom: 1.5rem;
+	  }
+  }
+  
+  .title--overhead,
+  .item-details__title,
+  .btn-link {
+    color: $white-color;
+  }
+  
+  .title--tail {
+	  &::before {
+	    background-color: $white-color;
+	  }
+  }
+}
+
+.header-page {
+  margin-top: 20vh;
+  margin-bottom: 2rem;
+
+  @media only screen and (max-width: $medium) {
+    margin-top: 9.37rem;
+  }
+  
+  @media only screen and (max-width: $small) {
+    margin-top: 5rem;
+  }
+  
+  &--gutterBottom {
+    height: 90vh;
+  }
+  
+  &--half {
+    margin-bottom: 4rem;
+	
+	  @media only screen and (max-width: $small) {
+	    margin-bottom: 1.2rem;
+  	}
+  }
+  
+  &__container-fluid {
+    @include display(flex);
+    padding-left: 4.25rem;
+    padding-right: 4.25rem;
+  	position: relative;
+	  height: 100%;
+    width: 100%;
+	  z-index: 1;
+	
+    @media only screen and (max-width: $large-xxl) {
+      padding-left: 3.12rem;
+      padding-right: 3.12rem;
+    }
+
+    @media only screen and (max-width: $small) {
+      padding-left: 1.42rem;
+      padding-right: 1.42rem;
+    }
+  
+    @media only screen and (min-width: $large-xxxl) {
+      padding-left: 6.25rem;
+      padding-right: 6.25rem;
+    }
+
+	  .row {
+	    align-items: center;
+	    width: 100%;
+	  }
+  }
+  
+  .title--display-1 {
+    font-weight: $weight-300;
+	
+	  @media only screen and (max-width: $small) {
+	    font-weight: $weight-400;
+	  }
+  }
+  
+  &__description {
+    font-size: 1.125rem;
+	
+	  @media only screen and (max-width: $large) {
+	    padding-bottom: 1.25rem;
+    }
+    
+    @media only screen and (max-width: $small) {
+      line-height: 1.6;
+    }
+  }
+}
+
+.flex-center-end {
+  @include display(flex);
+  @include flex-direction(column);
+  height: 100%;
+  
+  .flex-center {
+    @include display(flex);
+    flex: 1;
+	
+	  &__inner {
+	    @include display(flex);
+	    @include flex-direction(column);
+	    justify-content: center;
+	    padding-top: 5rem;
+	    width: 100%;
+	  
+	    @media only screen and (max-width: $small) {
+	      //text-align: center;
+	    }
+  	}
+  }
+}
+
+.image-container {
+  @include display(flex);
+  justify-content: center;
+  height: 45vw;
+  overflow: hidden;
+  position: relative;
+
+  @media only screen and (max-width: $large) {
+    height: 60vw;
+  }
+  
+  @media only screen and (max-width: $small) {
+    height: 300px;
+  }
+
+  &--gutters {
+    margin-left: 4.25rem;
+    margin-right: 4.25rem;
+	
+	  @media only screen and (max-width: $medium) {
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+	  }
+	
+	  @media only screen and (max-width: $small) {
+	    margin-left: .93rem;
+      margin-right: .93rem;
+	  }
+  }
+  
+  &--half {
+    margin-right: 30%;
+	
+	  @media only screen and (max-width: $large) {
+	    margin-right: 0;
+	  }
+  }
+  
+  &--cutoutRight {
+    margin-right: 12vw;
+	
+	  @media only screen and (max-width: $medium) {
+	    margin-right: 0;
+	  }
+  }
+}
+
+.video-container {
+  height: 45vw;
+  position: relative;
+  
+  @media only screen and (max-width: $large) {
+    height: 60vw;
+  }
+  
+  @media only screen and (max-width: $small) {
+    height: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .video__btn {
+    background-color: $black-color;
+    box-shadow: 0 0 0 0px $black-color;
+    border: 0;
+    border-radius: 50%;
+    color: $white-color;
+	  font-size: .75rem;
+    font-weight: $weight-700;
+    height: 7.5rem;
+    letter-spacing: .3rem;
+    margin: 0;
+	  @include position(absolute, $top: 50%, $left: 50%);
+    text-align: center;
+    text-transform: uppercase;
+    width: 7.5rem;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: all .3s ease-in-out;
+    z-index: 2;
+	
+    @media only screen and (max-width: $large) {
+      height: 5rem;
+	    letter-spacing: .2rem;
+	    width: 5rem;
+    }
+  
+    @media only screen and (max-width: $small) {
+      height: 3.75rem;
+	    letter-spacing: .2rem;
+	    width: 3.75rem;
+    }
+
+    &:before {
+      content: "PLAY";
+    }
+
+    &:hover {
+      background-color: $black-color;
+      box-shadow: 0 0 0 10px $black-color;
+      cursor: pointer;
+    }
+
+    &:focus {
+	    outline: 0;
+	  }	
+  }
+  
+  .video__poster {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+	  @include position(absolute, $top: 0, $left: 0);
+  	height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: .3s ease-in-out;
+    transition-duration: 0.5s;
+  	width: 100%;
+	  z-index: 1;
+	
+  	&::before {
+	    content: '';
+	    background: rgba($black-color,.2);
+	    height: 100%;
+	    @include position(absolute, $top: 0, $left: 0);
+	    transition: .3s ease-in-out;
+	    width: 100%;
+	    z-index: 1;
+	  }
+	
+  	&:hover::before {
+	    background: rgba($black-color,.0);
+  	}
+  } 
+}
+
+.js-video.is-active .video__poster {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+} 
+
+.caption-single {
+  padding-top: 4rem;
+
+  @media only screen and (max-width: $large) {
+    padding-top: 3rem;
+  }
+  
+  @media only screen and (max-width: $medium) {
+    padding-top: 2rem;
+  }
+  
+  @media only screen and (max-width: $small) {
+    padding-top: 1rem;
+  	padding-bottom: .5rem;
+  }   
+}
+
+.num-article {
+  color: $gray-dark-color;
+  display: inline-block;
+  text-transform: uppercase;
+  
+  &--light {
+    font-weight: $weight-300;
+  }
+  
+  @media only screen and (max-width: $large) {
+    margin-bottom: .93rem;
+  }
+}
+
+.slider-article {
+  .swiper-slide {
+    height: 45vw;
+	
+  	@media only screen and (max-width: $large) {
+	    height: 60vw;
+    }
+    
+    @media only screen and (max-width: $small) {
+      height: 300px;
+    }
+  }
+}
+
+// Gallery
+.gallery-two {
+  @media only screen and (max-width: $medium) {
+    max-width: 100%;
+	  padding-left: 1.87rem;
+	  padding-right: 1.87rem;
+  }
+
+  @media only screen and (max-width: $small) {
+    @include flex-direction(column);
+  	height: 100%;
+	  padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: .5rem;
+  }
+
+  &__item {
+    margin-left: 1.25rem;
+  	margin-right: 1.25rem;
+  	position: relative;
+	
+  	@media only screen and (max-width: $medium) {
+  	  margin-left: .62rem;
+	    margin-right: .62rem;
+    }
+
+	  @media only screen and (max-width: $small) {
+	    margin-left: 0;
+	    margin-right: 0;
+	    margin-top: 7.5px;
+	    margin-bottom: 7.5px;
+	  }
+	
+  	&--irregular {
+      width: 50%;
+
+	    @media only screen and (max-width: $large) {
+	      width: 100%;
+	    }
+    }
+
+  	&--irregular-right {
+	    align-self: flex-end;
+      width: 50%;
+
+	    @media only screen and (max-width: $large) {
+	      align-self: auto;
+	      width: 100%;
+	    }
+    }
+  }
+
+  &__item:first-child {
+    margin-left: 0;
+  }
+
+  &__item:last-child {
+    margin-right: 0;
+  }
+
+  .note {
+    @include display(flex);
+	  align-items: center;
+    background-color: $black-color;
+    color: $white-color;
+	  font-size: .87rem;
+    height: 9.37rem;
+    width: 9.37rem;
+    padding: 2rem;
+  	@include position(absolute, $left: 0, $bottom: 0);
+	
+	  @media only screen and (max-width: $medium) {
+	    height: auto;
+	  }
+	
+	  @media only screen and (max-width: $small) {
+	    padding: 1rem;
+  	}	
+  }
+}
+
+.page-nav {
+  @include display(flex);
+  justify-content: space-between;
+  border-top: 1px solid rgba($black-color, .1);
+  margin-top: 4rem;
+  padding: 2rem 4.25rem;
+
+  @media only screen and (max-width: $large) {
+    margin-top: 3rem;
+    padding: 2rem 1.87rem;
+  }
+  
+  @media only screen and (max-width: $medium) {
+    margin-top: 1rem;
+  }  
+  
+  @media only screen and (max-width: $small) {
+    margin-top: 1.42rem;
+    height: 48px;
+    padding: 0 15px;
+  }
+  
+  &__single {
+    margin-top: 6rem;
+    padding: 3rem 0 4rem;
+	
+  	@media only screen and (max-width: $small) {
+      height: auto;
+	    margin-top: 2rem;
+      padding: 1.2rem 0 2rem;
+	  }
+  }
+  
+  .btn-link {
+    font-size: .93rem;
+    font-weight: $weight-400;
+    text-transform: uppercase;
+	
+  	@media only screen and (max-width: $medium) {
+      font-size: .75rem;
+	    font-weight: $weight-500;
+	    letter-spacing: 0;
+    }
+
+    @media only screen and (max-width: $small) {
+      span {
+        display: none;
+      }
+    }  
+  }
+}
+
+.award-item {
+  margin-bottom: 1rem;
+  
+  @media only screen and (max-width: $large-xxl) {
+    margin-bottom: 0;
+  }
+  
+  @media only screen and (max-width: $medium) {
+    margin-bottom: 1.5rem;
+	
+	  &:first-child {
+	    margin-top: 1rem;
+	  }
+  }
+  
+  @media only screen and (max-width: $small) {
+	  &:first-child {
+	    margin-top: 0;
+    }
+    
+    &:last-child {
+	    margin-bottom: 0;
+	  }	
+  }  
+  
+  .title {
+    margin-bottom: .5rem;
+  }
+}

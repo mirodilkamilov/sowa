@@ -1,0 +1,27 @@
+/* -----------------------------------------------------------------
+    - About
+----------------------------------------------------------------- */ 
+
+.col--award {
+  width: 60%;
+  
+  @media only screen and (max-width: $medium) {
+    width: 100%;
+  }
+}
+
+.col--clint {
+  width: 30%;
+  
+  @media only screen and (max-width: $medium) {
+    width: 100%;
+  }
+}
+
+.col--year {
+  width: 10%;
+  
+  @media only screen and (max-width: $medium) {
+    width: 100%;
+  }
+}

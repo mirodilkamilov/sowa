@@ -1,0 +1,330 @@
+/* -----------------------------------------------------------------
+    - Project
+----------------------------------------------------------------- */
+
+.js-masonry-project {
+  overflow-y: hidden;
+  margin-left: -4%;
+  margin-right: -4%;
+
+  @media only screen and (max-width: $large-xl) {
+    margin-left: -2%;
+    margin-right: -2%;
+  }
+  
+  @media only screen and (max-width: $medium) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.item-project {
+  flex: 0 0 calc(46% - 4%);
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 5rem;
+  overflow: hidden;
+  width: calc(46% - 4%);
+
+  @media only screen and (max-width: $large-xl) {
+    flex: 0 0 calc(48% - 2%);
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-bottom: 2.4rem;
+    width: calc(48% - 2%);
+  }
+  
+  @media only screen and (max-width: $large) {
+	margin-bottom: 1.65rem;
+  }
+  
+  @media only screen and (max-width: $medium) {
+    flex: 0 0 100%;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 3rem;
+	width: 100%;
+  }  
+  
+  @media only screen and (max-width: $small) {
+	margin-bottom: 15px;
+  }  
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  &:hover .item-news__image {
+	transform: scale(1.05);
+  }
+  
+  &__figure {
+    margin: 0;
+  }
+  
+  &__link {
+    //height: 100%;
+	width: 100%;
+  }
+}
+
+.gutter-sizer {
+  width: 8%;
+  
+  @media only screen and (max-width: $large-xl) {
+    width: 4%;
+  }
+  
+  &--3 {
+    width: 4.98%;
+	@media only screen and (max-width: $large-xl) {
+	  width: 8%;
+	}
+  }
+}
+
+.onHover {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  //height: 100%;
+  width: 100%;
+  text-decoration: none;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+	background: linear-gradient(to top, rgba(0,0,0,.3) 0%, rgba(0,0,0,.0) 60%);
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	@include position(absolute, $top: 0, $left: 0);
+	transition: opacity .9s ease-in-out;
+	z-index: 1;
+  }
+  
+  &:hover {
+	opacity: 1;
+	
+	&::before {
+	  opacity: 1;
+	}
+	
+	.onHover__details, .title {
+	  opacity: 1;
+	  transform: translate3d(0, 0%, 0);
+	}
+  }
+  
+  &__details {
+    color: $white-color;
+	padding: 0 2rem;
+	opacity: 0;
+	@include position(absolute, $left: 0, $bottom: 0);
+	transform: translate3d(0, 100%, 0);
+	transition: all .5s ease-in-out;
+	z-index: 2;
+	
+	@media only screen and (max-width: $small) {
+	  padding: 0 15px;
+	}
+  }
+  
+  .title {
+	margin-bottom: 1.5rem;
+    opacity: 0;
+	transform: translate3d(0, 100%, 0);
+	transition: all .5s .1s ease-in-out;
+	
+	@media only screen and (max-width: $large-xl) {
+	  font-size: 1.286rem;
+	}
+	
+	@media only screen and (max-width: $medium) {
+	  font-size: 1.715rem;
+	}
+	
+	@media only screen and (max-width: $small) {
+	  font-size: 1.2rem;
+	  margin-bottom: 1rem;
+	}	
+  }
+  
+  .client {
+	@media only screen and (max-width: $large-xl) {
+	  font-size: .86rem;
+	}
+
+	@media only screen and (max-width: $medium) {
+	  font-size: 1rem;
+	}
+
+	@media only screen and (max-width: $small) {
+	  font-size: .875rem;
+	}
+  }
+  
+  .touch & {
+    &::before {
+	  opacity: 1;
+	}
+  
+    opacity: 1;
+	
+	&__details, .title {
+      opacity: 1;
+	  transform: translate3d(0, 0%, 0);
+    }
+  }
+}
+
+// Project carousel
+$carousel-height: 60vh;
+
+.grid-carousel {
+  @include display(flex);
+  @include flex-direction(column);
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.projects-carousel {
+  .swiper-slide {
+    @include display(flex);
+	@include flex-direction(column);
+	height: $carousel-height;
+    max-height: 580px;
+    width: 50%;
+	
+	@media only screen and (max-width: $large) {
+	  width: 70%;
+	}
+	
+	@media only screen and (max-width: $small) {
+	  height: 100vh;
+      max-height: 100%;
+	  width: 100%;
+	}
+	
+	&--portrait {
+	  width: calc(#{$carousel-height} / 1.5);
+	}
+	&--square {
+	  width: $carousel-height;
+	}
+	
+	&__link {
+	  color: $white-color;
+	  position: relative;
+	  text-decoration: none;
+	  text-align: center;
+	  
+	  &::before {
+	    content: '';
+	    background-color: rgba($black-color,.15);
+	    height: 100%;
+	    width: 100%;
+		@include position(absolute, $top: 0, $left: 0);
+	    z-index: 1;
+	  }
+	}
+	
+	&__description {
+	  @include display(flex);
+	  @include flex-direction(column);
+	  align-items: center;
+	  justify-content: center;
+	  position: relative;
+      height: 100%;
+      z-index: 1;
+	}
+	
+	.title {
+	  font-size: 4.2vw;
+	  margin-top: 1rem;
+	  margin-bottom: 0;
+	  transition: all .3s ease-in-out;
+	  
+	  @media only screen and (max-width: $large) {
+	    font-size: 3rem;
+	  }
+	  
+	  @media only screen and (max-width: $medium) {
+		font-size: 2.5rem;
+		margin-bottom: .5rem;
+	  }
+	}
+	
+	.cover-slider {
+	  transform: matrix(1, 0, 0, 1, 0, 0);
+	  transition: all .6s ease-in-out;
+	}
+	
+	.change-text {
+	  margin-top: -1rem;
+	  font-size: 1.2rem;
+	  position: relative;
+	  overflow: hidden;
+	  transition: all .3s ease-in-out;
+	  
+	  @media only screen and (min-width: $large-xxl) {
+	    font-size: 1.5rem;
+	  }
+
+	  @media only screen and (max-width: $small) {
+        font-size: 1rem;
+	  }	
+	  
+	  &__back {
+	    @include position(absolute, $top: 0);
+		width: 100%;
+	    transform: translate3d(0,100%,0);
+		transition: transform .3s ease-in-out;
+	  }
+	  &__front {
+        margin-top: 0;
+		width: 100%;
+	    transform: translate3d(0,0,0);
+		transition: transform .3s ease-in-out;
+	  }
+	}  
+	
+	&-active:hover {
+	  .cover-slider {
+		transform: matrix(1.08, 0, 0, 1.08, 0, 0);
+	  }
+
+	  .change-text__back {
+	    transform: translate3d(0,0,0);
+	  }
+
+	  .change-text__front {
+	    transform: translate3d(0,-100%,0);
+	  }
+	}
+	
+	&-active,
+    &-duplicate.swiper-slide-active {
+	  .js-text-wave div span {
+        transform: translate3d(0,0,0);
+	  }
+
+	  .down-up span {
+	    transform: translate3d(0,0,0);
+	  }
+	}
+  }
+  
+  //Pagination
+  .swiper-pagination-progressbar {
+    background-color: rgba($gray-light-color,.3);
+    height: 3px;
+	width: 100%;
+	@include position(fixed, $top: auto, $bottom: 0);
+	
+	&-fill {
+	  background-color: $black-color;
+	}
+  }  
+}

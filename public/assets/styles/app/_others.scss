@@ -1,0 +1,280 @@
+/* -----------------------------------------------------------------
+    - Custom PhotoSwiper
+----------------------------------------------------------------- */
+
+.pswp {
+  z-index: 1010;
+}
+
+.pswp__caption {
+  display: none;
+}
+
+.pswp__top-bar {
+  background: transparent;
+}
+
+.pswp__container,
+.pswp--zoom-allowed .pswp__img {
+  cursor: none;
+
+  @media all and (-ms-high-contrast:none) {
+    cursor: default;
+  }
+}
+
+
+/* -----------------------------------------------------------------
+    - Effects
+----------------------------------------------------------------- */ 
+
+// Reveal
+.reveal {
+  position: relative;
+  overflow: hidden;
+  
+  &::after,
+  &::before {
+    content: '';
+	  height: 100%;
+  	@include position(absolute, $top: 0);
+	  width: 100%;
+  }
+  
+  &::after {
+    background: $white-color;
+	  z-index: 1;
+  }
+  
+  .touch & {
+    &::after,
+    &::before {
+	    visibility: hidden;
+	  }
+  }
+  
+  &.animated {  
+    &::before {
+	    background: $black-color;
+	    animation: reveal 2s cubic-bezier(0.77, 0, 0.175, 1) both;
+	    z-index: 2;
+    }
+	
+  	&::after {
+	    animation: revealBack 2s cubic-bezier(0.77, 0, 0.175, 1) both;
+	  }
+  }
+}
+  
+@keyframes reveal {
+  0% {transform: translateX(-100%);}
+  50% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
+}
+
+@keyframes revealBack {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
+}
+
+@keyframes reveal-vertical {
+  0% {transform: translateY(100%);}
+  50% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+}
+
+
+// Text wave
+.js-text-wave {
+  opacity: 0;
+  
+  &.complete {
+    opacity: 1;
+  }
+  
+  div {
+    display: inline-block;
+    overflow: hidden;
+  }
+  
+  div span {
+    display: inline-block;
+    transform: translate3d(0,100%,0);
+    transition: transform 1s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  }
+  
+  &.complete div span {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.js-lines,
+.js-single-line,
+.js-block,
+.js-words,
+.js-words .word {
+  overflow: hidden;
+}
+
+.js-words .char,
+.js-words .word {
+  display: inline-block;
+}
+
+// Text down
+.down-up {
+  display: block;
+  margin-top: -5px;
+  overflow: hidden;
+  position: relative;
+  
+  span {
+    display: block;
+  	transform: translate3d(0,100%,0);
+  	transition: opacity, transform 0.75s cubic-bezier(0.8, 0, 0.2, 1);
+  }
+  
+  &.animated span {
+    opacity: 1;
+	  transform: translate3d(0px, 0%, 0px);
+  }
+}
+
+/* Text down*/
+.down-up-2 {
+  display: inline-block;
+  margin-top: -5px;
+  overflow: hidden;
+  
+  span {
+    display: inline-block;
+    opacity: 0;
+  	transform: translate3d(0,100%,0);
+	  transition: opacity, transform .8s 400ms cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  &.animated span {
+    opacity: 1;
+  	transform: translate3d(0px, 0%, 0px);
+  }
+}
+
+// Cursor
+.cursor {
+  background-color: $red-color;
+  border-radius: 50%;
+  display: block;
+  position: fixed;
+  margin-top: -10px;
+  margin-left: -10px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  transform: scale(1);
+  //transition: transform .35s ease-out;
+  transition: transform .4s cubic-bezier(0.75, -0.27, 0.3, 1.33);
+  z-index: 1011;
+  
+  @supports not (mix-blend-mode: multiply) {
+    opacity: .7;
+  }
+  
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {  
+    visibility: hidden;
+  } 
+  
+  &--zoom {
+    transform: scale(4);
+    
+  }
+
+  &-close {
+    background-color: $black-color;
+    transform: matrix(3, 0, 0, 3, 0, 0)!important;
+    mix-blend-mode: difference;
+	
+    &::before,
+	  &::after {
+	    content: '';
+	    background: $white-color;
+	    margin: auto;
+	    @include position(absolute, $top: 0, $left: 0, $bottom: 0, $right: 0);
+	    animation: cursorClose .6s .1s ease-in-out both;
+	  }
+	
+  	&::before {
+	    height: 100%;
+	    width: 1px;
+	  }
+	
+  	&::after {
+	    height: 1px;
+	    width: 100%;
+	  }
+  }
+}
+
+.open .cursor {
+  mix-blend-mode: lighten;
+}
+
+.touch .cursor {
+  display: none;
+}
+
+// Cursor active animation
+.cursor--active {
+  animation: cursor-active .6s cubic-bezier(.72,.16,.345,.875) both;
+
+  &.cursor--zoom {
+    animation: cursor-active2 .6s cubic-bezier(.72,.16,.345,.875) both;
+  }
+}
+
+@keyframes cursor-active {
+  0% {
+    box-shadow: 0 0 0 0 rgba($red-color, 1);
+  }
+  100% {
+    box-shadow: 0 0 0 3rem rgba($red-color, 0);
+  }
+}
+
+@keyframes cursor-active2 {
+  0% {
+    box-shadow: 0 0 0 0 rgba($red-color, 1);
+  }
+  100% {
+    box-shadow: 0 0 0 1rem rgba($red-color, 0);
+  }
+}
+
+@keyframes cursorClose {
+  0% {
+    transform: scale(0) rotate(90deg);
+  }
+  100% {
+    transform: scale(.45) rotate(45deg);
+  }
+}
+
+// Jarallax
+.jarallax {
+  position: relative;
+  z-index: 0;
+}
+.jarallax > .jarallax-img {
+  @include position(absolute, $top: 0, $left: 0);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+// Medium Zoom
+.medium-zoom-overlay {
+  z-index: 9999;
+}
+.medium-zoom-image {
+  z-index: 9999;
+}

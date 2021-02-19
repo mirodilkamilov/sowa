@@ -1,0 +1,23 @@
+/* -----------------------------------------------------------------
+    - Services
+----------------------------------------------------------------- */ 
+
+.itemService {
+  margin-top: 1.87rem;
+  margin-bottom: 1rem;
+  
+  @media only screen and (max-width: $small) {
+    margin-top: 0;
+    margin-bottom: 1.8rem;
+  }
+
+  .paragraph {
+    margin-bottom: 1rem;
+  }
+  
+  .itemCard__header {
+    @media only screen and (max-width: $small) {
+	    margin-top: 1.5rem;
+  	}
+  }
+}

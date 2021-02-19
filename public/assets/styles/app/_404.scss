@@ -1,0 +1,22 @@
+/* -----------------------------------------------------------------
+    - 404
+----------------------------------------------------------------- */ 
+
+.parallax-container {
+  overflow: hidden;
+}
+
+.error-page {
+  height: 100vh;
+}
+
+.mask-object {
+  filter: drop-shadow(0 20px 30px rgba($black-color,.1));
+  margin-bottom: 2rem;
+  width: 30vw;
+  transition: all 0.8s cubic-bezier(0.2,1,0.8,1);
+  
+  @media only screen and (max-width: $large) {
+    width: 50vw;
+  }
+}

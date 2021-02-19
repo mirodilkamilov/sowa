@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'fonticons';
+  src: url('fonticons.eot?70796161');
+  src: url('fonticons.eot?70796161#iefix') format('embedded-opentype'),
+       url('fonticons.woff2?70796161') format('woff2'),
+       url('fonticons.woff?70796161') format('woff'),
+       url('fonticons.ttf?70796161') format('truetype'),
+       url('fonticons.svg?70796161#fonticons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fonticons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ 
+.icon-heart-empty:before { content: '\e800'; }
+.icon-left-open:before { content: '\e801'; }
+.icon-heart:before { content: '\e802'; }
+.icon-right-open:before { content: '\e803'; }
+.icon-up-open:before { content: '\e804'; }
+.icon-down-open:before { content: '\e805'; }
+.icon-twitter:before { content: '\f099'; }
+.icon-facebook:before { content: '\f09a'; }
+.icon-linkedin:before { content: '\f0e1'; }
+.icon-google:before { content: '\f1a0'; }

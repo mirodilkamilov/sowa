@@ -1,0 +1,113 @@
+$version: "1.5.9";
+
+/* ------------------------------------------------
+
+ - General Styles
+   - Input
+   - Buttons
+   - Icon
+   - Table
+   - Flex Table
+ - Typography
+ - Preloader
+ - Header
+   - V2
+   - Navbar white
+   - State open
+   - Navbar back
+   - Logotype
+   - Hamburger
+ - Hero
+ - Slider
+   - Carousel horizontal
+   - Carousel vertical
+   - Slider Fullscreen
+   - Slider simply
+   - Swiper
+ - Sections
+   - Notation
+   - Social
+   - Details
+   - itemCard
+   - itemBrand
+ - Project
+ - Project Single
+   - Gallery
+ - Menu
+ - About
+ - Contact
+ - News
+   - Filter
+   - Three grid
+   - Single
+   - Gallery
+   - Scroll Indicator
+   - Share
+ - Footer
+   - Newsletter
+ - 404
+ - Custom PhotoSwiper
+ - Effects
+   - Reveal
+   - Text wave
+   - Text down
+   - Cursor
+   - Jarallax
+   - Medium Zoom
+    
+------------------------------------------------ */
+
+// Vendor
+@import 'vendors/bootstrap.min.css';
+@import 'vendors/swiper.min.css';
+@import 'vendors/photoswipe.css';
+@import 'vendors/animate.css';
+@import 'vendors/videojs-skin.css';
+
+// Font
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+// Font Icons
+@import '../icons/fonticons.css';
+
+
+// Variables
+
+@import 'variables/color.scss';
+@import 'variables/mixins.scss';
+@import 'variables/media.scss';
+
+// General settings
+
+@import 'app/general';
+@import 'app/typography';
+
+
+// Components
+
+@import 'app/form';
+@import 'app/buttons';
+@import 'app/preloader';
+@import 'app/header';
+@import 'app/menu';
+
+
+// Pages, layouts
+
+@import 'app/hero';
+@import 'app/sliders';
+@import 'app/sections';
+@import 'app/project';
+@import 'app/project-single';
+@import 'app/about';
+@import 'app/services';
+@import 'app/contact';
+@import 'app/news';
+@import 'app/footer';
+@import 'app/404';
+
+@import 'app/others';
+
+// rtl mode
+//@import 'app/rtl';
+

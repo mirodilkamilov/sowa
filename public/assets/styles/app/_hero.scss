@@ -1,0 +1,21 @@
+/* -----------------------------------------------------------------
+    - Hero
+----------------------------------------------------------------- */
+
+.hero {
+  height: 100vh;
+  position: relative;
+
+  // Social
+  .social {
+    @media only screen and (max-width: $large) {
+	  display: none;
+	}
+  }
+}
+
+.hero-column {
+  @include display(flex);
+  @include flex-direction(column);
+  justify-content: flex-end;
+}

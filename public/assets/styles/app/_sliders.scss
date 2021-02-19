@@ -1,0 +1,932 @@
+/* -----------------------------------------------------------------
+    - Slider
+----------------------------------------------------------------- */
+
+.slider {
+  @include display(flex);
+  
+  &__item {
+    width: 100%;
+  }
+  
+  // Caption
+  &__caption {
+    .swiper-slide {
+      @include display(flex);
+      @include align-items(center);
+    }
+    
+	.title--overhead {
+	  @media only screen and (max-width: $large-xxxl) {
+	    margin-bottom: .62rem;
+	  }
+	}
+	
+	.title--display-1 {
+       font-size: 4vw;
+       //margin-bottom: 1rem;
+	}
+	
+    .description {
+	  font-size: 1rem;
+	  width: 60%;
+	  margin-bottom: 1.87rem;
+	  
+	  @media only screen and (max-width: $large-xxxl) {
+	    margin-bottom: 1.25rem;
+	  }
+
+	  @media only screen and (max-width: $large-xl) {
+	    font-size: .93rem;
+	    width: 80%;
+	  }
+	  
+	  @media only screen and (max-width: $large) {
+	    width: 100%;
+	  }
+
+	  @media only screen and (max-width: $small) {
+	    margin-bottom: 0;
+	  }
+    }
+	
+	.btn-link {
+	  @media only screen and (max-width: $large-xxl) {
+	    font-size: .87rem;
+	    margin-top: 0;
+	  }
+
+	  .down-up span {
+		@include display(flex);
+		@include align-items(center);
+		padding: 1rem 1rem 1rem 0;
+
+		@media only screen and (max-width: $small) {
+			padding: 1rem 0 0;
+		}
+	  }
+	}
+  }
+  
+  // Image
+  &__image {
+    overflow: hidden;
+    position: relative;
+	
+	@media only screen and (max-width: $large) {
+      width: 100%;
+	  order: 1;
+	}
+  }
+  
+  // Control
+  .control-slider {
+    @include display(flex);
+    position: absolute;
+	z-index: 1;
+	
+	&--vertical {
+	  @include flex-direction(column);
+	  @include align-items(center);
+	  justify-content: space-between;
+	  height: 100vh;
+	  padding: 8.5rem 0 3.1rem;
+	  bottom: 0;
+	  right: 0;
+	  width: 10rem;
+	  z-index: 2;
+	
+	  @media only screen and (max-width: $large-xxl) {
+	    width: 7.7rem;
+	  }
+	
+	  @media only screen and (max-width: $large) {
+	    height: 3.12rem;
+        padding: 0;
+	    width: 100%;
+	  }
+	
+	  @media only screen and (min-width: $large-xxxl) {
+	    width: 14rem;
+	  }
+	
+	  @media only screen and (max-height: $medium) {
+	    padding: 5rem 0 2rem;
+	  }
+	  
+	  @media only screen and (max-width: $small) {
+	    padding: 0 2rem;
+		display: none;
+	  }
+	  
+	  .swiper-button-prev,
+      .swiper-button-next {
+	    display: block;
+      }
+	  
+	  .swiper-button-next {
+	    margin-bottom: 1.42rem;
+
+	    @media only screen and (max-width: $large) {
+	      margin-bottom: auto;
+	    }
+	  }
+	}
+	
+	&--bottom {
+	  bottom: 0;
+	  right: 0;
+	}
+  }
+  
+  // Details
+  &__case-details {
+    height: 6.5rem;
+    padding-left: 4.25rem;
+    padding-right: 4.25rem;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+	
+	@media only screen and (min-height: $large) {
+	  height: 9.12rem;	
+	}
+	
+    @media only screen and (max-width: $large-xxl) {
+      padding-left: 3.12rem;
+	  padding-right: 3.12rem;
+    }	
+	
+    @media only screen and (max-width: $large) {
+      height: 80px;
+      padding-left: 7.5rem;
+      padding-right: 7.5rem;
+      text-align: center;
+    }
+	
+    @media only screen and (max-width: $small) {
+      height: 48px;
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+	
+    .item-details {
+      @include display(flex);
+	  @include align-items(center);
+	  justify-content: space-between;
+      background-color: $white-color;
+	  overflow: auto;
+	  
+	  @media only screen and (max-width: $small) {
+	    @include align-items(normal);
+	  }
+	  
+	  &__client {
+	    @media only screen and (max-width: $large) {
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+	      width: 100%;
+		}
+	  }
+	  
+      &__category,
+	  .btn-link {
+	    @media only screen and (max-width: $large) {
+	      display: none;
+		}
+	  }
+    }
+
+    .control-slider {
+      width: 11.25rem;
+	  @media only screen and (max-width: $large) {
+	    width: 0;
+	  }
+    }
+	
+    .swiper-button-next {
+      margin-right: 1.42rem;
+	  @media only screen and (max-width: $large) {
+	    margin-right: 0;
+	  }
+    }
+  }
+}
+
+.swiper-container.slider-container-details {
+  width: calc(100% - 11.25rem);
+  
+  @media only screen and (max-width: $large) {
+	width: 100%;
+  }
+  
+  .swiper-wrapper {
+    @media only screen and (max-width: $large) {
+	  align-items: center;
+	}
+  }
+  
+  .btn-link {
+    margin: 2px;
+  }
+}
+
+/* Carousel horizontal */
+.slider-horizontal {
+  padding-left: 4.25rem;
+  padding-right: 10rem;
+
+  @media only screen and (max-width: $large-xxl) {
+    padding-left: 3.12rem;
+    padding-right: 7.7rem;
+  }
+	
+  @media only screen and (max-width: $large) {
+	//@include flex-direction(row); //column
+	padding-left: 3.12rem;
+    padding-right: 3.12rem;
+  }
+	
+  @media only screen and (max-width: $small) {
+	padding-left: 15px;
+    padding-right: 15px;
+  }
+	
+  @media only screen and (min-width: $large-xxxl) {
+    padding-left: 6.25rem;
+    padding-right: 14rem;
+  }
+
+  // Caption
+  .slider__caption {
+    flex: 0 1 50%;
+    height: 100vh;
+    padding-right: 3rem;
+    width: 50%;
+	
+    @media only screen and (max-width: $large) {
+      color: #fff;
+      margin: auto;
+	  margin-top: 5rem;
+	  height: calc(100vh - 8.12rem);
+	  @include position(absolute, $left: 0, $right: 0);
+      width: 70%;
+      text-align: center;
+	  z-index: 3;
+    }
+	
+	@media only screen and (max-width: $small) {
+	  height: calc(100vh - 63px);
+	  margin-top: 48px;
+	  padding: 0 2rem;
+	  width: 100%;
+	}
+    
+	.title--overhead {
+	  @media only screen and (max-width: $large) {
+	    color: $white-color;
+		padding: .2rem 0;
+		margin: 0;
+	  }
+	  
+	  @media only screen and (max-width: $small) {
+	    padding: 0;
+	  }
+	}
+
+    .title--display-1 {
+      .down-up span {
+        transition-duration: .4s;
+      }
+	  
+	  @media only screen and (max-width: $large) {
+	    font-size: 6.8vw;
+		margin-bottom: 0;
+		padding: .6rem 0;
+		overflow: hidden;
+		white-space: nowrap;
+	  }
+	  
+	  @media only screen and (max-width: $medium) {
+	    font-size: 6.4vw;
+	  }
+	  
+	  @media only screen and (max-width: $small) {
+	    font-size: 1.8rem;
+		padding-bottom: .9rem;
+	  }
+	}
+	
+    .description {
+      .down-up span {
+        transition-duration: .4s;
+      }
+	  
+	  @media only screen and (max-width: $small) {
+	    line-height: 1.4;
+		margin-bottom: .5rem;
+	  }
+	}
+	
+    .btn-link {
+      .down-up span {
+        transition-duration: .4s;
+      }
+	  
+	  @media only screen and (max-width: $large) {
+	    color: $white-color;
+		
+		.circle {
+		  background-color: $white-color;
+		  color: $black-color;
+		}
+	  }
+    }
+  
+    .swiper-slide-active {
+      .title--display-1 {
+        .down-up span {
+          transition-delay: 0s;
+        }
+	  }
+	  
+      .description {
+        .down-up span {
+          transition-delay: .4s;
+        }
+	  }
+	  
+	  .btn-link {
+	    .down-up span {
+	      transition-delay: .6s;
+	    }
+	  }
+    }
+  }
+  
+  // Image
+  .slider__image {
+    flex: 0 0 50%;
+    height: 100vh;
+	width: 50%;
+    overflow: hidden;
+    position: relative;
+	
+	@media only screen and (max-width: $large) {
+	  flex: 0 0 100%;
+	  margin-top: 5rem;
+	  height: calc(100vh - 8.12rem);
+      width: 100%;
+	  order: 1;
+	}
+	
+	@media only screen and (max-width: $small) {
+	  height: calc(100vh - 63px);
+	  margin-top: 48px;
+	}
+	
+	.overlay--45::before {
+	  display: none;
+	  
+	  @media only screen and (max-width: $large) {
+	    display: block;
+	  }
+	}
+	
+  }
+
+  .social {
+    @media only screen and (min-width: $large-xxxl) {
+	  left: 6.25rem;
+	}
+  }
+}
+	
+/* Carousel vertical */
+.slider-vertical {
+  //height: 60vh;
+  height: calc(92vh - 218px);
+  margin-top: 114px;
+  position: relative;
+  
+  @media only screen and (max-width: $large) {
+	height: calc(100vh - 160px);
+	margin-top: 80px;
+	//padding-bottom: 0;
+  }
+	
+  @media only screen and (max-width: $small) {
+    height: calc(100vh - 96px);
+	margin-top: 48px;
+  }
+
+  // Caption
+  .slider__caption {
+    flex: 0 1 50%;    
+	height: 100%;
+	padding-left: 7rem;
+	padding-right: 10rem;
+    width: 50%;
+	
+	@media only screen and (max-width: $large-xxl) {
+      padding-left: 5.62rem;
+	  padding-right: 0;
+    }
+	
+    @media only screen and (max-width: $large) {
+	  color: $white-color;
+	  margin: auto;
+	  padding-left: 3.12rem;
+      padding-right: 3.12rem;
+	  padding-bottom: 5rem;
+	  @include position(absolute, $left: 0, $right: 0);
+	  width: 100%;
+	  text-align: center;
+	  z-index: 3;
+    }
+    
+	@media only screen and (max-width: $small) {
+	  padding-left: 1.42rem;
+      padding-right: 1.42rem;
+	  padding-bottom: 0;
+	}
+	
+    .title--display-1 {
+	  margin-bottom: 1rem;
+	  
+	  @media only screen and (max-width: $large) {
+	    font-size: 6.8vw;
+		margin-bottom: 0;
+	  }
+	  
+	  @media only screen and (max-width: $medium) {
+	    font-size: 6vw;
+		margin-bottom: .6rem;
+	  }
+	  
+	  @media only screen and (max-width: $small) {
+	    font-size: 1.8rem;
+	  }
+	}
+  }
+
+  // Image
+  .slider__image {
+    flex: 0 0 50%;
+    height: 100%;
+	
+	@media only screen and (max-width: $large) {
+	  flex: 0 0 100%;
+	  
+	  &.overlay--45::before {
+	    z-index: 2;
+	  }
+	}
+  }
+}
+
+/* Slider Fullscreen */
+.slider-fullscreen {
+  height: 100vh;
+  position: relative;
+  z-index: 0;
+	
+  .title--display-1  {
+    font-size: 5rem;
+	margin-bottom: 0;
+	
+	@media only screen and (max-width: $large) {
+	  font-size: 4rem;
+	}
+	
+	@media only screen and (max-width: $small) {
+	  font-size: 2.5rem;
+	}	
+  }
+  
+  .category, .year {
+    font-weight: $weight-500;
+	margin-left: .5rem;
+	
+	@media only screen and (max-width: $large) {
+	  font-weight: $weight-400;
+	  margin-left: 0;
+	}	
+  }
+
+  .year {
+    opacity: .5;
+	margin-top: .5rem;
+  }
+  
+  &.overlay--45 {
+    &::before {
+      z-index: 2; 
+    }	  
+  }
+  
+  .slider__caption {
+    height: 100%;
+	padding-left: 4.25rem;
+    padding-right: 4.25rem;
+	@include position(absolute, $top: 0, $left: 0);
+	width: 100%;
+	z-index: 2;
+	
+    @media only screen and (max-width: $large-xxl) {
+      padding-left: 3.12rem;
+      padding-right: 3.12rem;
+    }
+  
+    @media only screen and (max-width: $small) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    @media only screen and (min-width: $large-xxxl) {
+      padding-left: 6.25rem;
+      padding-right: 6.25rem;
+    }	
+	
+	.slider__item {
+	  @include display(flex);
+	  @include flex-direction(column);
+	  justify-content: center;
+	  margin-top: 1.5rem;
+	  height: 100%;
+	  width: 50%;
+	  
+	  @media only screen and (max-width: $large-xxl) {
+	    width: 80%;
+	  }
+	  
+	  @media only screen and (max-width: $large-xl) {
+	    width: 100%;
+	  }
+	  
+	  @media only screen and (max-width: $large) {
+	    text-align: center;
+	  }
+	  
+	  @media only screen and (max-width: $small) {
+	    .description {
+		  display: none;
+		}
+	  }
+	  
+	}
+  }
+  
+  .slider__image.overlay--45 {
+    &:before {
+      z-index: 10;
+	}
+  }
+  
+  .slider__center {
+    padding-top: 2rem;
+	
+	@media only screen and (max-width: $large) {
+	  padding-top: 5.8rem;
+	}
+  }
+  
+  .slider__end {
+    margin-bottom: 3.1rem;
+   
+    @media only screen and (max-width: $large) {
+      margin-bottom: 6rem;
+    }
+	
+	@media only screen and (max-width: $small) {
+	  margin-bottom: 1.5rem;
+	}
+  }
+  
+  .control-slider {
+    @media only screen and (max-width: $large) {
+      margin-bottom: 1rem;
+	}  
+  }
+}
+
+
+/* Slider simply */
+.slider-simply {
+  margin: 0 0 1rem;
+
+  .swiper-control {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @media only screen and (max-width: $large) {
+	    @include position(relative, $left: 0, $right: 0);
+	  }
+	}
+  }
+}
+
+/* Swiper */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  
+  .swiper-slide {
+	overflow: hidden;
+	
+	.down-up span {
+      opacity: 0;
+	  transform: translate3d(0,100%,0);
+	  transition: opacity, transform .4s ease-out;
+    }
+	
+	.js-text-wave div span {
+      transform: translate3d(0,100%,0);
+    }
+	
+	&__link {
+	  display: block;
+	  height: 100%;
+	  position: absolute;
+	  width: 100%;
+	  z-index: 2;
+	}
+	
+	.cover-slider {
+      background-size: cover;
+      background-position: center center;
+      height: 100%;
+	  @include position(absolute, $top: 0, $left: 0);
+      width: 100%;
+    }
+  }
+  
+  .swiper-slide-active,
+  .swiper-slide-duplicate-active {
+    .down-up span {
+      opacity: 1;
+      transform: translate3d(0,0%,0);
+      transition-delay: .5s!important;
+    }
+	
+    .js-text-wave div span {
+      transform: translate3d(0,0,0);
+	}
+  }
+  
+  .swiper-slide-duplicate {
+    .js-text-wave div span,
+    .down-up span {
+      transform: translate3d(0,100%,0);
+    }
+  }
+} 
+
+.fade {
+  opacity: 0;
+  transition: opacity .6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition-delay: .6s;
+}
+
+.swiper-slide-active,
+.swiper-slide-duplicate-active {
+  .fade {
+    opacity: 1;
+	transition-delay: .9s;
+  }
+}	  
+
+/* Control Swiper */
+.swiper-control {
+  line-height: 0;
+  
+  .swiper-pagination {
+	position: relative;
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-image: none;
+	display: inline-block;
+	margin-top: 0;
+	height: 46px;
+	width: 46px;
+	outline: none;
+    position: relative;
+	top: 0;
+	transition: all .3s cubic-bezier(0.7, 0, 0.3, 1);
+
+	&:hover {
+	  opacity: 1;
+	}
+	
+	@media only screen and (max-width: $large) {
+	  @include position(absolute, $top: 0, $bottom: 0);
+	  margin-top: auto;
+	  margin-bottom: auto;
+	  height: 32px;
+	  width: 32px;
+	}
+
+	&--square {
+	  background-color: $white-color;
+	  @include display(flex);
+      @include align-items(center);
+      justify-content: center;
+	  height: 5rem;
+	  overflow: hidden;
+	  width: 5rem;
+	  
+	  @media only screen and (max-width: $small) {
+	    height: 3rem;
+		width: 3rem;
+	  }
+	  
+	  &::after,
+      &::before {
+        content: '';
+		background: $black-color;
+		@include position(absolute, $top: 0, $left: 0, $bottom: 0, $right: 0);
+		z-index: -1;
+      }
+	  
+	  &::after {
+	    transform: translate3d(100%,0,0);
+	  }
+	  
+	  &::before {
+	    transform: translate3d(-100%,0,0);
+		opacity: 0;
+	  }
+	  
+      &::after,
+	  &:hover::before {
+	    transition: transform .3s cubic-bezier(.72,.16,.345,.875);
+		opacity: 1;
+	  }
+	  
+	  &:hover::after {
+	    transition: none;
+		opacity: 0;
+	  }
+	  
+	  &:hover::after,
+	  &:hover::before {
+	    transform: translate3d(0,0,0);
+	  }
+	  
+	  &:hover {
+        color: $white-color;
+	  }
+	}
+  }
+  
+  .swiper-button-prev {
+	left: 0;
+	@media only screen and (max-width: $large) {
+	  left: 3rem;
+	}
+
+	@media only screen and (max-width: $small) {
+	  left: 15px;
+	}
+  }
+
+  .swiper-button-next {
+	right: 0;
+	@media only screen and (max-width: $large) {
+	  right: 3rem;
+	}
+
+	@media only screen and (max-width: $small) {
+	  right: 15px;
+	}
+  }
+}
+
+/* SVG button */
+.slider-nav {
+  height: 100%;
+  @include position(absolute, $top: 0, $right: 0);
+  width: 100%;
+  
+  &--progress {
+    transform: rotate(-90deg);
+  }
+  
+  &__arrow {
+    fill: $black-color;
+  }
+  
+  &__arrow--white {
+    fill: $white-color;
+  }
+  
+  &__path-progress {
+    stroke-width: 1;
+    fill: none;
+	transform: rotate(180deg);
+    transform-origin: center;
+    //stroke-dasharray: 300;
+    //stroke-dashoffset: 300;
+    //animation: circle-progress 3.9s 3s linear infinite;
+	
+	&--gray {
+	  stroke: $black-color;
+	} 
+	
+	&--white {
+	  stroke: $white-color;
+	}  
+  }
+	
+  &__path--gray {
+    stroke-width: 1;
+    fill: transparent;
+    stroke: $gray-dark-color;
+    opacity: .4;
+	transition: all .4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+	
+  &__path--white {
+	stroke: rgba($white-color,.2);
+	fill: transparent;
+  }
+  
+  &:hover &__path--gray {
+    opacity: 1;
+    stroke: $black-color;
+	fill: $black-color;
+  }
+  
+  &:hover &__path--white {
+    opacity: 1;
+    stroke: $white-color;
+	fill: $white-color;
+  }
+  
+  &:hover &__arrow {
+    fill: $white-color;
+  }
+  
+  &:hover &__arrow--white {
+    fill: $black-color;
+  }  
+}
+
+@keyframes circle-progress {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Pagination */
+.swiper-pagination-bullet {
+  background: $gray-dark-color;
+  display: block;
+  height: 6px;
+  margin: 30px 0;
+  opacity: 1;
+  outline: none;
+  width: 6px;
+	  
+  @media only screen and (max-width: $large) {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  
+  &-active {
+    background: $black-color;
+  }
+}
+
+.swiper-pagination--white {
+  .swiper-pagination-bullet  {
+    background: rgba($white-color, .2);
+	box-shadow: 0 0 0 4px rgba($black-color, .3);
+
+	&-active {
+	  background: rgba($white-color, 1);
+	}
+  }
+}
+
+/* Pagination number */
+.swiper-pagination-num {
+  font-size: 3rem;
+  font-weight: $weight-300;
+  margin-top: -3rem;
+  margin-left: 4.25rem;
+  position: absolute;
+  bottom: auto;
+  text-align: left;
+  width: auto;
+  z-index: 1;
+  
+  @media only screen and (max-width: $large) {
+    display: none;
+  }
+}

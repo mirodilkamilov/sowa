@@ -1,0 +1,150 @@
+// Buttons
+.btn {
+  background-color: $black-color;
+  border: 0;
+  border-radius: 2rem;
+  color: $white-color;
+  cursor: pointer;
+  font-size: .87rem;
+  letter-spacing: .1rem;
+  line-height: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: .8rem 2.5rem;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+	  background-color: rgba($white-color,.2);
+	  height: 100%;
+	  @include position(absolute, $top: 0, $left: 0);
+	  width: 0;
+	  z-index: -1;
+  }
+  
+  &:hover::before {
+    animation: btn-hover .8s cubic-bezier(.72,.16,.345,.875) both;
+	  width: 100%;
+  }
+  
+  &:hover {
+    color: $white-color;
+  }
+  
+  &:focus {
+    box-shadow: none;
+  }
+  
+  &.disabled {
+    opacity: 1;
+  }
+  
+  &--white {
+    background-color: $white-color;
+  	color: $black-color;
+	
+	  &::before {
+	    background-color: rgba($black-color,.2);
+	  }
+  }
+  
+  &__icon {
+    line-height: 0;
+	  padding: 0.99rem 1rem;
+  }
+}
+
+.touch .btn {
+  &::before {
+    display: none;
+  }
+}
+
+@keyframes btn-hover {
+  0% {transform: translateX(-100%);}
+  50% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
+}
+
+.btn-link {
+  color: $black-color;
+  display: inline-flex;
+  align-items: center;
+  font-weight: $weight-500;
+  position: relative;
+  text-decoration: none;
+  
+  &:hover {
+    color: inherit;
+	  text-decoration: none;
+	
+    .circle {
+	    box-shadow: 0 0 0 2px $black-color;
+	  
+	    &--white {
+	      box-shadow: 0 0 0 2px $white-color;
+	    }
+	  }
+	
+	  .icon-base {
+      padding-left: .6rem;
+      padding-right: .6rem;
+    }
+  }
+  
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.circle {
+  display: inline-flex;
+  @include align-items(center);
+  justify-content: center;
+  flex-wrap: nowrap;
+  color: $white-color;
+  background-color: $black-color;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0px $black-color;
+  height: 2.85rem;
+  overflow: hidden;
+  position: relative;
+  width: 2.85rem;
+  text-align: center;
+  transition: box-shadow .3s ease-in-out;
+	
+  @media only screen and (max-width: $large) {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  &::before {
+    @media only screen and (max-width: $large) {
+	    font-size: .87rem;
+	  }
+  }
+  
+  &--white {
+    color: $black-color;
+    background-color: $white-color;
+	  box-shadow: 0 0 0 0px $white-color;
+  }
+  
+  &--left {
+    margin-right: 1.07rem;
+  }
+  
+  &--right {
+    margin-left: 1.07rem;
+  }
+  
+  &.icon-left-open {
+    &::before {
+      margin-left: 0;
+	  }
+  }  
+}
+
+button:focus {outline: none;}

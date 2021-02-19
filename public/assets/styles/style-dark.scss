@@ -1,0 +1,714 @@
+$version: "1.0.4";
+
+// Colors
+$white-color:         #fff;
+$black-color:         #110f10;
+$black-light-color:   #202020;
+$gray-dark-color:     #8d99a7;
+$gray-light-color:    #c5d2e0;
+$red-color:           #f7541b;
+
+// Media
+$small-sm: 320px;
+$small: 580px;
+$medium: 768px;
+$large: 992px;
+$large-xl: 1200px;
+$large-xxl: 1500px;
+$large-xxxl: 2400px;
+
+/* -----------------------------------------------------------------
+    - General Styles
+----------------------------------------------------------------- */
+
+body {
+  background-color: $black-light-color;
+  color: $white-color;
+}
+
+// Input Text
+%formStyle {
+  background-color: $black-light-color;
+  border-bottom: 1px solid rgba($white-color,.2);
+  color: $white-color;
+}
+
+%formStyle-focus {
+  border-bottom: 1px solid $white-color;
+}
+
+.inputText {
+  @extend %formStyle;
+
+  &:focus {
+    @extend %formStyle-focus;
+  }
+  
+  &--fill {
+    border: 0;
+  }
+}
+
+.textarea {
+  @extend %formStyle;
+  
+  &:focus {
+    @extend %formStyle-focus;
+  }  
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: $white-color!important;
+}
+
+.label {
+  color: $white-color; 
+}
+
+// Buttons
+.btn {
+  background-color: $white-color;
+  color: $black-color;
+  
+  &::before {
+	background-color: rgba($black-color,.2);
+  }
+  
+  &:hover {
+    color: $black-color;
+  }  
+  
+  &--white {
+    background-color: $white-color;
+	color: $black-color;
+  }
+}
+
+
+.btn-link {
+  color: $white-color;
+  
+  &:hover {
+    .circle {
+	  box-shadow: 0 0 0 2px $white-color;
+	  
+	  &--white {
+	    box-shadow: 0 0 0 2px $white-color;
+	  }
+	}
+  }
+}
+
+.circle {
+  color: $black-color;
+  background-color: $white-color;
+  box-shadow: 0 0 0 0px $white-color;
+  
+  &--white {
+    color: $black-color;
+    background-color: $white-color;
+	box-shadow: 0 0 0 0px $white-color;
+  } 
+}
+
+// Icons  
+.dark-mask {
+  &::before {
+    background-color: $white-color;
+  }
+}
+
+// Table
+.table {
+  thead th {
+    color: rgba($white-color,.5);
+  }
+  td {
+    border-top: 1px solid rgba($white-color,.2);
+  }
+  span {
+    color: rgba($white-color,.5);
+  }
+
+  @media only screen and (max-width: $medium) {
+    td { 
+      &:before {
+		color: rgba($white-color,.5);
+      }
+	}
+  }
+}
+
+// Flex Table
+.flex-table {
+  @media only screen and (max-width: $medium) {
+    border-top: 1px solid rgba($white-color,.2);
+  }
+  
+  &__thead {
+	border-bottom: 1px solid rgba($white-color,.2);
+  }
+  
+  &__tr {
+    border-bottom: 1px solid rgba($white-color,.2);
+  }
+  
+  &__th {
+    color: rgba($white-color,.5);
+  }
+  
+  &__td { 
+	@media only screen and (max-width: $medium) {
+	  &:before {
+	    color: rgba($white-color,.5);
+      }
+	}
+  }
+}
+
+.separation {
+  border-top: 1px solid rgba($white-color, .1);
+}
+
+/* -----------------------------------------------------------------
+    - Typography
+----------------------------------------------------------------- */
+
+.title {
+  &--overhead {
+    color: rgba($white-color,.5);
+  }
+  
+  &--tail,
+  &--tail-black {
+	&::before {
+	  background-color: rgba($white-color,.5);
+	}
+  }
+  
+  &--tail-black {
+    &::before {
+      background-color: $white-color;
+	}
+  }
+}
+
+.block-quote {
+  &::before {
+    background-image: url(../images/icon-quote-white.svg);
+  }
+  
+  cite {
+    color: rgba($white-color,.5);
+	
+	&::before {
+	  background-color: $white-color;
+	}
+  }
+}
+
+a {
+  color: $white-color;
+}
+
+.paragraph {
+  color: rgba($white-color, .75);
+}
+
+.text-overlay {
+  color: $black-light-color;
+}
+
+.list-unstyled {
+  color: $white-color;
+}
+
+/* -----------------------------------------------------------------
+    - Preloader
+----------------------------------------------------------------- */
+
+.loading {
+  background-color: $black-color;
+  
+  &::before {
+    background-image: url(../images/logo-white.svg);
+  }
+  
+  .progress-bar {
+    background-color: $black-color;
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Header
+----------------------------------------------------------------- */
+
+.navbar {
+  @media only screen and (max-width: $small) {
+    background-color: $black-color;
+	box-shadow: 0 4px 20px rgba($black-color, .2);
+  }
+  
+  // V2
+  &-v2 {
+	@media only screen and (max-width: $small) {
+	  .hamburger__inner::before,
+	  .hamburger__inner::after {
+	    background-color: $black-color;
+	  }  
+	}  
+  }
+  
+  // Navbar white
+  @media only screen and (min-width: $small) {
+    &--white {
+      color: $black-color;
+	  
+	  .circle {
+        color: $black-color;
+        background-color: $white-color;
+	    box-shadow: 0 0 0 0px $white-color;
+	  
+	    &:hover {
+	      box-shadow: 0 0 0 2px $white-color;
+	    }
+      }
+	
+	  .btn-link {
+	    &:hover {
+	      .circle {	  
+	        box-shadow: 0 0 0 2px $white-color;
+	      }
+	    }
+	  }
+	
+	  .hamburger__inner::before,
+	  .hamburger__inner::after {
+	    background-color: $white-color;
+	  }
+    }
+  }
+  
+  // State open
+  .open & {
+	@media only screen and (max-width: $small) {
+	  box-shadow: none;
+	}	
+  }
+  
+  // Sticky
+  &.sticky {
+    background-color: $black-light-color;
+    height: 88px;
+  }
+}
+
+// Hamburger
+.hamburger {
+  &__inner {
+    &:before, 
+	&:after {
+	  background-color: $white-color;
+    }
+	.is-active & {
+      color: $white-color;
+    }
+  }
+  .open & {
+    &__inner {
+      &:before, 
+	  &:after {
+	    background-color: $black-color;
+      }
+	  .is-active & {
+        color: $black-color;
+      }
+    }
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Slider
+----------------------------------------------------------------- */
+
+.slider__case-details {
+  .item-details {
+    background-color: $black-light-color;
+  }
+}
+
+//Slider Fullscreen
+.slider-fullscreen {
+  &::before {
+	background-color: rgba($white-color,.1);
+  }
+}
+
+// Control Swiper
+.swiper-control {
+
+  .swiper-button-prev,
+  .swiper-button-next {
+	&--square {
+	  background-color: $black-light-color;
+
+	  &::after,
+      &::before {
+		background: $white-color;
+      }
+	  
+	  &:hover {
+        color: $black-color;
+	  }
+	}
+  }
+}
+
+// SVG button
+.slider-nav {  
+  &__arrow {
+    fill: $white-color;
+  }
+  
+  &__arrow--white {
+    fill: $white-color;
+  }
+  
+  &__path-progress {
+	&--gray {
+	  stroke: $white-color;
+	} 
+	
+	&--white {
+	  stroke: $white-color;
+	}  
+  }
+	
+  &__path--gray {
+    stroke: rgba($white-color,.4);
+  }
+	
+  &__path--white {
+	stroke: rgba($white-color,.2);
+  }
+  
+  &:hover &__path--gray {
+    opacity: 1;
+    stroke: $white-color;
+	fill: $white-color;
+  }
+  
+  &:hover &__path--white {
+    stroke: $white-color;
+	fill: $white-color;
+  }
+  
+  &:hover &__arrow {
+    fill: $black-color;
+  }
+  
+  &:hover &__arrow--white {
+    fill: $black-color;
+  }  
+}
+
+// Pagination
+.swiper-pagination-bullet {
+  background: rgba($white-color, .2);
+
+  &-active {
+    background: $white-color;
+  }
+}
+
+.swiper-pagination--white {
+  .swiper-pagination-bullet  {
+    background: rgba($white-color, .2);
+	box-shadow: 0 0 0 4px rgba($black-color, .3);
+
+	&-active {
+	  background: rgba($white-color, 1);
+	}
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Sections
+----------------------------------------------------------------- */
+
+.tail {
+  &::before {
+	background-color: $white-color;
+  }
+}
+
+.overlay {
+  &::before {
+    background-color: rgba($black-color, .35);
+  }
+  &--45 {
+    &::before {
+	  background-color: rgba($black-color, .45);
+	}
+  }
+  &--80 {
+    &::before {
+	  background-color: rgba($black-color, .8);
+	}
+  }
+}
+ 
+// Social
+.social {
+  &--white {
+	.social__link {
+	  color: $black-color;
+	  &:hover {
+	    color: $black-color;
+	  }
+	}
+  }
+
+  &__link {
+	&:hover {
+      color: $white-color;
+    }
+  }
+}
+
+// Details
+.case-details {
+  .item-details {
+    &__title {
+      color: rgba($white-color, .5);
+    }
+  }
+}
+	
+/* -----------------------------------------------------------------
+    - Project
+----------------------------------------------------------------- */
+
+.onHover {
+  background: linear-gradient(to top, rgba(0,0,0,.3) 0%, rgba(0,0,0,.0) 60%);
+  
+  &__details {
+    color: $white-color;
+  }
+}
+
+// Project carousel
+.projects-carousel {
+  //Pagination
+  .swiper-pagination-progressbar {
+    background-color: rgba($white-color,.15);
+
+	&-fill {
+	  background-color: $white-color;
+	}
+  }
+}
+
+
+/* -----------------------------------------------------------------
+    - Project Single
+----------------------------------------------------------------- */
+
+.header-fullscreen {
+  background-color: $white-color;
+  color: $white-color;
+  
+  .title--overhead,
+  .item-details__title,
+  .btn-link {
+    color: $white-color;
+  }
+  
+  .title--tail {
+	&::before {
+	  background-color: $white-color;
+	}
+  }
+}
+
+.num-article {
+  color: rgba($white-color, .5);
+}
+
+//Gallery
+.gallery-two {
+  .note {
+    background-color: $black-color;
+    color: $white-color;	
+  }
+}
+
+.page-nav {
+  border-top: 1px solid rgba($white-color, .1);
+}
+
+/* -----------------------------------------------------------------
+    - Menu
+----------------------------------------------------------------- */
+
+.menu {
+  background: $white-color;
+}
+
+.menu-list {
+  &__item {
+    color: $black-color;
+
+	&:hover {
+	  color: $black-color;
+	}
+  }
+}
+
+.ef-background {
+  background-color: #000;
+}
+
+/* -----------------------------------------------------------------
+    - News
+----------------------------------------------------------------- */ 
+
+
+// Filter
+@media only screen and (min-width: 769px) {
+  .filters {
+    &__item {
+      &.active {
+	    .filters__link {
+	      &::before {
+		    background-color: $white-color;
+	      }
+	    }
+	  }
+	}
+	
+    &__link {
+	  &::after {
+        background-color: $white-color;
+	  }
+
+      &.active {
+	    &::before {
+		  background-color: $white-color;
+	    }
+	  }
+    }
+  }
+}
+
+@media only screen and (max-width: $medium) {
+  .select {
+    color: $black-color;
+
+    .placeholder {
+      background-color: $white-color;
+	
+      &:hover {
+        background: rgba($white-color,.05);
+      }
+    }
+
+    ul {
+      background: $black-color;
+	  box-shadow: 0 10px 60px rgba($white-color,.1);
+
+      li {
+        color: $white-color;
+
+        &:hover {
+          background: rgba($white-color,.05);
+        }
+      }
+    }
+  }
+}
+
+.item-news {
+  .date {
+	&::before {
+	  background-color: rgba($white-color, .5);
+	}
+  }
+}
+
+// Three grid
+.date {
+  color: rgba($white-color, .5);
+}
+
+.hover-line {
+  background-image: linear-gradient(to right, $white-color 0%, $white-color 100%);
+}
+
+.image-caption {
+  color: rgba($white-color, .5);
+}
+
+// Share
+.share-post {  
+  &::before {
+    background-color: $white-color;
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Footer
+----------------------------------------------------------------- */ 
+
+.footer {
+  &::before {
+	background-color: $black-color;
+  }
+  
+  &__left {
+	color: $white-color;
+	
+	@media only screen and (max-width: $medium) {
+	  background-color: $black-color;
+	}
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Effects
+----------------------------------------------------------------- */ 
+
+.mapboxgl-popup-content {
+  color: $black-color;
+}
+
+// Cursor
+.cursor {
+  mix-blend-mode: lighten;
+  
+  &-close {
+    mix-blend-mode: difference;
+  }	
+}
+
+// Reveal
+.reveal {
+  &::after {
+    background: $black-light-color;
+  }
+  
+  &.animated {  
+    &::before {
+	  background: $black-color;
+    }
+  }
+}
+
+// niceScroll
+.nicescroll-cursors {
+  background-color: rgba($white-color, .66)!important;
+}

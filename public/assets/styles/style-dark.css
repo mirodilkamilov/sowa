@@ -1,0 +1,488 @@
+/* -----------------------------------------------------------------
+    - General Styles
+----------------------------------------------------------------- */
+body {
+  background-color: #202020;
+  color: #fff;
+}
+
+.inputText, .textarea {
+  background-color: #202020;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.inputText:focus, .textarea:focus {
+  border-bottom: 1px solid #fff;
+}
+
+.inputText--fill {
+  border: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.label {
+  color: #fff;
+}
+
+.btn {
+  background-color: #fff;
+  color: #110f10;
+}
+.btn::before {
+  background-color: rgba(17, 15, 16, 0.2);
+}
+.btn:hover {
+  color: #110f10;
+}
+.btn--white {
+  background-color: #fff;
+  color: #110f10;
+}
+
+.btn-link {
+  color: #fff;
+}
+.btn-link:hover .circle {
+  box-shadow: 0 0 0 2px #fff;
+}
+.btn-link:hover .circle--white {
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.circle {
+  color: #110f10;
+  background-color: #fff;
+  box-shadow: 0 0 0 0px #fff;
+}
+.circle--white {
+  color: #110f10;
+  background-color: #fff;
+  box-shadow: 0 0 0 0px #fff;
+}
+
+.dark-mask::before {
+  background-color: #fff;
+}
+
+.table thead th {
+  color: rgba(255, 255, 255, 0.5);
+}
+.table td {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.table span {
+  color: rgba(255, 255, 255, 0.5);
+}
+@media only screen and (max-width: 768px) {
+  .table td:before {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .flex-table {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+.flex-table__thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.flex-table__tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.flex-table__th {
+  color: rgba(255, 255, 255, 0.5);
+}
+@media only screen and (max-width: 768px) {
+  .flex-table__td:before {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.separation {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -----------------------------------------------------------------
+    - Typography
+----------------------------------------------------------------- */
+.title--overhead {
+  color: rgba(255, 255, 255, 0.5);
+}
+.title--tail::before, .title--tail-black::before {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.title--tail-black::before {
+  background-color: #fff;
+}
+
+.block-quote::before {
+  background-image: url(../images/icon-quote-white.svg);
+}
+.block-quote cite {
+  color: rgba(255, 255, 255, 0.5);
+}
+.block-quote cite::before {
+  background-color: #fff;
+}
+
+a {
+  color: #fff;
+}
+
+.paragraph {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.text-overlay {
+  color: #202020;
+}
+
+.list-unstyled {
+  color: #fff;
+}
+
+/* -----------------------------------------------------------------
+    - Preloader
+----------------------------------------------------------------- */
+.loading {
+  background-color: #110f10;
+}
+.loading::before {
+  background-image: url(../images/logo-white.svg);
+}
+.loading .progress-bar {
+  background-color: #110f10;
+}
+
+/* -----------------------------------------------------------------
+    - Header
+----------------------------------------------------------------- */
+@media only screen and (max-width: 580px) {
+  .navbar {
+    background-color: #110f10;
+    box-shadow: 0 4px 20px rgba(17, 15, 16, 0.2);
+  }
+}
+@media only screen and (max-width: 580px) {
+  .navbar-v2 .hamburger__inner::before,
+  .navbar-v2 .hamburger__inner::after {
+    background-color: #110f10;
+  }
+}
+@media only screen and (min-width: 580px) {
+  .navbar--white {
+    color: #110f10;
+  }
+  .navbar--white .circle {
+    color: #110f10;
+    background-color: #fff;
+    box-shadow: 0 0 0 0px #fff;
+  }
+  .navbar--white .circle:hover {
+    box-shadow: 0 0 0 2px #fff;
+  }
+  .navbar--white .btn-link:hover .circle {
+    box-shadow: 0 0 0 2px #fff;
+  }
+  .navbar--white .hamburger__inner::before,
+  .navbar--white .hamburger__inner::after {
+    background-color: #fff;
+  }
+}
+@media only screen and (max-width: 580px) {
+  .open .navbar {
+    box-shadow: none;
+  }
+}
+.navbar.sticky {
+  background-color: #202020;
+  height: 88px;
+}
+
+.hamburger__inner:before, .hamburger__inner:after {
+  background-color: #fff;
+}
+.is-active .hamburger__inner {
+  color: #fff;
+}
+.open .hamburger__inner:before, .open .hamburger__inner:after {
+  background-color: #110f10;
+}
+.is-active .open .hamburger__inner {
+  color: #110f10;
+}
+
+/* -----------------------------------------------------------------
+    - Slider
+----------------------------------------------------------------- */
+.slider__case-details .item-details {
+  background-color: #202020;
+}
+
+.slider-fullscreen::before {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.swiper-control .swiper-button-prev--square,
+.swiper-control .swiper-button-next--square {
+  background-color: #202020;
+}
+.swiper-control .swiper-button-prev--square::after, .swiper-control .swiper-button-prev--square::before,
+.swiper-control .swiper-button-next--square::after,
+.swiper-control .swiper-button-next--square::before {
+  background: #fff;
+}
+.swiper-control .swiper-button-prev--square:hover,
+.swiper-control .swiper-button-next--square:hover {
+  color: #110f10;
+}
+
+.slider-nav__arrow {
+  fill: #fff;
+}
+.slider-nav__arrow--white {
+  fill: #fff;
+}
+.slider-nav__path-progress--gray {
+  stroke: #fff;
+}
+.slider-nav__path-progress--white {
+  stroke: #fff;
+}
+.slider-nav__path--gray {
+  stroke: rgba(255, 255, 255, 0.4);
+}
+.slider-nav__path--white {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+.slider-nav:hover .slider-nav__path--gray {
+  opacity: 1;
+  stroke: #fff;
+  fill: #fff;
+}
+.slider-nav:hover .slider-nav__path--white {
+  stroke: #fff;
+  fill: #fff;
+}
+.slider-nav:hover .slider-nav__arrow {
+  fill: #110f10;
+}
+.slider-nav:hover .slider-nav__arrow--white {
+  fill: #110f10;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.2);
+}
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.swiper-pagination--white .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 4px rgba(17, 15, 16, 0.3);
+}
+.swiper-pagination--white .swiper-pagination-bullet-active {
+  background: white;
+}
+
+/* -----------------------------------------------------------------
+    - Sections
+----------------------------------------------------------------- */
+.tail::before {
+  background-color: #fff;
+}
+
+.overlay::before {
+  background-color: rgba(17, 15, 16, 0.35);
+}
+.overlay--45::before {
+  background-color: rgba(17, 15, 16, 0.45);
+}
+.overlay--80::before {
+  background-color: rgba(17, 15, 16, 0.8);
+}
+
+.social--white .social__link {
+  color: #110f10;
+}
+.social--white .social__link:hover {
+  color: #110f10;
+}
+.social__link:hover {
+  color: #fff;
+}
+
+.case-details .item-details__title {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* -----------------------------------------------------------------
+    - Project
+----------------------------------------------------------------- */
+.onHover {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+}
+.onHover__details {
+  color: #fff;
+}
+
+.projects-carousel .swiper-pagination-progressbar {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.projects-carousel .swiper-pagination-progressbar-fill {
+  background-color: #fff;
+}
+
+/* -----------------------------------------------------------------
+    - Project Single
+----------------------------------------------------------------- */
+.header-fullscreen {
+  background-color: #fff;
+  color: #fff;
+}
+.header-fullscreen .title--overhead,
+.header-fullscreen .item-details__title,
+.header-fullscreen .btn-link {
+  color: #fff;
+}
+.header-fullscreen .title--tail::before {
+  background-color: #fff;
+}
+
+.num-article {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.gallery-two .note {
+  background-color: #110f10;
+  color: #fff;
+}
+
+.page-nav {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -----------------------------------------------------------------
+    - Menu
+----------------------------------------------------------------- */
+.menu {
+  background: #fff;
+}
+
+.menu-list__item {
+  color: #110f10;
+}
+.menu-list__item:hover {
+  color: #110f10;
+}
+
+.ef-background {
+  background-color: #000;
+}
+
+/* -----------------------------------------------------------------
+    - News
+----------------------------------------------------------------- */
+@media only screen and (min-width: 769px) {
+  .filters__item.active .filters__link::before {
+    background-color: #fff;
+  }
+  .filters__link::after {
+    background-color: #fff;
+  }
+  .filters__link.active::before {
+    background-color: #fff;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .select {
+    color: #110f10;
+  }
+  .select .placeholder {
+    background-color: #fff;
+  }
+  .select .placeholder:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .select ul {
+    background: #110f10;
+    box-shadow: 0 10px 60px rgba(255, 255, 255, 0.1);
+  }
+  .select ul li {
+    color: #fff;
+  }
+  .select ul li:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+.item-news .date::before {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.date {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hover-line {
+  background-image: linear-gradient(to right, #fff 0%, #fff 100%);
+}
+
+.image-caption {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.share-post::before {
+  background-color: #fff;
+}
+
+/* -----------------------------------------------------------------
+    - Footer
+----------------------------------------------------------------- */
+.footer::before {
+  background-color: #110f10;
+}
+.footer__left {
+  color: #fff;
+}
+@media only screen and (max-width: 768px) {
+  .footer__left {
+    background-color: #110f10;
+  }
+}
+
+/* -----------------------------------------------------------------
+    - Effects
+----------------------------------------------------------------- */
+.mapboxgl-popup-content {
+  color: #110f10;
+}
+
+.cursor {
+  mix-blend-mode: lighten;
+}
+.cursor-close {
+  mix-blend-mode: difference;
+}
+
+.reveal::after {
+  background: #202020;
+}
+.reveal.animated::before {
+  background: #110f10;
+}
+
+.nicescroll-cursors {
+  background-color: rgba(255, 255, 255, 0.66) !important;
+}
+
+/*# sourceMappingURL=style-dark.css.map */

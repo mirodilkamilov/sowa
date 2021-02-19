@@ -1,0 +1,135 @@
+/* -----------------------------------------------------------------
+    - Footer
+----------------------------------------------------------------- */ 
+
+.footer {
+  margin-top: 8rem;
+  position: relative;
+
+  @media only screen and (max-width: $medium) {
+    margin-top: 4rem;
+  }
+  
+  @media only screen and (max-width: $small) {
+    margin-top: 2rem;
+  }
+  
+  &::before {
+    content: '';
+	  background-color: $black-color;
+  	position: absolute;
+  	height: 100%;
+  	width: 50%;
+	
+	  @media only screen and (max-width: $medium) {
+	    height: 0;
+	  }
+  }
+  
+  &__left {
+    @include display(flex);
+    @include flex-direction(column);
+  	@include align-items(center);
+	  color: $white-color;
+	  padding: 6rem;
+  	align-self: center;
+	
+  	@media only screen and (max-width: $large) {
+	    padding: 5rem 0 4rem;
+  	}
+	
+  	@media only screen and (max-width: $medium) {
+	    background-color: $black-color;
+	    flex: 0 0 100%;
+      max-width: 100%;
+  	}
+	
+  	@media only screen and (max-width: $small) {
+	    padding: 2rem 0 1rem;
+	  }
+	
+	  .form-group {
+	    margin-bottom: 0;
+	  }
+  }
+
+  &__right {
+	  padding: 6rem 0 3rem 10vw;
+
+  	@media only screen and (max-width: $medium) {
+	    padding: 3rem 0 0 2rem;
+	    flex: 0 0 100%;
+      max-width: 100%;
+    }
+    
+    @media only screen and (max-width: $small) {
+      padding: 2rem 15px 0 15px;
+    }
+  }
+}
+
+.listContact {
+  margin-bottom: 3rem;
+  
+  @media only screen and (max-width: $medium) {
+    margin-bottom: 2rem;
+  }
+  
+  @media only screen and (max-width: $small) {
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+	
+  	@media only screen and (max-width: $medium) {
+	    margin-bottom: .8rem;
+    }
+	
+  	@media only screen and (max-width: $small) {
+	    font-size: 1rem;
+	    margin-bottom: .6rem;
+  	}
+  }
+}
+
+// Newsletter
+.newsletter-form__row {
+  .inputText {
+    padding: 1rem 5rem 1rem 1.5rem;
+    width: 30vw;
+    margin-right: -62px;
+	
+    @media only screen and (max-width: $medium) {
+      width: 80vw;
+    }
+	
+    @media only screen and (max-width: $small) {
+      padding: 1.1rem 5rem 1.1rem 1.5rem;
+      margin-right: -2rem;
+    }
+	
+    @media only screen and (min-width: $large-xxl) {
+      width: 20vw;
+    }
+	
+	  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	    line-height: 1;
+      padding: 1.4rem 5rem 1.4rem 1.5rem;
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+  }
+}
+
+#validator-newsletter {
+  font-size: .89rem;
+  font-weight: $weight-300;
+  margin-top: 1.2rem;
+  
+  @media only screen and (max-width: $medium) {
+    text-align: center;
+  }
+}
