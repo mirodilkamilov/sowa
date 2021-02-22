@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,23 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home.index');
 });
 
-Route::get('/projects', function () {
-    return view('projects');
+Route::group(['prefix' => 'projects'], function () {
+    Route::get('/', function () {
+        return view('projects.index');
+    });
+
+    Route::get('/{project_id}-{slug}', 'App\Http\Controllers\ProjectController@show');
 });
 
 Route::get('/about', function () {
-    return view('about');
+    return view('about.index');
 });
 
 Route::get('/contacts', function () {
-    return view('contacts');
+    return view('contacts.index');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -18,25 +18,25 @@
     <meta name="twitter:site" content="@Sowa">
     <meta name="twitter:title" content="Sowa">
     <meta name="twitter:description" content="Sowa -  digital agency.">
-    <meta name="twitter:image" content="assets/images/social.jpg">
+    <meta name="twitter:image" content="/assets/images/social.jpg">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="Sowa"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="sowa.uz"/>
-    <meta property="og:image" content="assets/images/social.jpg"/>
+    <meta property="og:image" content="/assets/images/social.jpg"/>
     <meta property="og:description" content="Sowa -  digital agency."/>
     <meta property="og:site_name" content="Sowa"/>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="assets/images/favicons/site.webmanifest">
-    <link rel="mask-icon" href="assets/images/favicons/safari-pinned-tab.svg" color="#3a3a3a">
-    <link rel="shortcut icon" href="assets/images/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#3a3a3a">
+    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-config" content="assets/images/favicons/browserconfig.xml">
+    <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
     <!-- Styles -->
@@ -47,7 +47,7 @@
 <!-- Preloader -->
 <div class="preloader">
     <div class="preloader__wrap">
-        <img class="preloader__logo" src="assets/images/logo-white.svg" alt="Sowa">
+        <img class="preloader__logo" src="/assets/images/logo-white.svg" alt="Sowa">
         <div class="preloader__progress"><span></span></div>
     </div>
 </div>
@@ -56,8 +56,8 @@
 <nav class="navbar">
     <div class="mr-auto logo-container">
         <a class="logo-link" href="/">
-            <img class="logotype logotype__front" src="assets/images/logo-black.svg" alt="Sowa.">
-            <img class="logotype logotype__back" src="assets/images/logo-white.svg" alt="Sowa.">
+            <img class="logotype logotype__front" src="/assets/images/logo-black.svg" alt="Sowa.">
+            <img class="logotype logotype__back" src="/assets/images/logo-white.svg" alt="Sowa.">
         </a>
     </div>
     <div class="ml-sm-auto">
@@ -92,9 +92,9 @@
 <div class="cursor"></div>
 
 <!-- JavaScripts -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/plugins.js"></script>
-<script src="assets/js/common.js"></script>
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/common.js"></script>
 
 </body>
 </html>

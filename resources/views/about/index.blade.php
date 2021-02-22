@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Intro -->
-<header class="header-page header-fullscreen header-page--gutterBottom overlay overlay--45 js-image jarallax" data-image="assets/img/about_us.jpg">
+<header class="header-page header-fullscreen header-page--gutterBottom overlay overlay--45 js-image jarallax" data-image="/assets/img/about_us.jpg">
     <div class="header-page__container-fluid align-items-end js-opacity">
         <div class="row no-gutters">
             <div class="col-md-12 col-lg-6">
@@ -81,102 +81,102 @@
     <div class="row brands-wrap">
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/asturiamanus.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/asturiamanus.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/bbq.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/bbq.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/discoverygroup.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/discoverygroup.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/drasror.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/drasror.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/hairshop.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/hairshop.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/hubstock.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/hubstock.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/onlife.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/onlife.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/orient-star-group.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/orient-star-group.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/sangood.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/sangood.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/smartcenter.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/smartcenter.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/sola.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/sola.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/soya.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/soya.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/tak.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/tak.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/uskunalar.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/uskunalar.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/uzneftegaz.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/uzneftegaz.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/uzrailservice.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/uzrailservice.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/vithouse.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/vithouse.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/xonsaroy.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/xonsaroy.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/yuridik.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/yuridik.png" alt="Logo Brand" /></a>
             </div>
         </div>
         <div class="col-6 col-md-4 col-lg-3 my-2">
             <div class="item-brand">
-                <a href="#"><img class="item-brand__logo" src="assets/img/brands/www.png" alt="Logo Brand" /></a>
+                <a href="#"><img class="item-brand__logo" src="/assets/img/brands/www.png" alt="Logo Brand" /></a>
             </div>
         </div>
     </div>

@@ -26,8 +26,8 @@
         <div class="flex-grid js-masonry-project js-sort">
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-design">
-                <a href="project-yuridik.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/yuridik_cover.png" alt="Project">
+                <a href="projects/1-yuridik" class="onHover">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/yuridik_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client"></div>-->
                         <h3 class="title title--h5">YURIDIK.UZ</h3>
@@ -39,7 +39,7 @@
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-branding">
                 <a href="project-soomi.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/somi_cover.png" alt="Project">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/somi_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client">Soomi</div>-->
                         <h3 class="title title--h5">SOOMI</h3>
@@ -51,7 +51,7 @@
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-app">
                 <a href="project-kidya.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/kidya_cover.png" alt="Project">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/kidya_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client">Doodle Club</div>-->
                         <h3 class="title title--h5">KIDYA</h3>
@@ -63,7 +63,7 @@
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-design">
                 <a href="project-cleanice.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/ice_cover.png" alt="Project">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/ice_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client">KIDYA APP</div>-->
                         <h3 class="title title--h5">CLEAN ICE</h3>
@@ -75,7 +75,7 @@
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-branding">
                 <a href="project-waio.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/wisdom_cover.png" alt="Project">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/wisdom_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client">Clean Ice</div>-->
                         <h3 class="title title--h5">WISDOM DICTIONARY</h3>
@@ -87,7 +87,7 @@
             <!-- Project -->
             <figure class="item-project item-masonry js-block category-app">
                 <a href="project-alistore.html" class="onHover">
-                    <img class="item-news__image lazyload" src="assets/img/projects/ali_cover.png" alt="Project">
+                    <img class="item-news__image lazyload" src="/assets/img/projects/ali_cover.png" alt="Project">
                     <figcaption class="onHover__details">
                         <!--<div class="client">Digital Agancy</div>-->
                         <h3 class="title title--h5">ALISTORE</h3>

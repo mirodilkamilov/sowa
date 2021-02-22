@@ -52,21 +52,21 @@
             <div class="swiper-wrapper">
                 <!-- Image 1 -->
                 <div class="swiper-slide">
-                    <div class="cover-slider lazyload overlay--45" data-bg="assets/img/image_slider_1.jpg"><a
+                    <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1.jpg"><a
                             class="swiper-slide__link" href="projects1.html"></a></div>
                 </div>
                 <!-- /Image 1 -->
 
                 <!-- Image 2 -->
                 <div class="swiper-slide">
-                    <div class="cover-slider lazyload overlay--45" data-bg="assets/img/image_slider_1_2.jpg"><a
+                    <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1_2.jpg"><a
                             class="swiper-slide__link" href="projects2.html"></a></div>
                 </div>
                 <!-- /Image 2 -->
 
                 <!-- Image 3 -->
                 <div class="swiper-slide">
-                    <div class="cover-slider lazyload overlay--45" data-bg="assets/img/image_slider_1_3.jpg"><a
+                    <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1_3.jpg"><a
                             class="swiper-slide__link" href="projects3.html"></a></div>
                 </div>
                 <!-- /Image 3 -->
