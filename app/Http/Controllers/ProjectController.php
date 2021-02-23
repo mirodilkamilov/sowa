@@ -9,9 +9,9 @@ use function PHPUnit\Framework\isEmpty;
 
 class ProjectController extends Controller
 {
-    public function show(Project $project_id, $slug)
+    public function show($project_id)
     {
-        $projects = Project::find($project_id);
-        return view('projects.show')->with('projects', $projects);// ['projects' => $projects]);
+        $project = Project::findOrFail($project_id);
+        return view('projects.show', ['project' => $project]);
     }
 }

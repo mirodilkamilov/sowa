@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
@@ -12,11 +12,6 @@ class Project extends Model
 
     public function path()
     {
-        return url("/projects/{$this->id}-" . Str::slug($this->title));
+        return url("/projects/{$this->id}-" . Str::slug($this->slug));
     }
-
-//    public function getRouteKeyName()
-//    {
-//        return 'slug';
-//    }
 }
