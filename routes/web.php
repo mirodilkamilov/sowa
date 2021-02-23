@@ -19,7 +19,10 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'projects'], function () {
+
     Route::get('/', function () {
+       $a =  \App\Models\Project::find(1);
+        return $a->title();
         return view('projects.index');
     });
 

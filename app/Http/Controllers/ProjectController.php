@@ -14,4 +14,11 @@ class ProjectController extends Controller
         $project = Project::findOrFail($project_id);
         return view('projects.show', ['project' => $project]);
     }
+
+
+    public function store(Request $request)
+    {
+
+        return $request->all();
+    }
 }
