@@ -2,19 +2,30 @@
 
 namespace App\Models;
 
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Project extends Model implements TranslatableContract
+class Project extends Model
 {
-    use Translatable;
+    protected $fillable = ['title'];
+    protected $casts = [
+        'title' => 'array'
+        ];
 
-    public $translatedAttributes = ['title', 'category'];
 
     public function path()
     {
         return url("/projects/{$this->id}-" . Str::slug($this->slug));
+    }
+
+
+    public function title(){
+        switch (app()->getLocale()){
+            case 'uz':
+                return $this->title['uz'];
+                break;
+            default:
+                return $this->title['ru'];
+        }
     }
 }

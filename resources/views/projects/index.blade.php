@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <p>{{ $project->title['$lang'] }}</p>
+
     <!-- Projects -->
     <div class="container">
         <header class="header-page">

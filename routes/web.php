@@ -19,9 +19,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'projects'], function () {
-    Route::get('/', function () {
-        return view('projects.index');
-    });
+
+    Route::get('/', 'App\Http\Controllers\ProjectController@index');
 
     Route::get('/{project_id}-{slug}', 'App\Http\Controllers\ProjectController@show');
 });
