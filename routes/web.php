@@ -25,6 +25,9 @@ Route::group(['prefix' => 'projects'], function () {
 
     Route::get('/{project_id}-{slug}', [ProjectController::class, 'show']);
 
+    Route::get('/create', [ProjectController::class, 'create']);
+
+
 });
 
 Route::get('/about', function () {
