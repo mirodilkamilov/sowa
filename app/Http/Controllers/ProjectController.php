@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\isEmpty;
 
 class ProjectController extends Controller
 {
+    public function index()
+    {
+        $projects = Project::all();
+        return view('projects.index', ['projects' => $projects]);
+    }
+
     public function show($project_id)
     {
         $project = Project::findOrFail($project_id);

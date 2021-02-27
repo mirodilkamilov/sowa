@@ -8,7 +8,7 @@
             <div class="container">
                 <!-- Title -->
                 <h6 class="title title--overhead title--tail">{{ $project->category }}</h6>
-                <h1 class="title title--display-1 js-lines">{{ $project->title }}</h1>
+                <h1 class="title title--display-1 js-lines">{{ $project->title['ru'] }}</h1>
                 <!-- /Title -->
 
 {{--                TODO: slug links working--}}

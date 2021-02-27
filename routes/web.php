@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,11 +20,11 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'projects'], function () {
-    Route::get('/', function () {
-        return view('projects.index');
-    });
 
-    Route::get('/{project_id}-{slug}', 'App\Http\Controllers\ProjectController@show');
+    Route::get('/', [ProjectController::class, 'index']);
+
+    Route::get('/{project_id}-{slug}', [ProjectController::class, 'show']);
+
 });
 
 Route::get('/about', function () {
