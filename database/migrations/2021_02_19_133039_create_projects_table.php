@@ -15,8 +15,14 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('categories');
             $table->jsonb('title');
             $table->jsonb('slug');
+            $table->string('main_image');
+            $table->string('client');
+            $table->year('year');
+            $table->jsonb('description');
+            $table->string('url');
             $table->timestamps();
         });
     }

@@ -10,7 +10,13 @@ class Project extends Model
     protected $casts = [
         'title' => 'array',
         'slug' => 'array',
+        'description' => 'array',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function path()
     {
