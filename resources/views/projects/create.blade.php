@@ -12,23 +12,39 @@
 </head>
 <body>
 <div class="container pt-5">
-    <h1 class="heading">Create Project</h1>
-    <form class="row g-3">
+    <h1 class="heading">Create Project (RU)</h1>
+    <form class="row g-3" action="store" method="post">
+        @csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Project title</label>
-            <input type="text" class="form-control" id="inputEmail4">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="inputEmail4" name="title"
+                   value="{{  old('title')  }}">
+            @error('title')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-4">
             <label for="inputPassword4" class="form-label">Slug</label>
-            <input type="text" class="form-control" id="inputPassword4">
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="inputPassword4" name="slug"
+                   value="{{  old('slug')  }}">
+            @error('slug')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-4">
             <label for="formFile" class="form-label">Primary image</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control @error('image') is-invalid @enderror" type="file" id="formFile" name="image">
+            @error('image')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-4">
             <label class="form-label">Project category</label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select @error('category') is-invalid @enderror" aria-label="Project category"
+                    name="category">
+                @error('category')
+                <p class="alert alert-danger">{{ $message }}</p>
+                @enderror
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -36,20 +52,36 @@
         </div>
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Client</label>
-            <input type="text" class="form-control" id="inputEmail4">
+            <input type="text" class="form-control @error('client') is-invalid @enderror" id="inputEmail4" name="client"
+                   value="{{  old('client')  }}">
+            @error('client')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-4">
             <label for="inputPassword4" class="form-label">Year</label>
-            <input type="text" class="form-control" id="inputPassword4">
+            <input type="text" class="form-control @error('year') is-invalid @enderror" id="inputPassword4" name="year"
+                   value="{{  old('year')  }}">
+            @error('year')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="col-12">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
+                      name="description">{{  old('description')  }}</textarea>
+            @error('description')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-12">
             <label for="inputAddress2" class="form-label">Project URL</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="https://github.com/mirodil1999">
+            <input type="text" class="form-control @error('url') is-invalid @enderror" id="inputAddress2"
+                   placeholder="https://github.com/mirodil1999" name="url" value="{{  old('url')  }}">
+            @error('url')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Save</button>
