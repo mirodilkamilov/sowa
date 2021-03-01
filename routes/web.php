@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,6 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'projects'], function () {
-
     Route::get('/', [ProjectController::class, 'index']);
 
     Route::get('/{project_id}-{slug}', [ProjectController::class, 'show']);
@@ -28,7 +28,12 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/create', [ProjectController::class, 'create']);
 
     Route::post('/store', [ProjectController::class, 'store']);
+});
 
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/create', [CategoryController::class, 'create']);
+
+    Route::post('/store', [CategoryController::class, 'store']);
 });
 
 Route::get('/about', function () {
