@@ -23,6 +23,9 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->isMethod('get'))
+            return [];
+
         return [
             'category_ru' => 'required|max:30|unique:categories,category->ru',
             'category_en' => 'required|max:30|unique:categories,category->en',

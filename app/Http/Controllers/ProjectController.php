@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
+use App\Jobs\Project\ProjectStoreJob;
 use App\Models\Category;
 use App\Models\Project;
-use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -15,9 +15,8 @@ class ProjectController extends Controller
         return view('projects.index', ['projects' => $projects]);
     }
 
-    public function show($project_id)
+    public function show(Project $project)
     {
-        $project = Project::findOrFail($project_id);
         return view('projects.show', ['project' => $project]);
     }
 
@@ -29,42 +28,11 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
-        $validated = $request->validated();
-
-        $validated['slug'] = Str::slug($validated['slug'], '-');
-
-        $extension = $request->file('image')->extension();
-        $imageName = $validated['slug'] . '-main.' . $extension;
-        $path = $validated['image']->storeAs('images/projects', $imageName);
-
-        $projectCollection = collect([
-            'title' => [
-                'ru' => $validated['title'],
-                'en' => '',
-                'uz' => '',
-            ],
-            'slug' => [
-                'ru' => $validated['slug'],
-                'en' => '',
-                'uz' => '',
-            ],
-            'description' => [
-                'ru' => $validated['description'],
-                'en' => '',
-                'uz' => '',
-            ],
-        ]);
-
-        $project = new Project;
-        $project->category_id = $validated['category_id'];
-        $project->title = $projectCollection['title'];
-        $project->slug = $projectCollection['slug'];
-        $project->main_image = $path;
-        $project->client = $validated['client'];
-        $project->year = $validated['year'];
-        $project->description = $projectCollection['description'];
-        $project->url = $validated['url'];
-        $project->save();
+        try {
+            $project = $this->dispatchNow(new ProjectStoreJob($request));
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
 
         $request->session()->flash('alert-success', 'Project was successful added!');
         return redirect()->back();

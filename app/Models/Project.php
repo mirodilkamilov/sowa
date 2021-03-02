@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
+    protected $guarded = ['id'];
+
     protected $casts = [
         'title' => 'array',
         'slug' => 'array',

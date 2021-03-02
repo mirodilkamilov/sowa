@@ -15,6 +15,9 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
+        if ($request->isMethod('get'))
+            return view('category.create');
+
         $validated = $request->validated();
 
         $newCategory = collect([

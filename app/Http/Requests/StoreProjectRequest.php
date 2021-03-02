@@ -25,7 +25,9 @@ class StoreProjectRequest extends FormRequest
     {
 //      TODO: configure php.ini to upload bigger files in production (upload_max_filesize = 16M ; post_max_size = 24M)
         return [
-            'title' => 'required',
+            'title' => 'required|array',
+            'title.ru' => 'required',
+            'title.uz' => 'nullable',
             'slug' => 'required|max:20',
             'image' => 'required|image|max:3072',
             'category_id' => 'required|exists:categories,id',

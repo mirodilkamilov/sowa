@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', [ProjectController::class, 'index']);
 
-    Route::get('/{project_id}-{slug}', [ProjectController::class, 'show']);
+    Route::get('/{project}-{slug}', [ProjectController::class, 'show']);
 
     Route::get('/create', [ProjectController::class, 'create']);
 
@@ -31,9 +31,7 @@ Route::group(['prefix' => 'projects'], function () {
 });
 
 Route::group(['prefix' => 'category'], function () {
-    Route::get('/create', [CategoryController::class, 'create']);
-
-    Route::post('/store', [CategoryController::class, 'store']);
+    Route::match(['get', 'post'], '/create', [CategoryController::class, 'create']);
 });
 
 Route::get('/about', function () {

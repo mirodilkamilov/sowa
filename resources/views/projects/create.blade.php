@@ -24,9 +24,10 @@
         @csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Project title</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" id="inputEmail4" name="title"
-                   value="{{  old('title')  }}">
-            @error('title')
+            <input type="text" class="form-control @error('title.ru') is-invalid @enderror" id="inputEmail4"
+                   name="title[ru]"
+                   value="{{  old('title.ru')  }}">
+            @error('title.ru')
             <p class="alert alert-danger">{{ $message }}</p>
             @enderror
         </div>
@@ -76,9 +77,9 @@
 
         <div class="col-12">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
-                      name="description">{{  old('description')  }}</textarea>
-            @error('description')
+            <textarea class="form-control @error('description.ru') is-invalid @enderror" id="description" rows="3"
+                      name="description[ru]">{{  old('description.ru')  }}</textarea>
+            @error('description.ru')
             <p class="alert alert-danger">{{ $message }}</p>
             @enderror
         </div>
