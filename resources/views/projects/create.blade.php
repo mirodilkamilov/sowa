@@ -1,4 +1,5 @@
-<!doctype html>
+{{--TODO: save old value of category--}}
+    <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +12,15 @@
     <title>Create Projects</title>
 </head>
 <body>
+@if(Session::has('alert-success'))
+    <div class="flash-message">
+        <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
+    </div>
+@endif
+
 <div class="container pt-5">
     <h1 class="heading">Create Project (RU)</h1>
-    <form class="row g-3" action="store" method="post">
+    <form class="row g-3" action="store" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Project title</label>
@@ -41,14 +48,14 @@
         <div class="col-md-4">
             <label class="form-label">Project category</label>
             <select class="form-select @error('category') is-invalid @enderror" aria-label="Project category"
-                    name="category">
-                @error('category')
-                <p class="alert alert-danger">{{ $message }}</p>
-                @enderror
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                    name="category_id">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->category['ru'] }}</option>
+                @endforeach
             </select>
+            @error('category')
+            <p class="alert alert-danger">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Client</label>

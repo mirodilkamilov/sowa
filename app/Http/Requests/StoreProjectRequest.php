@@ -23,22 +23,16 @@ class StoreProjectRequest extends FormRequest
      */
     public function rules()
     {
-//      TODO: Validate category properly (compare with database)
+//      TODO: configure php.ini to upload bigger files in production (upload_max_filesize = 16M ; post_max_size = 24M)
         return [
             'title' => 'required',
             'slug' => 'required|max:20',
-            'image' => 'required|image',
-            'category' => 'required',
+            'image' => 'required|image|max:3072',
+            'category_id' => 'required|exists:categories,id',
+            'client' => 'nullable|max:30',
+            'year' => 'nullable|digits:4',
             'description' => 'required|max:250',
-            'url' => 'url',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'image.image' => 'Supported image formats: jpg, jpeg, png, bmp, gif, svg, or webp',
-            'body.required' => 'A message is required',
+            'url' => 'nullable|url',
         ];
     }
 }
