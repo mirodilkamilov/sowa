@@ -31,7 +31,9 @@ Route::group(['prefix' => 'projects'], function () {
 });
 
 Route::group(['prefix' => 'category'], function () {
-    Route::match(['get', 'post'], '/create', [CategoryController::class, 'create']);
+    Route::get('/create', [CategoryController::class, 'create']);
+
+    Route::post('/store', [CategoryController::class, 'store']);
 });
 
 Route::get('/about', function () {

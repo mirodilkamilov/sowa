@@ -34,7 +34,7 @@ class ProjectController extends Controller
             return $exception->getMessage();
         }
 
-        $request->session()->flash('alert-success', 'Project was successful added!');
+        $request->session()->flash('success', 'Project was successful added!');
         return redirect()->back();
     }
 }

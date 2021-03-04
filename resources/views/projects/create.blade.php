@@ -1,5 +1,6 @@
 {{--TODO: save old value of category--}}
-    <!doctype html>
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,10 +13,10 @@
     <title>Create Projects</title>
 </head>
 <body>
-@if(Session::has('alert-success'))
-    <div class="flash-message">
-        <p class="alert alert-success">{{ Session::get('alert-success') }}</p>
-    </div>
+@if(Session::has('success'))
+    <x-alert>
+        {{ Session::get('success') }}
+    </x-alert>
 @endif
 
 <div class="container pt-5">
