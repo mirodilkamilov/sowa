@@ -11,8 +11,8 @@
                 <h1 class="title title--display-1 js-lines">{{ $project->title['ru'] }}</h1>
                 <!-- /Title -->
 
-{{--                TODO: slug links working--}}
-{{--                <a href="{{ $project->path() }}">link to project</a>--}}
+                {{--TODO: slug links working--}}
+                {{--<a href="{{ $project->path() }}">link to project</a>--}}
 
 
             </div>
@@ -129,6 +129,7 @@
         </article>
 
         <!-- Image -->
+        <x-project.image :image="$project->main_image"/>
         <figure class="image-container reveal">
             <img class="cover lazyload" src="/assets/img/projects/yuridik/yuridik-6.png" alt=""/>
         </figure>
