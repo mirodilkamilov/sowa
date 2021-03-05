@@ -130,9 +130,6 @@
 
         <!-- Image -->
         <x-project.image :image="$project->main_image"/>
-        <figure class="image-container reveal">
-            <img class="cover lazyload" src="/assets/img/projects/yuridik/yuridik-6.png" alt=""/>
-        </figure>
         <!-- /Image -->
 
         <!--
