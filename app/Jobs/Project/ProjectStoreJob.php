@@ -17,7 +17,7 @@ class ProjectStoreJob
     {
         $this->attributes = $request->only(['category_id', 'title', 'client', 'year', 'description', 'url', 'slug']);
         if ($request->hasFile('image')) {
-            $imagePath = asset('assets/uploads') . '/' . $request->file('image')->store('projects');
+            $imagePath = 'assets/uploads/' . $request->file('image')->store('projects');
             $this->attributes['main_image'] = $imagePath;
         }
     }
