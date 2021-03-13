@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class ProjectContent extends Model
 {
     use HasFactory;
 
@@ -13,11 +13,13 @@ class Category extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'category' => 'array',
+        'title' => 'array',
+        'description' => 'array',
+        'image' => 'array',
     ];
 
-    public function projects()
+    public function project()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsTo(Project::class);
     }
 }

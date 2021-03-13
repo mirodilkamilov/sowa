@@ -2,26 +2,36 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    protected $guarded = ['id'];
+    use HasFactory;
 
-    protected $casts = [
-        'title' => 'array',
-        'slug' => 'array',
-        'description' => 'array',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
-    public function category()
+    protected $casts = [
+        'main_title' => 'array',
+        'slug' => 'array',
+    ];
+
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function project_contents()
+    {
+        return $this->hasMany(ProjectContent::class);
     }
 
     public function path()
     {
-        return url("/projects/{$this->id}-" . Str::slug($this->slug));
+        return url("/projects/{$this->id}-" . $this->slug);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialMediasTable extends Migration
+class CreateCompanyListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSocialMediasTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_medias', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('url');
-            $table->primary('name');
+        Schema::create('company_lists', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_detail_id')->constrained('company_details');
+            $table->jsonb('title');
+            $table->jsonb('list');
         });
     }
 
@@ -27,6 +28,6 @@ class CreateSocialMediasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_medias');
+        Schema::dropIfExists('lists');
     }
 }
