@@ -17,31 +17,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home.index');
+    $defaultLang = config('app.locale');
+    return redirect('/' . $defaultLang);
 });
 
-Route::group(['prefix' => 'projects'], function () {
-    Route::get('/', [ProjectController::class, 'index']);
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => implode('|', config('app.languages'))],
+    'middleware' => 'setLocale',
+], function () {
+    Route::get('/', function () {
+        return view('home.index');
+    });
 
-    Route::get('/{project}-{slug}', [ProjectController::class, 'show']);
+    Route::group(['prefix' => 'projects'], function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('products.index');
 
-    Route::get('/create', [ProjectController::class, 'create']);
+        Route::get('/{project}-{slug}', [ProjectController::class, 'show'])->name('products.show');
 
-    Route::post('/store', [ProjectController::class, 'store']);
-});
+        Route::get('/create', [ProjectController::class, 'create'])->name('products.create');
 
-Route::group(['prefix' => 'category'], function () {
-    Route::get('/create', [CategoryController::class, 'create']);
+        Route::post('/store', [ProjectController::class, 'store'])->name('products.store');
+    });
 
-    Route::post('/store', [CategoryController::class, 'store']);
-});
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
 
-Route::get('/about', function () {
-    return view('about.index');
-});
+        Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+    });
 
-Route::get('/contacts', function () {
-    return view('contacts.index');
+    Route::get('/about', function () {
+        return view('about.index');
+    });
+
+    Route::get('/contacts', function () {
+        return view('contacts.index');
+    });
 });
 
 Route::get('/dashboard', function () {

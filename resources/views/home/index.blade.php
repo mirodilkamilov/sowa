@@ -15,7 +15,7 @@
                             <p class="description"><span class="down-up"><span>В нашей компании все разработчики, дизайнеры и аналитики работают вместе. Именно это является важнейшим аспектом при создание отзывчивого и быстрого веб сайта с отличным дизайном.</span></span>
                             </p>
                             <a class="btn-link btn-link--circle-right" href="projects1.html"><span
-                                    class="down-up"><span>Подробно<i
+                                    class="down-up"><span>{{ __('Learn more') }}<i
                                             class="circle circle--right icon-right-open"></i></span></span></a>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                             <p class="description"><span class="down-up"><span>Уникальная Решения для каждого клиента – вот наш девиз. До того как мы начинаем планирование каждого проекта, мы изучаем целевую аудитории нашего клиента чтобы клиент получал максимальную пользу от готового продукта.</span></span>
                             </p>
                             <a class="btn-link btn-link--circle-right" href="projects2.html"><span
-                                    class="down-up"><span>Подробно<i
+                                    class="down-up"><span>{{ __('Learn more') }}<i
                                             class="circle circle--right icon-right-open"></i></span></span></a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <p class="description"><span class="down-up"><span>Дизайн - Важнейший этап разработки любого проекта. Потому что именно хороший дизайн привлекает пользователей. Мы поможем вам создать уникальный дизайн для вашего продукта.</span></span>
                             </p>
                             <a class="btn-link btn-link--circle-right" href="projects3.html"><span
-                                    class="down-up"><span>Подробно<i
+                                    class="down-up"><span>{{ __('Learn more') }}<i
                                             class="circle circle--right icon-right-open"></i></span></span></a>
                         </div>
                     </div>

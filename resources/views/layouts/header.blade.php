@@ -55,7 +55,7 @@
 <!-- Top -->
 <nav class="navbar">
     <div class="mr-auto logo-container">
-        <a class="logo-link" href="/">
+        <a class="logo-link" href="/{{ session('language') }}">
             <img class="logotype logotype__front" src="/assets/images/logo-black.svg" alt="Sowa.">
             <img class="logotype logotype__back" src="/assets/images/logo-white.svg" alt="Sowa.">
         </a>
@@ -74,10 +74,10 @@
 <div class="menu">
     <div class="menu-inner">
         <ul class="menu-list">
-            <li><a class="menu-list__item" href="{{ asset('projects') }}"><span>проекты</span></a></li>
-            <li><a class="menu-list__item" href="{{ asset('about') }}"><span>О нас</span></a></li>
+            <li><a class="menu-list__item" href="{{ asset('projects') }}"><span>{{ __('projects') }}</span></a></li>
+            <li><a class="menu-list__item" href="{{ asset('about') }}"><span>{{ __('About us') }}</span></a></li>
             <!--<li><a class="menu-list__item" href="news.html"><span>news</span></a></li>-->
-            <li><a class="menu-list__item" href="{{ asset('contacts') }}"><span>контакты</span></a></li>
+            <li><a class="menu-list__item" href="{{ asset('contacts') }}"><span>{{ __('contacts') }}</span></a></li>
         </ul>
     </div>
     <div class="social social--white">
