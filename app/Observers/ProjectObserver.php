@@ -3,14 +3,23 @@
 namespace App\Observers;
 
 use App\Models\Project;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ProjectObserver
 {
+    private $preferredLang;
+
+    public function __construct(Request $request)
+    {
+        $this->preferredLang = $request->cookie('lang');
+        if (!$request->hasCookie('lang'))
+            $this->preferredLang = 'ru';
+    }
+
     /**
      * Handle the Project "created" event.
      *
-     * @param \App\Models\Project $project
+     * @param Project $project
      * @return void
      */
     public function creating(Project $project)
@@ -25,6 +34,6 @@ class ProjectObserver
      */
     public function retrieved(Project $project)
     {
-        $project->main_title = $project->main_title['ru'];
+        $project->main_title = $project->main_title["$this->preferredLang"];
     }
 }
