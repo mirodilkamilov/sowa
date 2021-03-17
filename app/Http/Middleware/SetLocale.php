@@ -18,12 +18,14 @@ class SetLocale
     {
         // * Language in URL always valid (because of regex check in web.php)
         $langInUrl = $request->segment(1);
+        $langInSession = $request->session()->get('language');
+
+        // * Make sure lanInUrl and langInSession are same
+        if ($langInSession !== $langInUrl)
+            $request->session()->put('language', $langInUrl);
 
         $locale = $langInUrl;
-
-        $request->session()->put('language', $locale);
         app()->setLocale($locale);
-
         return $next($request);
     }
 }

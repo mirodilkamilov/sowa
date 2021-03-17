@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $defaultLang = config('app.locale');
-    return redirect('/' . $defaultLang);
+    $langInSession = session('language');
+
+    $locale = isset($langInSession) ? $langInSession : $defaultLang;
+    return redirect('/' . $locale);
 });
 
 Route::group([
