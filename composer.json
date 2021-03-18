@@ -17,6 +17,8 @@
         "twbs/bootstrap": "5.0.0-beta2"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.5",
+        "beyondcode/laravel-query-detector": "^1.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.1",
