@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Slider;
+use App\Models\Slide;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SliderFactory extends Factory
+class SlideFactory extends Factory
 {
-    protected $model = Slider::class;
+    protected $model = Slide::class;
     private $position = 0;
 
     /**
@@ -18,10 +18,11 @@ class SliderFactory extends Factory
     public function definition()
     {
         return [
-            'title' => ['ru' => 'ru-' . $this->faker->sentence, 'en' => 'en-' . $this->faker->sentence, 'uz' => 'uz-' . $this->faker->sentence],
+            'title' => ['ru' => 'ru-' . $this->faker->word, 'en' => 'en-' . $this->faker->word, 'uz' => 'uz-' . $this->faker->word],
+            'sub_title' => ['ru' => 'ru-' . $this->faker->word, 'en' => 'en-' . $this->faker->word, 'uz' => 'uz-' . $this->faker->word],
             'description' => ['ru' => 'ru-' . $this->faker->paragraph, 'en' => 'en-' . $this->faker->paragraph, 'uz' => 'uz-' . $this->faker->paragraph],
             'url' => $this->faker->url,
-            'image' => 'assets/uploads/slider/slider-' . ++$this->position . '.png',
+            'image' => $this->faker->imageUrl('1200', '1800', 'slide ' . ++$this->position),
             'position' => $this->position,
         ];
     }
