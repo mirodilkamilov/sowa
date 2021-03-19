@@ -33,13 +33,13 @@ Route::group([
     Route::get('/', [SlideController::class, 'index'])->name('home.index');
 
     Route::group(['prefix' => 'projects'], function () {
-        Route::get('/', [ProjectController::class, 'index'])->name('products.index');
+        Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
 
-        Route::get('/{id}-{slug}', [ProjectController::class, 'show'])->name('products.show');
+        Route::get('/{id}-{slug}', [ProjectController::class, 'show'])->name('projects.show');
 
-        Route::get('/create', [ProjectController::class, 'create'])->name('products.create');
+        Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
 
-        Route::post('/store', [ProjectController::class, 'store'])->name('products.store');
+        Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
     });
 
     Route::group(['prefix' => 'category'], function () {
@@ -50,11 +50,11 @@ Route::group([
 
     Route::get('/about', function () {
         return view('about.index');
-    });
+    })->name('about.index');
 
     Route::get('/contacts', function () {
         return view('contacts.index');
-    });
+    })->name('contacts.index');
 });
 
 Route::get('/dashboard', function () {
