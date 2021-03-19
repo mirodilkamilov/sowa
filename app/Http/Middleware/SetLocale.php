@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class SetLocale
 {
@@ -20,12 +21,15 @@ class SetLocale
         $langInUrl = $request->segment(1);
         $langInSession = $request->session()->get('language');
 
-        // * Make sure lanInUrl and langInSession are same
+        // * Make sure langInUrl and langInSession are same
         if ($langInSession !== $langInUrl)
             $request->session()->put('language', $langInUrl);
 
         $locale = $langInUrl;
         app()->setLocale($locale);
+
+        // * Share session value with $locale variable across all views
+        View::share('locale', session('language'));
         return $next($request);
     }
 }

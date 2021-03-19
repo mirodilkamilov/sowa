@@ -1,11 +1,6 @@
 @extends('layouts.header')
 
 @section('content')
-    {{--    TODO: get language from cookie--}}
-    @foreach($projects as $project)
-        <p>{{ $project->title['ru'] }}</p>
-    @endforeach
-
     <!-- Projects -->
     <div class="container">
         <header class="header-page">

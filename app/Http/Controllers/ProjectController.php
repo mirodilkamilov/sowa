@@ -12,14 +12,12 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return response()
-            ->view('projects.index', ['projects' => $projects])
-            ->withCookie('lang', 'ru', 360000);
+        return view('projects.index')->with('projects', $projects);
     }
 
     public function show(Project $project)
     {
-        return view('projects.show', ['project' => $project]);
+        return view('projects.show')->with('project', $project);
     }
 
     public function create()

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectObserver
 {
@@ -22,10 +23,11 @@ class ProjectObserver
      * @param Project $project
      * @return void
      */
-    public function creating(Project $project)
+    public function saving(Project $project)
     {
-        // ! Here should be $project->slug['ru'] ...
-        //  $project->slug = Str::slug($project->slug);
+//        $project->slug['ru'] = Str::slug($project->slug['ru']);
+//        $project->slug['en'] = Str::slug($project->slug['en']);
+//        $project->slug['uz'] = Str::slug($project->slug['uz']);
     }
 
     /**
@@ -34,6 +36,7 @@ class ProjectObserver
      */
     public function retrieved(Project $project)
     {
-        $project->main_title = $project->main_title["$this->preferredLang"];
+        $project->slug = $project->slug[$this->preferredLang];
+        $project->main_title = $project->main_title[$this->preferredLang];
     }
 }
