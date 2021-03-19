@@ -21,10 +21,6 @@ class CreateCompanyDetailsTable extends Migration
             $table->jsonb('about_description');
             $table->jsonb('help_title');
             $table->jsonb('help_description');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('address');
-            $table->text('google_map');
         });
     }
 

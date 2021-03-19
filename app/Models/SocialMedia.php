@@ -13,6 +13,10 @@ class SocialMedia extends Model
     public $timestamps = false;
     protected $primaryKey = 'name';
     protected $keyType = 'string';
-
     protected $fillable = ['name', 'url'];
+
+    public function companyContact()
+    {
+        return $this->belongsTo(CompanyContact::class);
+    }
 }

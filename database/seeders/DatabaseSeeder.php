@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectContentSeeder::class);
         $this->call(SliderSeeder::class);
         $this->call(UserContactSeeder::class);
-        $this->call(SocialMediaSeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(CompanyDetailSeeder::class);
+        $this->call(CompanyContactSeeder::class);
     }
 }

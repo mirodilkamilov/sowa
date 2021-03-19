@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,14 +30,12 @@ Route::group([
     'where' => ['locale' => implode('|', config('app.languages'))],
     'middleware' => 'setLocale',
 ], function () {
-    Route::get('/', function () {
-        return view('home.index');
-    });
+    Route::get('/', [SlideController::class, 'index'])->name('home.index');
 
     Route::group(['prefix' => 'projects'], function () {
         Route::get('/', [ProjectController::class, 'index'])->name('products.index');
 
-        Route::get('/{project}-{slug}', [ProjectController::class, 'show'])->name('products.show');
+        Route::get('/{id}-{slug}', [ProjectController::class, 'show'])->name('products.show');
 
         Route::get('/create', [ProjectController::class, 'create'])->name('products.create');
 

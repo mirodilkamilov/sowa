@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialMediaTable extends Migration
+class CreateCompanyContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateSocialMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_media', function (Blueprint $table) {
-            $table->string('name')->primary();
-            $table->foreignId('company_contact_id')->constrained();
-            $table->string('url');
+        Schema::create('company_contacts', function (Blueprint $table) {
+            $table->id();
+            $table->string('phone');
+            $table->string('email');
+            $table->string('address');
+            $table->text('google_map');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateSocialMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_medias');
+        Schema::dropIfExists('company_contacts');
     }
 }
