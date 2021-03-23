@@ -5,9 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectTranslations extends Model
+class CompanyContact extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'category'];
+
     public $timestamps = false;
+    protected $guarded = ['id'];
+
+    public function socialMedia()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
 }

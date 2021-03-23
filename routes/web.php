@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyDetailController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,26 +20,49 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home.index');
+    $defaultLang = config('app.locale');
+    $langInSession = session('language');
+
+    $locale = isset($langInSession) ? $langInSession : $defaultLang;
+    return redirect()->route('home.index', $locale);
 });
 
-Route::group(['prefix' => 'projects'], function () {
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => implode('|', config('app.languages'))],
+    'middleware' => 'setLocale',
+], function () {
+    Route::get('/', [SlideController::class, 'index'])->name('home.index');
 
-    Route::get('/', 'App\Http\Controllers\ProjectController@index');
+    Route::group(['prefix' => 'projects'], function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
 
-    Route::get('/{project_id}-{slug}', 'App\Http\Controllers\ProjectController@show');
+        Route::get('/{project}-{slug}', [ProjectController::class, 'show'])->name('projects.show');
+
+        Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
+
+        Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+
+        Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+    });
+
+    Route::get('/about', [CompanyDetailController::class, 'index'])->name('about.index');
+
+    Route::get('/contacts', function () {
+        return view('contacts.index');
+    })->name('contacts.index');
+
 });
 
-Route::get('/about', function () {
-    return view('about.index');
+Route::group([
+    'prefix' => 'dashboard',
+    'middleware' => 'auth',
+], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
-
-Route::get('/contacts', function () {
-    return view('contacts.index');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

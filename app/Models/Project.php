@@ -2,30 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    protected $fillable = ['title'];
+    use HasFactory;
+
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $casts = [
-        'title' => 'array'
-        ];
+        'main_title' => 'array',
+        'slug' => 'array',
+    ];
 
-
-    public function path()
+    public function categories()
     {
-        return url("/projects/{$this->id}-" . Str::slug($this->slug));
+        return $this->belongsToMany(Category::class)->orderBy('category');
     }
 
-
-    public function title(){
-        switch (app()->getLocale()){
-            case 'uz':
-                return $this->title['uz'];
-                break;
-            default:
-                return $this->title['ru'];
-        }
+    public function project_contents()
+    {
+        return $this->hasMany(ProjectContent::class)->orderBy('position');
     }
+
 }
