@@ -7,20 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+//    use HasFactory;
 
     public $timestamps = false;
+    protected $guarded = ['id'];
 
     protected $casts = [
         'category' => 'array',
     ];
 
-    /*
-     * @var \Illuminate\Support\Collection|mixed
-     */
-
     public function projects()
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsToMany(Project::class);
     }
 }

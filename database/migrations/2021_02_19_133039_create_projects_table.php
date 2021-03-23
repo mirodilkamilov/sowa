@@ -15,13 +15,11 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories');
-            $table->jsonb('title');
             $table->jsonb('slug');
-            $table->string('main_image')->nullable();
+            $table->jsonb('main_title');
+            $table->string('main_image');
             $table->string('client')->nullable();
             $table->year('year')->nullable();
-            $table->jsonb('description');
             $table->string('url')->nullable();
             $table->timestamps();
         });

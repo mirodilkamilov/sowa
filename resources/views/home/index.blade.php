@@ -1,3 +1,4 @@
+{{--TODO: change contents $slider->url to something projects?sortBy=web/app/design --}}
 @extends('layouts.header')
 
 @section('content')
@@ -6,74 +7,32 @@
         <div class="slider slider-horizontal">
             <div class="slider__caption swiper-container">
                 <div class="swiper-wrapper">
-                    <!-- Caption 1 -->
-                    <div class="swiper-slide">
-                        <div class="slider__item">
-                            <h6 class="title title--overhead"><span class="down-up"><span>Web development</span></span>
-                            </h6>
-                            <h1 class="title title--display-1 js-text-wave">Веб-приложения</h1>
-                            <p class="description"><span class="down-up"><span>В нашей компании все разработчики, дизайнеры и аналитики работают вместе. Именно это является важнейшим аспектом при создание отзывчивого и быстрого веб сайта с отличным дизайном.</span></span>
-                            </p>
-                            <a class="btn-link btn-link--circle-right" href="projects1.html"><span
-                                    class="down-up"><span>Подробно<i
-                                            class="circle circle--right icon-right-open"></i></span></span></a>
+                    @foreach($sliders as $slider)
+                        <div class="swiper-slide">
+                            <div class="slider__item">
+                                <h6 class="title title--overhead"><span
+                                        class="down-up"><span>{{ $slider->sub_title }}</span></span></h6>
+                                <h1 class="title title--display-1 js-text-wave">{{ $slider->title }}</h1>
+                                <p class="description"><span
+                                        class="down-up"><span>{{ $slider->description }}</span></span>
+                                </p>
+                                <a class="btn-link btn-link--circle-right" href="{{ $slider->url }}"><span
+                                        class="down-up"><span>{{ __('Learn more') }}<i
+                                                class="circle circle--right icon-right-open"></i></span></span></a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /Caption 1 -->
-
-                    <!-- Caption 2 -->
-                    <div class="swiper-slide">
-                        <div class="slider__item">
-                            <h6 class="title title--overhead"><span class="down-up"><span>Mobile apps</span></span></h6>
-                            <h1 class="title title--display-1 js-text-wave mb-0 pb-0">Мобильные</h1>
-                            <h1 class="title title--display-1 js-text-wave mt-0 pt-0">приложения</h1>
-                            <p class="description"><span class="down-up"><span>Уникальная Решения для каждого клиента – вот наш девиз. До того как мы начинаем планирование каждого проекта, мы изучаем целевую аудитории нашего клиента чтобы клиент получал максимальную пользу от готового продукта.</span></span>
-                            </p>
-                            <a class="btn-link btn-link--circle-right" href="projects2.html"><span
-                                    class="down-up"><span>Подробно<i
-                                            class="circle circle--right icon-right-open"></i></span></span></a>
-                        </div>
-                    </div>
-                    <!-- /Caption 2 -->
-
-                    <!-- Caption 3 -->
-                    <div class="swiper-slide">
-                        <div class="slider__item">
-                            <h6 class="title title--overhead"><span class="down-up"><span>Design</span></span></h6>
-                            <h1 class="title title--display-1 js-text-wave">Дизайн</h1>
-                            <p class="description"><span class="down-up"><span>Дизайн - Важнейший этап разработки любого проекта. Потому что именно хороший дизайн привлекает пользователей. Мы поможем вам создать уникальный дизайн для вашего продукта.</span></span>
-                            </p>
-                            <a class="btn-link btn-link--circle-right" href="projects3.html"><span
-                                    class="down-up"><span>Подробно<i
-                                            class="circle circle--right icon-right-open"></i></span></span></a>
-                        </div>
-                    </div>
-                    <!-- /Caption 3 -->
+                    @endforeach
                 </div>
             </div>
 
             <div class="slider__image swiper-container reveal">
                 <div class="swiper-wrapper">
-                    <!-- Image 1 -->
-                    <div class="swiper-slide">
-                        <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1.jpg"><a
-                                class="swiper-slide__link" href="projects1.html"></a></div>
-                    </div>
-                    <!-- /Image 1 -->
-
-                    <!-- Image 2 -->
-                    <div class="swiper-slide">
-                        <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1_2.jpg"><a
-                                class="swiper-slide__link" href="projects2.html"></a></div>
-                    </div>
-                    <!-- /Image 2 -->
-
-                    <!-- Image 3 -->
-                    <div class="swiper-slide">
-                        <div class="cover-slider lazyload overlay--45" data-bg="/assets/img/image_slider_1_3.jpg"><a
-                                class="swiper-slide__link" href="projects3.html"></a></div>
-                    </div>
-                    <!-- /Image 3 -->
+                    @foreach($sliders as $slider)
+                        <div class="swiper-slide">
+                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slider->image }}"><a
+                                    class="swiper-slide__link" href="{{ $slider->url }}"></a></div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -106,9 +65,11 @@
             <!-- /Control -->
 
             <div class="social social--floating">
-                <a class="social__link">FB</a>
-                <a class="social__link">TW</a>
-                <a class="social__link">IG</a>
+                @foreach($companyContact->socialMedia as $social_media)
+                    <a class="social__link" href="{{ $social_media->url }}">{{ $social_media->name }}</a>
+                @endforeach
+                <a class="social__link">{{ $companyContact->phone }}</a>
+                <a class="social__link">{{ $companyContact->email }}</a>
             </div>
         </div>
     </header>

@@ -52,7 +52,7 @@
    - Cursor
    - Jarallax
    - Medium Zoom
-    
+
 ------------------------------------------------ */
 @import url(vendors/bootstrap.min.css);
 @import url(vendors/swiper.min.css);
@@ -371,6 +371,9 @@ a {
   text-decoration: underline;
   -webkit-text-decoration-skip: objects;
   transition: all 0.6s cubic-bezier(0.72, 0.16, 0.345, 0.875);
+}
+a.link_decoration {
+    text-decoration: none;
 }
 a:hover, a:focus {
   color: inherit;

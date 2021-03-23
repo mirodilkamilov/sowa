@@ -3,20 +3,27 @@
 namespace App\Observers;
 
 use App\Models\Project;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ProjectObserver
 {
+    private $locale;
+
+    public function __construct(Request $request)
+    {
+        $langInUrl = $request->segment(1);
+        $this->locale = $langInUrl;
+    }
+
     /**
      * Handle the Project "created" event.
      *
-     * @param \App\Models\Project $project
+     * @param Project $project
      * @return void
      */
-    public function creating(Project $project)
+    public function saving(Project $project)
     {
-        $project->slug = Str::slug($project->slug);
+        //
     }
 
     /**
@@ -25,50 +32,8 @@ class ProjectObserver
      */
     public function retrieved(Project $project)
     {
-        $project->title = $project->title['ru'];
-    }
-
-    /**
-     * Handle the Project "updated" event.
-     *
-     * @param \App\Models\Project $project
-     * @return void
-     */
-    public function updated(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Handle the Project "deleted" event.
-     *
-     * @param \App\Models\Project $project
-     * @return void
-     */
-    public function deleted(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Handle the Project "restored" event.
-     *
-     * @param \App\Models\Project $project
-     * @return void
-     */
-    public function restored(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Handle the Project "force deleted" event.
-     *
-     * @param \App\Models\Project $project
-     * @return void
-     */
-    public function forceDeleted(Project $project)
-    {
-        //
+        // ! These values can be null when they are not going to be retrieved (omitted in select statement)
+        $project->slug = $project->slug[$this->locale] ?? '';
+        $project->main_title = $project->main_title[$this->locale] ?? '';
     }
 }
