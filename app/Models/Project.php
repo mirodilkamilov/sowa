@@ -22,16 +22,11 @@ class Project extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->orderBy('category');
     }
 
     public function project_contents()
     {
-        return $this->hasMany(ProjectContent::class);
-    }
-
-    public function path()
-    {
-        return url("/projects/{$this->id}-" . $this->slug);
+        return $this->hasMany(ProjectContent::class)->orderBy('position');
     }
 }

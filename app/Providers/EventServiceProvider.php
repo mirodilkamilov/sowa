@@ -2,8 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\CompanyDetail;
+use App\Models\CompanyList;
 use App\Models\Project;
+use App\Models\ProjectContent;
 use App\Models\Slide;
+use App\Observers\CategoryObserver;
+use App\Observers\CompanyDetailObserver;
+use App\Observers\CompanyListObserver;
+use App\Observers\ProjectContentObserver;
 use App\Observers\ProjectObserver;
 use App\Observers\SlideObserver;
 use App\Observers\SliderObserver;
@@ -31,7 +39,11 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Project::observe(ProjectObserver::class);
         Slide::observe(SlideObserver::class);
+        Project::observe(ProjectObserver::class);
+        ProjectContent::observe(ProjectContentObserver::class);
+        Category::observe(CategoryObserver::class);
+        CompanyDetail::observe(CompanyDetailObserver::class);
+        CompanyList::observe(CompanyListObserver::class);
     }
 }

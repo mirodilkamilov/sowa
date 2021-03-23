@@ -4,17 +4,15 @@ namespace App\Observers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProjectObserver
 {
-    private $preferredLang;
+    private $locale;
 
     public function __construct(Request $request)
     {
-        $this->preferredLang = $request->cookie('lang');
-        if (!$request->hasCookie('lang'))
-            $this->preferredLang = 'ru';
+        $langInUrl = $request->segment(1);
+        $this->locale = $langInUrl;
     }
 
     /**
@@ -25,9 +23,7 @@ class ProjectObserver
      */
     public function saving(Project $project)
     {
-//        $project->slug['ru'] = Str::slug($project->slug['ru']);
-//        $project->slug['en'] = Str::slug($project->slug['en']);
-//        $project->slug['uz'] = Str::slug($project->slug['uz']);
+        //
     }
 
     /**
@@ -36,7 +32,8 @@ class ProjectObserver
      */
     public function retrieved(Project $project)
     {
-        $project->slug = $project->slug[$this->preferredLang];
-        $project->main_title = $project->main_title[$this->preferredLang];
+        // ! These values can be null when they are not going to be retrieved (omitted in select statement)
+        $project->slug = $project->slug[$this->locale] ?? '';
+        $project->main_title = $project->main_title[$this->locale] ?? '';
     }
 }

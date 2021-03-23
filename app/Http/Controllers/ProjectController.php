@@ -11,13 +11,52 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
-        return view('projects.index')->with('projects', $projects);
+        $categories = Category::select(['category'])->get()->sortBy('category');
+        $projects = Project::select(['id', 'slug', 'main_image'])->with('categories')->get()->sortBy('categories');
+
+        return view('projects.index', compact('projects', 'categories'));
     }
 
-    public function show(Project $project)
+    public function show($locale, Project $project)
     {
-        return view('projects.show')->with('project', $project);
+        $project->load('project_contents');
+
+        $nextProject = $this->getNextProject($project->id);
+        $prevProject = $this->getPreviousProject($project->id);
+
+        return view('projects.show', compact(
+            'project',
+            'nextProject',
+            'prevProject'
+        ));
+    }
+
+    /**
+     * @param $projectId
+     * @return Project
+     */
+    private function getNextProject($projectId): Project
+    {
+        $nextProject = Project::select(['id', 'slug'])
+            ->where('id', '>', $projectId)
+            ->orderBy('id')->first();
+        $nextProject = $nextProject ?? Project::find(1);
+
+        return $nextProject;
+    }
+
+    /**
+     * @param $projectId
+     * @return Project
+     */
+    private function getPreviousProject($projectId): Project
+    {
+        $prevProject = Project::select(['id', 'slug'])
+            ->where('id', '<', $projectId)
+            ->orderByDesc('id')->first();
+        $prevProject = $prevProject ?? Project::select(['id', 'slug'])->orderByDesc('id')->first();
+
+        return $prevProject;
     }
 
     public function create()

@@ -1,9 +1,8 @@
-<!-- TODO: Change every page's title -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8"/>
-    <title>Sowa – Digital агентство</title>
+    <title>Sowa – {{ __($titleOfPage) }}</title>
 
     <!-- Meta Data -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,26 +46,16 @@
 <!-- Preloader -->
 <div class="preloader">
     <div class="preloader__wrap">
-        <img class="preloader__logo" src="/assets/images/logo-white.svg" alt="Sowa">
+        <img class="preloader__logo" src="{{ asset('/assets/images/logo-white.svg') }}" alt="Sowa">
         <div class="preloader__progress"><span></span></div>
     </div>
 </div>
 
-<!-- Top -->
-<nav class="navbar">
-    <div class="mr-auto logo-container">
-        <a class="logo-link" href="/{{ session('language') }}">
-            <img class="logotype logotype__front" src="/assets/images/logo-black.svg" alt="Sowa.">
-            <img class="logotype logotype__back" src="/assets/images/logo-white.svg" alt="Sowa.">
-        </a>
-    </div>
-    <div class="ml-sm-auto">
-        <button class="hamburger zoom-cursor" type="button">
-            <span class="hamburger__inner"></span>
-        </button>
-    </div>
-</nav>
-<!-- /Top -->
+@if(Route::currentRouteName() == 'projects.show')
+    <x-navbar-back :projectId="$project->id" :slug="$project->slug"/>
+@else
+    <x-navbar-main/>
+@endif
 
 @yield('content')
 
@@ -74,12 +63,19 @@
 <div class="menu">
     <div class="menu-inner">
         <ul class="menu-list">
-            <li><a class="menu-list__item" href="{{ asset('projects') }}"><span>{{ __('projects') }}</span></a></li>
-            <li><a class="menu-list__item" href="{{ asset('about') }}"><span>{{ __('About us') }}</span></a></li>
+            <li><a class="menu-list__item"
+                   href="{{ route('projects.index', $locale) }}"><span>{{ __('projects') }}</span></a>
+            </li>
+            <li><a class="menu-list__item"
+                   href="{{ route('about.index', $locale) }}"><span>{{ __('About us') }}</span></a>
+            </li>
             <!--<li><a class="menu-list__item" href="news.html"><span>news</span></a></li>-->
-            <li><a class="menu-list__item" href="{{ asset('contacts') }}"><span>{{ __('contacts') }}</span></a></li>
+            <li><a class="menu-list__item"
+                   href="{{ route('contacts.index', $locale) }}"><span>{{ __('contacts') }}</span></a>
+            </li>
         </ul>
     </div>
+    {{--    TODO: Do something with that--}}
     <div class="social social--white">
         <a class="social__link">FB</a>
         <a class="social__link">TW</a>
@@ -92,9 +88,9 @@
 <div class="cursor"></div>
 
 <!-- JavaScripts -->
-<script src="/assets/js/jquery-3.3.1.min.js"></script>
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/common.js"></script>
+<script src="{{ asset('/assets/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('/assets/js/plugins.js') }}"></script>
+<script src="{{ asset('/assets/js/common.js') }}"></script>
 
 </body>
 </html>

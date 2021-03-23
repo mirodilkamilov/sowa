@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyDetailController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +24,7 @@ Route::get('/', function () {
     $langInSession = session('language');
 
     $locale = isset($langInSession) ? $langInSession : $defaultLang;
-    return redirect('/' . $locale);
+    return redirect()->route('home.index', $locale);
 });
 
 Route::group([
@@ -35,7 +37,7 @@ Route::group([
     Route::group(['prefix' => 'projects'], function () {
         Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
 
-        Route::get('/{id}-{slug}', [ProjectController::class, 'show'])->name('projects.show');
+        Route::get('/{project}-{slug}', [ProjectController::class, 'show'])->name('projects.show');
 
         Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
 
@@ -48,17 +50,19 @@ Route::group([
         Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
     });
 
-    Route::get('/about', function () {
-        return view('about.index');
-    })->name('about.index');
+    Route::get('/about', [CompanyDetailController::class, 'index'])->name('about.index');
 
     Route::get('/contacts', function () {
         return view('contacts.index');
     })->name('contacts.index');
+
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group([
+    'prefix' => 'dashboard',
+    'middleware' => 'auth',
+], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 require __DIR__ . '/auth.php';
