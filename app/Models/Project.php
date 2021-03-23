@@ -29,4 +29,5 @@ class Project extends Model
     {
         return $this->hasMany(ProjectContent::class)->orderBy('position');
     }
+
 }

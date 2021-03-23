@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Jobs\Project\ProjectStoreJob;
 use App\Models\Category;
 use App\Models\Project;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -76,4 +77,6 @@ class ProjectController extends Controller
         $request->session()->flash('success', 'Project was successful added!');
         return redirect()->back();
     }
+
+
 }
