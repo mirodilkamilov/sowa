@@ -21,11 +21,10 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
-        $counter = 0;
         return [
             'slug' => ['ru' => $this->faker->slug(2), 'en' => $this->faker->slug(2), 'uz' => $this->faker->slug(2)],
             'main_title' => ['ru' => 'ru-' . $this->faker->sentence, 'en' => 'en-' . $this->faker->sentence, 'uz' => 'uz-' . $this->faker->sentence],
-            'main_image' => 'assets/uploads/projects/main-' . ++$counter,
+            'main_image' => $this->faker->imageUrl('1200', '675'),
             'client' => $this->faker->word,
             'year' => $this->faker->year,
             'url' => $this->faker->url,

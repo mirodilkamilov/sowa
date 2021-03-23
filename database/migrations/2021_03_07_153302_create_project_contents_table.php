@@ -16,7 +16,7 @@ class CreateProjectContentsTable extends Migration
         Schema::create('project_contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
-            $table->enum('type', ['text', 'image_small', 'image_big', 'slide']);
+            $table->enum('type', ['text', 'image-small', 'image-big', 'slide']);
             $table->integer('position');
             $table->jsonb('title')->nullable();
             $table->jsonb('description')->nullable();
