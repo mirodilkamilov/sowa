@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="loading" lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-textdirection="ltr">
+
+<!-- BEGIN: Head-->
+<head>
+    <title>Sowa - {{ __('Dashboard') }}</title>
+
+    <!-- Meta Data -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="address=no"/>
+    <meta name="author" content="Sowa"/>
+    <meta name="description" content="Sowa - digital agency."/>
+
+    <!-- Twitter data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Sowa">
+    <meta name="twitter:title" content="Sowa">
+    <meta name="twitter:description" content="Sowa -  digital agency.">
+    <meta name="twitter:image" content="/assets/images/social.jpg">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Sowa"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="sowa.uz"/>
+    <meta property="og:image" content="/assets/images/social.jpg"/>
+    <meta property="og:description" content="Sowa -  digital agency."/>
+    <meta property="og:site_name" content="Sowa"/>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#3a3a3a">
+    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/prism.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/core/colors/palette-gradient.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-user.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.css">
+    <!-- END: Page CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 2-columns navbar-sticky fixed-footer todo-application"
+      data-open="click"
+      data-menu="vertical-menu-modern" data-col="2-columns">
+
+<!-- BEGIN: Header-->
+<div class="content-overlay"></div>
+<div class="header-navbar-shadow"></div>
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top navbar-light navbar-shadow">
+    <div class="navbar-wrapper">
+        <div class="navbar-container content">
+            <div class="navbar-collapse" id="navbar-mobile">
+                <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item mobile-menu d-xl-none mr-auto">
+                            <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+                                <i class="ficon feather icon-menu"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="nav navbar-nav float-right">
+                    <x-dashboard.language-dropdown :availableLanguages="$availableLanguages" :locale="$locale"/>
+
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
+                                class="ficon feather icon-maximize"></i></a></li>
+
+                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
+                                                                           data-toggle="dropdown"><i
+                                class="ficon feather icon-bell"></i><span
+                                class="badge badge-pill badge-primary badge-up">5</span></a>
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                            <li class="dropdown-menu-header">
+                                <div class="dropdown-header m-0 p-2">
+                                    <h3 class="white">5 New</h3><span class="grey darken-2">App Notifications</span>
+                                </div>
+                            </li>
+                            <li class="scrollable-container media-list">
+                                <a class="d-flex justify-content-between"
+                                   href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i
+                                                class="feather icon-plus-square font-medium-5 primary"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="primary media-heading">You have new order!</h6><small
+                                                class="notification-text"> Are your going to meet me tonight?</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">9 hours ago
+                                            </time>
+                                        </small>
+                                    </div>
+                                </a><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i
+                                                class="feather icon-download-cloud font-medium-5 success"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="success media-heading red darken-1">99% Server load</h6><small
+                                                class="notification-text">You got new order of goods.</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">5 hour ago
+                                            </time>
+                                        </small>
+                                    </div>
+                                </a><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i
+                                                class="feather icon-alert-triangle font-medium-5 danger"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="danger media-heading yellow darken-3">Warning notifixation</h6>
+                                            <small class="notification-text">Server have 99% CPU usage.</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Today</time>
+                                        </small>
+                                    </div>
+                                </a><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i
+                                                class="feather icon-check-circle font-medium-5 info"></i></div>
+                                        <div class="media-body">
+                                            <h6 class="info media-heading">Complete the task</h6><small
+                                                class="notification-text">Cake sesame snaps cupcake</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last week
+                                            </time>
+                                        </small>
+                                    </div>
+                                </a><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                    <div class="media d-flex align-items-start">
+                                        <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="warning media-heading">Generate monthly report</h6><small
+                                                class="notification-text">Chocolate cake oat cake tiramisu
+                                                marzipan</small>
+                                        </div>
+                                        <small>
+                                            <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month
+                                            </time>
+                                        </small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
+                                                                href="javascript:void(0)">Read all notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
+                                                                   href="#" data-toggle="dropdown">
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span><span
+                                    class="user-status">Admin</span></div>
+                            <span><img class="round" src="/app-assets/images/portrait/small/avatar-s-11.jpg"
+                                       alt="avatar" height="40" width="40"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="feather icon-user"></i> Edit Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><i class="feather icon-power"></i> Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- END: Header-->
+
+
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                    <img src="/assets/images/logo-black.svg" alt="Sowa logo" width="35px">
+                    <h2 class="brand-text mb-0">Sowa</h2>
+                </a>
+            </li>
+            <li class="nav-item nav-toggle">
+                <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
+                    <i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i>
+                    <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block primary"
+                       data-ticon="icon-disc"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="nav-item @if($currentRoute == 'dashboard') active @endif">
+                <a href="{{ route('dashboard') }}">
+                    <i class="feather icon-home"></i>
+                    <span class="menu-title">{{ __('Dashboard') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item @if($currentRoute == 'slides') active @endif">
+                <a
+                    href="{{ route('slides.index') }}">
+                    <i class="feather icon-monitor"></i>
+                    <span class="menu-title">{{ __('Slides') }}</span>
+                </a>
+            </li>
+            <li class="nav-item @if($currentRoute == 'categories') active @endif">
+                <a href="{{ route('categories.index') }}">
+                    <i class="feather icon-list"></i>
+                    <span class="menu-title">{{ __('Categories') }}</span>
+                </a>
+            </li>
+            <li class="nav-item @if($currentRoute == 'projects') active @endif">
+                <a href="{{ route('dashboard.projects.index') }}">
+                    <i class="feather icon-briefcase"></i>
+                    <span class="menu-title">{{ __('Projects') }}</span>
+                </a>
+            </li>
+            <li class="nav-item @if($currentRoute == 'messages') active @endif">
+                <a href="{{ route('about.messages.index') }}">
+                    <i class="feather icon-message-square"></i>
+                    <span class="menu-title">{{ __('Messages') }}</span>
+                    <span class="badge badge badge-warning badge-pill float-right">2</span>
+                </a>
+            </li>
+            <li class="nav-item @if($currentRoute == 'main-info') sidebar-group-active open @endif">
+                <a href="#">
+                    <i class="feather icon-info"></i>
+                    <span class="menu-title">{{ __('About us') }}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="@if($currentRoute == 'main-info') active @endif">
+                        <a href="{{ route('about.main.index') }}">
+                            <i></i>
+                            <span class="menu-item">{{ __('Main information') }}</span>
+                        </a>
+                    </li>
+                    <li class="@if($currentRoute == 'customers') active @endif">
+                        <a href="{{ route('about.customers.index') }}">
+                            <i></i>
+                            <span class="menu-item">{{ __('Customers') }}</span>
+                        </a>
+                    </li>
+                    <li class="@if($currentRoute == 'contacts') active @endif">
+                        <a href="{{ route('about.contacts.index') }}">
+                            <i></i>
+                            <span class="menu-item">{{ __('Contacts') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END: Main Menu-->
+
+@yield('content')
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+
+<!-- BEGIN: Vendor JS-->
+<script src="/app-assets/vendors/js/vendors.min.js"></script>
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+<script src="/app-assets/vendors/js/ui/prism.min.js"></script>
+
+<script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+<script src="/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+<script src="/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+<script src="/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+<script src="/app-assets/js/core/app-menu.js"></script>
+<script src="/app-assets/js/core/app.js"></script>
+<script src="/app-assets/js/scripts/components.js"></script>
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+<script src="/app-assets/js/scripts/cards/card-statistics.js"></script>
+<script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+<script src="/app-assets/js/scripts/datatables/datatable.js"></script>
+<script src="/app-assets/js/scripts/pages/app-todo.js"></script>
+<script src="/app-assets/js/scripts/pages/app-user.js"></script>
+<!-- END: Page JS-->
+
+
+</body>
+<!-- END: Body-->
+
+</html>

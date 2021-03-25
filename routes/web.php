@@ -30,7 +30,7 @@ Route::get('/', function () {
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => implode('|', config('app.languages'))],
-    'middleware' => 'setLocale',
+    'middleware' => 'homeSetLocale',
 ], function () {
     Route::get('/', [SlideController::class, 'index'])->name('home.index');
 
@@ -60,9 +60,24 @@ Route::group([
 
 Route::group([
     'prefix' => 'dashboard',
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'dashboardSetLocale'],
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/slides', [DashboardController::class, 'slides'])->name('slides.index');
+
+    Route::get('/categories', [DashboardController::class, 'categories'])->name('categories.index');
+
+    Route::get('/projects', [DashboardController::class, 'projects'])->name('dashboard.projects.index');
+
+    Route::get('/messages', [DashboardController::class, 'messages'])->name('about.messages.index');
+
+    Route::get('/main-info', [DashboardController::class, 'mainInfo'])->name('about.main.index');
+
+    Route::get('/customers', [DashboardController::class, 'customers'])->name('about.customers.index');
+
+    Route::get('/contacts', [DashboardController::class, 'contacts'])->name('about.contacts.index');
+
 });
 
 require __DIR__ . '/auth.php';
