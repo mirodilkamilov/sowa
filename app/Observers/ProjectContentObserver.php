@@ -3,16 +3,14 @@
 namespace App\Observers;
 
 use App\Models\ProjectContent;
-use Illuminate\Http\Request;
 
 class ProjectContentObserver
 {
     private $locale;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $langInUrl = $request->segment(1);
-        $this->locale = $langInUrl;
+        $this->locale = session('language') ?? config('app.locale');
     }
 
     public function retrieved(ProjectContent $projectContent)

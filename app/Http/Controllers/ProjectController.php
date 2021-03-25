@@ -17,12 +17,15 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects', 'categories'));
     }
 
-    public function show($locale, Project $project)
+    public function show($locale, $project_id)
     {
-        $project->load('project_contents');
+        //I had to do this way. Possibly, service provider running Project $project (route model binding) first, then middleware
+        //As a result, Observer is setting locale which is not set yet
+        $project = Project::findOrFail($project_id);
+        $project->load('categories', 'project_contents');
 
-        $nextProject = $this->getNextProject($project->id);
-        $prevProject = $this->getPreviousProject($project->id);
+        $nextProject = $this->getNextProject($project_id);
+        $prevProject = $this->getPreviousProject($project_id);
 
         return view('projects.show', compact(
             'project',

@@ -3,16 +3,14 @@
 namespace App\Observers;
 
 use App\Models\CompanyDetail;
-use Illuminate\Http\Request;
 
 class CompanyDetailObserver
 {
     private $locale;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $langInUrl = $request->segment(1);
-        $this->locale = $langInUrl;
+        $this->locale = session('language') ?? config('app.locale');
     }
 
     public function retrieved(CompanyDetail $companyDetail)
