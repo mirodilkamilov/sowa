@@ -16,7 +16,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Sowa">
     <meta name="twitter:title" content="Sowa">
-    <meta name="twitter:description" content="Sowa -  digital agency.">
+    <meta name="twitter:description" content="Sowa - digital agency.">
     <meta name="twitter:image" content="/assets/images/social.jpg">
 
     <!-- Open Graph data -->

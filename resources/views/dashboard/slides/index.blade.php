@@ -48,10 +48,12 @@
                                 </td>
                                 <td class="product-price">$69.99</td>
                                 <td class="product-action">
-                                    <a class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i
-                                            class="feather icon-edit"></i></a>
-                                    <a class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light"><i
-                                            class="feather icon-trash-2"></i></a>
+                                    <a class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
+                                        <i class="feather icon-edit text-primary"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">
+                                        <i class="feather icon-trash-2 text-danger"></i>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>
