@@ -78,6 +78,8 @@ Route::group([
 
     Route::get('/contacts', [DashboardController::class, 'contacts'])->name('about.contacts.index');
 
+    Route::get('/trash', [DashboardController::class, 'trash'])->name('trash.index');
+
 });
 
 require __DIR__ . '/auth.php';

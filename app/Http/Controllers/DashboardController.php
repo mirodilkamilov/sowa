@@ -43,4 +43,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.about.contacts.index');
     }
+
+    public function trash()
+    {
+        return view('dashboard.trash.index');
+    }
 }

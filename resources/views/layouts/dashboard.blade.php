@@ -292,6 +292,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item @if($currentRoute == 'trash') active @endif">
+                <a href="{{ route('trash.index') }}">
+                    <i class="feather icon-trash-2"></i>
+                    <span class="menu-title">{{ __('Deleted elements') }}</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
