@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('client')->nullable();
             $table->year('year')->nullable();
             $table->string('url')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

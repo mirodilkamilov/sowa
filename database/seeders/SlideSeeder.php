@@ -14,6 +14,6 @@ class SlideSeeder extends Seeder
      */
     public function run()
     {
-        Slide::factory()->count(4)->create();
+        Slide::factory()->count(10)->create();
     }
 }

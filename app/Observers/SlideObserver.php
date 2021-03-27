@@ -15,8 +15,8 @@ class SlideObserver
 
     public function retrieved(Slide $slide)
     {
-        $slide->title = $slide->title[$this->locale];
-        $slide->sub_title = $slide->sub_title[$this->locale];
-        $slide->description = $slide->description[$this->locale];
+        $slide->title = $slide->title[$this->locale] ?? '';
+        $slide->sub_title = $slide->sub_title[$this->locale] ?? '';
+        $slide->description = $slide->description[$this->locale] ?? '';
     }
 }

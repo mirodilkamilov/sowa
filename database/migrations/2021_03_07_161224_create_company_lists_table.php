@@ -18,6 +18,7 @@ class CreateCompanyListsTable extends Migration
             $table->foreignId('company_detail_id')->constrained('company_details');
             $table->jsonb('title');
             $table->jsonb('list');
+            $table->softDeletes();
         });
     }
 

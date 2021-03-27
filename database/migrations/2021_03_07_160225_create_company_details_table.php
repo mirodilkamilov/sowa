@@ -21,6 +21,7 @@ class CreateCompanyDetailsTable extends Migration
             $table->jsonb('about_description');
             $table->jsonb('help_title');
             $table->jsonb('help_description');
+            $table->softDeletes();
         });
     }
 

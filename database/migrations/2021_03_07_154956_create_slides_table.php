@@ -21,6 +21,7 @@ class CreateSlidesTable extends Migration
             $table->string('url')->nullable();
             $table->string('image');
             $table->integer('position')->unique();
+            $table->softDeletes();
         });
     }
 

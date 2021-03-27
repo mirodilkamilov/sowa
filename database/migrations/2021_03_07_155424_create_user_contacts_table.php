@@ -20,6 +20,7 @@ class CreateUserContactsTable extends Migration
             $table->text('message')->nullable();
             $table->enum('status', ['not reviewed', 'reviewed', 'need action', 'spam']);
             $table->string('comment')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

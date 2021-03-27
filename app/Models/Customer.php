@@ -9,10 +9,8 @@ class Customer extends Model
 {
     use HasFactory;
 
-    public $incrementing = false;
     public $timestamps = false;
-    protected $primaryKey = 'name';
-    protected $keyType = 'string';
+    protected $primaryKey = 'position';
 
-    protected $fillable = ['name', 'logo'];
+    protected $fillable = ['position', 'name', 'logo'];
 }

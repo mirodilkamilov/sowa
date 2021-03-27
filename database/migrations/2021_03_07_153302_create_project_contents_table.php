@@ -21,6 +21,7 @@ class CreateProjectContentsTable extends Migration
             $table->jsonb('title')->nullable();
             $table->jsonb('description')->nullable();
             $table->jsonb('image')->nullable();
+            $table->softDeletes();
         });
     }
 
