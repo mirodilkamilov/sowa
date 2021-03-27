@@ -10,7 +10,7 @@
 $(function() {
   "use strict";
 
-  var $curr_title, $curr_desc, $curr_info, $curr_fav, $curr_chipVal;
+  var $curr_title, $curr_desc, $curr_comm, $curr_info, $curr_fav, $curr_chipVal;
 
 
     // if it is not touch device
@@ -191,12 +191,14 @@ $(function() {
     // Saving all values in variable
     $curr_title = $(this).find('.todo-title');  // Set path for Current Title, use this variable when updating title
     $curr_desc = $(this).find('.todo-desc');  // Set path for Current Description, use this variable when updating Description
+    $curr_comm = $(this).find('.todo-comm');  // Set path for Current Description, use this variable when updating Description
     $curr_info = $(this).find('.todo-item-info');  // Set path for Current info, use this variable when updating info
     $curr_fav = $(this).find('.todo-item-favorite'); // Set path for Current favorite, use this variable when updating favorite
     $curr_chipVal = $(this).find('.chip-wrapper'); // Set path for Chips, use this variable when updating chip value
 
     var $title = $(this).find('.todo-title').html();
     var $desc = $(this).find('.todo-desc').html();
+    var $comm = $(this).find('.todo-comm').html();
     var $info = $(this).find('.todo-item-info');
     var $fav = $(this).find('.todo-item-favorite');
     $('#form-edit-todo .dropdown-menu input').prop("checked",false);
@@ -214,6 +216,7 @@ $(function() {
     // apply all variable values to fields
     $('#form-edit-todo .edit-todo-item-title').val($title);
     $('#form-edit-todo .edit-todo-item-desc').val($desc);
+    $('#form-edit-todo .edit-todo-item-comm').val($comm);
 
     if($('#form-edit-todo .todo-item-info').hasClass('success')){$('#form-edit-todo .todo-item-info').removeClass('success')}
     if($('#form-edit-todo .edit-todo-item-favorite').hasClass('warning')){$('#form-edit-todo .edit-todo-item-favorite').removeClass('warning')}
@@ -234,11 +237,13 @@ $(function() {
   $('.update-todo-item').on('click', function(){
     var $edit_title = $('#form-edit-todo .edit-todo-item-title').val();
     var $edit_desc = $('#form-edit-todo .edit-todo-item-desc').val();
+    var $edit_comm = $('#form-edit-todo .edit-todo-item-comm').val();
     var $edit_info = $('#form-edit-todo .todo-item-info i');
     var $edit_fav = $('#form-edit-todo .todo-item-favorite i');
 
     $($curr_title).text($edit_title);
     $($curr_desc).text($edit_desc);
+    $($curr_comm).text($edit_comm);
 
     if($($curr_info).hasClass('success')){$($curr_info).removeClass('success')}
     if($($curr_fav).hasClass('warning')){$($curr_fav).removeClass('warning')}
