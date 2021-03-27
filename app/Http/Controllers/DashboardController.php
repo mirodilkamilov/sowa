@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\CompanyContact;
+use App\Models\CompanyDetail;
+use App\Models\Customer;
+use App\Models\Project;
+use App\Models\Slide;
+use App\Models\UserContact;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -11,41 +19,61 @@ class DashboardController extends Controller
 
     public function slides()
     {
-        return view('dashboard.slides.index');
+        $slides = Slide::all()->sortBy('position');
+
+        return view('dashboard.slides.index', compact('slides'));
     }
 
     public function categories()
     {
-        return view('dashboard.categories.index');
+        $categories = Category::withoutEvents(function () {
+            return Category::all();
+        });
+
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     public function projects()
     {
-        return view('dashboard.projects.index');
+//        TODO: Sort by category (this not working)
+        $projects = Project::with('categories')->get()->sortBy('categories');
+
+        return view('dashboard.projects.index', compact('projects'));
     }
 
     public function messages()
     {
-        return view('dashboard.messages.index');
+        $users = UserContact::all()->sortBy('created_at')->sortBy('status');
+
+        return view('dashboard.messages.index', compact('users'));
     }
 
     public function mainInfo()
     {
-        return view('dashboard.about.main.index');
+        $companyDetail = CompanyDetail::with('companyLists')->first();
+
+        return view('dashboard.about.main.index', compact('companyDetail'));
     }
 
     public function customers()
     {
-        return view('dashboard.about.customers.index');
+        $customers = Customer::all()->sortBy('position');
+
+        return view('dashboard.about.customers.index', compact('customers'));
     }
 
     public function contacts()
     {
-        return view('dashboard.about.contacts.index');
+        $contact = CompanyContact::with('socialMedia')->first();
+
+        return view('dashboard.about.contacts.index', compact('contact'));
     }
 
     public function trash()
     {
-        return view('dashboard.trash.index');
+        $projects = Project::onlyTrashed()->with('categories')->get();
+        $slides = Slide::onlyTrashed()->get();
+
+        return view('dashboard.trash.index', compact('projects', 'slides'));
     }
 }

@@ -64,7 +64,10 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/slides', [DashboardController::class, 'slides'])->name('slides.index');
+    Route::group(['prefix' => 'slides'], function () {
+        Route::get('/', [DashboardController::class, 'slides'])->name('slides.index');
+        Route::get('/create', [SlideController::class, 'create'])->name('slides.create');
+    });
 
     Route::get('/categories', [DashboardController::class, 'categories'])->name('categories.index');
 
@@ -79,6 +82,7 @@ Route::group([
     Route::get('/contacts', [DashboardController::class, 'contacts'])->name('about.contacts.index');
 
     Route::get('/trash', [DashboardController::class, 'trash'])->name('trash.index');
+
 
 });
 

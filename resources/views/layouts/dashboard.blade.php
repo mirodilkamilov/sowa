@@ -62,6 +62,8 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-user.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/file-uploaders/dropzone.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/file-uploaders/dropzone.css">
     <!-- END: Page CSS-->
 
 </head>
@@ -90,7 +92,8 @@
                     </ul>
                 </div>
                 <ul class="nav navbar-nav float-right">
-                    <x-dashboard.language-dropdown :availableLanguages="$availableLanguages" :locale="$locale"/>
+
+                    <x-dashboard.language-dropdown :availableLangs="$availableLangs" :locale="$locale"/>
 
                     <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
                                 class="ficon feather icon-maximize"></i></a></li>
@@ -179,12 +182,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
-                                                                   href="#" data-toggle="dropdown">
-                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span><span
-                                    class="user-status">Admin</span></div>
-                            <span><img class="round" src="/app-assets/images/portrait/small/avatar-s-11.jpg"
-                                       alt="avatar" height="40" width="40"></span>
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <div class="user-nav d-sm-flex d-none">
+                                <span class="user-name text-bold-600">{{ $name }}</span>
+                                <span class="user-status">Admin</span>
+                            </div>
+                            <div class="avatar">
+                                <span class="avatar-content">{{ Str::substr($name, 0, 1) }}</span>
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="feather icon-user"></i> Edit Profile</a>
@@ -215,7 +221,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <a class="navbar-brand" href="{{ route('home.index', $locale) }}">
                     <img src="/assets/images/logo-black.svg" alt="Sowa logo" width="35px">
                     <h2 class="brand-text mb-0">Sowa</h2>
                 </a>
@@ -263,7 +269,9 @@
                 <a href="{{ route('about.messages.index') }}">
                     <i class="feather icon-message-square"></i>
                     <span class="menu-title">{{ __('Messages') }}</span>
-                    <span class="badge badge badge-warning badge-pill float-right">2</span>
+                    @if($numNewMessages > 0)
+                        <span class="badge badge badge-info badge-pill float-right">{{$numNewMessages}}</span>
+                    @endif
                 </a>
             </li>
             <li class="nav-item @if($currentRoute == 'main-info') sidebar-group-active open @endif">
@@ -334,6 +342,8 @@
 <script src="/app-assets/js/scripts/datatables/datatable.js"></script>
 <script src="/app-assets/js/scripts/pages/app-todo.js"></script>
 <script src="/app-assets/js/scripts/pages/app-user.js"></script>
+<script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
+<script src="/app-assets/js/scripts/extensions/dropzone.js"></script>
 <!-- END: Page JS-->
 
 

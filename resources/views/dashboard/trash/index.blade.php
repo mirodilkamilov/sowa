@@ -20,26 +20,19 @@
                             <div class="col-sm-12">
                                 <div class="card collapse-icon accordion-icon-rotate">
                                     <div class="card-header">
-                                        <h4 class="card-title">Default</h4>
+                                        <h4 class="card-title">{{ __('Deleted elements') }}</h4>
                                     </div>
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <p>
-                                                With basic collapse you can open multiple items at a time. to add
-                                                bottom border use <code>.collapse-bordered</code> as a wrapper of
-                                                collapse
-                                                cards and
-                                                for icons on the right of collapse use
-                                                <code>.collapse-icon</code> <code>.accordion-icon-rotate</code>
-                                            </p>
                                             <div class="default-collapse collapse-bordered collapse-border">
+
                                                 <div class="card collapse-header">
                                                     <div id="headingCollapse1" class="card-header"
                                                          data-toggle="collapse"
                                                          role="button" data-target="#collapse1" aria-expanded="false"
                                                          aria-controls="collapse1">
                                                     <span class="lead collapse-title">
-                                                        Collapse Item 1
+                                                        {{ __('Projects') }}
                                                     </span>
                                                     </div>
                                                     <div id="collapse1" role="tabpanel"
@@ -47,104 +40,107 @@
                                                          class="collapse">
                                                         <div class="card-content">
                                                             <div class="card-body">
-                                                                Pie dragée muffin. Donut cake liquorice marzipan carrot
-                                                                cake
-                                                                topping powder candy. Sugar plum
-                                                                brownie brownie cotton candy.
-
-                                                                Tootsie roll cotton candy pudding bonbon chocolate cake
-                                                                lemon drops candy. Jelly marshmallow
-                                                                chocolate cake carrot cake bear claw ice cream
-                                                                chocolate.
-                                                                Fruitcake apple pie pudding jelly beans
-                                                                pie candy canes candy canes jelly-o. Tiramisu brownie
-                                                                gummi
-                                                                bears soufflé dessert cake.
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>{{ __('Image') }}</th>
+                                                                            <th>{{ __('Slug') }}</th>
+                                                                            <th>{{ __('Title') }}</th>
+                                                                            <th>{{__('Category')}}</th>
+                                                                            <th>{{ __('Restore') }}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody class="table table-striped">
+                                                                        @foreach($projects as $project)
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <img
+                                                                                        src="{{ $project->main_image }}"
+                                                                                        alt="{{ $project->name }}"
+                                                                                        style="height: 7.857rem;">
+                                                                                </td>
+                                                                                <td>{{ $project->slug }}</td>
+                                                                                <td>{{ $project->main_title }}</td>
+                                                                                <td class="text-center">
+                                                                                    @foreach($project->categories as $category)
+                                                                                        <x-dashboard.category-component
+                                                                                            :category="$category->category"
+                                                                                            :index="$category->id"/>
+                                                                                    @endforeach
+                                                                                </td>
+                                                                                <td class="product-action">
+                                                                                    <a type="button"
+                                                                                       class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light"
+                                                                                       data-toggle="modal"
+                                                                                       data-target="#edit-{{ $project->name }}">
+                                                                                        <i class="feather icon-upload text-success"></i>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="card collapse-header">
-                                                    <div id="headingCollapse2" class="card-header collapse-header"
-                                                         data-toggle="collapse" role="button" data-target="#collapse2"
-                                                         aria-expanded="false" aria-controls="collapse2">
+                                                    <div id="headingCollapse2" class="card-header"
+                                                         data-toggle="collapse"
+                                                         role="button" data-target="#collapse2" aria-expanded="false"
+                                                         aria-controls="collapse2">
                                                     <span class="lead collapse-title">
-                                                        Collapse Item 2</span>
+                                                        {{ __('Slides') }}
+                                                    </span>
                                                     </div>
                                                     <div id="collapse2" role="tabpanel"
                                                          aria-labelledby="headingCollapse2"
-                                                         class="collapse" aria-expanded="false">
+                                                         class="collapse">
                                                         <div class="card-content">
                                                             <div class="card-body">
-
-                                                                Jelly-o brownie marshmallow soufflé I love jelly beans
-                                                                oat
-                                                                cake. I love gummies chocolate bar
-                                                                marshmallow sugar plum. Pudding carrot cake sweet roll
-                                                                marzipan I love jujubes. Sweet roll tart
-                                                                sugar plum halvah donut.
-
-                                                                Cake gingerbread tart. Tootsie roll soufflé danish
-                                                                powder
-                                                                marshmallow sugar plum halvah sweet
-                                                                chocolate bar. Jujubes cupcake I love toffee biscuit.
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th class="text-uppercase">{{ __('Position') }}</th>
+                                                                            <th class="text-uppercase">{{ __('Image') }}</th>
+                                                                            <th class="text-uppercase">{{ __('Title') }}</th>
+                                                                            <th class="text-uppercase">{{ __('Sub-title') }}</th>
+                                                                            <th class="text-uppercase">{{ __('Actions') }}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody class="table table-striped">
+                                                                        @foreach($slides as $slide)
+                                                                            <tr>
+                                                                                <td>{{ $slide->position }}</td>
+                                                                                <td>
+                                                                                    <img src="{{ $slide->image }}"
+                                                                                         alt="Img placeholder"
+                                                                                         style="width: 8rem; height: 7rem;">
+                                                                                </td>
+                                                                                <td>{{ $slide->title }}</td>
+                                                                                <td>{{ $slide->sub_title }}</td>
+                                                                                <td class="product-action">
+                                                                                    <a type="button"
+                                                                                       class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light"
+                                                                                       data-toggle="modal"
+                                                                                       data-target="#edit-{{ $project->name }}">
+                                                                                        <i class="feather icon-upload text-success"></i>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card collapse-header">
-                                                    <div id="headingCollapse3" class="card-header collapse-header"
-                                                         data-toggle="collapse" role="button" data-target="#collapse3"
-                                                         aria-expanded="false" aria-controls="collapse3">
-                                                    <span class="lead collapse-title">
-                                                        Collapse Item 3
-                                                    </span>
-                                                    </div>
-                                                    <div id="collapse3" role="tabpanel"
-                                                         aria-labelledby="headingCollapse3"
-                                                         class="collapse" aria-expanded="false">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                                Pudding lollipop dessert chocolate gingerbread. Cake
-                                                                cupcake
-                                                                bonbon cupcake marshmallow. Gummi
-                                                                bears carrot cake bonbon cake.
 
-                                                                Sweet roll fruitcake bear claw soufflé. Apple pie ice
-                                                                cream
-                                                                liquorice sesame snaps brownie. Donut
-                                                                marshmallow donut pudding chupa chups.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card collapse-header">
-                                                    <div id="headingCollapse4" class="card-header"
-                                                         data-toggle="collapse"
-                                                         role="button" data-target="#collapse4" aria-expanded="false"
-                                                         aria-controls="collapse4">
-                                                    <span class="lead collapse-title">
-                                                        Collapse Item 4
-                                                    </span>
-                                                    </div>
-                                                    <div id="collapse4" role="tabpanel"
-                                                         aria-labelledby="headingCollapse4"
-                                                         class="collapse" aria-expanded="false">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                                Brownie sweet carrot cake dragée caramels fruitcake.
-                                                                Gummi
-                                                                bears tootsie roll croissant
-                                                                gingerbread dragée tootsie roll. Cookie caramels tootsie
-                                                                roll pie. Sesame snaps cookie cake donut
-                                                                wafer.
-
-                                                                Wafer cookie jelly-o candy muffin cake. Marzipan topping
-                                                                lollipop. Gummies chocolate sugar plum.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

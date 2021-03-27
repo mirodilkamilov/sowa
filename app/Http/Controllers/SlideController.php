@@ -12,4 +12,11 @@ class SlideController extends Controller
 
         return view('home.index', compact('sliders'));
     }
+
+    public function create()
+    {
+        $positions = Slide::select(['position'])->get()->sortBy('position');
+
+        return view('dashboard.slides.create', compact('positions'));
+    }
 }
