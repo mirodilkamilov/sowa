@@ -7,7 +7,8 @@
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
 
-            <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
+            <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"
+                                :slicedSegment="$slicedSegment ?? null"/>
 
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,15 +27,16 @@
                         <div class="col-12">
                             <div class="card mb-1">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ __('Add slide') }}</h4>
+                                    <h4 class="card-title">{{ __('Edit slide') . ': ' . $slide->title[$locale] }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
 
                                         <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
 
-                                        <form class="form" action="{{ route('slides.store') }}" method="post"
+                                        <form class="form" action="{{ route('slides.update', $slide->id) }}" method="post"
                                               enctype="multipart/form-data" id="slide-form">
+                                            @method('PUT')
                                             @csrf
                                             <div class="form-body">
                                                 <div class="row">
@@ -51,7 +53,7 @@
                                                                                    class="form-control @error("title.{$lang}") is-invalid @enderror"
                                                                                    placeholder="{{ __('Title') . ' ('. $lang . ')' }}"
                                                                                    name="title[{{ $lang }}]"
-                                                                                   value="{{ old("title.{$lang}") }}">
+                                                                                   value="{{ old("title.{$lang}") ?? $slide->title[$lang] }}">
                                                                             <label
                                                                                 for="title">{{ __('Title') . ' ('. $lang . ')' }}</label>
                                                                             @error("title.{$lang}")
@@ -65,7 +67,7 @@
                                                                                    class="form-control @error("sub_title.{$lang}") is-invalid @enderror"
                                                                                    placeholder="{{ __('Sub-title') . ' ('. $lang . ')' }}"
                                                                                    name="sub_title[{{ $lang }}]"
-                                                                                   value="{{ old("sub_title.{$lang}") }}">
+                                                                                   value="{{ old("sub_title.{$lang}") ?? $slide->sub_title[$lang] }}">
                                                                             <label
                                                                                 for="sub-title">{{ __('Sub-title') . ' ('. $lang . ')' }}</label>
                                                                             @error("sub_title.{$lang}")
@@ -75,11 +77,13 @@
                                                                     </div>
                                                                     <div class="col-md-12 col-12">
                                                                         <fieldset class="form-label-group">
-                                                                            <textarea class="form-control @error("description.{$lang}") is-invalid @enderror" rows="4"
-                                                                                      placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
-                                                                                      id="description"
-                                                                                      spellcheck="false"
-                                                                                      name="description[{{ $lang }}]">{{ old("description.{$lang}") }}</textarea>
+                                                                            <textarea
+                                                                                class="form-control @error("description.{$lang}") is-invalid @enderror"
+                                                                                rows="4"
+                                                                                placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
+                                                                                id="description"
+                                                                                spellcheck="false"
+                                                                                name="description[{{ $lang }}]">{{ old("description.{$lang}") ?? $slide->description[$lang] }}</textarea>
                                                                             <label
                                                                                 for="description">{{ __('Description') . ' ('. $lang . ')' }}</label>
                                                                             @error("description.{$lang}")
@@ -114,9 +118,10 @@
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-label-group">
-                                                    <input type="text" id="url" class="form-control @error('url') is-invalid @enderror"
+                                                    <input type="text" id="url"
+                                                           class="form-control @error('url') is-invalid @enderror"
                                                            placeholder="{{ __('Url') }}" name="url" form="slide-form"
-                                                           value="{{ old('url') }}">
+                                                           value="{{ old('url') ?? $slide->url }}">
                                                     <label for="url">{{ __('Url') }}</label>
                                                     @error('url')
                                                     <p class="text-danger">{{ $message }}</p>
@@ -129,7 +134,7 @@
                                                            class="form-control @error('position') is-invalid @enderror"
                                                            name="position"
                                                            placeholder="{{ __('Position') }}" form="slide-form"
-                                                           value="{{ old('position') }}">
+                                                           value="{{ old('position') ?? $slide->position }}">
                                                     <label for="position">{{ __('Position') }}</label>
                                                     @error('position')
                                                     <p class="text-danger mb-0">{{ $message }}</p>
@@ -138,10 +143,18 @@
                                                 </div>
                                             </div>
 
+                                            <div
+                                                class="img-container p-1 pt-2"
+                                                style="width: 100%; display: flex; flex-flow: column nowrap; align-items: center;">
+                                                <h3 class="card-title">{{ __('Current image') }}</h3>
+                                                <img src="{{ $slide->image }}" alt="" style="width: 400px;">
+                                            </div>
                                             <fieldset class="form-group col-md-12 col-12">
                                                 <label for="basicInputFile">{{ __('Image') }}</label>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image"
+                                                    <input type="file"
+                                                           class="custom-file-input @error('image') is-invalid @enderror"
+                                                           name="image"
                                                            id="basicInputFile" form="slide-form">
                                                     <label class="custom-file-label"
                                                            for="basicInputFile"></label>
@@ -153,9 +166,10 @@
                                             <div class="col-12 mt-1">
                                                 <button type="submit" class="btn btn-primary mr-1 mb-1"
                                                         form="slide-form">
-                                                    {{ __('Add slide') }}
+                                                    {{ __('Edit slide') }}
                                                 </button>
-                                                <button type="reset" class="btn btn-outline-warning mr-1 mb-1" form="slide-form">
+                                                <button type="reset" class="btn btn-outline-warning mr-1 mb-1"
+                                                        form="slide-form">
                                                     Reset
                                                 </button>
                                             </div>

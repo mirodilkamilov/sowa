@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSlideRequest;
-use App\Jobs\SlideStoreJob;
+use App\Http\Requests\UpdateSlideRequest;
+use App\Jobs\StoreSlideJob;
+use App\Jobs\UpdateSlideJob;
 use App\Models\Slide;
 
 class SlideController extends Controller
@@ -31,15 +33,32 @@ class SlideController extends Controller
 
         //  SlideStoreJob::dispatch($validated);
         // TODO: Local development for now
-        SlideStoreJob::dispatchNow($validated);
+        StoreSlideJob::dispatchNow($validated);
 
         $request->session()->flash('success', 'Slide was successfully added!');
         return redirect()->route('slides.create');
     }
 
-    public function edit(Slide $slide)
+    public function edit($slide)
     {
-        return view('');
+        $slide = Slide::withoutEvents(function () use ($slide) {
+            return Slide::findOrFail($slide);
+        });
+        $positions = Slide::select(['position'])->get()->sortBy('position');
+
+        return view('dashboard.slides.edit', compact('slide', 'positions'));
+    }
+
+    public function update(Slide $slide, UpdateSlideRequest $request)
+    {
+        $validated = $request->validated();
+        if ($request->hasFile('image'))
+            $validated['image'] = $request->file('image')->store('slides');
+        $validated['id'] = $slide->id;
+
+        UpdateSlideJob::dispatchNow($slide, $validated);
+        $request->session()->flash('success', 'Slide was successfully edited!');
+        return redirect()->route('slides.edit', $slide->id);
     }
 
 }
