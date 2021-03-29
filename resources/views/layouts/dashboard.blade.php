@@ -95,13 +95,17 @@
 
                     <x-dashboard.language-dropdown :availableLangs="$availableLangs" :locale="$locale"/>
 
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
-                                class="ficon feather icon-maximize"></i></a></li>
+                    <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link nav-link-expand">
+                            <i class="ficon feather icon-maximize"></i>
+                        </a>
+                    </li>
 
-                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
-                                                                           data-toggle="dropdown"><i
-                                class="ficon feather icon-bell"></i><span
-                                class="badge badge-pill badge-primary badge-up">5</span></a>
+                    <li class="dropdown dropdown-notification nav-item">
+                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
+                            <i class="ficon feather icon-bell"></i>
+                            <span class="badge badge-pill badge-primary badge-up">5</span>
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <div class="dropdown-header m-0 p-2">
@@ -150,11 +154,12 @@
                                     </div>
                                 </a><a class="d-flex justify-content-between" href="javascript:void(0)">
                                     <div class="media d-flex align-items-start">
-                                        <div class="media-left"><i
-                                                class="feather icon-check-circle font-medium-5 info"></i></div>
+                                        <div class="media-left">
+                                            <i class="feather icon-check-circle font-medium-5 info"></i>
+                                        </div>
                                         <div class="media-body">
-                                            <h6 class="info media-heading">Complete the task</h6><small
-                                                class="notification-text">Cake sesame snaps cupcake</small>
+                                            <h6 class="info media-heading">Complete the task</h6>
+                                            <small class="notification-text">Cake sesame snaps cupcake</small>
                                         </div>
                                         <small>
                                             <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last week
@@ -166,9 +171,8 @@
                                         <div class="media-left"><i class="feather icon-file font-medium-5 warning"></i>
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="warning media-heading">Generate monthly report</h6><small
-                                                class="notification-text">Chocolate cake oat cake tiramisu
-                                                marzipan</small>
+                                            <h6 class="warning media-heading">Generate monthly report</h6>
+                                            <small class="notification-text">Chocolate cake oat cake tiramisu marzipan</small>
                                         </div>
                                         <small>
                                             <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month
@@ -177,8 +181,8 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
-                                                                href="javascript:void(0)">Read all notifications</a>
+                            <li class="dropdown-menu-footer">
+                                <a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a>
                             </li>
                         </ul>
                     </li>
@@ -193,7 +197,10 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#"><i class="feather icon-user"></i> Edit Profile</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="feather icon-user"></i>
+                                Edit Profile
+                            </a>
                             <div class="dropdown-divider"></div>
 
                             <!-- Log out -->
@@ -260,13 +267,13 @@
                 </a>
             </li>
             <li class="nav-item @if($currentRoute == 'projects') active @endif">
-                <a href="{{ route('dashboard.projects.index') }}">
+                <a href="{{ route('projects.index') }}">
                     <i class="feather icon-briefcase"></i>
                     <span class="menu-title">{{ __('Projects') }}</span>
                 </a>
             </li>
-            <li class="nav-item @if($currentRoute == 'messages') active @endif">
-                <a href="{{ route('about.messages.index') }}">
+            <li class="nav-item @if($currentRoute == 'contacts') active @endif">
+                <a href="{{ route('contacts.index') }}">
                     <i class="feather icon-message-square"></i>
                     <span class="menu-title">{{ __('Messages') }}</span>
                     @if($numNewMessages > 0)
@@ -274,26 +281,26 @@
                     @endif
                 </a>
             </li>
-            <li class="nav-item @if($currentRoute == 'main-info') sidebar-group-active open @endif">
+            <li class="nav-item @if($currentRoute == 'about') sidebar-group-active open @endif">
                 <a href="#">
                     <i class="feather icon-info"></i>
                     <span class="menu-title">{{ __('About us') }}</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="@if($currentRoute == 'main-info') active @endif">
-                        <a href="{{ route('about.main.index') }}">
+                    <li class="@if($currentRoute == 'about') active @endif">
+                        <a href="{{ route('about.index') }}">
                             <i></i>
                             <span class="menu-item">{{ __('Main information') }}</span>
                         </a>
                     </li>
                     <li class="@if($currentRoute == 'customers') active @endif">
-                        <a href="{{ route('about.customers.index') }}">
+                        <a href="{{ route('customers.index') }}">
                             <i></i>
                             <span class="menu-item">{{ __('Customers') }}</span>
                         </a>
                     </li>
-                    <li class="@if($currentRoute == 'contacts') active @endif">
-                        <a href="{{ route('about.contacts.index') }}">
+                    <li class="@if($currentRoute == 'company-contacts') active @endif">
+                        <a href="{{ route('company-contacts.index') }}">
                             <i></i>
                             <span class="menu-item">{{ __('Contacts') }}</span>
                         </a>

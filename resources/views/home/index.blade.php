@@ -1,4 +1,4 @@
-{{--TODO: change contents $slider->url to something projects?sortBy=web/app/design --}}
+{{--TODO: change contents $slide->url to something projects?sortBy=web/app/design --}}
 @extends('layouts.header')
 
 @section('content')
@@ -7,16 +7,16 @@
         <div class="slider slider-horizontal">
             <div class="slider__caption swiper-container">
                 <div class="swiper-wrapper">
-                    @foreach($sliders as $slider)
+                    @foreach($slides as $slide)
                         <div class="swiper-slide">
                             <div class="slider__item">
                                 <h6 class="title title--overhead"><span
-                                        class="down-up"><span>{{ $slider->sub_title }}</span></span></h6>
-                                <h1 class="title title--display-1 js-text-wave">{{ $slider->title }}</h1>
+                                        class="down-up"><span>{{ $slide->sub_title }}</span></span></h6>
+                                <h1 class="title title--display-1 js-text-wave">{{ $slide->title }}</h1>
                                 <p class="description"><span
-                                        class="down-up"><span>{{ $slider->description }}</span></span>
+                                        class="down-up"><span>{{ $slide->description }}</span></span>
                                 </p>
-                                <a class="btn-link btn-link--circle-right" href="{{ $slider->url }}"><span
+                                <a class="btn-link btn-link--circle-right" href="{{ $slide->url }}"><span
                                         class="down-up"><span>{{ __('Learn more') }}<i
                                                 class="circle circle--right icon-right-open"></i></span></span></a>
                             </div>
@@ -27,10 +27,10 @@
 
             <div class="slider__image swiper-container reveal">
                 <div class="swiper-wrapper">
-                    @foreach($sliders as $slider)
+                    @foreach($slides as $slide)
                         <div class="swiper-slide">
-                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slider->image }}"><a
-                                    class="swiper-slide__link" href="{{ $slider->url }}"></a></div>
+                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slide->image }}"><a
+                                    class="swiper-slide__link" href="{{ $slide->url }}"></a></div>
                         </div>
                     @endforeach
                 </div>

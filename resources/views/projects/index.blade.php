@@ -26,7 +26,7 @@
             @foreach($projects as $project)
                 <figure
                     class="item-project item-masonry js-block @foreach($project->categories as $category) category-{{ Str::slug($category->category) }} @endforeach">
-                    <a href="{{ route('projects.show', [$locale, $project->id, $project->slug]) }}" class="onHover">
+                    <a href="{{ route('user.projects.show', [$locale, $project->id, $project->slug]) }}" class="onHover">
                         <img class="item-news__image lazyload" src="{{ $project->main_image }}"
                              alt="{{ $project->main_title }}">
                         <figcaption class="onHover__details">

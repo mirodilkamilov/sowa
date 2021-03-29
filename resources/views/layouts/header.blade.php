@@ -51,7 +51,7 @@
     </div>
 </div>
 
-@if(Route::currentRouteName() == 'projects.show')
+@if(Route::currentRouteName() == 'user.projects.show')
     <x-navbar-back :projectId="$project->id" :slug="$project->slug"/>
 @else
     <x-navbar-main/>
@@ -64,14 +64,14 @@
     <div class="menu-inner">
         <ul class="menu-list">
             <li><a class="menu-list__item"
-                   href="{{ route('projects.index', $locale) }}"><span>{{ __('projects') }}</span></a>
+                   href="{{ route('user.projects.index', $locale) }}"><span>{{ __('projects') }}</span></a>
             </li>
             <li><a class="menu-list__item"
-                   href="{{ route('about.index', $locale) }}"><span>{{ __('About us') }}</span></a>
+                   href="{{ route('user.about.index', $locale) }}"><span>{{ __('About us') }}</span></a>
             </li>
             <!--<li><a class="menu-list__item" href="news.html"><span>news</span></a></li>-->
             <li><a class="menu-list__item"
-                   href="{{ route('contacts.index', $locale) }}"><span>{{ __('contacts') }}</span></a>
+                   href="{{ route('contacts.create', $locale) }}"><span>{{ __('contacts') }}</span></a>
             </li>
         </ul>
     </div>

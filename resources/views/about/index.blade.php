@@ -4,11 +4,11 @@
 
     <!-- Intro -->
     <header class="header-page header-fullscreen header-page--gutterBottom overlay overlay--45 js-image jarallax"
-            data-image="{{ $companyDetail->image }}">
+            data-image="{{ $about->image }}">
         <div class="header-page__container-fluid align-items-end js-opacity">
             <div class="row no-gutters">
                 <div class="col-md-12 col-lg-6">
-                    <div class="tail header-page__description">{{ $companyDetail->image_title }}</div>
+                    <div class="tail header-page__description">{{ $about->image_title }}</div>
                 </div>
                 <div class="col-md-12 col-lg-6 text-lg-right">
                     <a class="btn-link btn-link--circle-right" href="!#start"><i
@@ -26,9 +26,9 @@
                 <h4 class="title title--overhead js-lines">{{ __('About company') }}</h4>
             </div>
             <div class="col-12 col-lg-9">
-                <h2 class="title title--h4 js-lines">{{ $companyDetail->about_title }}</h2>
+                <h2 class="title title--h4 js-lines">{{ $about->about_title }}</h2>
                 <div class="description noGutters-Bottom js-block">
-                    <p class="paragraph noGutters-Bottom">{{ $companyDetail->about_description }}</p>
+                    <p class="paragraph noGutters-Bottom">{{ $about->about_description }}</p>
                 </div>
             </div>
         </div>
@@ -42,13 +42,13 @@
                 <h4 class="title title--overhead js-lines">{{ __('What we do?') }}</h4>
             </div>
             <div class="col-12 col-lg-9">
-                <h2 class="title title--h4 js-lines">{{ $companyDetail->help_title }}</h2>
+                <h2 class="title title--h4 js-lines">{{ $about->help_title }}</h2>
                 <div class="description js-block">
-                    <p class="paragraph">{{ $companyDetail->help_description }}</p>
+                    <p class="paragraph">{{ $about->help_description }}</p>
                 </div>
             </div>
-            @foreach($companyDetail->companyLists as $companyList)
-                <x-list :title="$companyList->title" :lists="$companyList->list" :isOdd="$loop->odd"/>
+            @foreach($about->aboutLists as $aboutList)
+                <x-list :title="$aboutList->title" :lists="$aboutList->list" :isOdd="$loop->odd"/>
             @endforeach
         </div>
     </article>

@@ -79,10 +79,10 @@
 
     <!-- Page nav -->
         <nav class="page-nav">
-            <a class="btn-link" href="{{ route('projects.show', [$locale, $prevProject->id, $prevProject->slug]) }}"><i
+            <a class="btn-link" href="{{ route('user.projects.show', [$locale, $prevProject->id, $prevProject->slug]) }}"><i
                     class="circle circle--left icon-left-open"></i><span>{{ __('Previous project') }}</span></a>
             <a class="btn-link"
-               href="{{ route('projects.show', [$locale, $nextProject->id, $prevProject->slug]) }}"><span>{{ __('Next project') }}</span><i
+               href="{{ route('user.projects.show', [$locale, $nextProject->id, $prevProject->slug]) }}"><span>{{ __('Next project') }}</span><i
                     class="circle circle--right icon-right-open"></i></a>
         </nav>
         <!-- /Page nav -->
