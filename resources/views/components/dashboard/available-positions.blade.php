@@ -1,4 +1,4 @@
-<span class="display-block mt-1 text-muted">
+<span class="display-block text-muted" style="margin-top: 0.5rem;">
     @php $availablePositions = $getAvailablePositions(); @endphp
     @if(empty($availablePositions))
         No reserved positions yet

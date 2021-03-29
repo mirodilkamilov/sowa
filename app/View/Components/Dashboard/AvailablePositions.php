@@ -28,6 +28,7 @@ class AvailablePositions extends Component
     public function getAvailablePositions(): array
     {
         $counter = 1;
+        $i = 0;
 
         if (isset($this->positions)) {
             foreach ($this->positions as $position) {
@@ -36,9 +37,12 @@ class AvailablePositions extends Component
                     ++$counter;
                 }
                 ++$counter;
+                ++$i;
             }
-            if (empty($this->arrayOfPositions)) {
-                $lastAvailablePosition = ++$position->position ?? 1;
+
+            // sets last available position
+            if (count($this->positions) == $i || empty($this->arrayOfPositions)) {
+                $lastAvailablePosition = $counter;
                 array_push($this->arrayOfPositions, $lastAvailablePosition);
             }
         }
