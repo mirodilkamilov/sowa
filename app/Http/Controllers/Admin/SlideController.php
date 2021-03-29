@@ -61,4 +61,11 @@ class SlideController extends Controller
         return redirect()->route('slides.edit', $slide->id);
     }
 
+    public function destroy(Slide $slide)
+    {
+        $slide->delete();
+        session()->flash('success', 'Slide was successfully deleted!');
+        return redirect()->route('slides.index');
+    }
+
 }

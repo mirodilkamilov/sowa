@@ -9,6 +9,17 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="mb-0"><i class="feather icon-check"></i>
+                        {{ session('success') }}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="content-body">
                 <!-- Data list view starts -->
                 <section id="data-thumb-view" class="data-thumb-view-header">
@@ -43,10 +54,14 @@
                                            class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        <a href="{{ route('slides.destroy', $slide->id) }}"
-                                           class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">
-                                            <i class="feather icon-trash-2"></i>
-                                        </a>
+                                        <form action="{{ route('slides.destroy', $slide->id) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light"
+                                                    type="submit">
+                                                <i class="feather icon-trash-2"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
