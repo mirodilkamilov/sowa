@@ -1,62 +1,56 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CompanyDetailController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SlideController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CompanyContactController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\TrashController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\UserAboutController;
+use App\Http\Controllers\User\UserContactController;
+use App\Http\Controllers\User\UserProjectController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| User routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::get('/', function () {
-    $defaultLang = config('app.locale');
+    $defaultLang = config('app.default_language');
     $langInSession = session('language');
 
     $locale = isset($langInSession) ? $langInSession : $defaultLang;
     return redirect()->route('home.index', $locale);
 });
-
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => implode('|', config('app.languages'))],
     'middleware' => 'homeSetLocale',
 ], function () {
-    Route::get('/', [SlideController::class, 'index'])->name('home.index');
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
     Route::group(['prefix' => 'projects'], function () {
-        Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
-
-        Route::get('/{project}-{slug}', [ProjectController::class, 'show'])->name('projects.show');
-
-        Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
-
-        Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
+        Route::get('/', [UserProjectController::class, 'index'])->name('user.projects.index');
+        Route::get('/{project}-{slug}', [UserProjectController::class, 'show'])->name('user.projects.show');
     });
 
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::get('/about', [UserAboutController::class, 'index'])->name('user.about.index');
 
-        Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
-    });
-
-    Route::get('/about', [CompanyDetailController::class, 'index'])->name('about.index');
-
-    Route::get('/contacts', function () {
-        return view('contacts.index');
-    })->name('contacts.index');
+    Route::resource('contacts', UserContactController::class)->only(['create', 'store']);
 
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin routes
+|--------------------------------------------------------------------------
+*/
 
 Route::group([
     'prefix' => 'dashboard',
@@ -64,25 +58,22 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::group(['prefix' => 'slides'], function () {
-        Route::get('/', [DashboardController::class, 'slides'])->name('slides.index');
-        Route::get('/create', [SlideController::class, 'create'])->name('slides.create');
-    });
+    Route::resource('slides', SlideController::class)->except(['show']);
 
-    Route::get('/categories', [DashboardController::class, 'categories'])->name('categories.index');
+    Route::resource('categories', CategoryController::class)->except(['show']);
 
-    Route::get('/projects', [DashboardController::class, 'projects'])->name('dashboard.projects.index');
+    Route::resource('projects', ProjectController::class)->except(['show']);
 
-    Route::get('/messages', [DashboardController::class, 'messages'])->name('about.messages.index');
+    // * Users contacts controller (messages)
+    Route::resource('contacts', ContactController::class)->except(['create', 'show', 'store']);
 
-    Route::get('/main-info', [DashboardController::class, 'mainInfo'])->name('about.main.index');
+    Route::resource('about', AboutController::class)->except(['create', 'show', 'store']);
 
-    Route::get('/customers', [DashboardController::class, 'customers'])->name('about.customers.index');
+    Route::resource('customers', CompanyContactController::class)->except(['show']);
 
-    Route::get('/contacts', [DashboardController::class, 'contacts'])->name('about.contacts.index');
+    Route::resource('company-contacts', CompanyContactController::class)->except(['show']);
 
-    Route::get('/trash', [DashboardController::class, 'trash'])->name('trash.index');
-
+    Route::get('/trash', [TrashController::class, 'index'])->name('trash.index');
 
 });
 

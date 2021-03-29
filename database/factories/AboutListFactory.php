@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\CompanyList;
+use App\Models\AboutList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CompanyListFactory extends Factory
+class AboutListFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CompanyList::class;
+    protected $model = AboutList::class;
 
     /**
      * Define the model's default state.

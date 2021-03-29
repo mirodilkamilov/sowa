@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyListsTable extends Migration
+class CreateAboutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateCompanyListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_lists', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_detail_id')->constrained('company_details');
-            $table->jsonb('title');
-            $table->jsonb('list');
+            $table->string('image');
+            $table->jsonb('image_title');
+            $table->jsonb('about_title');
+            $table->jsonb('about_description');
+            $table->jsonb('help_title');
+            $table->jsonb('help_description');
             $table->softDeletes();
         });
     }
@@ -29,6 +32,6 @@ class CreateCompanyListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lists');
+        Schema::dropIfExists('abouts');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CompanyDetail extends Model
+class About extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -22,8 +22,8 @@ class CompanyDetail extends Model
         'help_description' => 'array',
     ];
 
-    public function companyLists()
+    public function aboutLists()
     {
-        return $this->hasMany(CompanyList::class);
+        return $this->hasMany(AboutList::class);
     }
 }

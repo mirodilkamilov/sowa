@@ -6,16 +6,20 @@ use App\Models\ProjectContent;
 
 class ProjectContentObserver
 {
+    private $defaultLang;
     private $locale;
 
     public function __construct()
     {
-        $this->locale = session('language') ?? config('app.locale');
+        $this->defaultLang = config('app.default_language');
+        $this->locale = session('language') ?? $this->defaultLang;
     }
 
     public function retrieved(ProjectContent $projectContent)
     {
-        $projectContent->title = $projectContent->title[$this->locale] ?? '';
-        $projectContent->description = $projectContent->description[$this->locale] ?? '';
+        if (isset($projectContent->title))
+            $projectContent->title = $projectContent->title[$this->locale] ?? $projectContent->title[$this->defaultLang];
+        if (isset($projectContent->description))
+            $projectContent->description = $projectContent->description[$this->locale] ?? $projectContent->description[$this->defaultLang];
     }
 }

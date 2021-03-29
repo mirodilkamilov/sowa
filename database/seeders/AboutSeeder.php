@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\CompanyDetail;
-use App\Models\CompanyList;
+use App\Models\About;
+use App\Models\AboutList;
 use Illuminate\Database\Seeder;
 
-class CompanyDetailSeeder extends Seeder
+class AboutSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +15,8 @@ class CompanyDetailSeeder extends Seeder
      */
     public function run()
     {
-        CompanyDetail::factory()
-            ->has(CompanyList::factory()->count(2))
+        About::factory()
+            ->has(AboutList::factory()->count(2))
             ->create();
     }
 }

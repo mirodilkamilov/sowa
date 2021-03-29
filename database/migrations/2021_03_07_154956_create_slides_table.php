@@ -20,7 +20,7 @@ class CreateSlidesTable extends Migration
             $table->jsonb('description');
             $table->string('url')->nullable();
             $table->string('image');
-            $table->integer('position')->unique();
+            $table->integer('position');
             $table->softDeletes();
         });
     }

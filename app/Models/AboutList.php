@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CompanyList extends Model
+class AboutList extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -19,8 +19,8 @@ class CompanyList extends Model
         'list' => 'array',
     ];
 
-    public function companyDetail()
+    public function about()
     {
-        return $this->belongsTo(CompanyDetail::class);
+        return $this->belongsTo(About::class);
     }
 }

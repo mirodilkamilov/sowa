@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\StoreProjectRequest;
-use App\Jobs\Project\ProjectStoreJob;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Project;
 
-class ProjectController extends Controller
+class UserProjectController extends Controller
 {
     public function index()
     {
@@ -19,8 +18,8 @@ class ProjectController extends Controller
 
     public function show($locale, $project_id)
     {
-        //I had to do this way. Possibly, service provider running Project $project (route model binding) first, then middleware
-        //As a result, Observer is setting locale which is not set yet
+        //  I had to do this way. Possibly, service provider running Project $project (route model binding) first, then middleware
+        //  As a result, Observer is setting locale which is not set yet
         $project = Project::findOrFail($project_id);
         $project->load('categories', 'project_contents');
 
@@ -61,24 +60,5 @@ class ProjectController extends Controller
 
         return $prevProject;
     }
-
-    public function create()
-    {
-        $categories = Category::all();
-        return view('projects.create')->with('categories', $categories);
-    }
-
-    public function store(StoreProjectRequest $request)
-    {
-        try {
-            $project = $this->dispatchNow(new ProjectStoreJob($request));
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-
-        $request->session()->flash('success', 'Project was successful added!');
-        return redirect()->back();
-    }
-
 
 }
