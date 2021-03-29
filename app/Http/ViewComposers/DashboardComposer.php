@@ -2,7 +2,6 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\UserContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,10 +9,10 @@ use Illuminate\View\View;
 
 class DashboardComposer
 {
-    private $arrayOfRoutes;
+    private array $arrayOfRoutes;
     private $currentRoute;
     private $userName;
-    private $numNewMessages;
+    private int $numNewMessages;
 
     public function __construct(Request $request)
     {
@@ -22,8 +21,8 @@ class DashboardComposer
         $sizeOfArray = count($this->arrayOfRoutes);
         $isRouteDashboard = $sizeOfArray == 1;
 
-        $this->currentRoute = ($isRouteDashboard) ? $this->arrayOfRoutes[0] : $this->arrayOfRoutes[1];
-        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->count();
+        $this->currentRoute = $isRouteDashboard ? $this->arrayOfRoutes[0] : $this->arrayOfRoutes[1];
+        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->count('id');
         $this->userName = Auth::user()->name;
     }
 
