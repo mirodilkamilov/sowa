@@ -114,7 +114,6 @@
                                                                         <table class="table">
                                                                             <thead>
                                                                             <tr>
-                                                                                <th class="text-uppercase">{{ __('Position') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Image') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Title') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Sub-title') }}</th>
@@ -124,11 +123,10 @@
                                                                             <tbody class="table table-striped">
                                                                             @foreach($slides as $slide)
                                                                                 <tr>
-                                                                                    <td>{{ $slide->position }}</td>
                                                                                     <td>
                                                                                         <img src="{{ $slide->image }}"
                                                                                              alt="Img placeholder"
-                                                                                             style="width: 8rem; height: 7rem;">
+                                                                                             style="min-width: 100%; height: calc(10rem / 0.6667);">
                                                                                     </td>
                                                                                     <td>{{ $slide->title }}</td>
                                                                                     <td>{{ $slide->sub_title }}</td>

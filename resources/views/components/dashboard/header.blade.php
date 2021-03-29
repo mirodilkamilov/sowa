@@ -1,4 +1,4 @@
-@props(['currentRoute', 'arrayOfRoutes'])
+@props(['currentRoute', 'arrayOfRoutes', 'slicedSegment' => null])
 
 <div class="content-header row">
     <div class="content-header-left col-md-9 col-12 mb-2">
@@ -10,6 +10,9 @@
                         @php $routeUrl = ''; @endphp
                         @foreach($arrayOfRoutes as $route)
                             <li class="breadcrumb-item">
+                                @if(isset($slicedSegment) && $loop->iteration == 3)
+                                    @php $routeUrl = $routeUrl . '/'.  $slicedSegment @endphp
+                                @endif
                                 @php $routeUrl = $routeUrl . '/'.  $route @endphp
                                 <a href="{{ asset($routeUrl) }}">{{ __(Str::title($route)) }}</a>
                             </li>
