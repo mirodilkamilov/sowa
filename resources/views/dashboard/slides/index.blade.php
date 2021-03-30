@@ -22,7 +22,7 @@
 
             <div class="content-body">
                 <!-- Data list view starts -->
-                <section id="data-thumb-view" class="data-thumb-view-header">
+                <section id="data-thumb-view" class="data-thumb-view-header slides">
                     <!-- dataTable starts -->
                     <div class="table-responsive">
                         <a href="{{ URL::current() . '/create' }}" class="btn btn-outline-primary" tabindex="0"
@@ -44,24 +44,21 @@
                                 <tr>
                                     <td class="product-img">
                                         <img src="{{ $slide->image }}" alt="Img placeholder"
-                                             style="min-width: 100%; height: calc(10rem / 0.6667);">
+                                             style="width: 100%; max-width: 200px; height: auto;">
                                     </td>
                                     <td class="product-price">{{ $slide->position }}</td>
-                                    <td class="product-name">{{ $slide->title }}</td>
+                                    <td class="product-name slide-title">{{ $slide->title }}</td>
                                     <td class="product-name">{{ $slide->sub_title }}</td>
                                     <td class="product-action">
                                         <a href="{{ route('slides.edit', $slide->id) }}"
-                                           class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
+                                           class="btn btn-outline-primary mr-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        <form action="{{ route('slides.destroy', $slide->id) }}" method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light"
-                                                    type="submit">
-                                                <i class="feather icon-trash-2"></i>
-                                            </button>
-                                        </form>
+                                        <button type="button" value="{{ $slide->id }}"
+                                                class="confirm-btn btn btn-outline-danger waves-effect waves-light"
+                                                data-toggle="modal" data-target="#exampleModalCenter">
+                                            <i class="feather icon-trash-2"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,6 +68,52 @@
                     <!-- dataTable ends -->
                 </section>
                 <!-- Data list view end -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                         role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center">{{ __('Are you sure you want to delete?') }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="slide-title"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" method="post" id="delete-form">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger mr-1 waves-effect waves-light"
+                                            type="submit">
+                                        Yes, delete it!
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                                            aria-label="Close">
+                                        Cancel
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modal -->
+
+                <script>
+                    $(".confirm-btn").click(function () {
+                        var slideId = $(this).val();
+                        var actionUrl = window.location.href + '/' + slideId;
+                        var slideTitle = $(this).closest('.product-action').siblings('.slide-title').text();
+
+                        $("#delete-form").attr("action", actionUrl);
+                        var modalMessage = 'Slide with title of ' + slideTitle + ' is going to be deleted.';
+                        $("#slide-title").text(modalMessage);
+                    });
+                </script>
 
             </div>
         </div>

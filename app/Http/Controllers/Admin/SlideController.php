@@ -36,7 +36,7 @@ class SlideController extends Controller
         StoreSlideJob::dispatchNow($validated);
 
         $request->session()->flash('success', 'Slide was successfully added!');
-        return redirect()->route('slides.create');
+        return redirect()->route('slides.index');
     }
 
     public function edit($slide)
@@ -58,7 +58,7 @@ class SlideController extends Controller
 
         UpdateSlideJob::dispatchNow($slide, $validated);
         $request->session()->flash('success', 'Slide was successfully edited!');
-        return redirect()->route('slides.edit', $slide->id);
+        return redirect()->route('slides.index');
     }
 
     public function destroy(Slide $slide)
