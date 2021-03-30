@@ -8,6 +8,22 @@
         <div class="content-wrapper">
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="mb-0"><i class="feather icon-check"></i>
+                        {{ session('success') }}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                    data-target="#exampleModalScrollable">
+                <span><i class="feather icon-plus"></i> Add New</span>
+            </button>
             <div class="content-body">
                 <section id="data-list-view" class="data-list-view-header">
                     <!-- DataTable starts -->
@@ -40,70 +56,65 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- add new sidebar starts -->
-                    <div class="add-new-data-sidebar">
-                        <div class="overlay-bg"></div>
-                        <div class="add-new-data">
-                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                                <div>
-                                    <h4 class="text-uppercase">Thumb View Data</h4>
-                                </div>
-                                <div class="hide-data-sidebar">
-                                    <i class="feather icon-x"></i>
-                                </div>
-                            </div>
-                            <div class="data-items pb-3">
-                                <div class="data-fields px-2 mt-3">
-                                    <div class="row">
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-name">Name</label>
-                                            <input type="text" class="form-control" id="data-name">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-category"> Category </label>
-                                            <select class="form-control" id="data-category">
-                                                <option>Audio</option>
-                                                <option>Computers</option>
-                                                <option>Fitness</option>
-                                                <option>Appliance</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-status">Order Status</label>
-                                            <select class="form-control" id="data-status">
-                                                <option>Pending</option>
-                                                <option>Canceled</option>
-                                                <option>Delivered</option>
-                                                <option>On Hold</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-price">Price</label>
-                                            <input type="text" class="form-control" id="data-price">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col data-list-upload">
-                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                                <div class="dz-message">Upload Image</div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                <div class="add-data-btn">
-                                    <button class="btn btn-primary">Add Data</button>
-                                </div>
-                                <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- add new sidebar ends -->
                 </section>
             </div>
         </div>
     </div>
     <!-- END: Content-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1"
+         role="dialog"
+         aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success white">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">{{ __('Create a category') }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form" action="{{ route('categories.store') }}" method="post" id="category-create">
+                        @csrf
+                        @foreach($availableLangs as $lang)
+                            <div class="col-sm-12 data-field-col pt-2 p-1 mb-0 form-label-group">
+                                <input type="text" class="form-control" id="data-name" name="category[{{ $lang }}]"
+                                       placeholder="{{ __('Category') . " ({$lang})" }}"
+                                       value="{{ old("category.{$lang}") }}">
+                                <label
+                                    for="data-name"
+                                    style="padding-left: 0.6rem; top: 0;">{{ __('Category') . " ({$lang})" }}</label>
+                                @error("category.{$lang}")
+                                <p class="text-danger pt-1 mb-0">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        @endforeach
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="add-data-btn">
+                        <button class="btn btn-outline-success mr-1" type="submit" form="category-create">
+                            Add category
+                        </button>
+                    </div>
+                    <div class="cancel-data-btn">
+                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-background"></div>
+
+    @php $hasError = !empty($errors->all()); @endphp
+    @if($hasError)
+        @push('modal-script')
+            <script>
+                $('#exampleModalScrollable').modal('show');
+            </script>
+        @endpush
+    @endif
 
 @endsection

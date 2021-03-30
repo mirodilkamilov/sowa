@@ -60,7 +60,7 @@ Route::group([
 
     Route::resource('slides', SlideController::class)->except(['show']);
 
-    Route::resource('categories', CategoryController::class)->except(['show']);
+    Route::resource('categories', CategoryController::class)->except(['show', 'create']);
 
     Route::resource('projects', ProjectController::class)->except(['show']);
 

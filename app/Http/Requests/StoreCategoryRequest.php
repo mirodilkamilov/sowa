@@ -23,22 +23,19 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('get'))
-            return [];
-
         return [
-            'category_ru' => 'required|max:30|unique:categories,category->ru',
-            'category_en' => 'required|max:30|unique:categories,category->en',
-            'category_uz' => 'required|max:30|unique:categories,category->uz',
+            'category.ru' => 'required|max:30|unique:categories,category->ru',
+            'category.en' => 'required|max:30|unique:categories,category->en',
+            'category.uz' => 'required|max:30|unique:categories,category->uz',
         ];
     }
 
     public function attributes()
     {
         return [
-            'category_ru' => 'category (ru)',
-            'category_en' => 'category (en)',
-            'category_uz' => 'category (uz)',
+            'category.ru' => 'category (ru)',
+            'category.en' => 'category (en)',
+            'category.uz' => 'category (uz)',
         ];
     }
 
