@@ -26,7 +26,17 @@ class SlideObserver
         }
     }
 
-    public function saving(Slide $slide)
+    public function updating(Slide $slide)
+    {
+        $slideOld = Slide::select(['image'])->find($slide->id);
+        $OldImage = $slideOld->image;
+        $updatingImage = $slide->image;
+
+        if ($OldImage != $updatingImage)
+            $slide->image = '/assets/uploads/' . $slide->image;
+    }
+
+    public function creating(Slide $slide)
     {
         $slide->image = '/assets/uploads/' . $slide->image;
     }
