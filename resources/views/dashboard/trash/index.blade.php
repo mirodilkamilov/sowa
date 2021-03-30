@@ -126,7 +126,7 @@
                                                                                     <td>
                                                                                         <img src="{{ $slide->image }}"
                                                                                              alt="Img placeholder"
-                                                                                             style="min-width: 100%; height: calc(10rem / 0.6667);">
+                                                                                             style="max-width: 200px; height: auto;">
                                                                                     </td>
                                                                                     <td>{{ $slide->title }}</td>
                                                                                     <td>{{ $slide->sub_title }}</td>

@@ -66,6 +66,8 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/file-uploaders/dropzone.css">
     <!-- END: Page CSS-->
 
+    <link rel="stylesheet" href="/assets/styles/remove-btn.css">
+
 </head>
 <!-- END: Head-->
 
@@ -172,7 +174,8 @@
                                         </div>
                                         <div class="media-body">
                                             <h6 class="warning media-heading">Generate monthly report</h6>
-                                            <small class="notification-text">Chocolate cake oat cake tiramisu marzipan</small>
+                                            <small class="notification-text">Chocolate cake oat cake tiramisu
+                                                marzipan</small>
                                         </div>
                                         <small>
                                             <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last month
@@ -182,7 +185,8 @@
                                 </a>
                             </li>
                             <li class="dropdown-menu-footer">
-                                <a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a>
+                                <a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all
+                                    notifications</a>
                             </li>
                         </ul>
                     </li>
@@ -323,7 +327,6 @@
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
-
 <!-- BEGIN: Vendor JS-->
 <script src="/app-assets/vendors/js/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
@@ -351,8 +354,14 @@
 <script src="/app-assets/js/scripts/pages/app-user.js"></script>
 <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <script src="/app-assets/js/scripts/extensions/dropzone.js"></script>
+<script src="/app-assets/js/scripts/modal/components-modal.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <!-- END: Page JS-->
 
+@stack('modal-script')
+@stack('file-preview')
+@stack('file-preview-with-placeholder')
 
 </body>
 <!-- END: Body-->
