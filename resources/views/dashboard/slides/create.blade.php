@@ -9,17 +9,6 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <p class="mb-0"><i class="feather icon-check"></i>
-                   {{ session('success') }}
-                </p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endif
-
             <div class="content-body">
                 <section id="multiple-column-form">
                     <div class="row match-height">
@@ -75,11 +64,13 @@
                                                                     </div>
                                                                     <div class="col-md-12 col-12">
                                                                         <fieldset class="form-label-group">
-                                                                            <textarea class="form-control @error("description.{$lang}") is-invalid @enderror" rows="4"
-                                                                                      placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
-                                                                                      id="description"
-                                                                                      spellcheck="false"
-                                                                                      name="description[{{ $lang }}]">{{ old("description.{$lang}") }}</textarea>
+                                                                            <textarea
+                                                                                class="form-control @error("description.{$lang}") is-invalid @enderror"
+                                                                                rows="4"
+                                                                                placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
+                                                                                id="description"
+                                                                                spellcheck="false"
+                                                                                name="description[{{ $lang }}]">{{ old("description.{$lang}") }}</textarea>
                                                                             <label
                                                                                 for="description">{{ __('Description') . ' ('. $lang . ')' }}</label>
                                                                             @error("description.{$lang}")
@@ -114,7 +105,8 @@
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-label-group">
-                                                    <input type="text" id="url" class="form-control @error('url') is-invalid @enderror"
+                                                    <input type="text" id="url"
+                                                           class="form-control @error('url') is-invalid @enderror"
                                                            placeholder="{{ __('Url') }}" name="url" form="slide-form"
                                                            value="{{ old('url') }}">
                                                     <label for="url">{{ __('Url') }}</label>
@@ -141,7 +133,9 @@
                                             <fieldset class="form-group col-md-12 col-12">
                                                 <label for="basicInputFile">{{ __('Image') }}</label>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image"
+                                                    <input type="file"
+                                                           class="custom-file-input @error('image') is-invalid @enderror"
+                                                           name="image"
                                                            id="basicInputFile" form="slide-form">
                                                     <label class="custom-file-label"
                                                            for="basicInputFile"></label>
@@ -150,12 +144,18 @@
                                                     @enderror
                                                 </div>
                                             </fieldset>
+                                            <fieldset class="form-group col-md-12 col-12"
+                                                      style="display: flex; justify-content: center; align-items: center;">
+                                                <img id="preview" src="#" alt="preview"/>
+                                            </fieldset>
+
                                             <div class="col-12 mt-1">
                                                 <button type="submit" class="btn btn-primary mr-1 mb-1"
                                                         form="slide-form">
                                                     {{ __('Add slide') }}
                                                 </button>
-                                                <button type="reset" class="btn btn-outline-warning mr-1 mb-1" form="slide-form">
+                                                <button type="reset" class="btn btn-outline-warning mr-1 mb-1"
+                                                        form="slide-form">
                                                     Reset
                                                 </button>
                                             </div>
@@ -169,4 +169,28 @@
             </div>
         </div>
     </div>
+
+    @push('file-preview')
+        <script>
+            $("#preview").css('display', 'none');
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+                        $("#preview").css('width', '300px');
+                        $("#preview").css('display', 'block');
+                    }
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+
+            $("#basicInputFile").change(function () {
+                readURL(this);
+            });
+        </script>
+    @endpush
 @endsection

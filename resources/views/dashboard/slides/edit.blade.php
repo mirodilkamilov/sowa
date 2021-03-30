@@ -10,17 +10,6 @@
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"
                                 :slicedSegment="$slicedSegment ?? null"/>
 
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <p class="mb-0"><i class="feather icon-check"></i>
-                        {{ session('success') }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-
             <div class="content-body">
                 <section id="multiple-column-form">
                     <div class="row match-height">
@@ -34,7 +23,8 @@
 
                                         <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
 
-                                        <form class="form" action="{{ route('slides.update', $slide->id) }}" method="post"
+                                        <form class="form" action="{{ route('slides.update', $slide->id) }}"
+                                              method="post"
                                               enctype="multipart/form-data" id="slide-form">
                                             @method('PUT')
                                             @csrf
@@ -143,12 +133,6 @@
                                                 </div>
                                             </div>
 
-                                            <div
-                                                class="img-container p-1 pt-2"
-                                                style="width: 100%; display: flex; flex-flow: column nowrap; align-items: center;">
-                                                <h3 class="card-title">{{ __('Current image') }}</h3>
-                                                <img src="{{ $slide->image }}" alt="" style="width: 400px;">
-                                            </div>
                                             <fieldset class="form-group col-md-12 col-12">
                                                 <label for="basicInputFile">{{ __('Image') }}</label>
                                                 <div class="custom-file">
@@ -163,6 +147,14 @@
                                                     @enderror
                                                 </div>
                                             </fieldset>
+
+                                            <fieldset class="form-group col-md-12 col-12"
+                                                      style="display: flex; justify-content: center; align-items: center;">
+                                                <img id="preview" src="#" alt="preview"/>
+                                                <img src="{{ $slide->image }}" alt="placeholder" style="width: 300px;"
+                                                     id="placeholder">
+                                            </fieldset>
+
                                             <div class="col-12 mt-1">
                                                 <button type="submit" class="btn btn-primary mr-1 mb-1"
                                                         form="slide-form">
@@ -183,4 +175,31 @@
             </div>
         </div>
     </div>
+
+    @push('file-preview-with-placeholder')
+        <script>
+            $("#placeholder").css('display', 'block');
+            $("#preview").css('display', 'none');
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    $("#placeholder").css('display', 'none');
+
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+                        $("#preview").css('width', '300px');
+                        $("#preview").css('display', 'block');
+                    }
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+
+            $("#basicInputFile").change(function () {
+                readURL(this);
+            });
+        </script>
+    @endpush
 @endsection
