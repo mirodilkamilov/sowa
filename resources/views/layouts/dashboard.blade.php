@@ -328,6 +328,8 @@
 <div class="drag-target"></div>
 
 <!-- BEGIN: Vendor JS-->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="/app-assets/vendors/js/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
@@ -355,8 +357,6 @@
 <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <script src="/app-assets/js/scripts/extensions/dropzone.js"></script>
 <script src="/app-assets/js/scripts/modal/components-modal.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <!-- END: Page JS-->
 
 @stack('modal-script')

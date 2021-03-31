@@ -106,15 +106,13 @@
         </div>
     </div>
 
-    <div class="modal-background"></div>
-
-    @php $hasError = !empty($errors->all()); @endphp
-    @if($hasError)
+    @if($errors->any())
         @push('modal-script')
             <script>
                 $('#exampleModalScrollable').modal('show');
             </script>
         @endpush
     @endif
+
 
 @endsection
