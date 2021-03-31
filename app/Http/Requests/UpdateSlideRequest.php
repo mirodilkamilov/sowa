@@ -10,8 +10,7 @@ class UpdateSlideRequest extends FormRequest
     public function rules()
     {
         $slide_id = $this->segment(3);
-        $ignoredPosition = Slide::select(['position'])->find($slide_id);
-        $ignoredPosition = $ignoredPosition->position;
+        $ignoredPosition = Slide::select(['position'])->find($slide_id)->position;
 
         return [
             'title.ru' => 'required|min:3|max:255',

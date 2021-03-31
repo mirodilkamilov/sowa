@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -28,20 +28,30 @@ class CategoryController extends Controller
     }
 
 
-    public function edit(Category $category)
+    public function edit($category)
     {
-        //
+        $category = Category::withoutEvents(function () use ($category) {
+            return Category::findOrFail($category);
+        });
+
+        return view('dashboard.categories.edit', compact('category'));
     }
 
 
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+        $category->update($validated);
+
+        $request->session()->flash('success', 'Category was successfully edited!');
+        return redirect()->route('categories.index');
     }
 
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        session()->flash('success', 'Category was successfully deleted!');
+        return redirect()->route('categories.index');
     }
 }

@@ -67,6 +67,8 @@
     <!-- END: Page CSS-->
 
     <link rel="stylesheet" href="/assets/styles/remove-btn.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
 </head>
 <!-- END: Head-->
@@ -328,8 +330,6 @@
 <div class="drag-target"></div>
 
 <!-- BEGIN: Vendor JS-->
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="/app-assets/vendors/js/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
