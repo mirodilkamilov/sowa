@@ -182,12 +182,12 @@
             $("#preview").css('display', 'none');
 
             function readURL(input) {
+                $("#placeholder").css('display', 'block');
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
-                    $("#placeholder").css('display', 'none');
-
                     reader.onload = function (e) {
+                        $("#placeholder").css('display', 'none');
                         $('#preview').attr('src', e.target.result);
                         $("#preview").css('width', '300px');
                         $("#preview").css('display', 'block');
