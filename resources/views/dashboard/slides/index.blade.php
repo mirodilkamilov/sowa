@@ -69,7 +69,7 @@
                 </section>
                 <!-- Data list view end -->
 
-                <!-- Modal -->
+                <!-- Confirm Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
@@ -101,12 +101,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- /Modal -->
+                <!-- /Confirm Modal -->
 
                 <script>
                     $(".confirm-btn").click(function () {
                         var slideId = $(this).val();
-                        var actionUrl = window.location.href + '/' + slideId;
+                        var currentUrl = window.location.href;
+                        currentUrl = currentUrl.replace(/\/$/, '');
+                        var actionUrl = currentUrl + '/' + slideId;
                         var slideTitle = $(this).closest('.product-action').siblings('.slide-title').text();
 
                         $("#delete-form").attr("action", actionUrl);

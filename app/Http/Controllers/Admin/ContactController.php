@@ -33,8 +33,12 @@ class ContactController extends Controller
         return redirect()->route('contacts.index');
     }
 
-    public function destroy(UserContact $userContact)
+    public function destroy($userContact)
     {
-        //
+        $userContact = UserContact::findOrFail($userContact);
+        $userContact->delete();
+
+        session()->flash('success', 'User message was successfully deleted!');
+        return redirect()->route('contacts.index');
     }
 }

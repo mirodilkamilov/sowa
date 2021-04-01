@@ -10,7 +10,8 @@
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin: 0 2.2rem 1.5rem;">
+                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                     style="margin: 0 2.2rem 1.5rem;">
                     <p class="mb-0"><i class="feather icon-check"></i>
                         {{ session('success') }}
                     </p>
@@ -91,7 +92,7 @@
                                                             class="todo-title-wrapper d-flex justify-content-between mb-50">
                                                             <div class="todo-title-area d-flex align-items-center">
                                                                 <div class="title-wrapper d-flex">
-                                                                    <h6 class="todo-title mt-50 mx-50">{{ $user->name }}</h6>
+                                                                    <h6 class="todo-title mt-50 mx-50 user-name">{{ $user->name }}</h6>
                                                                 </div>
                                                                 <div class="chip-wrapper">
                                                                     <div class="chip mb-0">
@@ -108,9 +109,13 @@
                                                             </div>
                                                             <div class="float-right todo-item-action d-flex"
                                                                  style="width: 0;">
-                                                                <a class='todo-item-delete'>
+                                                                <button type="button" value="{{ $user->id }}"
+                                                                        class="todo-item-delete confirm-btn"
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModalCenter"
+                                                                        style="cursor: pointer; font-size: 1.2rem; line-height: 1.5; color: #7367F0; background-color: transparent; border: 0 solid transparent;">
                                                                     <i class="feather icon-trash"></i>
-                                                                </a>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                         <p class="todo-desc mb-0">{{ $user->message }}</p>
@@ -130,7 +135,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal -->
+
+                            <!-- Edit Modal -->
                             <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog"
                                  aria-labelledby="editTodoTask" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md"
@@ -225,6 +231,58 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!-- Confirm Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div
+                                    class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                                    role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-center">{{ __('Are you sure you want to delete?') }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p id="user-name"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="" method="post" id="delete-form">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger mr-1 waves-effect waves-light"
+                                                        type="submit">
+                                                    Yes, delete it!
+                                                </button>
+                                                <button type="button" class="btn btn-outline-primary"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    Cancel
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Confirm Modal -->
+
+                            <script>
+                                $(".confirm-btn").click(function () {
+                                    var userId = $(this).val();
+                                    var currentUrl = window.location.href;
+                                    currentUrl = currentUrl.replace(/\/$/, '');
+                                    var actionUrl = currentUrl + '/' + userId;
+
+                                    var userName = $(this).closest('.todo-item-action').siblings('.todo-title-area').find('.user-name').text();
+
+                                    $("#delete-form").attr("action", actionUrl);
+                                    var modalMessage = userName + '\'s message is going to be deleted.';
+                                    $("#user-name").text(modalMessage);
+                                });
+                            </script>
 
                         </div>
                     </div>

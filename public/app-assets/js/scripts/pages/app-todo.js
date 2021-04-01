@@ -282,7 +282,6 @@ $(function() {
   $(document).on('click', '.todo-item-delete', function(e){
     var item = this;
     e.stopPropagation();
-    $(item).closest('.todo-item').remove();
   })
 
   // Complete task strike through
