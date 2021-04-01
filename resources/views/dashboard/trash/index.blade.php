@@ -30,15 +30,15 @@
                                                 @php $numOfDeletedSlides = count($slides); @endphp
                                                 @php $numOfDeletedUserContacts = count($userContacts); @endphp
                                                 <div class="card collapse-header">
-                                                    <div id="headingCollapse1" class="card-header"
+                                                    <div id="projects" class="card-header"
                                                          data-toggle="collapse"
-                                                         role="button" data-target="#collapse1" aria-expanded="false"
-                                                         aria-controls="collapse1">
+                                                         role="button" data-target="#projects" aria-expanded="false"
+                                                         aria-controls="projects">
                                                         <span class="lead collapse-title">{{ __('Projects') }}</span>
                                                         <span
                                                             class="badge badge badge-warning badge-pill float-right mr-3">{{ $numOfDeletedProjects }}</span>
                                                     </div>
-                                                    <div id="collapse1" role="tabpanel"
+                                                    <div id="projects" role="tabpanel"
                                                          aria-labelledby="headingCollapse1"
                                                          class="collapse">
                                                         <div class="card-content">
@@ -95,18 +95,18 @@
                                                 </div>
 
                                                 <div class="card collapse-header">
-                                                    <div id="headingCollapse2" class="card-header"
+                                                    <div id="slides" class="card-header"
                                                          data-toggle="collapse"
-                                                         role="button" data-target="#collapse2" aria-expanded="false"
-                                                         aria-controls="collapse2">
+                                                         role="button" data-target="#slides" aria-expanded="false"
+                                                         aria-controls="slides">
                                                     <span class="lead collapse-title">
                                                         {{ __('Slides') }}
                                                     </span>
                                                         <span
                                                             class="badge badge badge-warning badge-pill float-right mr-3">{{ $numOfDeletedSlides }}</span>
                                                     </div>
-                                                    <div id="collapse2" role="tabpanel"
-                                                         aria-labelledby="headingCollapse2"
+                                                    <div id="slides" role="tabpanel"
+                                                         aria-labelledby="slides"
                                                          class="collapse">
                                                         <div class="card-content">
                                                             <div class="card-body">
@@ -118,7 +118,7 @@
                                                                                 <th class="text-uppercase">{{ __('Image') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Title') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Sub-title') }}</th>
-                                                                                <th class="text-uppercase">{{ __('Actions') }}</th>
+                                                                                <th class="text-uppercase">{{ __('Restore') }}</th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody class="table table-striped">
@@ -152,18 +152,18 @@
                                                 </div>
 
                                                 <div class="card collapse-header">
-                                                    <div id="headingCollapse2" class="card-header"
+                                                    <div id="messages" class="card-header"
                                                          data-toggle="collapse"
-                                                         role="button" data-target="#collapse2" aria-expanded="false"
-                                                         aria-controls="collapse2">
+                                                         role="button" data-target="#messages" aria-expanded="false"
+                                                         aria-controls="messages">
                                                     <span class="lead collapse-title">
                                                         {{ __('Messages') }}
                                                     </span>
                                                         <span
                                                             class="badge badge badge-warning badge-pill float-right mr-3">{{ $numOfDeletedUserContacts }}</span>
                                                     </div>
-                                                    <div id="collapse2" role="tabpanel"
-                                                         aria-labelledby="headingCollapse2"
+                                                    <div id="messages" role="tabpanel"
+                                                         aria-labelledby="messages"
                                                          class="collapse">
                                                         <div class="card-content">
                                                             <div class="card-body">
@@ -176,7 +176,7 @@
                                                                                 <th class="text-uppercase">{{ __('Phone') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Message') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Comment') }}</th>
-                                                                                <th class="text-uppercase">{{ __('Actions') }}</th>
+                                                                                <th class="text-uppercase">{{ __('Restore') }}</th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody class="table table-striped">
