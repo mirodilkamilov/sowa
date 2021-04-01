@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ProjectObserver
 {
@@ -22,5 +23,23 @@ class ProjectObserver
             $project->slug = $project->slug[$this->locale] ?? $project->slug[$this->defaultLang];
         if (isset($project->main_title))
             $project->main_title = $project->main_title[$this->locale] ?? $project->main_title[$this->defaultLang];
+    }
+
+    public function creating(Project $project)
+    {
+        $project->main_image = '/assets/uploads/' . $project->main_image;
+        // * soft deletes until corresponding project content is added
+        $project->deleted_at = now();
+    }
+
+    public function saving(Project $project)
+    {
+        $slug = collect([
+            'en' => isset($project->slug['en']) ? Str::slug($project->slug['en']) : $project->slug['en'],
+            'ru' => isset($project->slug['ru']) ? Str::slug($project->slug['ru']) : $project->slug['ru'],
+            'uz' => isset($project->slug['uz']) ? Str::slug($project->slug['uz']) : $project->slug['uz'],
+        ]);
+
+        $project->slug = $slug;
     }
 }

@@ -40,6 +40,8 @@
     <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
+    @stack('divider-custom-style')
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -62,8 +64,7 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-user.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/file-uploaders/dropzone.min.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/file-uploaders/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/wizard.css">
     <!-- END: Page CSS-->
 
     <link rel="stylesheet" href="/assets/styles/remove-btn.css">
@@ -357,6 +358,10 @@
 <script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
 <script src="/app-assets/js/scripts/extensions/dropzone.js"></script>
 <script src="/app-assets/js/scripts/modal/components-modal.js"></script>
+
+<script src="/app-assets/vendors/js/ui/jquery.sticky.js"></script>
+<script src="/app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+<script src="/app-assets/js/scripts/forms/wizard-steps.js"></script>
 <!-- END: Page JS-->
 
 @stack('modal-script')

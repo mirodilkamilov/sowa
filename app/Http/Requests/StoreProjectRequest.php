@@ -25,14 +25,15 @@ class StoreProjectRequest extends FormRequest
     {
 //      TODO: configure php.ini to upload bigger files in production (upload_max_filesize = 16M ; post_max_size = 24M)
         return [
-            'title.ru' => 'required',
-            'title.uz' => 'nullable',
-            'slug' => 'required|max:20',
-            'image' => 'required|image|max:3072',
-            'category_id' => 'required|exists:categories,id',
-            'client' => 'nullable|max:30',
-            'year' => 'nullable|digits:4',
-            'description.ru' => 'required|max:250',
+            'main_title.ru' => 'required|min:3|max:255',
+            'main_title.en' => 'nullable|required_with:slug.en|min:3|max:255',
+            'main_title.uz' => 'nullable|required_with:slug.uz|min:3|max:255',
+            'slug.ru' => 'required|min:3|max:20',
+            'slug.en' => 'nullable|required_with:main_title.en|min:3|max:20',
+            'slug.uz' => 'nullable|required_with:main_title.uz|min:3|max:20',
+            'main_image' => 'required|image|max:4000',
+            'client' => 'nullable|min:3|max:30',
+            'year' => 'nullable|digits:4|integer|min:1990|max:' . (date('Y') + 1),
             'url' => 'nullable|url',
         ];
     }

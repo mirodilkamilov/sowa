@@ -25,7 +25,7 @@
                 <section id="data-thumb-view" class="data-thumb-view-header slides">
                     <!-- dataTable starts -->
                     <div class="table-responsive">
-                        <a href="{{ URL::current() . '/create' }}" class="btn btn-outline-primary" tabindex="0"
+                        <a href="{{ route('slides.create') }}" class="btn btn-outline-primary" tabindex="0"
                            aria-controls="DataTables_Table_0">
                             <span><i class="feather icon-plus"></i> Add New</span>
                         </a>

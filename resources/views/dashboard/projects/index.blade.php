@@ -9,11 +9,26 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="mb-0"><i class="feather icon-check"></i>
+                        {{ session('success') }}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="content-body">
                 <!-- Data list view starts -->
                 <section id="data-thumb-view" class="data-thumb-view-header">
                     <!-- dataTable starts -->
                     <div class="table-responsive">
+                        <a href="{{ route('projects.create')  }}" class="btn btn-outline-primary" tabindex="0"
+                           aria-controls="DataTables_Table_0">
+                            <span><i class="feather icon-plus"></i> Add New</span>
+                        </a>
                         <table class="table data-thumb-view">
                             <thead>
                             <tr>
@@ -52,67 +67,6 @@
                         </table>
                     </div>
                     <!-- dataTable ends -->
-
-                    <!-- add new sidebar starts -->
-                    <div class="add-new-data-sidebar">
-                        <div class="overlay-bg"></div>
-                        <div class="add-new-data">
-                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                                <div>
-                                    <h4 class="text-uppercase">Thumb View Data</h4>
-                                </div>
-                                <div class="hide-data-sidebar">
-                                    <i class="feather icon-x"></i>
-                                </div>
-                            </div>
-                            <div class="data-items pb-3">
-                                <div class="data-fields px-2 mt-3">
-                                    <div class="row">
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-name">Name</label>
-                                            <input type="text" class="form-control" id="data-name">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-category"> Category </label>
-                                            <select class="form-control" id="data-category">
-                                                <option>Audio</option>
-                                                <option>Computers</option>
-                                                <option>Fitness</option>
-                                                <option>Appliance</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-status">Order Status</label>
-                                            <select class="form-control" id="data-status">
-                                                <option>Pending</option>
-                                                <option>Canceled</option>
-                                                <option>Delivered</option>
-                                                <option>On Hold</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-price">Price</label>
-                                            <input type="text" class="form-control" id="data-price">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col data-list-upload">
-                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                                <div class="dz-message">Upload Image</div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                <div class="add-data-btn">
-                                    <button class="btn btn-primary">Add Data</button>
-                                </div>
-                                <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- add new sidebar ends -->
                 </section>
                 <!-- Data list view end -->
 
