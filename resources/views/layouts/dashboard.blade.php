@@ -362,6 +362,7 @@
 @stack('modal-script')
 @stack('file-preview')
 @stack('file-preview-with-placeholder')
+@stack('edit-user-message')
 
 </body>
 <!-- END: Body-->

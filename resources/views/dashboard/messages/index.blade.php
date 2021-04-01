@@ -9,6 +9,17 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin: 0 2.2rem 1.5rem;">
+                    <p class="mb-0"><i class="feather icon-check"></i>
+                        {{ session('success') }}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="content-area-wrapper mt-0">
                 <div class="sidebar-left">
                     <div class="sidebar">
@@ -17,31 +28,14 @@
                             <i class="feather icon-x"></i>
                         </span>
                             <div class="todo-app-menu">
-                                <div class="form-group text-center add-task">
-                                    <button type="button" class="btn btn-primary btn-block my-1" data-toggle="modal"
-                                            data-target="#addTaskModal">Add Task
-                                    </button>
-                                </div>
                                 <div class="sidebar-menu-list">
-                                    <div class="list-group list-group-filters font-medium-1">
+                                    <div class="list-group list-group-filters font-medium-1 mt-2">
                                         <a href="#" class="list-group-item list-group-item-action border-0 pt-0 active">
                                             <i class="font-medium-5 feather icon-mail mr-50"></i> All
                                         </a>
                                     </div>
                                     <hr>
-                                    <h5 class="mt-2 mb-1 pt-25">Filters</h5>
-                                    <div class="list-group list-group-filters font-medium-1">
-                                        <a href="#" class="list-group-item list-group-item-action border-0"><i
-                                                class="font-medium-5 feather icon-star mr-50"></i> Starred</a>
-                                        <a href="#" class="list-group-item list-group-item-action border-0"><i
-                                                class="font-medium-5 feather icon-info mr-50"></i> Important</a>
-                                        <a href="#" class="list-group-item list-group-item-action border-0"><i
-                                                class="font-medium-5 feather icon-check mr-50"></i> Completed</a>
-                                        <a href="#" class="list-group-item list-group-item-action border-0"><i
-                                                class="font-medium-5 feather icon-trash mr-50"></i> Trashed</a>
-                                    </div>
-                                    <hr>
-                                    <h5 class="mt-2 mb-1 pt-25">Labels</h5>
+                                    <h5 class="mt-2 mb-1 pt-25">{{ __('Statuses') }}</h5>
                                     <div class="list-group list-group-labels font-medium-1">
                                         @php
                                             $statusColor = [
@@ -64,115 +58,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal (New Task) -->
-                        <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"
-                                 role="document">
-                                <div class="modal-content">
-                                    <section class="todo-form">
-                                        <form id="form-add-todo" class="todo-input">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="todo-item-action ml-auto">
-                                                    <a class='todo-item-info'><i class="feather icon-info"></i></a>
-                                                    <a class='todo-item-favorite'><i class="feather icon-star"></i></a>
-                                                    <div class="dropdown todo-item-label">
-                                                        <i class="dropdown-toggle mr-0 mb-1 feather icon-tag"
-                                                           id="todoLabel" data-toggle="dropdown">
-                                                        </i>
-                                                        <div class="dropdown-menu dropdown-menu-right"
-                                                             aria-labelledby="todoLabel">
-                                                            <div class="dropdown-item">
-                                                                <div class="vs-checkbox-con">
-                                                                    <input type="checkbox" data-color="primary"
-                                                                           data-value="Frontend">
-                                                                    <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check mr-0"></i>
-                                                                    </span>
-                                                                </span>
-                                                                    <span>Frontend</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="dropdown-item">
-                                                                <div class="vs-checkbox-con">
-                                                                    <input type="checkbox" data-color="warning"
-                                                                           data-value="Backend">
-                                                                    <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check mr-0"></i>
-                                                                    </span>
-                                                                </span>
-                                                                    <span>Backend</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="dropdown-item">
-                                                                <div class="vs-checkbox-con">
-                                                                    <input type="checkbox" data-color="success"
-                                                                           data-value="Doc">
-                                                                    <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check mr-0"></i>
-                                                                    </span>
-                                                                </span>
-                                                                    <span>Doc</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="dropdown-item">
-                                                                <div class="vs-checkbox-con">
-                                                                    <input type="checkbox" data-color="danger"
-                                                                           data-value="Bug">
-                                                                    <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check mr-0"></i>
-                                                                    </span>
-                                                                </span>
-                                                                    <span>Bug</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <fieldset class="form-group">
-                                                    <input type="text" class="new-todo-item-title form-control"
-                                                           placeholder="Title">
-                                                </fieldset>
-                                                <fieldset class="form-group">
-                                                    <textarea class="new-todo-item-desc form-control" rows="3"
-                                                              placeholder="Add description"></textarea>
-                                                </fieldset>
-                                                <fieldset class="form-group">
-                                                    <textarea class="new-todo-item-comm form-control" rows="3"
-                                                              placeholder="Add Comment"></textarea>
-                                                </fieldset>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                    <button type="button" class="btn btn-primary add-todo-item"
-                                                            data-dismiss="modal"><i
-                                                            class="feather icon-check d-block d-lg-none"></i>
-                                                        <span class="d-none d-lg-block">Add Task</span></button>
-                                                </fieldset>
-                                                <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                    <button type="button" class="btn btn-outline-light"
-                                                            data-dismiss="modal"><i
-                                                            class="feather icon-x d-block d-lg-none"></i>
-                                                        <span class="d-none d-lg-block">Cancel</span></button>
-                                                </fieldset>
-                                            </div>
-                                        </form>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -200,7 +85,8 @@
                                             <ul class="todo-task-list-wrapper media-list">
                                                 @foreach($users as $user)
                                                     <li class="todo-item @if ($user->status == 'spam') completed @endif"
-                                                        data-toggle="modal" data-target="#editTaskModal">
+                                                        data-toggle="modal" data-target="#editTaskModal"
+                                                        value="{{ $user->id }}">
                                                         <div
                                                             class="todo-title-wrapper d-flex justify-content-between mb-50">
                                                             <div class="todo-title-area d-flex align-items-center">
@@ -220,13 +106,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="float-right todo-item-action d-flex">
-                                                                <a class='todo-item-info'><i
-                                                                        class="feather icon-info"></i></a>
-                                                                <a class='todo-item-favorite'><i
-                                                                        class="feather icon-star"></i></a>
-                                                                <a class='todo-item-delete'><i
-                                                                        class="feather icon-trash"></i></a>
+                                                            <div class="float-right todo-item-action d-flex"
+                                                                 style="width: 0;">
+                                                                <a class='todo-item-delete'>
+                                                                    <i class="feather icon-trash"></i>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                         <p class="todo-desc mb-0">{{ $user->message }}</p>
@@ -250,10 +134,15 @@
                             <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog"
                                  aria-labelledby="editTodoTask" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md"
-                                     role="document">
+                                     role="document" style="max-width: 550px;">
                                     <div class="modal-content" style="min-height: 70vh;">
                                         <section class="todo-form">
-                                            <form id="form-edit-todo" class="todo-input">
+                                            <form class="todo-input user-message-form"
+                                                  action="{{ route('contacts.update', old('user_contact_id') ?? 1) }}"
+                                                  method="post"
+                                                  id="form-edit-todo">
+                                                @method('PUT')
+                                                @csrf
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editTodoTask">Edit Task</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
@@ -262,64 +151,73 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="todo-item-action ml-auto">
-                                                        <a class='edit-todo-item-info todo-item-info'><i
-                                                                class="feather icon-info"></i></a>
-                                                        <a class='edit-todo-item-favorite todo-item-favorite'><i
-                                                                class="feather icon-star"></i></a>
-                                                        <div class="dropdown todo-item-label">
-                                                            <i class="dropdown-toggle mr-0 mb-1 feather icon-tag"
-                                                               id="todoEditLabel" data-toggle="dropdown">
-                                                            </i>
-                                                            <div class="dropdown-menu dropdown-menu-right"
-                                                                 aria-labelledby="todoEditLabel">
-                                                                @foreach($statuses as $status)
-                                                                    <div class="dropdown-item">
+                                                    <h5 class="text-primary text-center">Statuses</h5>
+                                                    <div class="todo-item-action">
+                                                        @foreach($statuses as $status)
+                                                            <div class="row pl-2">
+                                                                <div class="dropdown todo-item-label">
+                                                                    <div
+                                                                        class="dropdown-item p-0 @unless($loop->first) ml-2 @endunless">
                                                                         <div class="vs-checkbox-con">
                                                                             <input type="radio" name="status"
                                                                                    data-color="{{ $statusColor[$status] }}"
-                                                                                   data-value="{{ $status }}">
+                                                                                   data-value="{{ $status }}"
+                                                                                   value="{{ $status }}"
+                                                                                   class="user-status"
+                                                                                   @if(old('status') == $status) checked @endif>
                                                                             <span class="vs-checkbox">
-                                                                        <span class="vs-checkbox--check">
-                                                                            <i class="vs-icon feather icon-check mr-0"></i>
-                                                                        </span>
-                                                                    </span>
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check mr-0"></i>
+                                                                                </span>
+                                                                            </span>
                                                                             <span>{{ $status }}</span>
                                                                         </div>
                                                                     </div>
-                                                                @endforeach
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endforeach
                                                     </div>
+                                                    @error("status")
+                                                    <p class="text-danger mb-1">{{ $message }}</p>
+                                                    @enderror
+
                                                     <fieldset class="form-label-group">
                                                         <input type="text" class="edit-todo-item-title form-control"
+                                                               name="name" value="{{ old('name') }}"
                                                                placeholder="Title" id="name" readonly>
                                                         <label for="name">User name</label>
                                                     </fieldset>
                                                     <fieldset class="form-label-group">
                                                         <textarea class="edit-todo-item-desc form-control"
-                                                                  rows="3" id="message"
-                                                                  placeholder="Add description" readonly></textarea>
+                                                                  rows="4" id="message" name="message"
+                                                                  placeholder="Add description"
+                                                                  readonly>{{ old('message') }}</textarea>
                                                         <label for="message">User message</label>
                                                     </fieldset>
                                                     <fieldset class="form-label-group">
                                                         <textarea class="edit-todo-item-comm form-control"
-                                                                  rows="3" id="comment"
-                                                                  placeholder="Add comment"></textarea>
+                                                                  rows="3" id="comment" name="comment"
+                                                                  placeholder="Add comment">{{ old('comment') }}</textarea>
                                                         <label for="comment">Add comment</label>
+                                                        @error("comment")
+                                                        <p class="text-danger pt-1 mb-0">{{ $message }}</p>
+                                                        @enderror
+                                                        <input type="hidden" name="user_contact_id" id="user_contact_id"
+                                                               value="{{ old('user_contact_id') }}">
                                                     </fieldset>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                        <button type="button" class="btn btn-primary update-todo-item"
-                                                                data-dismiss="modal"><i
-                                                                class="feather icon-edit d-block d-lg-none"></i>
-                                                            <span class="d-none d-lg-block">Update</span></button>
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <i class="feather icon-edit d-block d-lg-none"></i>
+                                                            <span class="d-none d-lg-block">Update</span>
+                                                        </button>
                                                     </fieldset>
                                                     <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                        <button type="button" class="btn" data-dismiss="modal"><i
-                                                                class="feather icon-x d-block d-lg-none"></i>
-                                                            <span class="d-none d-lg-block">Cancel</span></button>
+                                                        <button type="button" class="btn" data-dismiss="modal">
+                                                            <i class="feather icon-x d-block d-lg-none"></i>
+                                                            <span class="d-none d-lg-block">Cancel</span>
+                                                        </button>
                                                     </fieldset>
                                                 </div>
                                             </form>
@@ -334,5 +232,20 @@
             </div>
         </div>
     </div>
+
+    @push('edit-user-message')
+        <script>
+            @if($errors->any())
+            $('#editTaskModal').modal('show');
+            @endif
+
+            $('.todo-item').click(function () {
+                var userId = $(this).val();
+                var actionUrl = window.location.href + '/' + userId;
+                $(".user-message-form").attr("action", actionUrl);
+                $('#user_contact_id').attr('value', userId);
+            });
+        </script>
+    @endpush
     <!-- END: Content-->
 @endsection

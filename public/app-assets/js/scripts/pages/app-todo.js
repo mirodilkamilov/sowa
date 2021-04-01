@@ -138,7 +138,7 @@ $(function() {
     }
 
     // Chip calculation loop
-    var selected  = $('.modal .dropdown-menu input:checked');
+    var selected  = $('.modal .dropdown input:checked');
 
     selected.each(function(){
       todoChip += '<div class="chip mb-0">' +
@@ -201,7 +201,7 @@ $(function() {
     var $comm = $(this).find('.todo-comm').html();
     var $info = $(this).find('.todo-item-info');
     var $fav = $(this).find('.todo-item-favorite');
-    $('#form-edit-todo .dropdown-menu input').prop("checked",false);
+    $('#form-edit-todo .dropdown input').prop("checked",false);
 
 
     // Checkbox checked as per chips
@@ -210,7 +210,7 @@ $(function() {
     selected.each(function(){
 
       var chipVal = $(this).find('.chip-text').data('value');
-      $('#form-edit-todo .dropdown-menu input[data-value="'+chipVal+'"]').prop("checked",true);
+      $('#form-edit-todo .dropdown input[data-value="'+chipVal+'"]').prop("checked",true);
     });
 
     // apply all variable values to fields
