@@ -32,7 +32,7 @@ class DashboardComposer
         $isRouteDashboard = $sizeOfArray == 1;
 
         $this->currentRoute = $isRouteDashboard ? $this->arrayOfRoutes[0] : $this->arrayOfRoutes[1];
-        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->count('id');
+        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->where('deleted_at', null)->count('id');
         $this->userName = Auth::user()->name;
     }
 
