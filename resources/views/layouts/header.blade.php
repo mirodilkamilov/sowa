@@ -39,7 +39,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/styles/style.css') }}"/>
 
 </head>
 <body>

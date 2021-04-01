@@ -20,11 +20,12 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+
 Route::get('/', function () {
     $defaultLang = config('app.default_language');
     $langInSession = session('language');
-
     $locale = isset($langInSession) ? $langInSession : $defaultLang;
+
     return redirect()->route('home.index', $locale);
 });
 Route::group([
@@ -42,6 +43,10 @@ Route::group([
     Route::get('/about', [UserAboutController::class, 'index'])->name('user.about.index');
 
     Route::resource('contacts', UserContactController::class)->only(['create', 'store']);
+    Route::get('/contacts', function () {
+        $locale = session('language') ?? config('app.default_language');
+        return redirect()->route('contacts.create', $locale);
+    });
 
 });
 
