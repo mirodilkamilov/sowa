@@ -27,10 +27,14 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $validated = $request->validated();
-        StoreProjectJob::dispatchNow($request, $validated);
+        $project_id = StoreProjectJob::dispatchNow($request, $validated);
 
-        $request->session()->flash('success', 'Project was successfully added!');
-        return redirect()->route('projects.index');
+
+        $request->session()->flash('success', 'Main project part was successfully saved!');
+        $request->session()->flash('info', 'Please complete the other part as well, because incomplete project will not be displayed');
+        $request->session()->put('hasCompletedFirstPart', true);
+        $request->session()->put('project_id', $project_id);
+        return redirect()->route('projects.create');
     }
 
     public function edit(Project $project)

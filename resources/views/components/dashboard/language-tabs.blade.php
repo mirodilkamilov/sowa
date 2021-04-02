@@ -1,8 +1,8 @@
 @props(['availableLangs'])
 
-<ul class="nav nav-tabs" id="myTab2" role="tablist">
+<ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
     @foreach($availableLangs as $lang)
-        <li class="nav-item" style="border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 1rem 1rem 0 0; width: 100px; text-align: center;">
+        <li class="nav-item">
             <a class="nav-link text-uppercase @if($loop->first) active @endif"
                id="{{ $lang }}-tab-justified"
                data-toggle="tab"

@@ -67,7 +67,7 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/wizard.css">
     <!-- END: Page CSS-->
 
-    <link rel="stylesheet" href="/assets/styles/remove-btn.css">
+    <link rel="stylesheet" href="/assets/styles/custom.css">
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
             integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
@@ -368,6 +368,7 @@
 @stack('file-preview')
 @stack('file-preview-with-placeholder')
 @stack('edit-user-message')
+@stack('project-text-content')
 
 </body>
 <!-- END: Body-->

@@ -25,6 +25,7 @@ class StoreProjectJob implements ShouldQueue
 
     public function handle()
     {
-        Project::create($this->validated);
+        $project_id = Project::create($this->validated)->id;
+        return $project_id;
     }
 }
