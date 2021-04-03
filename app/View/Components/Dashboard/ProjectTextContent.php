@@ -8,13 +8,13 @@ class ProjectTextContent extends Component
 {
     public array $availableLangs;
     public int $maxNumOfNotEmptyInputs = 1;
-    private array $oldValues;
+    private $oldValues;
 
     public function __construct($availableLangs)
     {
         $this->availableLangs = $availableLangs;
-        $this->oldValues = old();
-        if (!empty($this->oldValues))
+        $this->oldValues = old('content.0');
+        if (isset($this->oldValues))
             $this->maxNumOfNotEmptyInputs = $this->getMaxNumOfNotEmptyInputs();
     }
 

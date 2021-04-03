@@ -8,14 +8,18 @@ class StoreProjectContentRequest extends FormRequest
 {
     public function rules()
     {
+        $prefix = 'content.0.';
         return [
-            'title.ru.*' => 'required|min:3|max:255',
-            'title.en.*' => 'required|min:3|max:255',
-            'title.uz.*' => 'required|min:3|max:255',
-            'description.ru.*' => 'required|min:3|max:255',
-            'description.en.*' => 'required|min:3|max:255',
-            'description.uz.*' => 'required|min:3|max:255',
-            'position.*' => 'required|integer'
+            $prefix . 'title.ru.*' => 'required|min:3|max:255',
+            $prefix . 'description.ru.*' => 'required|min:3|max:255',
+            $prefix . 'position.*' => 'required|integer'
+
+//            'title.en.*' => 'required|min:3|max:255',
+//            'title.uz.*' => 'required|min:3|max:255',
+//            'description.ru.*' => 'required|min:3|max:255',
+//            'description.en.*' => 'required|min:3|max:255',
+//            'description.uz.*' => 'required|min:3|max:255',
+//            'position.*' => 'required|integer'
         ];
     }
 

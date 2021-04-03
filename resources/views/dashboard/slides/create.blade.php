@@ -172,16 +172,17 @@
 
     @push('file-preview')
         <script>
-            $("#preview").css('display', 'none');
+            var preview = $('#preview');
+            preview.css('display', 'none');
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        $('#preview').attr('src', e.target.result);
-                        $("#preview").css('width', '300px');
-                        $("#preview").css('display', 'block');
+                        preview.attr('src', e.target.result);
+                        preview.css('width', '300px');
+                        preview.css('display', 'block');
                     }
 
                     reader.readAsDataURL(input.files[0]); // convert to base64 string

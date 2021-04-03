@@ -1,4 +1,4 @@
-@props(['availableLangs'])
+@props(['availableLangs', 'hasMultiValuedInput' => false])
 
 <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
     @foreach($availableLangs as $lang)
@@ -11,7 +11,7 @@
                aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $lang }}
                 @if(!empty($errors->all()))
                     @php $errorCounter = 0; @endphp
-                    @php $errorCounter = count($errors->get("*.{$lang}")); @endphp
+                    @php $errorCounter = $hasMultiValuedInput ? count($errors->get("content.0.*.{$lang}.*")) : count($errors->get("*.{$lang}")); @endphp
                     @if($errorCounter > 0)
                         <span
                             class="badge badge badge-danger badge-pill float-right">{{ $errorCounter }}</span>

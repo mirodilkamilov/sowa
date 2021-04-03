@@ -369,6 +369,7 @@
 @stack('file-preview-with-placeholder')
 @stack('edit-user-message')
 @stack('project-text-content')
+@stack('project-image-content')
 
 </body>
 <!-- END: Body-->

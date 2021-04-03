@@ -207,7 +207,8 @@
                                       method="post"
                                       enctype="multipart/form-data"
                                       id="project-content-create-form">
-                                    @csrf
+                                @csrf
+                                <!--= text type                                                  -->
                                     <div class="card">
                                         <div class="card-header">
                                             <p class="card-title">{{ __('Content type') . ': ' }}<span
@@ -215,18 +216,96 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body pb-0" id="text-content-card">
-                                                <!--= text type                                                  -->
-                                                <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
+                                                <x-dashboard.language-tabs :availableLangs="$availableLangs"
+                                                                           :hasMultiValuedInput="true"/>
 
                                                 <x-dashboard.project-text-content :availableLangs="$availableLangs"
                                                                                   :oldValues="old()"/>
                                             </div>
 
                                             <div class="row p-2">
-                                                <div class="col-9">
+                                                <div class="col-12 text-center">
                                                     <button type="button" class="btn btn-success mr-1 mb-1"
                                                             id="add-text-content">
                                                         {{ __('Add text type content') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--= image type                                                  -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p class="card-title">{{ __('Content type') . ': ' }}<span
+                                                    class="text-primary">{{ __('Image') }}</span></p>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body pb-0" id="image-content-card"
+                                                 style="display: grid; grid-template-columns: 1fr 1fr;">
+                                                <div class="image-copy-content">
+                                                    <div class="row mr-0 ml-0">
+                                                        <div class="col-md-6 col-6">
+                                                            <div class="form-label-group mb-0">
+                                                                <label for="image-type"
+                                                                       style="transform: translate(-5px, -25px); opacity: 1;">{{ __('Image type') }}</label>
+                                                                <select id="image-type"
+                                                                        class="custom-select @error('image-type') is-invalid @enderror"
+                                                                        name="image-type">
+                                                                    <option
+                                                                        value="{{ old('image-type') ?? 'image-small' }}">
+                                                                        Small Image
+                                                                    </option>
+                                                                    <option
+                                                                        value="{{ old('image-type') ?? 'image-big' }}">
+                                                                        Wide Image
+                                                                    </option>
+                                                                </select>
+                                                                @error('image-type')
+                                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-6">
+                                                            <div class="form-label-group mb-0">
+                                                                <input type="number" id="position"
+                                                                       class="form-control @error('position') is-invalid @enderror"
+                                                                       name="position[]"
+                                                                       placeholder="{{ __('Position') }}"
+                                                                       form="slide-form"
+                                                                       value="{{ old('position') }}">
+                                                                <label for="position">{{ __('Position') }}</label>
+                                                                @error('position')
+                                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <fieldset class="form-group col-md-12 col-12 mt-1">
+                                                        <label for="basicInputFile">{{ __('Image') }}</label>
+                                                        <div class="custom-file">
+                                                            <input type="file"
+                                                                   class="custom-file-input @error('image') is-invalid @enderror image-input"
+                                                                   name="image[]"
+                                                                   id="basicInputFile" form="slide-form">
+                                                            <label class="custom-file-label"
+                                                                   for="basicInputFile"></label>
+                                                            @error('image')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group col-md-12 col-12"
+                                                              style="display: flex; justify-content: center;">
+                                                        <img class="preview" id="preview" src="#" alt="preview"/>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-12 text-center">
+                                                    <button type="button" class="btn btn-success mr-1 mb-1"
+                                                            id="add-image-content">
+                                                        {{ __('Add image type content') }}
                                                     </button>
                                                 </div>
                                                 <div class="col-3 float-right">
@@ -242,9 +321,9 @@
                                                     </button>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
-
                                 </form>
                             @endif
                         </div>
@@ -258,24 +337,26 @@
     @push('file-preview')
         <script>
             $('.actions').remove();
-            $("#preview").css('display', 'none');
+            var preview = $('.preview');
+            preview.css('display', 'none');
 
-            function readURL(input) {
+            function readURL(input, preview) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        $('#preview').attr('src', e.target.result);
-                        $("#preview").css('width', '300px');
-                        $("#preview").css('display', 'block');
+                        preview.attr('src', e.target.result);
+                        preview.css('width', '300px');
+                        preview.css('display', 'block');
                     }
 
                     reader.readAsDataURL(input.files[0]); // convert to base64 string
                 }
             }
 
-            $("#basicInputFile").change(function () {
-                readURL(this);
+            $('.image-input').change(function () {
+                var preview = $(this).closest('.custom-file').closest('.form-group').siblings('.form-group').find('.preview')
+                readURL(this, preview);
             });
 
             @if(session('hasCompletedFirstPart'))
@@ -292,7 +373,6 @@
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
 
-            // add text content
             $('#add-text-content').click(function () {
                 var textContent = $('.text-content:last').clone();
                 textContent.find('textarea').val('').removeClass('is-invalid');
@@ -302,7 +382,6 @@
             });
 
             // TODO: Fix remove button
-            // remove text content
             $('.remove-text-content').click(function () {
                 $(this).closest('.text-content').remove();
                 console.log('clicked');
@@ -324,6 +403,25 @@
                 $('.tab-pane-en').removeClass('active');
                 $('.tab-pane-uz').addClass('active');
             });
+        </script>
+    @endpush
+
+    @push('project-image-content')
+        <script>
+            $('#add-image-content').click(function () {
+                var textContent = $('.image-copy-content:last').clone();
+                textContent.find('select').val('').removeClass('is-invalid');
+                textContent.find('input').val('').removeClass('is-invalid');
+                textContent.find('p.text-danger').remove();
+                textContent.appendTo('#image-content-card');
+
+
+                $('.image-input').change(function () {
+                    var preview = $(this).closest('.custom-file').closest('.form-group').siblings('.form-group').find('.preview')
+                    readURL(this, preview);
+                });
+            });
+
         </script>
     @endpush
 
