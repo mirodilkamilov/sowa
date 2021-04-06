@@ -13,27 +13,26 @@ class SlideController extends Controller
 {
     public function index()
     {
-        $slides = Slide::all()->sortBy('position');
+        $slides = Slide::orderBy('position')->get();
 
         return view('dashboard.slides.index', compact('slides'));
     }
 
     public function create()
     {
-        $positions = Slide::select(['position'])->get()->sortBy('position');
+        $positions = Slide::select(['position'])->orderBy('position')->get();
 
         return view('dashboard.slides.create', compact('positions'));
     }
 
     public function store(StoreSlideRequest $request)
     {
-        $imagePath = $request->file('image')->store('slides');
-        $validated = $request->validated();
-        $validated['image'] = $imagePath;
-
-        //  SlideStoreJob::dispatch($validated);
-        // TODO: Local development for now
-        StoreSlideJob::dispatchNow($validated);
+        try {
+            StoreSlideJob::dispatchNow($request);
+        } catch (\Exception $exception) {
+            $request->session()->flash('error', $exception->getMessage());
+            return redirect()->route('slides.index');
+        }
 
         $request->session()->flash('success', 'Slide was successfully added!');
         return redirect()->route('slides.index');
@@ -44,19 +43,20 @@ class SlideController extends Controller
         $slide = Slide::withoutEvents(function () use ($slide) {
             return Slide::findOrFail($slide);
         });
-        $positions = Slide::select(['position'])->get()->sortBy('position');
+        $positions = Slide::select(['position'])->orderBy('position')->get();
 
         return view('dashboard.slides.edit', compact('slide', 'positions'));
     }
 
     public function update(Slide $slide, UpdateSlideRequest $request)
     {
-        $validated = $request->validated();
-        if ($request->hasFile('image'))
-            $validated['image'] = $request->file('image')->store('slides');
-        $validated['id'] = $slide->id;
+        try {
+            UpdateSlideJob::dispatchNow($slide, $request);
+        } catch (\Exception $exception) {
+            $request->session()->flash('error', $exception->getMessage());
+            return redirect()->route('slides.index');
+        }
 
-        UpdateSlideJob::dispatchNow($slide, $validated);
         $request->session()->flash('success', 'Slide was successfully edited!');
         return redirect()->route('slides.index');
     }

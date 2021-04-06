@@ -64,13 +64,15 @@
             </div>
             <!-- /Control -->
 
-            <div class="social social--floating">
-                @foreach($companyContact->socialMedia as $social_media)
-                    <a class="social__link" href="{{ $social_media->url }}">{{ $social_media->name }}</a>
-                @endforeach
-                <a class="social__link">{{ $companyContact->phone }}</a>
-                <a class="social__link">{{ $companyContact->email }}</a>
-            </div>
+            @if(isset($companyContact->socialMedia))
+                <div class="social social--floating">
+                    @foreach($companyContact->socialMedia as $social_media)
+                        <a class="social__link" href="{{ $social_media->url }}">{{ $social_media->name }}</a>
+                    @endforeach
+                    <a class="social__link">{{ $companyContact->phone }}</a>
+                    <a class="social__link">{{ $companyContact->email }}</a>
+                </div>
+            @endif
         </div>
     </header>
     <!-- /Hero -->

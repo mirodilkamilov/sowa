@@ -19,7 +19,7 @@ class DashboardComposer
     {
         $routePath = $request->path();
 
-        //  remove numbers from url
+        // *  remove numbers from url
         $thirdSegmentOfUrl = $request->segment(3);
         $forthSegmentOfUrl = $request->segment(4);
         if ($forthSegmentOfUrl == 'edit') {
@@ -43,7 +43,7 @@ class DashboardComposer
             $view->with('slicedSegment', $this->slicedSegment);
         $view->with('currentRoute', $this->currentRoute);
         $view->with('availableLangs', config('app.languages'));
-        $view->with('locale', session('language') ?? config('app.locale'));
+        $view->with('locale', session('language') ?? config('app.default_language'));
         $view->with('name', $this->userName);
         $view->with('numNewMessages', $this->numNewMessages);
     }

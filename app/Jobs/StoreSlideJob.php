@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Requests\StoreSlideRequest;
 use App\Models\Slide;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,9 +16,10 @@ class StoreSlideJob implements ShouldQueue
 
     private $validated;
 
-    public function __construct($validated)
+    public function __construct(StoreSlideRequest $request)
     {
-        $this->validated = $validated;
+        $this->validated = $request->validated();
+        $this->validated['image'] = $request->file('image')->store('slides');
     }
 
     public function handle()

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Requests\UpdateSlideRequest;
 use App\Models\Slide;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,17 +17,21 @@ class UpdateSlideJob implements ShouldQueue
     private $validated;
     private Slide $slide;
 
-    public function __construct($slide, $validated)
+    public function __construct(Slide $slide, UpdateSlideRequest $request)
     {
-        $this->validated = $validated;
+        $this->validated = $request->validated();
+        unset($this->validated['image']);
+
+        if ($request->hasFile('image'))
+            $this->validated['image'] = $request->file('image')->store('slides');
+
+        $this->validated['id'] = $slide->id;
         $this->slide = $slide;
+
     }
 
     public function handle()
     {
-        if (!isset($this->validated['image']))
-            unset($this->validated['image']);
-
         $this->slide->update($this->validated);
     }
 }

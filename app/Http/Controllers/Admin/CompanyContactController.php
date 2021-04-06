@@ -9,7 +9,7 @@ class CompanyContactController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all()->sortBy('position');
+        $customers = Customer::orderBy('position')->get();
 
         return view('dashboard.about.customers.index', compact('customers'));
     }

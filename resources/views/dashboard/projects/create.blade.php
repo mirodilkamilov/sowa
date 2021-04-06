@@ -9,24 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <p><i class="feather icon-check"></i>
-                        {{ session('success') }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <p><i class="feather icon-alert-circle"></i>
-                        {{ session('info') }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+            <x-custom-alerts/>
 
             <div class="content-body">
                 <section id="number-tabs">
@@ -159,7 +142,7 @@
                                                                 for="basicInputFile">{{ __('Image') }}</label>
                                                             <div class="custom-file">
                                                                 <input type="file"
-                                                                       class="custom-file-input @error('main_image') is-invalid @enderror"
+                                                                       class="custom-file-input image-input @error('main_image') is-invalid @enderror"
                                                                        name="main_image"
                                                                        id="basicInputFile"
                                                                        form="project-create-form">
@@ -173,7 +156,7 @@
                                                         <fieldset
                                                             class="form-group col-md-12 col-12"
                                                             style="display: flex; justify-content: center; align-items: center;">
-                                                            <img id="preview" src="#"
+                                                            <img id="preview" class="preview" src="#"
                                                                  alt="preview"/>
                                                         </fieldset>
 

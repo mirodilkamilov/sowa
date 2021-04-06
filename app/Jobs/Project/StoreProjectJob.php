@@ -16,9 +16,9 @@ class StoreProjectJob implements ShouldQueue
 
     private array $validated;
 
-    public function __construct(StoreProjectRequest $request, $validated)
+    public function __construct(StoreProjectRequest $request)
     {
-        $this->validated = $validated;
+        $this->validated = $request->validated();
         $this->validated['main_image'] = $request->file('main_image')->store('projects');
     }
 

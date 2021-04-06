@@ -8,17 +8,16 @@ class SlideObserver
 {
     private $locale;
     private $defaultLang;
-    private $availableLangs;
 
     public function __construct()
     {
         $this->defaultLang = config('app.default_language');
         $this->locale = session('language') ?? $this->defaultLang;
-        $this->availableLangs = config('app.languages');
     }
 
     public function retrieved(Slide $slide)
     {
+        // gets a record with default language if a record doesn't exists with locale
         if (isset($slide->title)) {
             $slide->title = $slide->title[$this->locale] ?? $slide->title[$this->defaultLang];
             $slide->sub_title = $slide->sub_title[$this->locale] ?? $slide->sub_title[$this->defaultLang];
@@ -28,11 +27,7 @@ class SlideObserver
 
     public function updating(Slide $slide)
     {
-        $slideOld = Slide::select(['image'])->find($slide->id);
-        $OldImage = $slideOld->image;
-        $updatingImage = $slide->image;
-
-        if ($OldImage != $updatingImage)
+        if (isset($slide->image))
             $slide->image = '/assets/uploads/' . $slide->image;
     }
 

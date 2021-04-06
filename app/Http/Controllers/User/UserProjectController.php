@@ -11,7 +11,7 @@ class UserProjectController extends Controller
     public function index()
     {
         $categories = Category::select(['category'])->get()->sortBy('category');
-        $projects = Project::select(['id', 'slug', 'main_image'])->with('categories')->get()->sortBy('categories');
+        $projects = Project::select(['id', 'slug', 'main_image'])->with('categories')->get();
 
         return view('projects.index', compact('projects', 'categories'));
     }

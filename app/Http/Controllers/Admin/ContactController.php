@@ -27,7 +27,13 @@ class ContactController extends Controller
         $validated = $request->validated();
         $userContact->comment = $validated['comment'];
         $userContact->status = $validated['status'];
-        $userContact->save();
+
+        try {
+            $userContact->save();
+        } catch (\Exception $exception) {
+            $request->session()->flash('error', $exception->getMessage());
+            return redirect()->route('contacts.index');
+        }
 
         $request->session()->flash('success', 'Changed successfully!');
         return redirect()->route('contacts.index');

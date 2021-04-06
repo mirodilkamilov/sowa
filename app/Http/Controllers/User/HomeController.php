@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slides = Slide::all()->sortBy('position');
+        $slides = Slide::orderBy('position')->get();
 
         return view('home.index', compact('slides'));
     }

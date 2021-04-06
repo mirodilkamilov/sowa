@@ -8,13 +8,7 @@
                 <div class="contact-wrap">
                     <h1 class="title title--h3 js-lines mb-3">{{ __('Leave your phone number and we will definitely call you!') }}</h1>
 
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="opacity: 1;">
-                            <p class="mb-0"><i class="feather icon-check"></i>
-                                {{ __(session('success')) }}
-                            </p>
-                        </div>
-                    @endif
+                    <x-contacts-create-alerts/>
 
                     <form action="{{ route('contacts.store', $locale) }}"
                           method="post">
@@ -75,10 +69,15 @@
             </div>
             <div class="col-12 col-lg-6">
                 <!-- <div class="map-block reveal" id="map"></div> -->
+                @if(isset($map))
                 <iframe style="height: 100vh;"
                         src="{{ $map }}"
                         frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
                         tabindex="0"></iframe>
+                @else
+                    <p class="text-center">No map provided</p>
+                @endif
+
             </div>
         </div>
     </div>

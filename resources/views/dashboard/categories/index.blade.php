@@ -9,16 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <p class="mb-0"><i class="feather icon-check"></i>
-                        {{ session('success') }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+            <x-custom-alerts/>
 
             <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                     data-target="#category-add">

@@ -25,18 +25,21 @@
             <div class="col-12 col-md-6 footer__right">
                 <ul class="listContact list-unstyled">
                     <li><h6 class="title title--h6">{{ __('Address') }}</h6></li>
-                    <li>{{ $companyContact->address }}</li>
+                    <li>{{ $companyContact?->address }}</li>
                 </ul>
                 <ul class="listContact list-unstyled">
                     <li><h6 class="title title--h6">{{ __('Contacts') }}</h6></li>
-                    <li>{{ $companyContact->email }}</li>
-                    <li>{{ $companyContact->phone }}</li>
+                    <li>{{ $companyContact?->email }}</li>
+                    <li>{{ $companyContact?->phone }}</li>
                 </ul>
                 <ul class="listContact list-unstyled">
                     <li><h6 class="title title--h6">{{ __('Social networks') }}</h6></li>
-                    @foreach($companyContact->socialMedia as $socialMedia)
-                        <li><a class="link_decoration" href="{{ $socialMedia->url }}">{{ $socialMedia->name }}</a></li>
-                    @endforeach
+                    @if(isset($companyContact->socialMedia))
+                        @foreach($companyContact?->socialMedia as $socialMedia)
+                            <li><a class="link_decoration" href="{{ $socialMedia->url }}">{{ $socialMedia->name }}</a>
+                            </li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
         </div>

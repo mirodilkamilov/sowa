@@ -10,8 +10,8 @@ class UserAboutController extends Controller
 {
     public function index()
     {
-        $about = About::with('aboutLists')->first();
-        $customers = Customer::all();
+        $about = About::with('aboutLists')->firstOrFail();
+        $customers = Customer::orderBy('position')->get();
 
         return view('about.index', compact('about', 'customers'));
     }
