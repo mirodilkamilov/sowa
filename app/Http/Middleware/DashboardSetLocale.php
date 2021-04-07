@@ -19,7 +19,7 @@ class DashboardSetLocale
         $langInSession = $request->session()->get('language');
         $locale = $langInSession;
         if (!isset($langInSession)) {
-            $locale = config('app.locale');
+            $locale = config('app.default_language');
             $request->session()->put('language', $locale);
         }
 

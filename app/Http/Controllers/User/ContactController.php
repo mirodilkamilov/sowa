@@ -8,7 +8,7 @@ use App\Models\CompanyContact;
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Log;
 
-class UserContactController extends Controller
+class ContactController extends Controller
 {
     public function create()
     {

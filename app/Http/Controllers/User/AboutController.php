@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Customer;
 
-class UserAboutController extends Controller
+class AboutController extends Controller
 {
     public function index()
     {

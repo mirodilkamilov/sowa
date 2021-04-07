@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
-use App\Jobs\Project\ProjectStoreJob;
 use App\Jobs\Project\StoreProjectJob;
 use App\Models\Project;
 use Illuminate\Http\Request;

@@ -9,10 +9,10 @@ use App\Http\Controllers\Admin\ProjectContentController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\TrashController;
+use App\Http\Controllers\User\AboutController as UserAboutController;
+use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\UserAboutController;
-use App\Http\Controllers\User\UserContactController;
-use App\Http\Controllers\User\UserProjectController;
+use App\Http\Controllers\User\ProjectController as UserProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
