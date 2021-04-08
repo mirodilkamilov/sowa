@@ -19,7 +19,7 @@ class ProjectImageContent extends Component
     private function getMaxNumOfNotEmptyInputs(): int
     {
         $imageTypes = $this->oldValues['image-type'];
-        $numOfNotEmptyImkageType = 0;
+        $numOfNotEmptyImageType = 0;
         foreach ($imageTypes as $imageType) {
             if (isset($imageType))
                 ++$numOfNotEmptyImageType;

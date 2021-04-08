@@ -311,7 +311,6 @@
                 });
             });
 
-            // TODO: Fix remove button
             $('.remove-text-content').click(function () {
                 $(this).closest('.text-content').remove();
                 console.log('clicked');
