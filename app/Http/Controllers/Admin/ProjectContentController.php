@@ -9,18 +9,18 @@ use Illuminate\Http\Request;
 
 class ProjectContentController extends Controller
 {
-   public function store(StoreProjectContentRequest $request)
-   {
-       $request->dd();
-   }
+    public function store(StoreProjectContentRequest $request)
+    {
+        $request->dd();
+    }
 
-   public function update(Request $request, ProjectContent $projectContent)
-   {
-      //
-   }
+    public function update(Request $request, ProjectContent $projectContent)
+    {
+        //
+    }
 
-   public function destroy(ProjectContent $projectContent)
-   {
-      //
-   }
+    public function destroy(ProjectContent $projectContent)
+    {
+        //
+    }
 }

@@ -53,7 +53,7 @@
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
             </div>
-{{--            <i class="feather icon-trash-2 text-danger remove-text-content"></i>--}}
+            <i class="feather icon-trash-2 text-danger remove-text-content"></i>
         </div>
         <hr class="divider">
     </div>

@@ -202,8 +202,7 @@
                                                 <x-dashboard.language-tabs :availableLangs="$availableLangs"
                                                                            :hasMultiValuedInput="true"/>
 
-                                                <x-dashboard.project-text-content :availableLangs="$availableLangs"
-                                                                                  :oldValues="old()"/>
+                                                <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
                                             </div>
 
                                             <div class="row p-2">
@@ -226,63 +225,9 @@
                                         <div class="card-content">
                                             <div class="card-body pb-0" id="image-content-card"
                                                  style="display: grid; grid-template-columns: 1fr 1fr;">
-                                                <div class="image-copy-content">
-                                                    <div class="row mr-0 ml-0">
-                                                        <div class="col-md-6 col-6">
-                                                            <div class="form-label-group mb-0">
-                                                                <label for="image-type"
-                                                                       style="transform: translate(-5px, -25px); opacity: 1;">{{ __('Image type') }}</label>
-                                                                <select id="image-type"
-                                                                        class="custom-select @error('image-type') is-invalid @enderror"
-                                                                        name="image-type">
-                                                                    <option
-                                                                        value="{{ old('image-type') ?? 'image-small' }}">
-                                                                        Small Image
-                                                                    </option>
-                                                                    <option
-                                                                        value="{{ old('image-type') ?? 'image-big' }}">
-                                                                        Wide Image
-                                                                    </option>
-                                                                </select>
-                                                                @error('image-type')
-                                                                <p class="text-danger mb-0">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-6">
-                                                            <div class="form-label-group mb-0">
-                                                                <input type="number" id="position"
-                                                                       class="form-control @error('position') is-invalid @enderror"
-                                                                       name="position[]"
-                                                                       placeholder="{{ __('Position') }}"
-                                                                       form="slide-form"
-                                                                       value="{{ old('position') }}">
-                                                                <label for="position">{{ __('Position') }}</label>
-                                                                @error('position')
-                                                                <p class="text-danger mb-0">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <fieldset class="form-group col-md-12 col-12 mt-1">
-                                                        <label for="basicInputFile">{{ __('Image') }}</label>
-                                                        <div class="custom-file">
-                                                            <input type="file"
-                                                                   class="custom-file-input @error('image') is-invalid @enderror image-input"
-                                                                   name="image[]"
-                                                                   id="basicInputFile" form="slide-form">
-                                                            <label class="custom-file-label"
-                                                                   for="basicInputFile"></label>
-                                                            @error('image')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                            @enderror
-                                                        </div>
-                                                    </fieldset>
-                                                    <fieldset class="form-group col-md-12 col-12"
-                                                              style="display: flex; justify-content: center;">
-                                                        <img class="preview" id="preview" src="#" alt="preview"/>
-                                                    </fieldset>
-                                                </div>
+
+                                                <x-project-image-content/>
+
                                             </div>
                                             <div class="row p-2">
                                                 <div class="col-12 text-center">
@@ -293,13 +238,11 @@
                                                 </div>
                                                 <div class="col-3 float-right">
                                                     <button type="submit"
-                                                            class="btn btn-primary mr-1 mb-1"
-                                                            form="project-content-create-form">
+                                                            class="btn btn-primary mr-1 mb-1">
                                                         {{ __('Save') }}
                                                     </button>
                                                     <button type="reset"
-                                                            class="btn btn-outline-warning mb-1"
-                                                            form="project-content-create-form">
+                                                            class="btn btn-outline-warning mb-1">
                                                         {{ __('Reset') }}
                                                     </button>
                                                 </div>
@@ -362,6 +305,10 @@
                 textContent.find('input').val('').removeClass('is-invalid');
                 textContent.find('p.text-danger').remove();
                 textContent.appendTo('#text-content-card');
+                $('.remove-text-content').click(function () {
+                    $(this).closest('.text-content').remove();
+                    console.log('clicked');
+                });
             });
 
             // TODO: Fix remove button
@@ -392,11 +339,14 @@
     @push('project-image-content')
         <script>
             $('#add-image-content').click(function () {
-                var textContent = $('.image-copy-content:last').clone();
-                textContent.find('select').val('').removeClass('is-invalid');
-                textContent.find('input').val('').removeClass('is-invalid');
-                textContent.find('p.text-danger').remove();
-                textContent.appendTo('#image-content-card');
+                // var textContent = $('.image-copy-content:last').clone();
+                // var imageContent = String('<div class="image-copy-content"><div class="row mr-0 ml-0"><div class="col-md-6 col-6"><div class="form-label-group mb-0"><label for="image-type" style="transform: translate(-5px, -25px); opacity: 1;">Image type</label><select id="image-type" class="custom-select " name="content[1][image-type][]"><option value="image-small">Small Image</option><option value="image-big">Wide Image</option></select></div></div><div class="col-md-6 col-6"><div class="form-label-group mb-0"><input type="number" id="position" class="form-control " name="content[1][position][]" placeholder="Позиция" value=""><label for="position">Позиция</label></div></div></div><fieldset class="form-group col-md-12 col-12 mt-1"><label for="basicInputFile">Изображение</label><div class="custom-file"><input type="file" class="custom-file-input image-input " name="content[1][image][]" id="basicInputFile"><label class="custom-file-label" for="basicInputFile"></label></div></fieldset><fieldset class="form-group col-md-12 col-12" style="display: flex; justify-content: center;"><img class="preview" id="preview" src="#" alt="preview" style="display: none;"></fieldset></div>');
+                // imageContent.find('select').val('').removeClass('is-invalid');
+                // imageContent.find('input').val('').removeClass('is-invalid');
+                // imageContent.find('p.text-danger').remove();
+                // imageContent.appendTo('#image-content-card');
+                var i = $('.image-copy-content').length
+                $('#image-content-card').append(`<div class="image-copy-content"><div class="row mr-0 ml-0"><div class="col-md-6 col-6"><div class="form-label-group mb-0"><label for="image-type" style="transform: translate(-5px, -25px); opacity: 1;">Image type</label><select id="image-type" class="custom-select " name="content[1][image-type][]"><option value="image-small">Small Image</option><option value="image-big">Wide Image</option></select></div></div><div class="col-md-6 col-6"><div class="form-label-group mb-0"><input type="number" id="position" class="form-control " name="content[1][position][]" placeholder="Позиция" value=""><label for="position">Позиция</label></div></div></div><fieldset class="form-group col-md-12 col-12 mt-1"><label for="basicInputFile">Изображение</label><div class="custom-file"><input type="file" class="custom-file-input image-input " name="content[1][image][${i}]" id="basicInputFile"><label class="custom-file-label" for="basicInputFile"></label></div></fieldset><fieldset class="form-group col-md-12 col-12" style="display: flex; justify-content: center;"><img class="preview" id="preview" src="#" alt="preview" style="display: none;"></fieldset></div>`)
 
 
                 $('.image-input').change(function () {

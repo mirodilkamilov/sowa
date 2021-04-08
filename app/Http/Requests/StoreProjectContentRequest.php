@@ -8,18 +8,22 @@ class StoreProjectContentRequest extends FormRequest
 {
     public function rules()
     {
-        $prefix = 'content.0.';
+        $prefix = 'content.';
         return [
-            $prefix . 'title.ru.*' => 'required|min:3|max:255',
-            $prefix . 'description.ru.*' => 'required|min:3|max:255',
-            $prefix . 'position.*' => 'required|integer'
+            // ? Text content
+            $prefix . '0.title.ru.*' => 'required|min:3|max:255',
+            $prefix . '0.title.en.*' => 'nullable|required_with:content.0.description.en.*|min:3|max:255',
+            $prefix . '0.title.uz.*' => 'nullable|required_with:content.0.description.uz.*|min:3|max:255',
+            $prefix . '0.description.ru.*' => 'required|min:3|max:255',
+            $prefix . '0.description.en.*' => 'nullable|required_with:content.0.title.en.*|min:3|max:255',
+            $prefix . '0.description.uz.*' => 'nullable|required_with:content.0.title.uz.*|min:3|max:255',
+            $prefix . '0.position.*' => 'required|integer',
 
-//            'title.en.*' => 'required|min:3|max:255',
-//            'title.uz.*' => 'required|min:3|max:255',
-//            'description.ru.*' => 'required|min:3|max:255',
-//            'description.en.*' => 'required|min:3|max:255',
-//            'description.uz.*' => 'required|min:3|max:255',
-//            'position.*' => 'required|integer'
+            // ? Image content
+            $prefix . '1.image-type.*' => 'required|in:image-big,image-small',
+            $prefix . '1.position.*' => 'required|integer',
+//            $prefix . '1.image' => 'required|array',
+            $prefix . '1.image.*' => 'required|image',
         ];
     }
 
