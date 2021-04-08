@@ -217,38 +217,50 @@
                                     </div>
 
                                     <!--= image type                                                  -->
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <p class="card-title">{{ __('Content type') . ': ' }}<span
-                                                    class="text-primary">{{ __('Image') }}</span></p>
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="card-body pb-0" id="image-content-card"
-                                                 style="display: grid; grid-template-columns: 1fr 1fr;">
+                                    {{--                                    <div class="card">--}}
+                                    {{--                                        <div class="card-header">--}}
+                                    {{--                                            <p class="card-title">{{ __('Content type') . ': ' }}<span--}}
+                                    {{--                                                    class="text-primary">{{ __('Image') }}</span></p>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                        <div class="card-content">--}}
+                                    {{--                                            <div class="card-body pb-0" id="image-content-card"--}}
+                                    {{--                                                 style="display: grid; grid-template-columns: 1fr 1fr;">--}}
 
-                                                <x-project-image-content/>
+                                    {{--                                                <x-project-image-content/>--}}
 
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="col-12 text-center">
-                                                    <button type="button" class="btn btn-success mr-1 mb-1"
-                                                            id="add-image-content">
-                                                        {{ __('Add image type content') }}
-                                                    </button>
-                                                </div>
-                                                <div class="col-3 float-right">
-                                                    <button type="submit"
-                                                            class="btn btn-primary mr-1 mb-1">
-                                                        {{ __('Save') }}
-                                                    </button>
-                                                    <button type="reset"
-                                                            class="btn btn-outline-warning mb-1">
-                                                        {{ __('Reset') }}
-                                                    </button>
-                                                </div>
-                                            </div>
+                                    {{--                                            </div>--}}
+                                    {{--                                            <div class="row p-2">--}}
+                                    {{--                                                <div class="col-12 text-center">--}}
+                                    {{--                                                    <button type="button" class="btn btn-success mr-1 mb-1"--}}
+                                    {{--                                                            id="add-image-content">--}}
+                                    {{--                                                        {{ __('Add image type content') }}--}}
+                                    {{--                                                    </button>--}}
+                                    {{--                                                </div>--}}
+                                    {{--                                                <div class="col-3 float-right">--}}
+                                    {{--                                                    <button type="submit"--}}
+                                    {{--                                                            class="btn btn-primary mr-1 mb-1">--}}
+                                    {{--                                                        {{ __('Save') }}--}}
+                                    {{--                                                    </button>--}}
+                                    {{--                                                    <button type="reset"--}}
+                                    {{--                                                            class="btn btn-outline-warning mb-1">--}}
+                                    {{--                                                        {{ __('Reset') }}--}}
+                                    {{--                                                    </button>--}}
+                                    {{--                                                </div>--}}
+                                    {{--                                            </div>--}}
 
-                                        </div>
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
+
+
+                                    <div class="col-3 float-right">
+                                        <button type="submit"
+                                                class="btn btn-primary mr-1 mb-1">
+                                            {{ __('Save') }}
+                                        </button>
+                                        <button type="reset"
+                                                class="btn btn-outline-warning mb-1">
+                                            {{ __('Reset') }}
+                                        </button>
                                     </div>
                                 </form>
                             @endif
@@ -299,15 +311,24 @@
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
 
+            let i = $('.text-content').length;
             $('#add-text-content').click(function () {
                 var textContent = $('.text-content:last').clone();
-                textContent.find('textarea').val('').removeClass('is-invalid');
-                textContent.find('input').val('').removeClass('is-invalid');
+                var numOfTextContents = ++$('.text-content').length;
+
+                for (i; i < numOfTextContents; i++) {
+                    for (let j = 0; j < avilableLangs.length; j++) {
+                        textContent.find('textarea#title-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][title][' + avilableLangs[j] + ']');
+                        textContent.find('textarea#description-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][description][' + avilableLangs[j] + ']');
+                    }
+                    textContent.find('input').val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][position]');
+                }
                 textContent.find('p.text-danger').remove();
+
                 textContent.appendTo('#text-content-card');
+                $('.text-content:last .wrapper').append('<i class="feather icon-trash-2 text-danger remove-text-content"></i>');
                 $('.remove-text-content').click(function () {
                     $(this).closest('.text-content').remove();
-                    console.log('clicked');
                 });
             });
 
