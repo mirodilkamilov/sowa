@@ -7,7 +7,7 @@
                            style="transform: translate(-5px, -25px); opacity: 1;">{{ __('Image type') }}</label>
                     <select id="image-type"
                             class="custom-select @error("content.1.image-type.{$i}") is-invalid @enderror"
-                            name="content[1][image-type][]">
+                            name="content[image][{{$i}}][image-type]">
                         @php $isSelected  = old("content.1.image-type.{$i}") == 'image-big'; @endphp
                         <option
                             value="image-small">
@@ -27,7 +27,7 @@
                 <div class="form-label-group mb-0">
                     <input type="number" id="position"
                            class="form-control @error("content.1.position.{$i}") is-invalid @enderror"
-                           name="content[1][position][]"
+                           name="content[image][{{$i}}][position]"
                            placeholder="{{ __('Position') }}"
                            value="{{ old("content.1.position.{$i}") }}">
                     <label for="position">{{ __('Position') }}</label>
@@ -37,12 +37,12 @@
                 </div>
             </div>
         </div>
-        <fieldset class="form-group col-md-12 col-12 mt-1">
+        <fieldset class="form-group col-md-12 col-12 mt-1 image-input-container">
             <label for="basicInputFile">{{ __('Image') }}</label>
             <div class="custom-file">
                 <input type="file"
                        class="custom-file-input image-input @error("content.1.image.{$i}") is-invalid @enderror"
-                       name="content[1][image][{{ $i }}]"
+                       name="content[image][{{$i}}][image]"
                        id="basicInputFile">
                 <label class="custom-file-label"
                        for="basicInputFile"></label>
@@ -50,6 +50,7 @@
                 <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
+{{--        <i class="feather icon-trash-2 text-danger remove-image-content"></i>--}}
         </fieldset>
         <fieldset class="form-group col-md-12 col-12"
                   style="display: flex; justify-content: center;">

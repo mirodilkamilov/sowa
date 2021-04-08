@@ -217,50 +217,38 @@
                                     </div>
 
                                     <!--= image type                                                  -->
-                                    {{--                                    <div class="card">--}}
-                                    {{--                                        <div class="card-header">--}}
-                                    {{--                                            <p class="card-title">{{ __('Content type') . ': ' }}<span--}}
-                                    {{--                                                    class="text-primary">{{ __('Image') }}</span></p>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        <div class="card-content">--}}
-                                    {{--                                            <div class="card-body pb-0" id="image-content-card"--}}
-                                    {{--                                                 style="display: grid; grid-template-columns: 1fr 1fr;">--}}
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p class="card-title">{{ __('Content type') . ': ' }}<span
+                                                    class="text-primary">{{ __('Image') }}</span></p>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body pb-0" id="image-content-card"
+                                                 style="display: grid; grid-template-columns: 1fr 1fr;">
 
-                                    {{--                                                <x-project-image-content/>--}}
+                                                <x-project-image-content/>
 
-                                    {{--                                            </div>--}}
-                                    {{--                                            <div class="row p-2">--}}
-                                    {{--                                                <div class="col-12 text-center">--}}
-                                    {{--                                                    <button type="button" class="btn btn-success mr-1 mb-1"--}}
-                                    {{--                                                            id="add-image-content">--}}
-                                    {{--                                                        {{ __('Add image type content') }}--}}
-                                    {{--                                                    </button>--}}
-                                    {{--                                                </div>--}}
-                                    {{--                                                <div class="col-3 float-right">--}}
-                                    {{--                                                    <button type="submit"--}}
-                                    {{--                                                            class="btn btn-primary mr-1 mb-1">--}}
-                                    {{--                                                        {{ __('Save') }}--}}
-                                    {{--                                                    </button>--}}
-                                    {{--                                                    <button type="reset"--}}
-                                    {{--                                                            class="btn btn-outline-warning mb-1">--}}
-                                    {{--                                                        {{ __('Reset') }}--}}
-                                    {{--                                                    </button>--}}
-                                    {{--                                                </div>--}}
-                                    {{--                                            </div>--}}
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-12 text-center">
+                                                    <button type="button" class="btn btn-success mr-1 mb-1"
+                                                            id="add-image-content">
+                                                        {{ __('Add image type content') }}
+                                                    </button>
+                                                </div>
+                                                <div class="col-3 float-right">
+                                                    <button type="submit"
+                                                            class="btn btn-primary mr-1 mb-1">
+                                                        {{ __('Save') }}
+                                                    </button>
+                                                    <button type="reset"
+                                                            class="btn btn-outline-warning mb-1">
+                                                        {{ __('Reset') }}
+                                                    </button>
+                                                </div>
+                                            </div>
 
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-
-
-                                    <div class="col-3 float-right">
-                                        <button type="submit"
-                                                class="btn btn-primary mr-1 mb-1">
-                                            {{ __('Save') }}
-                                        </button>
-                                        <button type="reset"
-                                                class="btn btn-outline-warning mb-1">
-                                            {{ __('Reset') }}
-                                        </button>
+                                        </div>
                                     </div>
                                 </form>
                             @endif
@@ -311,17 +299,17 @@
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
 
-            let i = $('.text-content').length;
+            let i_text = $('.text-content').length;
             $('#add-text-content').click(function () {
                 var textContent = $('.text-content:last').clone();
                 var numOfTextContents = ++$('.text-content').length;
 
-                for (i; i < numOfTextContents; i++) {
+                for (i_text; i_text < numOfTextContents; i_text++) {
                     for (let j = 0; j < avilableLangs.length; j++) {
-                        textContent.find('textarea#title-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][title][' + avilableLangs[j] + ']');
-                        textContent.find('textarea#description-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][description][' + avilableLangs[j] + ']');
+                        textContent.find('textarea#title-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][title][' + avilableLangs[j] + ']');
+                        textContent.find('textarea#description-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][description][' + avilableLangs[j] + ']');
                     }
-                    textContent.find('input').val('').removeClass('is-invalid').attr('name', 'content[text][' + i + '][position]');
+                    textContent.find('input').val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][position]');
                 }
                 textContent.find('p.text-danger').remove();
 
@@ -334,7 +322,6 @@
 
             $('.remove-text-content').click(function () {
                 $(this).closest('.text-content').remove();
-                console.log('clicked');
             });
 
 
@@ -358,16 +345,28 @@
 
     @push('project-image-content')
         <script>
+            let i_image = $('.image-copy-content').length;
+            console.log('#add-image-content clicked');
             $('#add-image-content').click(function () {
-                // var textContent = $('.image-copy-content:last').clone();
-                // var imageContent = String('<div class="image-copy-content"><div class="row mr-0 ml-0"><div class="col-md-6 col-6"><div class="form-label-group mb-0"><label for="image-type" style="transform: translate(-5px, -25px); opacity: 1;">Image type</label><select id="image-type" class="custom-select " name="content[1][image-type][]"><option value="image-small">Small Image</option><option value="image-big">Wide Image</option></select></div></div><div class="col-md-6 col-6"><div class="form-label-group mb-0"><input type="number" id="position" class="form-control " name="content[1][position][]" placeholder="Позиция" value=""><label for="position">Позиция</label></div></div></div><fieldset class="form-group col-md-12 col-12 mt-1"><label for="basicInputFile">Изображение</label><div class="custom-file"><input type="file" class="custom-file-input image-input " name="content[1][image][]" id="basicInputFile"><label class="custom-file-label" for="basicInputFile"></label></div></fieldset><fieldset class="form-group col-md-12 col-12" style="display: flex; justify-content: center;"><img class="preview" id="preview" src="#" alt="preview" style="display: none;"></fieldset></div>');
-                // imageContent.find('select').val('').removeClass('is-invalid');
-                // imageContent.find('input').val('').removeClass('is-invalid');
-                // imageContent.find('p.text-danger').remove();
-                // imageContent.appendTo('#image-content-card');
-                var i = $('.image-copy-content').length
-                $('#image-content-card').append(`<div class="image-copy-content"><div class="row mr-0 ml-0"><div class="col-md-6 col-6"><div class="form-label-group mb-0"><label for="image-type" style="transform: translate(-5px, -25px); opacity: 1;">Image type</label><select id="image-type" class="custom-select " name="content[1][image-type][]"><option value="image-small">Small Image</option><option value="image-big">Wide Image</option></select></div></div><div class="col-md-6 col-6"><div class="form-label-group mb-0"><input type="number" id="position" class="form-control " name="content[1][position][]" placeholder="Позиция" value=""><label for="position">Позиция</label></div></div></div><fieldset class="form-group col-md-12 col-12 mt-1"><label for="basicInputFile">Изображение</label><div class="custom-file"><input type="file" class="custom-file-input image-input " name="content[1][image][${i}]" id="basicInputFile"><label class="custom-file-label" for="basicInputFile"></label></div></fieldset><fieldset class="form-group col-md-12 col-12" style="display: flex; justify-content: center;"><img class="preview" id="preview" src="#" alt="preview" style="display: none;"></fieldset></div>`)
 
+                var imageContent = $('.image-copy-content:last').clone();
+                var numOfImageContents = ++$('.image-copy-content').length;
+
+                for (i_image; i_image < numOfImageContents; i_image++) {
+                    imageContent.find('select').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][image-type]');
+                    imageContent.find('#position').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][position]');
+                    imageContent.find('.image-input').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][image]');
+                }
+                imageContent.find('p.text-danger').remove();
+
+                var appendedImageContent = imageContent.appendTo('#image-content-card');
+                appendedImageContent.find('#preview').attr('src', '').css('display', 'none');
+                appendedImageContent.find('.custom-file-label').html('');
+
+                $('.image-copy-content:last .image-input-container').append('<i class="feather icon-trash-2 text-danger remove-image-content"></i>');
+                $('.remove-image-content').click(function () {
+                    $(this).closest('.image-copy-content').remove();
+                });
 
                 $('.image-input').change(function () {
                     var preview = $(this).closest('.custom-file').closest('.form-group').siblings('.form-group').find('.preview')
@@ -375,21 +374,10 @@
                 });
             });
 
+            $('.remove-text-content').click(function () {
+                $(this).closest('.text-content').remove();
+            });
         </script>
     @endpush
 
 @endsection
-
-
-{{--<div class="col-12 mt-1">--}}
-{{--    <button type="submit"--}}
-{{--            class="btn btn-primary mr-1 mb-1"--}}
-{{--            form="project-content-create-form">--}}
-{{--        {{ __('Save') }}--}}
-{{--    </button>--}}
-{{--    <button type="reset"--}}
-{{--            class="btn btn-outline-warning mr-1 mb-1"--}}
-{{--            form="project-content-create-form">--}}
-{{--        {{ __('Reset') }}--}}
-{{--    </button>--}}
-{{--</div>--}}

@@ -9,12 +9,18 @@
     text-align: center;
 }
 
-.text-content .remove-text-content {
+.text-content .remove-text-content,
+.image-copy-content .remove-image-content {
     font-size: 1.5rem;
     position: absolute;
     z-index: 100;
     right: 0;
     bottom: 1.5rem;
     cursor: pointer;
+}
+
+.image-copy-content .remove-image-content {
+    right: 16px;
+    bottom: -26px;
 }
 
