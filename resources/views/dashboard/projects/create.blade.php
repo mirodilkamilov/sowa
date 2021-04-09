@@ -200,7 +200,7 @@
                                         <div class="card-content">
                                             <div class="card-body pb-0" id="text-content-card">
                                                 <x-dashboard.language-tabs :availableLangs="$availableLangs"
-                                                                           :hasMultiValuedInput="true"/>
+                                                                           :hasMultiValuedInput="true" :errorMessages="$errors"/>
 
                                                 <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
                                             </div>
