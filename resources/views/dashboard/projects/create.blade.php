@@ -191,65 +191,66 @@
                                       enctype="multipart/form-data"
                                       id="project-content-create-form">
                                 @csrf
-                                <!--= text type                                                  -->
-                                    <div class="card">
+
+                                <!--= Template copy content                          -->
+                                    <div class="card mb-1 template-copy-content">
                                         <div class="card-header">
-                                            <p class="card-title">{{ __('Content type') . ': ' }}<span
-                                                    class="text-primary">{{ __('Text') }}</span></p>
+                                            <label for="content-type">{{ __('Content type') }}</label>
+                                            <select id="content-type"
+                                                    class="custom-select @error("") is-invalid @enderror"
+                                                    name="content[][type]">
+                                                <option disabled selected value> -- select a type --</option>
+                                                <option value="text">{{ __('Text') }}</option>
+                                                <option value="image-small">{{ __('Small Image') }}</option>
+                                                <option value="image-big">{{ __('Wide Image') }}</option>
+                                                <option value="slide">{{ __('Slide') }}</option>
+                                            </select>
+                                            @error("")
+                                            <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        <div class="card-content">
-                                            <div class="card-body pb-0" id="text-content-card">
-                                                <x-dashboard.language-tabs :availableLangs="$availableLangs"
-                                                                           :hasMultiValuedInput="true" :errorMessages="$errors"/>
-
-                                                <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
-                                            </div>
-
-                                            <div class="row p-2">
-                                                <div class="col-12 text-center">
-                                                    <button type="button" class="btn btn-success mr-1 mb-1"
-                                                            id="add-text-content">
-                                                        {{ __('Add text type content') }}
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        <div class="card-content pb-1"></div>
+                                        <div class="card-footer">
+                                            <i class="feather icon-trash-2 text-danger pr-1 remove-content"></i>
                                         </div>
                                     </div>
 
-                                    <!--= image type                                                  -->
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <p class="card-title">{{ __('Content type') . ': ' }}<span
-                                                    class="text-primary">{{ __('Image') }}</span></p>
+                                    <!--= Text copy content -->
+                                    <div class="card-body pb-0 text-copy-content">
+                                        <x-dashboard.language-tabs :availableLangs="$availableLangs"
+                                                                   :hasMultiValuedInput="true"/>
+                                        <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
+                                    </div>
+                                    <!--= Image copy content -->
+                                    <div class="card-body pb-0 image-copy-content">
+                                        <x-dashboard.project-image-content/>
+                                    </div>
+                                    <!--= Slide copy content -->
+                                    <div class="card-body pb-0 slide-copy-content">
+                                        <x-dashboard.project-slide-content/>
+                                    </div>
+
+
+                                    <div class="content-container"></div>
+
+                                    <div class="content-buttons mt-3"
+                                         style="display: flex; justify-content: space-between;">
+                                        <div class="add-btn-container">
+                                            <button type="button" class="btn btn-success add-content-btn">
+                                                {{ __('Add content') }}
+                                            </button>
                                         </div>
-                                        <div class="card-content">
-                                            <div class="card-body pb-0" id="image-content-card"
-                                                 style="display: grid; grid-template-columns: 1fr 1fr;">
-
-                                                <x-project-image-content/>
-
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="col-12 text-center">
-                                                    <button type="button" class="btn btn-success mr-1 mb-1"
-                                                            id="add-image-content">
-                                                        {{ __('Add image type content') }}
-                                                    </button>
-                                                </div>
-                                                <div class="col-3 float-right">
-                                                    <button type="submit"
-                                                            class="btn btn-primary mr-1 mb-1">
-                                                        {{ __('Save') }}
-                                                    </button>
-                                                    <button type="reset"
-                                                            class="btn btn-outline-warning mb-1">
-                                                        {{ __('Reset') }}
-                                                    </button>
-                                                </div>
-                                            </div>
-
+                                        <div class="form-btn-container">
+                                            <button type="submit" class="btn btn-primary mr-1">
+                                                {{ __('Save') }}
+                                            </button>
+                                            <button type="reset" class="btn btn-outline-warning">
+                                                {{ __('Reset') }}
+                                            </button>
                                         </div>
                                     </div>
+
+
                                 </form>
                             @endif
                         </div>
@@ -260,31 +261,9 @@
         </div>
     </div>
 
-    @push('file-preview')
+    @push('wizard-steps-manipulation')
         <script>
             $('.actions').remove();
-            var preview = $('.preview');
-            preview.css('display', 'none');
-
-            function readURL(input, preview) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        preview.attr('src', e.target.result);
-                        preview.css('width', '300px');
-                        preview.css('display', 'block');
-                    }
-
-                    reader.readAsDataURL(input.files[0]); // convert to base64 string
-                }
-            }
-
-            $('.image-input').change(function () {
-                var preview = $(this).closest('.custom-file').closest('.form-group').siblings('.form-group').find('.preview')
-                readURL(this, preview);
-            });
-
             @if(session('hasCompletedFirstPart'))
             $('#wizard').find('.first').addClass('done').addClass('disabled').removeClass('current');
             $('#wizard').find('.last').removeClass('disabled').addClass('current');
@@ -295,87 +274,128 @@
         </script>
     @endpush
 
-    @push('project-text-content')
+    @push('file-preview')
         <script>
-            var avilableLangs = ['ru', 'en', 'uz'];
+            var preview = $('.preview');
+            preview.css('display', 'none');
 
-            let i_text = $('.text-content').length;
-            $('#add-text-content').click(function () {
-                var textContent = $('.text-content:last').clone();
-                var numOfTextContents = ++$('.text-content').length;
+            function readURL(input, preview, width = '300px') {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-                for (i_text; i_text < numOfTextContents; i_text++) {
-                    for (let j = 0; j < avilableLangs.length; j++) {
-                        textContent.find('textarea#title-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][title][' + avilableLangs[j] + ']');
-                        textContent.find('textarea#description-' + avilableLangs[j]).val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][description][' + avilableLangs[j] + ']');
+                    reader.onload = function (e) {
+                        preview.attr('src', e.target.result);
+                        preview.css('width', width);
+                        preview.css('display', 'block');
                     }
-                    textContent.find('input').val('').removeClass('is-invalid').attr('name', 'content[text][' + i_text + '][position]');
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
                 }
-                textContent.find('p.text-danger').remove();
-
-                textContent.appendTo('#text-content-card');
-                $('.text-content:last .wrapper').append('<i class="feather icon-trash-2 text-danger remove-text-content"></i>');
-                $('.remove-text-content').click(function () {
-                    $(this).closest('.text-content').remove();
-                });
-            });
-
-            $('.remove-text-content').click(function () {
-                $(this).closest('.text-content').remove();
-            });
-
-
-            $('#ru-tab-justified').click(function () {
-                $('.tab-pane-en').removeClass('active');
-                $('.tab-pane-uz').removeClass('active');
-                $('.tab-pane-ru').addClass('active');
-            });
-            $('#en-tab-justified').click(function () {
-                $('.tab-pane-ru').removeClass('active');
-                $('.tab-pane-uz').removeClass('active');
-                $('.tab-pane-en').addClass('active');
-            });
-            $('#uz-tab-justified').click(function () {
-                $('.tab-pane-ru').removeClass('active');
-                $('.tab-pane-en').removeClass('active');
-                $('.tab-pane-uz').addClass('active');
-            });
+            }
         </script>
     @endpush
 
-    @push('project-image-content')
+    @push('project-content-manipulation')
         <script>
-            let i_image = $('.image-copy-content').length;
-            console.log('#add-image-content clicked');
-            $('#add-image-content').click(function () {
+            var templateContent = $('.template-copy-content').css('display', 'none');
+            var textContent = $('.text-copy-content').css('display', 'none');
+            var imageContent = $('.image-copy-content').css('display', 'none');
+            var slideContent = $('.slide-copy-content').css('display', 'none');
 
-                var imageContent = $('.image-copy-content:last').clone();
-                var numOfImageContents = ++$('.image-copy-content').length;
+            $('.add-content-btn').click(function () {
+                var templateCopyContent = templateContent.clone().css('display', 'block');
+                var appendedTemplate = templateCopyContent.appendTo('.content-container');
 
-                for (i_image; i_image < numOfImageContents; i_image++) {
-                    imageContent.find('select').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][image-type]');
-                    imageContent.find('#position').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][position]');
-                    imageContent.find('.image-input').val('').removeClass('is-invalid').attr('name', 'content[image][' + i_image + '][image]');
-                }
-                imageContent.find('p.text-danger').remove();
+                appendedTemplate.find('.custom-select').on('change', function () {
+                    // * remove existing content if any
+                    appendedTemplate.find('.card-body').remove();
+                    switch (this.value) {
+                        case 'text':
+                            var textCopyContent = textContent.clone().css('display', 'block');
 
-                var appendedImageContent = imageContent.appendTo('#image-content-card');
-                appendedImageContent.find('#preview').attr('src', '').css('display', 'none');
-                appendedImageContent.find('.custom-file-label').html('');
+                            textCopyContent.appendTo(appendedTemplate.find('.card-content'));
+                            $('.ru-tab-justified').click(function () {
+                                $('.en-tab-justified').removeClass('active');
+                                $('.uz-tab-justified').removeClass('active');
+                                $('.ru-tab-justified').addClass('active');
 
-                $('.image-copy-content:last .image-input-container').append('<i class="feather icon-trash-2 text-danger remove-image-content"></i>');
-                $('.remove-image-content').click(function () {
-                    $(this).closest('.image-copy-content').remove();
+                                $('.tab-pane-en').removeClass('active');
+                                $('.tab-pane-uz').removeClass('active');
+                                $('.tab-pane-ru').addClass('active');
+                            });
+                            $('.en-tab-justified').click(function () {
+                                $('.ru-tab-justified').removeClass('active');
+                                $('.uz-tab-justified').removeClass('active');
+                                $('.en-tab-justified').addClass('active');
+
+                                $('.tab-pane-ru').removeClass('active');
+                                $('.tab-pane-uz').removeClass('active');
+                                $('.tab-pane-en').addClass('active');
+                            });
+                            $('.uz-tab-justified').click(function () {
+                                $('.ru-tab-justified').removeClass('active');
+                                $('.en-tab-justified').removeClass('active');
+                                $('.uz-tab-justified').addClass('active');
+
+                                $('.tab-pane-ru').removeClass('active');
+                                $('.tab-pane-en').removeClass('active');
+                                $('.tab-pane-uz').addClass('active');
+                            });
+                            break;
+
+                        case 'image-small':
+                            var imageSmallCopyContent = imageContent.clone().css('display', 'block');
+                            var appendedSmallImage = imageSmallCopyContent.appendTo(appendedTemplate.find('.card-content'));
+
+                            // * preview set
+                            $('.image-input').change(function () {
+                                var preview = appendedSmallImage.find('.preview');
+                                readURL(this, preview);
+                            });
+                            break;
+
+                        case 'image-big':
+                            var imageBigCopyContent = imageContent.clone().css('display', 'block');
+                            var appendedBigImage = imageBigCopyContent.appendTo(appendedTemplate.find('.card-content'));
+
+                            // * preview set
+                            $('.image-input').change(function () {
+                                var preview = appendedBigImage.find('.preview');
+                                readURL(this, preview, '100%');
+                            });
+                            break;
+
+                        case 'slide':
+                            var slideCopyContent = slideContent.clone().css('display', 'block');
+                            var appendedSlide = slideCopyContent.appendTo(appendedTemplate.find('.card-content'));
+                            appendedSlide.find('.slide-preview img').remove();
+
+                            $(function () {
+                                // Multiple images preview in browser
+                                var imagesPreview = function (input, placeToInsertImagePreview) {
+                                    if (input.files) {
+                                        var filesAmount = input.files.length;
+
+                                        for (i = 0; i < filesAmount; i++) {
+                                            var reader = new FileReader();
+                                            reader.onload = function (event) {
+                                                $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                                            }
+                                            reader.readAsDataURL(input.files[i]);
+                                        }
+                                    }
+                                };
+                                $('.image-input').on('change', function () {
+                                    imagesPreview(this, '.slide-preview');
+                                });
+                            });
+                            break;
+                    }
+
+                    $('.content-container .remove-content').click(function () {
+                        $(this).closest('.template-copy-content').remove();
+                    });
                 });
-
-                $('.image-input').change(function () {
-                    var preview = $(this).closest('.custom-file').closest('.form-group').siblings('.form-group').find('.preview')
-                    readURL(this, preview);
-                });
-            });
-
-            $('.remove-text-content').click(function () {
-                $(this).closest('.text-content').remove();
             });
         </script>
     @endpush

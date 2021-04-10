@@ -9,18 +9,26 @@
     text-align: center;
 }
 
-.text-content .remove-text-content,
-.image-copy-content .remove-image-content {
+.card-footer .remove-content {
     font-size: 1.5rem;
-    position: absolute;
     z-index: 100;
-    right: 0;
-    bottom: 1.5rem;
     cursor: pointer;
 }
 
-.image-copy-content .remove-image-content {
-    right: 16px;
-    bottom: -26px;
+.template-copy-content .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.slide-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.slide-preview img {
+    width: 300px;
+    padding-bottom: 1rem;
 }
 
