@@ -329,8 +329,9 @@
 
                         case 'image-small':
                             var imageSmallCopyContent = imageContent.clone().css('display', 'block');
-                            var appendedSmallImage = imageSmallCopyContent.appendTo(appendedTemplate.find('.card-content'));
 
+                            changeImageInputNames(imageSmallCopyContent);
+                            var appendedSmallImage = imageSmallCopyContent.appendTo(appendedTemplate.find('.card-content'));
                             // * preview set
                             $('.image-input').change(function () {
                                 var preview = appendedSmallImage.find('.preview');
@@ -340,8 +341,9 @@
 
                         case 'image-big':
                             var imageBigCopyContent = imageContent.clone().css('display', 'block');
-                            var appendedBigImage = imageBigCopyContent.appendTo(appendedTemplate.find('.card-content'));
 
+                            changeImageInputNames(imageBigCopyContent);
+                            var appendedBigImage = imageBigCopyContent.appendTo(appendedTemplate.find('.card-content'));
                             // * preview set
                             $('.image-input').change(function () {
                                 var preview = appendedBigImage.find('.preview');
@@ -351,6 +353,8 @@
 
                         case 'slide':
                             var slideCopyContent = slideContent.clone().css('display', 'block');
+
+                            changeImageInputNames(slideCopyContent, true);
                             var appendedSlide = slideCopyContent.appendTo(appendedTemplate.find('.card-content'));
                             appendedSlide.find('.slide-preview img').remove();
 
@@ -403,7 +407,18 @@
                             textCopyContent.find('#title-' + lang).attr('name', 'content[' + contentCounter + '][title][' + lang + ']');
                             textCopyContent.find('#description-' + lang).attr('name', 'content[' + contentCounter + '][description][' + lang + ']');
                         }
-                        textCopyContent.find('#position').attr('name', 'content[' + contentCounter + '][position]');
+                        changePositionInputName(textCopyContent);
+                    }
+
+                    function changeImageInputNames(imageCopyContent, isSlideType = false) {
+                        imageCopyContent.find('.image-input').attr('name', 'content[' + contentCounter + '][image]');
+                        if (isSlideType)
+                            imageCopyContent.find('.image-input').attr('name', 'content[' + contentCounter + '][image][]');
+                        changePositionInputName(imageCopyContent);
+                    }
+
+                    function changePositionInputName(copyContent) {
+                        copyContent.find('#position').attr('name', 'content[' + contentCounter + '][position]');
                     }
                 });
             });

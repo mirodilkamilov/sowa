@@ -3,7 +3,7 @@
         <label for="basicInputFile" style="position: absolute; top: -1.3rem;">{{ __('Image') }}</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input image-input @error("content.1.image.") is-invalid @enderror"
-                   name="content[image][image]" id="basicInputFile" multiple>
+                   name="content[0][image][]" id="basicInputFile" multiple>
             <label class="custom-file-label" for="basicInputFile"></label>
             @error("content.1.image")
             <p class="text-danger">{{ $message }}</p>

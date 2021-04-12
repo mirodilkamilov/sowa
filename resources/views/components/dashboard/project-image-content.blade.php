@@ -3,7 +3,7 @@
         <label for="basicInputFile" style="position: absolute; top: -1.3rem;">{{ __('Image') }}</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input image-input @error("content.1.image.") is-invalid @enderror"
-                   name="content[image][image]" id="basicInputFile">
+                   name="content[0][image]" id="basicInputFile">
             <label class="custom-file-label" for="basicInputFile"></label>
             @error("content.1.image")
             <p class="text-danger">{{ $message }}</p>
@@ -15,7 +15,7 @@
         <div class="form-label-group mb-0">
             <input type="number" id="position"
                    class="form-control @error("content.1.position.") is-invalid @enderror"
-                   name="content[image][position]"
+                   name="content[0][position]"
                    placeholder="{{ __('Position') }}"
                    value="{{ old("content.1.position.") }}">
             <label for="position">{{ __('Position') }}</label>
