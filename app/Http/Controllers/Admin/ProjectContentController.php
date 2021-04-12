@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProjectContentController extends Controller
 {
-    public function store(StoreProjectContentRequest $request)
+    public function store(Request $request)
     {
         $request->dd();
     }

@@ -185,51 +185,49 @@
                                 </div>
                             </div>
 
-                            @if(session('hasCompletedFirstPart'))
+                        @if(session('hasCompletedFirstPart'))
+                            <!--= Template copy content                            -->
+                                <div class="card mb-1 template-copy-content">
+                                    <div class="card-header">
+                                        <label for="content-type">{{ __('Content type') }}</label>
+                                        <select id="content-type"
+                                                class="custom-select @error("") is-invalid @enderror"
+                                                name="content[][type]">
+                                            <option disabled selected value> -- select a type --</option>
+                                            <option value="text">{{ __('Text') }}</option>
+                                            <option value="image-small">{{ __('Small Image') }}</option>
+                                            <option value="image-big">{{ __('Wide Image') }}</option>
+                                            <option value="slide">{{ __('Slide') }}</option>
+                                        </select>
+                                        @error("")
+                                        <p class="text-danger mb-0">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="card-content pb-1"></div>
+                                    <div class="card-footer">
+                                        <i class="feather icon-trash-2 text-danger pr-1 remove-content"></i>
+                                    </div>
+                                </div>
+                                <!--= Text copy content -->
+                                <div class="card-body pb-0 text-copy-content">
+                                    <x-dashboard.language-tabs :availableLangs="$availableLangs"
+                                                               :hasMultiValuedInput="true"/>
+                                    <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
+                                </div>
+                                <!--= Image copy content -->
+                                <div class="card-body pb-0 image-copy-content">
+                                    <x-dashboard.project-image-content/>
+                                </div>
+                                <!--= Slide copy content -->
+                                <div class="card-body pb-0 slide-copy-content">
+                                    <x-dashboard.project-slide-content/>
+                                </div>
+
                                 <form class="form" action="{{ route('project-contents.store') }}"
                                       method="post"
                                       enctype="multipart/form-data"
                                       id="project-content-create-form">
-                                @csrf
-
-                                <!--= Template copy content                          -->
-                                    <div class="card mb-1 template-copy-content">
-                                        <div class="card-header">
-                                            <label for="content-type">{{ __('Content type') }}</label>
-                                            <select id="content-type"
-                                                    class="custom-select @error("") is-invalid @enderror"
-                                                    name="content[][type]">
-                                                <option disabled selected value> -- select a type --</option>
-                                                <option value="text">{{ __('Text') }}</option>
-                                                <option value="image-small">{{ __('Small Image') }}</option>
-                                                <option value="image-big">{{ __('Wide Image') }}</option>
-                                                <option value="slide">{{ __('Slide') }}</option>
-                                            </select>
-                                            @error("")
-                                            <p class="text-danger mb-0">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="card-content pb-1"></div>
-                                        <div class="card-footer">
-                                            <i class="feather icon-trash-2 text-danger pr-1 remove-content"></i>
-                                        </div>
-                                    </div>
-
-                                    <!--= Text copy content -->
-                                    <div class="card-body pb-0 text-copy-content">
-                                        <x-dashboard.language-tabs :availableLangs="$availableLangs"
-                                                                   :hasMultiValuedInput="true"/>
-                                        <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
-                                    </div>
-                                    <!--= Image copy content -->
-                                    <div class="card-body pb-0 image-copy-content">
-                                        <x-dashboard.project-image-content/>
-                                    </div>
-                                    <!--= Slide copy content -->
-                                    <div class="card-body pb-0 slide-copy-content">
-                                        <x-dashboard.project-slide-content/>
-                                    </div>
-
+                                    @csrf
 
                                     <div class="content-container"></div>
 
@@ -249,10 +247,9 @@
                                             </button>
                                         </div>
                                     </div>
-
-
                                 </form>
                             @endif
+
                         </div>
                     </div>
                 </section>
@@ -297,6 +294,7 @@
 
     @push('project-content-manipulation')
         <script>
+            var avilableLangs = ['ru', 'en', 'uz'];
             var templateContent = $('.template-copy-content').css('display', 'none');
             var textContent = $('.text-copy-content').css('display', 'none');
             var imageContent = $('.image-copy-content').css('display', 'none');
@@ -305,41 +303,27 @@
             $('.add-content-btn').click(function () {
                 var templateCopyContent = templateContent.clone().css('display', 'block');
                 var appendedTemplate = templateCopyContent.appendTo('.content-container');
+                var contentCounter = --$('.content-container .template-copy-content').length;
 
                 appendedTemplate.find('.custom-select').on('change', function () {
                     // * remove existing content if any
                     appendedTemplate.find('.card-body').remove();
+
                     switch (this.value) {
                         case 'text':
                             var textCopyContent = textContent.clone().css('display', 'block');
 
+                            changeTextInputNames();
                             textCopyContent.appendTo(appendedTemplate.find('.card-content'));
-                            $('.ru-tab-justified').click(function () {
-                                $('.en-tab-justified').removeClass('active');
-                                $('.uz-tab-justified').removeClass('active');
-                                $('.ru-tab-justified').addClass('active');
 
-                                $('.tab-pane-en').removeClass('active');
-                                $('.tab-pane-uz').removeClass('active');
-                                $('.tab-pane-ru').addClass('active');
+                            $('.ru-tab-justified').click(function () {
+                                changeLangTabs(this);
                             });
                             $('.en-tab-justified').click(function () {
-                                $('.ru-tab-justified').removeClass('active');
-                                $('.uz-tab-justified').removeClass('active');
-                                $('.en-tab-justified').addClass('active');
-
-                                $('.tab-pane-ru').removeClass('active');
-                                $('.tab-pane-uz').removeClass('active');
-                                $('.tab-pane-en').addClass('active');
+                                changeLangTabs(this);
                             });
                             $('.uz-tab-justified').click(function () {
-                                $('.ru-tab-justified').removeClass('active');
-                                $('.en-tab-justified').removeClass('active');
-                                $('.uz-tab-justified').addClass('active');
-
-                                $('.tab-pane-ru').removeClass('active');
-                                $('.tab-pane-en').removeClass('active');
-                                $('.tab-pane-uz').addClass('active');
+                                changeLangTabs(this);
                             });
                             break;
 
@@ -395,6 +379,32 @@
                     $('.content-container .remove-content').click(function () {
                         $(this).closest('.template-copy-content').remove();
                     });
+
+                    function changeLangTabs(obj) {
+                        var allClassNames = obj.className;
+                        var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);
+
+                        if (!avilableLangs.includes(currentLang))
+                            return;
+
+                        for (let lang of avilableLangs) {
+                            if (currentLang === lang) {
+                                $('.' + currentLang + '-tab-justified').addClass('active');
+                                $('.tab-pane-' + currentLang).addClass('active');
+                                continue;
+                            }
+                            $('.' + lang + '-tab-justified').removeClass('active');
+                            $('.tab-pane-' + lang).removeClass('active');
+                        }
+                    }
+
+                    function changeTextInputNames() {
+                        for (let lang of avilableLangs) {
+                            textCopyContent.find('#title-' + lang).attr('name', 'content[' + contentCounter + '][title][' + lang + ']');
+                            textCopyContent.find('#description-' + lang).attr('name', 'content[' + contentCounter + '][description][' + lang + ']');
+                        }
+                        textCopyContent.find('#position').attr('name', 'content[' + contentCounter + '][position]');
+                    }
                 });
             });
         </script>

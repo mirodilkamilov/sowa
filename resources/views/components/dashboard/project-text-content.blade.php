@@ -8,13 +8,11 @@
                     <div class="form-label-group">
                         <textarea
                             id="title-{{$lang}}"
-                            class="form-control @error("content.0.title.{$lang}.") is-invalid @enderror"
+                            class="form-control @error("content.0.text.title.$lang") is-invalid @enderror"
                             placeholder="{{ __('Title') . ' ('. $lang . ')' }}" rows="4"
-                            name="content[][text][title][{{ $lang }}]">{{ old("content.0.title.{$lang}.") }}</textarea>
-
-                        <label
-                            for="title-{{$lang}}">{{ __('Title') . ' ('. $lang . ')' }}</label>
-                        @error("content.0.title.{$lang}.")
+                            name="content[0][title][{{ $lang }}]">{{ old("") }}</textarea>
+                        <label for="title-{{$lang}}">{{ __('Title') . ' ('. $lang . ')' }}</label>
+                        @error("content.0.text.title.$lang")
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
@@ -23,12 +21,11 @@
                     <div class="form-label-group">
                         <textarea
                             id="description-{{$lang}}"
-                            class="form-control @error("content.0.description.{$lang}.") is-invalid @enderror"
+                            class="form-control @error("") is-invalid @enderror"
                             placeholder="{{ __('Description') . ' ('. $lang . ')' }}" rows="4"
-                            name="content[][text][description][{{ $lang }}]">{{ old("content.0.description.{$lang}.") }}</textarea>
-                        <label
-                            for="description-{{$lang}}">{{ __('Description') . ' ('. $lang . ')' }}</label>
-                        @error("content.0.description.{$lang}.")
+                            name="content[0][description][{{ $lang }}]">{{ old("") }}</textarea>
+                        <label for="description-{{$lang}}">{{ __('Description') . ' ('. $lang . ')' }}</label>
+                        @error("")
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
@@ -40,13 +37,12 @@
          style="display: flex; justify-content: center;">
         <div class="form-label-group mb-1">
             <input type="number" id="position"
-                   class="form-control @error("content.0.position.") is-invalid @enderror"
-                   name="content[][text][position]"
+                   class="form-control @error("") is-invalid @enderror"
+                   name="content[0][position]"
                    placeholder="{{ __('Position') }}"
-                   value="{{ old("content.0.position.") }}">
-            <label
-                for="position">{{ __('Position') }}</label>
-            @error("content.0.position.")
+                   value="{{ old("") }}">
+            <label for="position">{{ __('Position') }}</label>
+            @error("")
             <p class="text-danger mb-0">{{ $message }}</p>
             @enderror
         </div>
