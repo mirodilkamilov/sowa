@@ -300,10 +300,14 @@
             var imageContent = $('.image-copy-content').css('display', 'none');
             var slideContent = $('.slide-copy-content').css('display', 'none');
 
+            var contentCounter = 0;
+
             $('.add-content-btn').click(function () {
                 var templateCopyContent = templateContent.clone().css('display', 'block');
                 var appendedTemplate = templateCopyContent.appendTo('.content-container');
-                var contentCounter = --$('.content-container .template-copy-content').length;
+                ++contentCounter;
+                appendedTemplate.attr('id', contentCounter);
+                appendedTemplate.find('select').attr('name', 'content[' + contentCounter + '][type]');
 
                 appendedTemplate.find('.custom-select').on('change', function () {
                     // * remove existing content if any
@@ -380,10 +384,6 @@
                             break;
                     }
 
-                    $('.content-container .remove-content').click(function () {
-                        $(this).closest('.template-copy-content').remove();
-                    });
-
                     function changeLangTabs(obj) {
                         var allClassNames = obj.className;
                         var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);
@@ -403,23 +403,28 @@
                     }
 
                     function changeTextInputNames() {
+                        var id = appendedTemplate[0].id;
                         for (let lang of avilableLangs) {
-                            textCopyContent.find('#title-' + lang).attr('name', 'content[' + contentCounter + '][title][' + lang + ']');
-                            textCopyContent.find('#description-' + lang).attr('name', 'content[' + contentCounter + '][description][' + lang + ']');
+                            textCopyContent.find('#title-' + lang).attr('name', 'content[' + id + '][title][' + lang + ']');
+                            textCopyContent.find('#description-' + lang).attr('name', 'content[' + id + '][description][' + lang + ']');
                         }
-                        changePositionInputName(textCopyContent);
+                        changePositionInputName(textCopyContent, id);
                     }
 
                     function changeImageInputNames(imageCopyContent, isSlideType = false) {
-                        imageCopyContent.find('.image-input').attr('name', 'content[' + contentCounter + '][image]');
+                        var id = appendedTemplate[0].id
+                        imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image]');
                         if (isSlideType)
-                            imageCopyContent.find('.image-input').attr('name', 'content[' + contentCounter + '][image][]');
-                        changePositionInputName(imageCopyContent);
+                            imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image][]');
+                        changePositionInputName(imageCopyContent, id);
                     }
 
-                    function changePositionInputName(copyContent) {
-                        copyContent.find('#position').attr('name', 'content[' + contentCounter + '][position]');
+                    function changePositionInputName(copyContent, id) {
+                        copyContent.find('#position').attr('name', 'content[' + id + '][position]');
                     }
+                });
+                $('.content-container .remove-content').on('click', function () {
+                    $(this).parents('.template-copy-content').remove();
                 });
             });
         </script>
