@@ -365,8 +365,8 @@
 <!-- END: Page JS-->
 
 @stack('modal-script')
-@stack('file-preview')
-@stack('file-preview-with-placeholder')
+@stack('image-preview')
+@stack('image-preview-with-placeholder')
 @stack('edit-user-message')
 @stack('wizard-steps-manipulation')
 @stack('project-content-manipulation')

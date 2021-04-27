@@ -15,7 +15,8 @@
     cursor: pointer;
 }
 
-.template-copy-content .card-footer {
+.template-copy-content .card-footer,
+.old-content .card-footer {
     display: flex;
     justify-content: flex-end;
     padding: 1rem;

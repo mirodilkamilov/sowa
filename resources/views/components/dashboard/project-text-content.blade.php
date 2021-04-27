@@ -8,11 +8,11 @@
                     <div class="form-label-group">
                         <textarea
                             id="title-{{$lang}}"
-                            class="form-control @error("content.0.text.title.$lang") is-invalid @enderror"
+                            class="form-control @error("content.$key.title.$lang") is-invalid @enderror"
                             placeholder="{{ __('Title') . ' ('. $lang . ')' }}" rows="4"
-                            name="content[0][title][{{ $lang }}]">{{ old("") }}</textarea>
+                            name="content[{{ $key }}][title][{{ $lang }}]">{{ old("content.$key.title.$lang") }}</textarea>
                         <label for="title-{{$lang}}">{{ __('Title') . ' ('. $lang . ')' }}</label>
-                        @error("content.0.text.title.$lang")
+                        @error("content.$key.title.$lang")
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
@@ -21,11 +21,11 @@
                     <div class="form-label-group">
                         <textarea
                             id="description-{{$lang}}"
-                            class="form-control @error("") is-invalid @enderror"
+                            class="form-control @error("content.$key.description.$lang") is-invalid @enderror"
                             placeholder="{{ __('Description') . ' ('. $lang . ')' }}" rows="4"
-                            name="content[0][description][{{ $lang }}]">{{ old("") }}</textarea>
+                            name="content[{{ $key }}][description][{{ $lang }}]">{{ old("content.$key.description.$lang") }}</textarea>
                         <label for="description-{{$lang}}">{{ __('Description') . ' ('. $lang . ')' }}</label>
-                        @error("")
+                        @error("content.$key.description.$lang")
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
@@ -37,12 +37,12 @@
          style="display: flex; justify-content: center;">
         <div class="form-label-group mb-1">
             <input type="number" id="position"
-                   class="form-control @error("") is-invalid @enderror"
-                   name="content[0][position]"
+                   class="form-control @error("content.$key.position") is-invalid @enderror"
+                   name="content[{{ $key }}][position]"
                    placeholder="{{ __('Position') }}"
-                   value="{{ old("") }}">
+                   value="{{ old("content.$key.position") }}">
             <label for="position">{{ __('Position') }}</label>
-            @error("")
+            @error("content.$key.position")
             <p class="text-danger mb-0">{{ $message }}</p>
             @enderror
         </div>

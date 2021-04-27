@@ -191,21 +191,20 @@
                                     <div class="card-header">
                                         <label for="content-type">{{ __('Content type') }}</label>
                                         <select id="content-type"
-                                                class="custom-select @error("") is-invalid @enderror"
-                                                name="content[][type]">
+                                                class="custom-select"
+                                                name="content[][type]"
+                                                onchange="changeContentType(this)">
                                             <option disabled selected value> -- select a type --</option>
                                             <option value="text">{{ __('Text') }}</option>
                                             <option value="image-small">{{ __('Small Image') }}</option>
                                             <option value="image-big">{{ __('Wide Image') }}</option>
                                             <option value="slide">{{ __('Slide') }}</option>
                                         </select>
-                                        @error("")
-                                        <p class="text-danger mb-0">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="card-content pb-1"></div>
                                     <div class="card-footer">
-                                        <i class="feather icon-trash-2 text-danger pr-1 remove-content"></i>
+                                        <i class="feather icon-trash-2 text-danger pr-1 remove-content"
+                                           onclick="removeContent(this)"></i>
                                     </div>
                                 </div>
                                 <!--= Text copy content -->
@@ -229,7 +228,11 @@
                                       id="project-content-create-form">
                                     @csrf
 
-                                    <div class="content-container"></div>
+                                    <div class="content-container">
+                                        @if($errors->any())
+                                            <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
+                                        @endif
+                                    </div>
 
                                     <div class="content-buttons mt-3"
                                          style="display: flex; justify-content: space-between;">
@@ -271,7 +274,7 @@
         </script>
     @endpush
 
-    @push('file-preview')
+    @push('image-preview')
         <script>
             var preview = $('.preview');
             preview.css('display', 'none');
@@ -289,6 +292,39 @@
                     reader.readAsDataURL(input.files[0]); // convert to base64 string
                 }
             }
+
+            // * Multiple images preview in browser
+            function imagesPreview(input, placeToInsertImagePreview) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function (event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            }
+
+            function setPreview(obj) {
+                var imageType = $(obj).parents('.card').find('.custom-select').children('option:selected').val();
+                var previewClassName = $(obj).closest('.card-body').find('.preview').hasClass('preview') ? 'preview' : 'slide-preview';
+                var preview = $(obj).closest('.card-body').find('.' + previewClassName);
+
+                switch (imageType) {
+                    case 'image-small':
+                        readURL(obj, preview);
+                        break;
+                    case 'image-big':
+                        readURL(obj, preview, '100%');
+                        break;
+                    case 'slide':
+                        imagesPreview(obj, preview);
+                        break;
+                }
+            }
         </script>
     @endpush
 
@@ -300,133 +336,92 @@
             var imageContent = $('.image-copy-content').css('display', 'none');
             var slideContent = $('.slide-copy-content').css('display', 'none');
 
-            var contentCounter = 0;
+            var lastOldContentId = $('.old-content').last().attr('id');
+            var contentCounter = lastOldContentId ?? 0;
 
-            $('.add-content-btn').click(function () {
+            function changeContentType(select) {
+                // * remove existing content if any
+                var changedContent = $(select).parents('.card');
+                changedContent.find('.card-body').remove();
+
+                switch (select.value) {
+                    case 'text':
+                        var textCopyContent = textContent.clone().css('display', 'block');
+                        changeTextInputNames();
+                        textCopyContent.appendTo(changedContent.find('.card-content'));
+                        break;
+
+                    case 'image-small':
+                        var imageSmallCopyContent = imageContent.clone().css('display', 'block');
+                        changeImageInputNames(imageSmallCopyContent);
+                        imageSmallCopyContent.appendTo(changedContent.find('.card-content'));
+                        break;
+
+                    case 'image-big':
+                        var imageBigCopyContent = imageContent.clone().css('display', 'block');
+                        changeImageInputNames(imageBigCopyContent);
+                        imageBigCopyContent.appendTo(changedContent.find('.card-content'));
+                        break;
+
+                    case 'slide':
+                        var slideCopyContent = slideContent.clone().css('display', 'block');
+                        changeImageInputNames(slideCopyContent, true);
+                        var appendedSlide = slideCopyContent.appendTo(changedContent.find('.card-content'));
+                        appendedSlide.find('.slide-preview img').remove();
+                        break;
+                }
+
+                function changeTextInputNames() {
+                    var id = changedContent[0].id;
+                    for (let lang of avilableLangs) {
+                        textCopyContent.find('#title-' + lang).attr('name', 'content[' + id + '][title][' + lang + ']');
+                        textCopyContent.find('#description-' + lang).attr('name', 'content[' + id + '][description][' + lang + ']');
+                    }
+                    changePositionInputName(textCopyContent, id);
+                }
+
+                function changeImageInputNames(imageCopyContent, isSlideType = false) {
+                    var id = changedContent[0].id
+                    imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image]');
+                    if (isSlideType)
+                        imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][slide][]');
+                    changePositionInputName(imageCopyContent, id);
+                }
+
+                function changePositionInputName(copyContent, id) {
+                    copyContent.find('#position').attr('name', 'content[' + id + '][position]');
+                }
+            }
+
+            $('.add-content-btn').on('click', function () {
                 var templateCopyContent = templateContent.clone().css('display', 'block');
                 var appendedTemplate = templateCopyContent.appendTo('.content-container');
                 ++contentCounter;
                 appendedTemplate.attr('id', contentCounter);
                 appendedTemplate.find('select').attr('name', 'content[' + contentCounter + '][type]');
-
-                appendedTemplate.find('.custom-select').on('change', function () {
-                    // * remove existing content if any
-                    appendedTemplate.find('.card-body').remove();
-
-                    switch (this.value) {
-                        case 'text':
-                            var textCopyContent = textContent.clone().css('display', 'block');
-
-                            changeTextInputNames();
-                            textCopyContent.appendTo(appendedTemplate.find('.card-content'));
-
-                            $('.ru-tab-justified').click(function () {
-                                changeLangTabs(this);
-                            });
-                            $('.en-tab-justified').click(function () {
-                                changeLangTabs(this);
-                            });
-                            $('.uz-tab-justified').click(function () {
-                                changeLangTabs(this);
-                            });
-                            break;
-
-                        case 'image-small':
-                            var imageSmallCopyContent = imageContent.clone().css('display', 'block');
-
-                            changeImageInputNames(imageSmallCopyContent);
-                            var appendedSmallImage = imageSmallCopyContent.appendTo(appendedTemplate.find('.card-content'));
-                            // * preview set
-                            $('.image-input').change(function () {
-                                var preview = appendedSmallImage.find('.preview');
-                                readURL(this, preview);
-                            });
-                            break;
-
-                        case 'image-big':
-                            var imageBigCopyContent = imageContent.clone().css('display', 'block');
-
-                            changeImageInputNames(imageBigCopyContent);
-                            var appendedBigImage = imageBigCopyContent.appendTo(appendedTemplate.find('.card-content'));
-                            // * preview set
-                            $('.image-input').change(function () {
-                                var preview = appendedBigImage.find('.preview');
-                                readURL(this, preview, '100%');
-                            });
-                            break;
-
-                        case 'slide':
-                            var slideCopyContent = slideContent.clone().css('display', 'block');
-
-                            changeImageInputNames(slideCopyContent, true);
-                            var appendedSlide = slideCopyContent.appendTo(appendedTemplate.find('.card-content'));
-                            appendedSlide.find('.slide-preview img').remove();
-
-                            $(function () {
-                                // Multiple images preview in browser
-                                var imagesPreview = function (input, placeToInsertImagePreview) {
-                                    if (input.files) {
-                                        var filesAmount = input.files.length;
-
-                                        for (i = 0; i < filesAmount; i++) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (event) {
-                                                $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                                            }
-                                            reader.readAsDataURL(input.files[i]);
-                                        }
-                                    }
-                                };
-                                $('.image-input').on('change', function () {
-                                    imagesPreview(this, '.slide-preview');
-                                });
-                            });
-                            break;
-                    }
-
-                    function changeLangTabs(obj) {
-                        var allClassNames = obj.className;
-                        var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);
-
-                        if (!avilableLangs.includes(currentLang))
-                            return;
-
-                        for (let lang of avilableLangs) {
-                            if (currentLang === lang) {
-                                $('.' + currentLang + '-tab-justified').addClass('active');
-                                $('.tab-pane-' + currentLang).addClass('active');
-                                continue;
-                            }
-                            $('.' + lang + '-tab-justified').removeClass('active');
-                            $('.tab-pane-' + lang).removeClass('active');
-                        }
-                    }
-
-                    function changeTextInputNames() {
-                        var id = appendedTemplate[0].id;
-                        for (let lang of avilableLangs) {
-                            textCopyContent.find('#title-' + lang).attr('name', 'content[' + id + '][title][' + lang + ']');
-                            textCopyContent.find('#description-' + lang).attr('name', 'content[' + id + '][description][' + lang + ']');
-                        }
-                        changePositionInputName(textCopyContent, id);
-                    }
-
-                    function changeImageInputNames(imageCopyContent, isSlideType = false) {
-                        var id = appendedTemplate[0].id
-                        imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image]');
-                        if (isSlideType)
-                            imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image][]');
-                        changePositionInputName(imageCopyContent, id);
-                    }
-
-                    function changePositionInputName(copyContent, id) {
-                        copyContent.find('#position').attr('name', 'content[' + id + '][position]');
-                    }
-                });
-                $('.content-container .remove-content').on('click', function () {
-                    $(this).parents('.template-copy-content').remove();
-                });
             });
+
+            function changeLangTabs(obj) {
+                var allClassNames = obj.className;
+                var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);
+
+                if (!avilableLangs.includes(currentLang))
+                    return;
+
+                for (let lang of avilableLangs) {
+                    if (currentLang === lang) {
+                        $('.' + currentLang + '-tab-justified').addClass('active');
+                        $('.tab-pane-' + currentLang).addClass('active');
+                        continue;
+                    }
+                    $('.' + lang + '-tab-justified').removeClass('active');
+                    $('.tab-pane-' + lang).removeClass('active');
+                }
+            }
+
+            function removeContent(obj) {
+                $(obj).parents('.card').remove();
+            }
         </script>
     @endpush
 
