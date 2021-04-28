@@ -20,9 +20,9 @@ class StoreProjectContentRequest extends FormRequest
             $prefix . '*.title.uz' => 'nullable|required_with:content.*.description.uz|min:3|max:255',
 
             $prefix . '*.description' => 'required_if:content.*.type,text|array',
-            $prefix . '*.description.ru' => 'required_if:content.*.type,text|min:3|max:255',
-            $prefix . '*.description.en' => 'nullable|required_with:content.*.title.en|min:3|max:255',
-            $prefix . '*.description.uz' => 'nullable|required_with:content.*.title.uz|min:3|max:255',
+            $prefix . '*.description.ru' => 'required_if:content.*.type,text|min:3|max:1024',
+            $prefix . '*.description.en' => 'nullable|required_with:content.*.title.en|min:3|max:1024',
+            $prefix . '*.description.uz' => 'nullable|required_with:content.*.title.uz|min:3|max:1024',
 
             $prefix . '*.image' => 'required_if:content.*.type,image-small,image-big|image|max:3000',
             $prefix . '*.slide' => 'required_if:content.*.type,slide|array|min:1|max:5',
@@ -30,7 +30,7 @@ class StoreProjectContentRequest extends FormRequest
         ];
     }
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

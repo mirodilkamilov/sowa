@@ -16,7 +16,7 @@ class ProjectObserver
         $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    public function retrieved(Project $project)
+    public function retrieved(Project $project): void
     {
         // ! These values can be null when they are not going to be retrieved (omitted in select statement)
         if (isset($project->slug))
@@ -25,14 +25,14 @@ class ProjectObserver
             $project->main_title = $project->main_title[$this->locale] ?? $project->main_title[$this->defaultLang];
     }
 
-    public function creating(Project $project)
+    public function creating(Project $project): void
     {
         $project->main_image = '/assets/uploads/' . $project->main_image;
         // * soft deletes until corresponding project content is added
         $project->deleted_at = now();
     }
 
-    public function saving(Project $project)
+    public function saving(Project $project): void
     {
         $slug = collect([
             'en' => isset($project->slug['en']) ? Str::slug($project->slug['en']) : $project->slug['en'],

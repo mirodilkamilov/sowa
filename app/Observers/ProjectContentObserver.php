@@ -15,7 +15,7 @@ class ProjectContentObserver
         $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    public function retrieved(ProjectContent $projectContent)
+    public function retrieved(ProjectContent $projectContent): void
     {
         if (isset($projectContent->title))
             $projectContent->title = $projectContent->title[$this->locale] ?? $projectContent->title[$this->defaultLang];

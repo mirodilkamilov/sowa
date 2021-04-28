@@ -295,10 +295,11 @@
 
             // * Multiple images preview in browser
             function imagesPreview(input, placeToInsertImagePreview) {
+                placeToInsertImagePreview.find('img').remove();
                 if (input.files) {
                     var filesAmount = input.files.length;
 
-                    for (i = 0; i < filesAmount; i++) {
+                    for (var i = 0; i < filesAmount; i++) {
                         var reader = new FileReader();
                         reader.onload = function (event) {
                             $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
