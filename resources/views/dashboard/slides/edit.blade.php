@@ -176,7 +176,7 @@
         </div>
     </div>
 
-    @push('file-preview-with-placeholder')
+    @push('image-preview-with-placeholder')
         <script>
             $("#placeholder").css('display', 'block');
             $("#preview").css('display', 'none');

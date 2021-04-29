@@ -26,7 +26,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         try {
-            $project_id = StoreProjectJob::dispatchNow($request);
+            $project_id = StoreProjectJob::dispatchSync($request);
         } catch (\Exception $exception) {
             $request->session()->flash('error', $exception->getMessage());
             return redirect()->route('projects.create');

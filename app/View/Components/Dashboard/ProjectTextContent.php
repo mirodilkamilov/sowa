@@ -7,10 +7,12 @@ use Illuminate\View\Component;
 class ProjectTextContent extends Component
 {
     public array $availableLangs;
+    public int $key;
 
-    public function __construct($availableLangs)
+    public function __construct($availableLangs, $key = 0)
     {
         $this->availableLangs = $availableLangs;
+        $this->key = $key;
     }
 
     public function render()
