@@ -1,13 +1,14 @@
-@props(['images'])
+@props(['images', 'isLastContentTypeText'])
 
-<div class="slider slider-simply image-container--half reveal">
+<div class="slider slider-simply image-container--half reveal"
+     @unless($isLastContentTypeText) style="margin-top: calc(4rem + 2.32rem);" @endunless>
     <div class="slider-article swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                @foreach($images as $image)
+            @foreach($images as $image)
+                <div class="swiper-slide">
                     <div class="cover-slider lazyload" data-bg="{{ $image }}"></div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

@@ -28,6 +28,6 @@
         </div>
     </div>
 </div>
-<fieldset class="form-group col-md-6 col-6 mb-0" style="display: flex; justify-content: center;">
+<fieldset class="form-group col-md-6 col-6 mb-0 pl-0" style="display: flex; justify-content: center;">
     <img class="preview" id="preview" src="#" alt="preview"/>
 </fieldset>

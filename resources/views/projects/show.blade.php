@@ -46,8 +46,10 @@
                     </span>
                 </div>
                 <div class="item-details item-details--end">
-                    <a class="btn-link" target="_blank" href="{{ $project->url }}">{{ __('View project') }}<i
-                            class="circle circle--right icon-right-open"></i></a>
+                    <a class="btn-link" target="_blank" href="{{ $project->url }}">
+                        {{ __('View project') }}
+                        <i class="circle circle--right icon-right-open"></i>
+                    </a>
                 </div>
             </div>
             <!-- /Details -->
@@ -55,35 +57,45 @@
 
         @php $textSectionNum = 0; @endphp
 
+        @php $isLastContentTypeText = false; @endphp
         @foreach($project->project_contents as $content)
             @switch($content->type)
                 @case('text')
                 @php $textSectionNum++ @endphp
-                <x-project.text :textSectionNum="$textSectionNum" :title="$content->title"
-                                :description="$content->description"/>
+                <x-project.text :textSectionNum="$textSectionNum" :content="$content"/>
+                @php $isLastContentTypeText = true; @endphp
                 @break
 
                 @case('image-small')
-                <x-project.image :image="$content->image[0]" class="image-container--gutters"/>
+                <x-project.image :image="$content->image" class="image-container--gutters"
+                                 :isLastContentTypeText="$isLastContentTypeText"/>
+                @php $isLastContentTypeText = false; @endphp
                 @break
 
                 @case('image-big')
-                <x-project.image :image="$content->image[0]"/>
+                <x-project.image :image="$content->image" :isLastContentTypeText="$isLastContentTypeText"/>
+                @php $isLastContentTypeText = false; @endphp
                 @break
 
                 @case('slide')
-                <x-project.slider :images="$content->image"/>
-            @break
-        @endswitch
-    @endforeach
+                <x-project.slider :images="$content->image" :isLastContentTypeText="$isLastContentTypeText"/>
+                @php $isLastContentTypeText = false; @endphp
+                @break
+            @endswitch
+        @endforeach
 
-    <!-- Page nav -->
+        <!-- Page nav -->
         <nav class="page-nav">
-            <a class="btn-link" href="{{ route('user.projects.show', [$locale, $prevProject->id, $prevProject->slug]) }}"><i
-                    class="circle circle--left icon-left-open"></i><span>{{ __('Previous project') }}</span></a>
             <a class="btn-link"
-               href="{{ route('user.projects.show', [$locale, $nextProject->id, $prevProject->slug]) }}"><span>{{ __('Next project') }}</span><i
-                    class="circle circle--right icon-right-open"></i></a>
+               href="{{ route('user.projects.show', [$locale, $prevProject->id, $prevProject->slug]) }}">
+                <i class="circle circle--left icon-left-open"></i>
+                <span>{{ __('Previous project') }}</span>
+            </a>
+            <a class="btn-link"
+               href="{{ route('user.projects.show', [$locale, $nextProject->id, $prevProject->slug]) }}">
+                <span>{{ __('Next project') }}</span>
+                <i class="circle circle--right icon-right-open"></i>
+            </a>
         </nav>
         <!-- /Page nav -->
     </section>
