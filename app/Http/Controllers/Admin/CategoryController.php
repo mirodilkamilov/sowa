@@ -30,7 +30,7 @@ class CategoryController extends Controller
         }
 
         $request->session()->flash('success', 'Category was successfully added!');
-        return redirect()->route('categories.index');
+        return redirect()->back();
     }
 
 

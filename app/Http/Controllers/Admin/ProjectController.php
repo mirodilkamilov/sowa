@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Jobs\Project\StoreProjectJob;
+use App\Models\Category;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('dashboard.projects.create');
+        $categories = Category::all();
+        return view('dashboard.projects.create', compact('categories'));
     }
 
     public function store(StoreProjectRequest $request)

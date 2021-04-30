@@ -35,20 +35,20 @@
 
                                                         <div class="tab-content pt-2 col-md-12 col-12 pr-0 pl-0">
                                                             @foreach($availableLangs as $lang)
-                                                                <div class="tab-pane @if($loop->first) active @endif"
+                                                                <div class="tab-pane @if($loop->first) active @endif tab-pane-{{$lang}}"
                                                                      id="{{ $lang }}-just" role="tabpanel"
                                                                      aria-labelledby="{{ $lang }}-tab-justified">
                                                                     <div class="row">
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-label-group">
                                                                                 <input type="text" id="main_title"
-                                                                                       class="form-control @error("main_title.{$lang}") is-invalid @enderror"
+                                                                                       class="form-control @error("main_title.$lang") is-invalid @enderror"
                                                                                        placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
                                                                                        name="main_title[{{ $lang }}]"
-                                                                                       value="{{ old("main_title.{$lang}") }}">
+                                                                                       value="{{ old("main_title.$lang") }}">
                                                                                 <label
                                                                                     for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
-                                                                                @error("main_title.{$lang}")
+                                                                                @error("main_title.$lang")
                                                                                 <p class="text-danger">{{ $message }}</p>
                                                                                 @enderror
                                                                             </div>
@@ -56,13 +56,13 @@
                                                                         <div class="col-md-6 col-12">
                                                                             <div class="form-label-group">
                                                                                 <input type="text" id="slug"
-                                                                                       class="form-control @error("slug.{$lang}") is-invalid @enderror"
+                                                                                       class="form-control @error("slug.$lang") is-invalid @enderror"
                                                                                        placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
                                                                                        name="slug[{{ $lang }}]"
-                                                                                       value="{{ old("slug.{$lang}") }}">
+                                                                                       value="{{ old("slug.$lang") }}">
                                                                                 <label
                                                                                     for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
-                                                                                @error("slug.{$lang}")
+                                                                                @error("slug.$lang")
                                                                                 <p class="text-danger">{{ $message }}</p>
                                                                                 @enderror
                                                                             </div>
@@ -136,25 +136,53 @@
                                                             </div>
                                                         </div>
 
-                                                        <fieldset
-                                                            class="form-group col-md-12 col-12">
-                                                            <label
-                                                                for="basicInputFile">{{ __('Image') }}</label>
-                                                            <div class="custom-file">
-                                                                <input type="file"
-                                                                       class="custom-file-input image-input @error('main_image') is-invalid @enderror"
-                                                                       name="main_image"
-                                                                       id="basicInputFile"
-                                                                       form="project-create-form">
-                                                                <label class="custom-file-label"
-                                                                       for="basicInputFile"></label>
-                                                                @error('main_image')
+
+                                                        <div class="row col-12 col-md-12 mr-0 ml-0 p-0">
+                                                            <fieldset class="form-group col-md-6 col-6">
+                                                                <label for="project-category">
+                                                                    {{ __('Project category') }}
+                                                                </label>
+                                                                <select id="project-category"
+                                                                        class="custom-select project-category @error('category') is-invalid @enderror"
+                                                                        name="category"
+                                                                        form="project-create-form">
+                                                                    <option disabled selected value>
+                                                                        -- select a category --
+                                                                    </option>
+                                                                    @foreach($categories as $category)
+                                                                        <option value="{{ $category->id }}">
+                                                                            {{ $category->category }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                    <option value="add-category">
+                                                                        -- {{ __('add new category') }} --
+                                                                    </option>
+                                                                </select>
+                                                                @error('category')
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
-                                                            </div>
-                                                        </fieldset>
+                                                            </fieldset>
+
+                                                            <fieldset class="form-group col-md-6 col-6">
+                                                                <label for="basicInputFile">{{ __('Image') }}</label>
+                                                                <div class="custom-file">
+                                                                    <input type="file"
+                                                                           class="custom-file-input image-input @error('main_image') is-invalid @enderror"
+                                                                           name="main_image"
+                                                                           id="basicInputFile"
+                                                                           form="project-create-form"
+                                                                           onchange="setPreview(this)">
+                                                                    <label class="custom-file-label"
+                                                                           for="basicInputFile"></label>
+                                                                    @error('main_image')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                    @enderror
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                        <fieldset class="form-group col-md-6 col-6"></fieldset>
                                                         <fieldset
-                                                            class="form-group col-md-12 col-12"
+                                                            class="form-group col-md-6 col-6"
                                                             style="display: flex; justify-content: center; align-items: center;">
                                                             <img id="preview" class="preview" src="#"
                                                                  alt="preview"/>
@@ -175,6 +203,62 @@
                                                     </div>
                                                 @endunless
                                             </fieldset>
+
+                                            <!-- Create Project category Modal -->
+                                            <div class="modal fade" id="category-add" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="category-addTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+                                                     role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-success white">
+                                                            <h5 class="modal-title"
+                                                                id="category-addTitle">{{ __('Create a category') }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="form" action="{{ route('categories.store') }}"
+                                                                  method="post" id="category-create">
+                                                                @csrf
+                                                                @foreach($availableLangs as $lang)
+                                                                    <div class="col-sm-12 data-field-col pt-2 p-1 mb-0 form-label-group">
+                                                                        <input type="text"
+                                                                               class="form-control category-edit-input"
+                                                                               id="category_{{$lang}}"
+                                                                               name="category[{{ $lang }}]"
+                                                                               placeholder="{{ __('Category') . " ($lang)" }}"
+                                                                               value="{{ old("category.$lang") }}">
+                                                                        <label
+                                                                            for="category_{{$lang}}"
+                                                                            style="padding-left: 0.6rem; top: 0;">
+                                                                            {{ __('Category') . " ($lang)" }}
+                                                                        </label>
+                                                                        @error("category.$lang")
+                                                                        <p class="text-danger pt-1 mb-0">{{ $message }}</p>
+                                                                        @enderror
+                                                                    </div>
+                                                                @endforeach
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="add-data-btn">
+                                                                <button class="btn btn-outline-success mr-1"
+                                                                        type="submit" form="category-create">
+                                                                    Add category
+                                                                </button>
+                                                            </div>
+                                                            <div class="cancel-data-btn">
+                                                                <button class="btn btn-outline-primary"
+                                                                        data-dismiss="modal">Cancel
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- Step 2 -->
                                             <h6>Step 2</h6>
@@ -274,6 +358,25 @@
         </script>
     @endpush
 
+    @if($errors->hasAny('category.*'))
+        @push('category-modal-show')
+            <script>
+                $('#category-add').modal('show');
+            </script>
+        @endpush
+    @endif
+
+    @push('category-modal-show-select-change')
+        <script>
+            $('.project-category').on('change', function () {
+                if ($(this).val() === 'add-category') {
+                    $(this).val($(".project-category option:first").val());
+                    $('#category-add').modal('show');
+                }
+            });
+        </script>
+    @endpush
+
     @push('image-preview')
         <script>
             var preview = $('.preview');
@@ -315,14 +418,14 @@
                 var preview = $(obj).closest('.card-body').find('.' + previewClassName);
 
                 switch (imageType) {
-                    case 'image-small':
-                        readURL(obj, preview);
-                        break;
                     case 'image-big':
                         readURL(obj, preview, '100%');
                         break;
                     case 'slide':
                         imagesPreview(obj, preview);
+                        break;
+                    default:
+                        readURL(obj, preview);
                         break;
                 }
             }

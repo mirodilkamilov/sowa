@@ -8,10 +8,12 @@
                data-toggle="tab"
                href="#{{ $lang }}-just" role="tab"
                aria-controls="{{ $lang }}-just"
-               aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $lang }}
+               aria-selected="{{ $loop->first ? 'true' : 'false' }}">
+                {{ $lang }}
                 @if(!empty($errors->all()))
                     @php $errorCounter = 0; @endphp
-                    @php $errorCounter = $hasMultiValuedInput ? count($errors->get("content.$key.*.$lang")) : count($errors->get("*.$lang")); @endphp
+                    @php $errorCounterForSimpleInput = count($errors->get("main_title.$lang")) + count($errors->get("slug.$lang")); @endphp
+                    @php $errorCounter = $hasMultiValuedInput ? count($errors->get("content.$key.*.$lang")) : $errorCounterForSimpleInput; @endphp
                     @if($errorCounter > 0)
                         <span class="badge badge badge-danger badge-pill float-right">{{ $errorCounter }}</span>
                     @endif

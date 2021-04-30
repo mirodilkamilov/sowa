@@ -158,7 +158,7 @@
     </script>
 
     @if($errors->any())
-        @push('modal-script')
+        @push('category-modal-show')
             <script>
                 $('#category-add').modal('show');
             </script>

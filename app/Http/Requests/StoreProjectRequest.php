@@ -31,6 +31,7 @@ class StoreProjectRequest extends FormRequest
             'slug.ru' => 'required|min:3|max:20',
             'slug.en' => 'nullable|required_with:main_title.en|min:3|max:20',
             'slug.uz' => 'nullable|required_with:main_title.uz|min:3|max:20',
+            'category' => 'required|integer|min:1|exists:categories,id',
             'main_image' => 'required|image|max:4000',
             'client' => 'nullable|min:3|max:30',
             'year' => 'nullable|digits:4|integer|min:1990|max:' . (date('Y') + 1),

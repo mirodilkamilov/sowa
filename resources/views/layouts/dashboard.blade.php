@@ -364,7 +364,8 @@
 <script src="/app-assets/js/scripts/forms/wizard-steps.js"></script>
 <!-- END: Page JS-->
 
-@stack('modal-script')
+@stack('category-modal-show')
+@stack('category-modal-show-select-change')
 @stack('image-preview')
 @stack('image-preview-with-placeholder')
 @stack('edit-user-message')
