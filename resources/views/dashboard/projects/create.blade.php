@@ -391,7 +391,12 @@
                     case 'text':
                         var textCopyContent = textContent.clone().css('display', 'block');
                         changeTextInputNames();
+                        textCopyContent.find('.editor').attr('id', 'editor-new');
                         textCopyContent.appendTo(changedContent.find('.card-content'));
+
+                        // var quill = new Quill('#editor-new', {
+                        //     theme: 'snow'
+                        // });
                         break;
 
                     case 'image-small':

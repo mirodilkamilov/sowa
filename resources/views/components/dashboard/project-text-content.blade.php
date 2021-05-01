@@ -48,3 +48,10 @@
         </div>
     </div>
 </div>
+
+{{--<!-- Create the editor container -->--}}
+{{--<div id="editor" class="editor">--}}
+{{--    <p>Hello World!</p>--}}
+{{--    <p>Some initial <strong>bold</strong> text</p>--}}
+{{--    <p><br></p>--}}
+{{--</div>--}}

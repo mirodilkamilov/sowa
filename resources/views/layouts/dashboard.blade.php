@@ -68,9 +68,10 @@
     <!-- END: Page CSS-->
 
     <link rel="stylesheet" href="/assets/styles/custom.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
             integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-
 </head>
 <!-- END: Head-->
 
@@ -362,6 +363,8 @@
 <script src="/app-assets/vendors/js/ui/jquery.sticky.js"></script>
 <script src="/app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
 <script src="/app-assets/js/scripts/forms/wizard-steps.js"></script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <!-- END: Page JS-->
 
 @stack('category-modal-show')
