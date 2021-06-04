@@ -268,8 +268,11 @@
                                     <div class="content-buttons mt-3"
                                          style="display: flex; justify-content: space-between;">
                                         <div class="add-btn-container">
-                                            <button type="button" class="btn btn-success add-content-btn">
-                                                {{ __('Add content') }}
+                                            <button type="button" class="btn btn-success add-template-btn mr-1">
+                                                {{ __('Create template') }}
+                                            </button>
+                                            <button type="button" class="btn btn-secondary add-content-btn">
+                                                {{ __('Add custom content') }}
                                             </button>
                                         </div>
                                         <div class="form-btn-container">
@@ -448,6 +451,216 @@
                 appendedTemplate.attr('id', contentCounter);
                 appendedTemplate.find('select').attr('name', 'content[' + contentCounter + '][type]');
             });
+
+            $('.add-template-btn').on('click', function () {
+                let existingContent = $('.template-copy-content').length;
+                if (existingContent > 1) {
+                    if ($('.content-container .template-message').length === 0)
+                        $('.content-container').append('<p class="template-message text-danger">Cannot generate template. Content already exist</p>');
+                    return;
+                }
+
+                createTemplate();
+            });
+
+            function createTemplate() {
+                var contentType;
+                var template = ``;
+                for (let contentId = 1; contentId <= 6; contentId++) {
+                    if (contentId % 2 === 1)
+                        contentType = 'text';
+                    else if (contentId === 2)
+                        contentType = 'image-small';
+                    else if (contentId === 4)
+                        contentType = 'slide';
+                    else if (contentId === 6)
+                        contentType = 'image-big';
+
+                    template += createContent(contentId, contentType);
+                }
+
+                $('.content-container').append(template);
+            }
+
+            function createContent(contentId, contentType) {
+                if (contentId > 6)
+                    return false;
+
+                var contentStart = `<div class="card mb-1 template-copy-content" id="` + contentId + `">
+               <div class="card-header">
+                  <label for="content-type-` + contentId + `">Content type</label>
+                  <select id="content-type-` + contentId + `" class="custom-select" name="content[` + contentId + `][type]" onchange="changeContentType(this)">
+                     <option disabled="" selected="" value=""> -- select a type --</option>
+                     <option value="text" ` + (contentType === 'text' ? 'selected' : '') + `>Text</option>
+                     <option value="image-small" ` + (contentType === 'image-small' ? 'selected' : '') + `>Small Image</option>
+                     <option value="image-big" ` + (contentType === 'image-big' ? 'selected' : '') + `>Wide Image</option>
+                     <option value="slide" ` + (contentType === 'slide' ? 'selected' : '') + `>Slide</option>
+                  </select>
+               </div>`;
+
+
+                var contentEnd = `<div class="card-footer">
+                  <i class="feather icon-trash-2 text-danger pr-1 remove-content" onclick="removeContent(this)"></i>
+               </div>
+            </div>`;
+
+                var content = contentStart;
+
+                switch (contentType) {
+                    case 'text':
+                        var textContent = `<div class="card-content pb-1">
+              <div class="card-body pb-0 text-copy-content">
+                 <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
+                    <li class="nav-item">
+                       <a class="nav-link text-uppercase active ru-tab-justified" onclick="changeLangTabs(this)"
+                          data-toggle="tab" href="#ru-just" role="tab" aria-controls="ru-just"
+                          aria-selected="true">
+                          ru
+                       </a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link text-uppercase en-tab-justified" onclick="changeLangTabs(this)"
+                          data-toggle="tab" href="#en-just" role="tab" aria-controls="en-just" aria-selected="false">
+                          en
+                       </a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link text-uppercase uz-tab-justified" onclick="changeLangTabs(this)"
+                          data-toggle="tab" href="#uz-just" role="tab" aria-controls="uz-just" aria-selected="false">
+                          uz
+                       </a>
+                    </li>
+                 </ul>
+                 <div class="tab-content pt-2 col-md-12 col-12 pr-0 pl-0 text-content">
+                    <div class="tab-pane active tab-pane-ru" role="tabpanel" aria-labelledby="ru-tab-justified">
+                       <div class="row">
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="title-ru-` + contentId + `" class="form-control " placeholder="Title (ru)" rows="4"
+                                   name="content[` + contentId + `][title][ru]">` + (contentId === 3 ? 'Задача' : '') + (contentId === 5 ? 'Сделано' : '') + `</textarea>
+                                <label for="title-ru-` + contentId + `">Title (ru)</label>
+                             </div>
+                          </div>
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="description-ru-` + contentId + `" class="form-control " placeholder="Description (ru)" rows="4"
+                                   name="content[` + contentId + `][description][ru]"></textarea>
+                                <label for="description-ru-` + contentId + `">Description (ru)</label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="tab-pane tab-pane-en" role="tabpanel" aria-labelledby="en-tab-justified">
+                       <div class="row">
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="title-en-` + contentId + `" class="form-control " placeholder="Title (en)" rows="4"
+                                   name="content[` + contentId + `][title][en]"></textarea>
+                                <label for="title-en-` + contentId + `">Title (en)</label>
+                             </div>
+                          </div>
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="description-en-` + contentId + `" class="form-control " placeholder="Description (en)" rows="4"
+                                   name="content[` + contentId + `][description][en]"></textarea>
+                                <label for="description-en-` + contentId + `">Description (en)</label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="tab-pane tab-pane-uz" role="tabpanel" aria-labelledby="uz-tab-justified">
+                       <div class="row">
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="title-uz-` + contentId + `" class="form-control " placeholder="Title (uz)" rows="4"
+                                   name="content[` + contentId + `][title][uz]"></textarea>
+                                <label for="title-uz-` + contentId + `">Title (uz)</label>
+                             </div>
+                          </div>
+                          <div class="col-md-6 col-12">
+                             <div class="form-label-group">
+                                <textarea id="description-uz-` + contentId + `" class="form-control " placeholder="Description (uz)" rows="4"
+                                   name="content[` + contentId + `][description][uz]"></textarea>
+                                <label for="description-uz-` + contentId + `">Description (uz)</label>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="wrapper pt-1" style="display: flex; justify-content: center;">
+                       <div class="form-label-group mb-1">
+                          <input type="number" id="position-` + contentId + `" class="form-control " name="content[` + contentId + `][position]"
+                             placeholder="Position" value="` + contentId + `">
+                          <label for="position-` + contentId + `">Position</label>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>`;
+                        content += textContent + contentEnd;
+                        break;
+
+                    case 'slide':
+                        var slideContent = `<div class="card-content pb-1">
+                  <div class="card-body pb-0 slide-copy-content">
+                     <div class="row mr-0 ml-0 pt-1">
+                        <fieldset class="form-group col-md-8 col-8 image-input-container pl-0">
+                           <label for="basicInputFile" style="position: absolute; top: -1.3rem;">Image</label>
+                           <div class="custom-file">
+                              <input type="file" class="custom-file-input image-input " name="content[` + contentId + `][slide][]"
+                                 id="input-file-` + contentId + `" onchange="setPreview(this)" multiple="">
+                              <label class="custom-file-label" for="input-file-` + contentId + `"></label>
+                           </div>
+                        </fieldset>
+
+                        <div class="col-md-4 col-4 pr-0">
+                           <div class="form-label-group mb-0">
+                              <input type="number" id="position-` + contentId + `" class="form-control " name="content[` + contentId + `][position]"
+                                 placeholder="Position" value="` + contentId + `">
+                              <label for="position-` + contentId + `">Position</label>
+                           </div>
+                        </div>
+                     </div>
+                     <fieldset class="form-group col-md-12 col-12 mb-0 p-0">
+                        <div class="slide-preview"></div>
+                     </fieldset>
+                  </div>
+               </div>`;
+                        content += slideContent + contentEnd;
+                        break;
+
+                    case 'image-small':
+                    case 'image-big':
+                        var image = `<div class="card-content pb-1">
+                  <div class="card-body pb-0 image-copy-content">
+                     <div class="row mr-0 ml-0 pt-1">
+                        <fieldset class="form-group col-md-6 col-6 image-input-container pl-0">
+                           <label for="input-file-` + contentId + `" style="position: absolute; top: -1.3rem;">Image</label>
+                           <div class="custom-file">
+                              <input type="file" class="custom-file-input image-input " name="content[1][image]" id="input-file-` + contentId + `"
+                                 onchange="setPreview(this)">
+                              <label class="custom-file-label" for="input-file-` + contentId + `"></label>
+                           </div>
+                        </fieldset>
+
+                        <div class="col-md-6 col-6 pr-0">
+                           <div class="form-label-group mb-0">
+                              <input type="number" id="position-` + contentId + `" class="form-control " name="content[` + contentId + `][position]"
+                                 placeholder="Position" value="` + contentId + `">
+                              <label for="position-` + contentId + `">Position</label>
+                           </div>
+                        </div>
+                     </div>
+                     <fieldset class="form-group col-md-6 col-6 mb-0 pl-0" style="display: flex; justify-content: center;">
+                        <img class="preview" id="preview" src="#" alt="preview" style="display: none;">
+                     </fieldset>
+                  </div>
+               </div>`;
+                        content += image + contentEnd;
+                        break;
+                }
+
+                return content;
+            }
 
             function changeLangTabs(obj) {
                 var allClassNames = obj.className;
