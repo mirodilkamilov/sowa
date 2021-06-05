@@ -216,43 +216,7 @@
                                 </div>
                             </div>
 
-                        @if(session('hasCompletedFirstPart'))
-                            <!--= Template copy content                            -->
-                                <div class="card mb-1 template-copy-content">
-                                    <div class="card-header">
-                                        <label for="content-type">{{ __('Content type') }}</label>
-                                        <select id="content-type"
-                                                class="custom-select"
-                                                name="content[][type]"
-                                                onchange="changeContentType(this)">
-                                            <option disabled selected value> -- select a type --</option>
-                                            <option value="text">{{ __('Text') }}</option>
-                                            <option value="image-small">{{ __('Small Image') }}</option>
-                                            <option value="image-big">{{ __('Wide Image') }}</option>
-                                            <option value="slide">{{ __('Slide') }}</option>
-                                        </select>
-                                    </div>
-                                    <div class="card-content pb-1"></div>
-                                    <div class="card-footer">
-                                        <i class="feather icon-trash-2 text-danger pr-1 remove-content"
-                                           onclick="removeContent(this)"></i>
-                                    </div>
-                                </div>
-                                <!--= Text copy content -->
-                                <div class="card-body pb-0 text-copy-content">
-                                    <x-dashboard.language-tabs :availableLangs="$availableLangs"
-                                                               :hasMultiValuedInput="true"/>
-                                    <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
-                                </div>
-                                <!--= Image copy content -->
-                                <div class="card-body pb-0 image-copy-content">
-                                    <x-dashboard.project-image-content/>
-                                </div>
-                                <!--= Slide copy content -->
-                                <div class="card-body pb-0 slide-copy-content">
-                                    <x-dashboard.project-slide-content/>
-                                </div>
-
+                            @if(session('hasCompletedFirstPart'))
                                 <form class="form" action="{{ route('project-contents.store') }}"
                                       method="post"
                                       enctype="multipart/form-data"
@@ -377,139 +341,67 @@
     @push('project-content-manipulation')
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
-            var templateContent = $('.template-copy-content').css('display', 'none');
-            var textContent = $('.text-copy-content').css('display', 'none');
-            var imageContent = $('.image-copy-content').css('display', 'none');
-            var slideContent = $('.slide-copy-content').css('display', 'none');
-
-            var lastOldContentId = $('.old-content').last().attr('id');
-            var contentCounter = lastOldContentId ?? 0;
 
             function changeContentType(select) {
                 // * remove existing content if any
                 var changedContent = $(select).parents('.card');
                 changedContent.find('.card-body').remove();
+                var changedContentId = changedContent.attr('id');
 
-                switch (select.value) {
-                    case 'text':
-                        var textCopyContent = textContent.clone().css('display', 'block');
-                        changeTextInputNames();
-                        textCopyContent.find('.editor').attr('id', 'editor-new');
-                        textCopyContent.appendTo(changedContent.find('.card-content'));
-
-                        // var quill = new Quill('#editor-new', {
-                        //     theme: 'snow'
-                        // });
-                        break;
-
-                    case 'image-small':
-                        var imageSmallCopyContent = imageContent.clone().css('display', 'block');
-                        changeImageInputNames(imageSmallCopyContent);
-                        imageSmallCopyContent.appendTo(changedContent.find('.card-content'));
-                        break;
-
-                    case 'image-big':
-                        var imageBigCopyContent = imageContent.clone().css('display', 'block');
-                        changeImageInputNames(imageBigCopyContent);
-                        imageBigCopyContent.appendTo(changedContent.find('.card-content'));
-                        break;
-
-                    case 'slide':
-                        var slideCopyContent = slideContent.clone().css('display', 'block');
-                        changeImageInputNames(slideCopyContent, true);
-                        var appendedSlide = slideCopyContent.appendTo(changedContent.find('.card-content'));
-                        appendedSlide.find('.slide-preview img').remove();
-                        break;
-                }
-
-                function changeTextInputNames() {
-                    var id = changedContent[0].id;
-                    for (let lang of avilableLangs) {
-                        textCopyContent.find('#title-' + lang).attr('name', 'content[' + id + '][title][' + lang + ']');
-                        textCopyContent.find('#description-' + lang).attr('name', 'content[' + id + '][description][' + lang + ']');
-                    }
-                    changePositionInputName(textCopyContent, id);
-                }
-
-                function changeImageInputNames(imageCopyContent, isSlideType = false) {
-                    var id = changedContent[0].id
-                    imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image]');
-                    if (isSlideType)
-                        imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][slide][]');
-                    changePositionInputName(imageCopyContent, id);
-                }
-
-                function changePositionInputName(copyContent, id) {
-                    copyContent.find('#position').attr('name', 'content[' + id + '][position]');
-                }
+                createContent(changedContentId, select.value);
             }
 
             $('.add-content-btn').on('click', function () {
-                var templateCopyContent = templateContent.clone().css('display', 'block');
-                var appendedTemplate = templateCopyContent.appendTo('.content-container');
-                ++contentCounter;
-                appendedTemplate.attr('id', contentCounter);
-                appendedTemplate.find('select').attr('name', 'content[' + contentCounter + '][type]');
+                createSingleTemplate();
             });
 
             $('.add-template-btn').on('click', function () {
+                var templateMessage = $('.content-container .template-message');
                 let existingContent = $('.template-copy-content').length;
-                if (existingContent > 1) {
-                    if ($('.content-container .template-message').length === 0)
-                        $('.content-container').append('<p class="template-message text-danger">Cannot generate template. Content already exist</p>');
+
+                if (existingContent === 0) {
+                    createFullTemplate();
                     return;
                 }
 
-                createTemplate();
+                if (templateMessage.length > 0)
+                    templateMessage.remove();
+
+                templateMessage = `<div class="template-message alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="mb-0"><i class="feather icon-alert-circle"></i>
+                        Cannot generate template. Content already exist
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>`;
+                $('.content-container').append(templateMessage);
             });
 
-            function createTemplate() {
+            function createFullTemplate() {
                 var contentType;
-                var template = ``;
-                for (let contentId = 1; contentId <= 6; contentId++) {
-                    if (contentId % 2 === 1)
+
+                for (let i = 1; i <= 6; i++) {
+                    if (i % 2 === 1)
                         contentType = 'text';
-                    else if (contentId === 2)
+                    else if (i === 2)
                         contentType = 'image-small';
-                    else if (contentId === 4)
+                    else if (i === 4)
                         contentType = 'slide';
-                    else if (contentId === 6)
+                    else if (i === 6)
                         contentType = 'image-big';
 
-                    template += createContent(contentId, contentType);
+                    let contentId = createSingleTemplate(contentType);
+                    createContent(contentId, contentType);
                 }
-
-                $('.content-container').append(template);
             }
 
             function createContent(contentId, contentType) {
-                if (contentId > 6)
-                    return false;
-
-                var contentStart = `<div class="card mb-1 template-copy-content" id="` + contentId + `">
-               <div class="card-header">
-                  <label for="content-type-` + contentId + `">Content type</label>
-                  <select id="content-type-` + contentId + `" class="custom-select" name="content[` + contentId + `][type]" onchange="changeContentType(this)">
-                     <option disabled="" selected="" value=""> -- select a type --</option>
-                     <option value="text" ` + (contentType === 'text' ? 'selected' : '') + `>Text</option>
-                     <option value="image-small" ` + (contentType === 'image-small' ? 'selected' : '') + `>Small Image</option>
-                     <option value="image-big" ` + (contentType === 'image-big' ? 'selected' : '') + `>Wide Image</option>
-                     <option value="slide" ` + (contentType === 'slide' ? 'selected' : '') + `>Slide</option>
-                  </select>
-               </div>`;
-
-
-                var contentEnd = `<div class="card-footer">
-                  <i class="feather icon-trash-2 text-danger pr-1 remove-content" onclick="removeContent(this)"></i>
-               </div>
-            </div>`;
-
-                var content = contentStart;
+                var content;
 
                 switch (contentType) {
                     case 'text':
-                        var textContent = `<div class="card-content pb-1">
-              <div class="card-body pb-0 text-copy-content">
+                        content = `<div class="card-body pb-0 text-copy-content">
                  <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
                     <li class="nav-item">
                        <a class="nav-link text-uppercase active ru-tab-justified" onclick="changeLangTabs(this)"
@@ -596,12 +488,10 @@
                  </div>
               </div>
            </div>`;
-                        content += textContent + contentEnd;
                         break;
 
                     case 'slide':
-                        var slideContent = `<div class="card-content pb-1">
-                  <div class="card-body pb-0 slide-copy-content">
+                        content = `<div class="card-body pb-0 slide-copy-content">
                      <div class="row mr-0 ml-0 pt-1">
                         <fieldset class="form-group col-md-8 col-8 image-input-container pl-0">
                            <label for="basicInputFile" style="position: absolute; top: -1.3rem;">Image</label>
@@ -625,13 +515,11 @@
                      </fieldset>
                   </div>
                </div>`;
-                        content += slideContent + contentEnd;
                         break;
 
                     case 'image-small':
                     case 'image-big':
-                        var image = `<div class="card-content pb-1">
-                  <div class="card-body pb-0 image-copy-content">
+                        content = `<div class="card-body pb-0 image-copy-content">
                      <div class="row mr-0 ml-0 pt-1">
                         <fieldset class="form-group col-md-6 col-6 image-input-container pl-0">
                            <label for="input-file-` + contentId + `" style="position: absolute; top: -1.3rem;">Image</label>
@@ -655,11 +543,37 @@
                      </fieldset>
                   </div>
                </div>`;
-                        content += image + contentEnd;
                         break;
                 }
 
-                return content;
+                $('.template-copy-content#' + contentId + ' .card-content').append(content);
+            }
+
+            function createSingleTemplate(contentType = 'none') {
+                let lastContentId = $('.template-copy-content').last().attr('id') ?? 0;
+                ++lastContentId;
+
+                var singleTemplate = `<div class="card mb-1 template-copy-content" id="` + lastContentId + `">
+               <div class="card-header">
+                  <label for="content-type-` + lastContentId + `">Content type</label>
+                  <select id="content-type-` + lastContentId + `" class="custom-select" name="content[` + lastContentId + `][type]" onchange="changeContentType(this)">
+                     <option disabled="" selected="" value="">-- select a type --</option>
+                     <option value="text" ` + (contentType === 'text' ? 'selected' : '') + `>Text</option>
+                     <option value="image-small" ` + (contentType === 'image-small' ? 'selected' : '') + `>Small Image</option>
+                     <option value="image-big" ` + (contentType === 'image-big' ? 'selected' : '') + `>Wide Image</option>
+                     <option value="slide" ` + (contentType === 'slide' ? 'selected' : '') + `>Slide</option>
+                  </select>
+               </div>
+
+               <div class="card-content pb-1"></div>
+
+                <div class="card-footer">
+                  <i class="feather icon-trash-2 text-danger pr-1 remove-content" onclick="removeContent(this)"></i>
+               </div>
+            </div>`;
+
+                $('.content-container').append(singleTemplate);
+                return lastContentId;
             }
 
             function changeLangTabs(obj) {

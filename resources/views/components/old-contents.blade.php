@@ -22,7 +22,7 @@
         @if(!isset($oldValue['type']))
             @break
         @endif
-        <div class="card mb-1 old-content" id="{{ $key }}">
+        <div class="card mb-1 template-copy-content" id="{{ $key }}">
             <div class="card-header">
                 @php $optionValues = ['text' => 'Text', 'image-small' => 'Small Image', 'image-big' => 'Wide Image', 'slide' => 'Slide']; @endphp
                 <label for="content-type">{{ __('Content type') }}</label>
