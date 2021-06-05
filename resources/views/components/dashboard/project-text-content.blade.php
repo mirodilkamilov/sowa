@@ -7,7 +7,7 @@
                 <div class="col-md-6 col-12">
                     <div class="form-label-group">
                         <textarea
-                            id="title-{{$lang}}"
+                            form="project-create-form" id="title-{{$lang}}"
                             class="form-control @error("content.$key.title.$lang") is-invalid @enderror"
                             placeholder="{{ __('Title') . ' ('. $lang . ')' }}" rows="4"
                             name="content[{{ $key }}][title][{{ $lang }}]">{{ old("content.$key.title.$lang") }}</textarea>
@@ -20,7 +20,7 @@
                 <div class="col-md-6 col-12">
                     <div class="form-label-group">
                         <textarea
-                            id="description-{{$lang}}"
+                            form="project-create-form" id="description-{{$lang}}"
                             class="form-control @error("content.$key.description.$lang") is-invalid @enderror"
                             placeholder="{{ __('Description') . ' ('. $lang . ')' }}" rows="4"
                             name="content[{{ $key }}][description][{{ $lang }}]">{{ old("content.$key.description.$lang") }}</textarea>
@@ -36,7 +36,7 @@
     <div class="wrapper pt-1"
          style="display: flex; justify-content: center;">
         <div class="form-label-group mb-1">
-            <input type="number" id="position"
+            <input form="project-create-form" type="number" id="position"
                    class="form-control @error("content.$key.position") is-invalid @enderror"
                    name="content[{{ $key }}][position]"
                    placeholder="{{ __('Position') }}"

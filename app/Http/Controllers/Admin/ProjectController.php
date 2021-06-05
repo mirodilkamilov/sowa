@@ -27,6 +27,7 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
+        dd($request->all());
         try {
             $project_id = StoreProjectJob::dispatchSync($request);
         } catch (\Exception $exception) {
