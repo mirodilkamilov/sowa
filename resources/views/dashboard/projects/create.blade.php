@@ -522,7 +522,7 @@
                         <fieldset class="form-group col-md-6 col-6 image-input-container pl-0">
                            <label for="input-file-` + contentId + `" style="position: absolute; top: -1.3rem;">Image</label>
                            <div class="custom-file">
-                              <input type="file" class="custom-file-input image-input " name="content[1][image]" id="input-file-` + contentId + `"
+                              <input type="file" class="custom-file-input image-input " name="content[` + contentId + `][image]" id="input-file-` + contentId + `"
                                  onchange="setPreview(this)">
                               <label class="custom-file-label" for="input-file-` + contentId + `"></label>
                            </div>
