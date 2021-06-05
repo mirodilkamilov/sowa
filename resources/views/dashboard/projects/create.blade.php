@@ -11,287 +11,249 @@
 
             <x-custom-alerts/>
 
-            <div class="content-body">
-                <section id="number-tabs">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">{{ session('hasCompletedFirstPart') ? __('Create a project\'s content part') : __('Create project\'s main part') }}</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
+            <section id="number-tabs">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ session('hasCompletedFirstPart') ? __('Create a project\'s content part') : __('Create project\'s main part') }}</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
 
-                                        <div class="number-tab-steps wizard-circle form" id="wizard">
-                                            <!-- Step 1 -->
-                                            <h6>Step 1</h6>
-                                            <fieldset>
-                                                @unless(session('hasCompletedFirstPart'))
-                                                    <form class="form" action="{{ route('projects.store') }}"
-                                                          method="post"
-                                                          enctype="multipart/form-data" id="project-create-form">
-                                                        @csrf
-                                                        <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
+                                    <div class="number-tab-steps wizard-circle form" id="wizard">
+                                        <!-- Step 1 -->
+                                        <h6>Step 1</h6>
+                                        <fieldset>
+                                            @unless(session('hasCompletedFirstPart'))
+                                                <form class="form" action="{{ route('projects.store') }}"
+                                                      method="post"
+                                                      enctype="multipart/form-data" id="project-create-form">
+                                                    @csrf
+                                                    <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
 
-                                                        <div class="tab-content pt-2 col-md-12 col-12 pr-0 pl-0">
-                                                            @foreach($availableLangs as $lang)
-                                                                <div
-                                                                    class="tab-pane @if($loop->first) active @endif tab-pane-{{$lang}}"
-                                                                    id="{{ $lang }}-just" role="tabpanel"
-                                                                    aria-labelledby="{{ $lang }}-tab-justified">
-                                                                    <div class="row">
-                                                                        <div class="col-md-6 col-12">
-                                                                            <div class="form-label-group">
-                                                                                <input type="text" id="main_title"
-                                                                                       class="form-control @error("main_title.$lang") is-invalid @enderror"
-                                                                                       placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
-                                                                                       name="main_title[{{ $lang }}]"
-                                                                                       value="{{ old("main_title.$lang") }}">
-                                                                                <label
-                                                                                    for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
-                                                                                @error("main_title.$lang")
-                                                                                <p class="text-danger">{{ $message }}</p>
-                                                                                @enderror
-                                                                            </div>
+                                                    <div class="tab-content pt-2 col-md-12 col-12 pr-0 pl-0">
+                                                        @foreach($availableLangs as $lang)
+                                                            <div
+                                                                class="tab-pane @if($loop->first) active @endif tab-pane-{{$lang}}"
+                                                                id="{{ $lang }}-just" role="tabpanel"
+                                                                aria-labelledby="{{ $lang }}-tab-justified">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="form-label-group">
+                                                                            <input type="text" id="main_title"
+                                                                                   class="form-control @error("main_title.$lang") is-invalid @enderror"
+                                                                                   placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
+                                                                                   name="main_title[{{ $lang }}]"
+                                                                                   value="{{ old("main_title.$lang") }}">
+                                                                            <label
+                                                                                for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
+                                                                            @error("main_title.$lang")
+                                                                            <p class="text-danger">{{ $message }}</p>
+                                                                            @enderror
                                                                         </div>
-                                                                        <div class="col-md-6 col-12">
-                                                                            <div class="form-label-group">
-                                                                                <input type="text" id="slug"
-                                                                                       class="form-control @error("slug.$lang") is-invalid @enderror"
-                                                                                       placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
-                                                                                       name="slug[{{ $lang }}]"
-                                                                                       value="{{ old("slug.$lang") }}">
-                                                                                <label
-                                                                                    for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
-                                                                                @error("slug.$lang")
-                                                                                <p class="text-danger">{{ $message }}</p>
-                                                                                @enderror
-                                                                            </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-12">
+                                                                        <div class="form-label-group">
+                                                                            <input type="text" id="slug"
+                                                                                   class="form-control @error("slug.$lang") is-invalid @enderror"
+                                                                                   placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
+                                                                                   name="slug[{{ $lang }}]"
+                                                                                   value="{{ old("slug.$lang") }}">
+                                                                            <label
+                                                                                for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
+                                                                            @error("slug.$lang")
+                                                                            <p class="text-danger">{{ $message }}</p>
+                                                                            @enderror
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </form>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </form>
 
-                                                    @push('divider-custom-style')
-                                                        <style>
-                                                            .divider .divider-text:before,
-                                                            .divider .divider-text:after {
-                                                                border-top: 1px solid #7367F0 !important;
-                                                            }
-                                                        </style>
-                                                    @endpush
-                                                    <div class="divider">
-                                                        <div class="divider-text">
-                                                            <h4 class="title text-primary">Common form fields</h4>
+                                                @push('divider-custom-style')
+                                                    <style>
+                                                        .divider .divider-text:before,
+                                                        .divider .divider-text:after {
+                                                            border-top: 1px solid #7367F0 !important;
+                                                        }
+                                                    </style>
+                                                @endpush
+                                                <div class="divider">
+                                                    <div class="divider-text">
+                                                        <h4 class="title text-primary">Common form fields</h4>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row pt-1">
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="form-label-group mb-0">
+                                                            <input type="text" id="client"
+                                                                   class="form-control @error('client') is-invalid @enderror"
+                                                                   name="client"
+                                                                   placeholder="{{ __('Client') }}"
+                                                                   form="project-create-form"
+                                                                   value="{{ old('client') }}">
+                                                            <label
+                                                                for="client">{{ __('Client') }}</label>
+                                                            @error('client')
+                                                            <p class="text-danger mb-0">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
                                                     </div>
 
-                                                    <div class="row pt-1">
-                                                        <div class="col-md-4 col-6">
-                                                            <div class="form-label-group mb-0">
-                                                                <input type="text" id="client"
-                                                                       class="form-control @error('client') is-invalid @enderror"
-                                                                       name="client"
-                                                                       placeholder="{{ __('Client') }}"
-                                                                       form="project-create-form"
-                                                                       value="{{ old('client') }}">
-                                                                <label
-                                                                    for="client">{{ __('Client') }}</label>
-                                                                @error('client')
-                                                                <p class="text-danger mb-0">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="form-label-group mb-0">
+                                                            <input type="number" id="year"
+                                                                   class="form-control @error('year') is-invalid @enderror"
+                                                                   name="year"
+                                                                   placeholder="{{ __('Year') }}"
+                                                                   form="project-create-form"
+                                                                   value="{{ old('year') }}">
+                                                            <label
+                                                                for="year">{{ __('Year') }}</label>
+                                                            @error('year')
+                                                            <p class="text-danger mb-0">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
+                                                    </div>
 
-                                                        <div class="col-md-4 col-6">
-                                                            <div class="form-label-group mb-0">
-                                                                <input type="number" id="year"
-                                                                       class="form-control @error('year') is-invalid @enderror"
-                                                                       name="year"
-                                                                       placeholder="{{ __('Year') }}"
-                                                                       form="project-create-form"
-                                                                       value="{{ old('year') }}">
-                                                                <label
-                                                                    for="year">{{ __('Year') }}</label>
-                                                                @error('year')
-                                                                <p class="text-danger mb-0">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
+                                                    <div class="col-md-4 col-6">
+                                                        <div class="form-label-group">
+                                                            <input type="text" id="url"
+                                                                   class="form-control @error('url') is-invalid @enderror"
+                                                                   placeholder="{{ __('Url') }}"
+                                                                   name="url"
+                                                                   form="project-create-form"
+                                                                   value="{{ old('url') }}">
+                                                            <label
+                                                                for="url">{{ __('Url') }}</label>
+                                                            @error('url')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
-
-                                                        <div class="col-md-4 col-6">
-                                                            <div class="form-label-group">
-                                                                <input type="text" id="url"
-                                                                       class="form-control @error('url') is-invalid @enderror"
-                                                                       placeholder="{{ __('Url') }}"
-                                                                       name="url"
-                                                                       form="project-create-form"
-                                                                       value="{{ old('url') }}">
-                                                                <label
-                                                                    for="url">{{ __('Url') }}</label>
-                                                                @error('url')
-                                                                <p class="text-danger">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
+                                                    </div>
 
 
-                                                        <div class="row col-12 col-md-12 mr-0 ml-0 p-0">
-                                                            <fieldset class="form-group col-md-6 col-6">
-                                                                <label for="project-category">
-                                                                    {{ __('Project category') }}
-                                                                </label>
-                                                                <select id="project-category"
-                                                                        class="custom-select project-category @error('category') is-invalid @enderror"
-                                                                        name="category"
-                                                                        form="project-create-form">
-                                                                    <option disabled selected value>
-                                                                        -- select a category --
+                                                    <div class="row col-12 col-md-12 mr-0 ml-0 p-0">
+                                                        <fieldset class="form-group col-md-6 col-6">
+                                                            <label for="project-category">
+                                                                {{ __('Project category') }}
+                                                            </label>
+                                                            <select id="project-category"
+                                                                    class="custom-select project-category @error('category') is-invalid @enderror"
+                                                                    name="category"
+                                                                    form="project-create-form">
+                                                                <option disabled selected value>
+                                                                    -- select a category --
+                                                                </option>
+                                                                @foreach($categories as $category)
+                                                                    <option value="{{ $category->id }}">
+                                                                        {{ $category->category }}
                                                                     </option>
-                                                                    @foreach($categories as $category)
-                                                                        <option value="{{ $category->id }}">
-                                                                            {{ $category->category }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                    <option value="add-category">
-                                                                        -- {{ __('add new category') }} --
-                                                                    </option>
-                                                                </select>
-                                                                @error('category')
-                                                                <p class="text-danger">{{ $message }}</p>
-                                                                @enderror
-                                                            </fieldset>
-
-                                                            <fieldset class="form-group col-md-6 col-6">
-                                                                <label for="basicInputFile">{{ __('Image') }}</label>
-                                                                <div class="custom-file">
-                                                                    <input type="file"
-                                                                           class="custom-file-input image-input @error('main_image') is-invalid @enderror"
-                                                                           name="main_image"
-                                                                           id="basicInputFile"
-                                                                           form="project-create-form"
-                                                                           onchange="setPreview(this)">
-                                                                    <label class="custom-file-label"
-                                                                           for="basicInputFile"></label>
-                                                                    @error('main_image')
-                                                                    <p class="text-danger">{{ $message }}</p>
-                                                                    @enderror
-                                                                </div>
-                                                            </fieldset>
-                                                        </div>
-                                                        <fieldset class="form-group col-md-6 col-6"></fieldset>
-                                                        <fieldset
-                                                            class="form-group col-md-6 col-6"
-                                                            style="display: flex; justify-content: center; align-items: center;">
-                                                            <img id="preview" class="preview" src="#"
-                                                                 alt="preview"/>
+                                                                @endforeach
+                                                                <option value="add-category">
+                                                                    -- {{ __('add new category') }} --
+                                                                </option>
+                                                            </select>
+                                                            @error('category')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
                                                         </fieldset>
 
-                                                        <div class="col-12 mt-1">
-                                                            <button type="submit"
-                                                                    class="btn btn-primary mr-1 mb-1"
-                                                                    form="project-create-form">
-                                                                {{ __('Save') }}
-                                                            </button>
-                                                            <button type="reset"
-                                                                    class="btn btn-outline-warning mr-1 mb-1"
-                                                                    form="project-create-form">
-                                                                {{ __('Reset') }}
-                                                            </button>
-                                                        </div>
+                                                        <fieldset class="form-group col-md-6 col-6">
+                                                            <label for="basicInputFile">{{ __('Image') }}</label>
+                                                            <div class="custom-file">
+                                                                <input type="file"
+                                                                       class="custom-file-input image-input @error('main_image') is-invalid @enderror"
+                                                                       name="main_image"
+                                                                       id="basicInputFile"
+                                                                       form="project-create-form"
+                                                                       onchange="setPreview(this)">
+                                                                <label class="custom-file-label"
+                                                                       for="basicInputFile"></label>
+                                                                @error('main_image')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
-                                                @endunless
-                                            </fieldset>
+                                                    <fieldset class="form-group col-md-6 col-6"></fieldset>
+                                                    <fieldset
+                                                        class="form-group col-md-6 col-6"
+                                                        style="display: flex; justify-content: center; align-items: center;">
+                                                        <img id="preview" class="preview" src="#"
+                                                             alt="preview"/>
+                                                    </fieldset>
 
-                                            <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
+                                                    <div class="col-12 mt-1">
+                                                        <button type="submit"
+                                                                class="btn btn-primary mr-1 mb-1"
+                                                                form="project-create-form">
+                                                            {{ __('Save') }}
+                                                        </button>
+                                                        <button type="reset"
+                                                                class="btn btn-outline-warning mr-1 mb-1"
+                                                                form="project-create-form">
+                                                            {{ __('Reset') }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endunless
+                                        </fieldset>
 
-                                            <!-- Step 2 -->
-                                            <h6>Step 2</h6>
-                                            <fieldset></fieldset>
+                                        <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
 
-                                        </div>
+                                        <!-- Step 2 -->
+                                        <h6>Step 2</h6>
+                                        <fieldset></fieldset>
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                         @if(session('hasCompletedFirstPart'))
-                            <!--= Template copy content                            -->
-                                <div class="card mb-1 template-copy-content">
-                                    <div class="card-header">
-                                        <label for="content-type">{{ __('Content type') }}</label>
-                                        <select id="content-type"
-                                                class="custom-select"
-                                                name="content[][type]"
-                                                onchange="changeContentType(this)">
-                                            <option disabled selected value> -- select a type --</option>
-                                            <option value="text">{{ __('Text') }}</option>
-                                            <option value="image-small">{{ __('Small Image') }}</option>
-                                            <option value="image-big">{{ __('Wide Image') }}</option>
-                                            <option value="slide">{{ __('Slide') }}</option>
-                                        </select>
-                                    </div>
-                                    <div class="card-content pb-1"></div>
-                                    <div class="card-footer">
-                                        <i class="feather icon-trash-2 text-danger pr-1 remove-content"
-                                           onclick="removeContent(this)"></i>
-                                    </div>
-                                </div>
-                                <!--= Text copy content -->
-                                <div class="card-body pb-0 text-copy-content">
-                                    <x-dashboard.language-tabs :availableLangs="$availableLangs"
-                                                               :hasMultiValuedInput="true"/>
-                                    <x-dashboard.project-text-content :availableLangs="$availableLangs"/>
-                                </div>
-                                <!--= Image copy content -->
-                                <div class="card-body pb-0 image-copy-content">
-                                    <x-dashboard.project-image-content/>
-                                </div>
-                                <!--= Slide copy content -->
-                                <div class="card-body pb-0 slide-copy-content">
-                                    <x-dashboard.project-slide-content/>
+                            <form class="form" action="{{ route('project-contents.store') }}"
+                                  method="post"
+                                  enctype="multipart/form-data"
+                                  id="project-content-create-form">
+                                @csrf
+
+                                <div class="content-container">
+                                    @if($errors->any())
+                                        <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
+                                    @endif
                                 </div>
 
-                                <form class="form" action="{{ route('project-contents.store') }}"
-                                      method="post"
-                                      enctype="multipart/form-data"
-                                      id="project-content-create-form">
-                                    @csrf
-
-                                    <div class="content-container">
-                                        @if($errors->any())
-                                            <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
-                                        @endif
+                                <div class="content-buttons mt-3"
+                                     style="display: flex; justify-content: space-between;">
+                                    <div class="add-btn-container">
+                                        <button type="button" class="btn btn-success add-template-btn mr-1">
+                                            {{ __('Create template') }}
+                                        </button>
+                                        <button type="button" class="btn btn-secondary add-content-btn">
+                                            {{ __('Add custom content') }}
+                                        </button>
                                     </div>
-
-                                    <div class="content-buttons mt-3"
-                                         style="display: flex; justify-content: space-between;">
-                                        <div class="add-btn-container">
-                                            <button type="button" class="btn btn-success add-template-btn mr-1">
-                                                {{ __('Create template') }}
-                                            </button>
-                                            <button type="button" class="btn btn-secondary add-content-btn">
-                                                {{ __('Add custom content') }}
-                                            </button>
-                                        </div>
-                                        <div class="form-btn-container">
-                                            <button type="submit" class="btn btn-primary mr-1">
-                                                {{ __('Save') }}
-                                            </button>
-                                            <button type="reset" class="btn btn-outline-warning">
-                                                {{ __('Reset') }}
-                                            </button>
-                                        </div>
+                                    <div class="form-btn-container">
+                                        <button type="submit" class="btn btn-primary mr-1">
+                                            {{ __('Save') }}
+                                        </button>
+                                        <button type="reset" class="btn btn-outline-warning">
+                                            {{ __('Reset') }}
+                                        </button>
                                     </div>
-                                </form>
-                            @endif
+                                </div>
+                            </form>
+                        @endif
 
-                        </div>
                     </div>
-                </section>
-                <!-- Form wizard with number tabs section end -->
-            </div>
+                </div>
+            </section>
+            <!-- Form wizard with number tabs section end -->
         </div>
     </div>
 
@@ -377,139 +339,67 @@
     @push('project-content-manipulation')
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
-            var templateContent = $('.template-copy-content').css('display', 'none');
-            var textContent = $('.text-copy-content').css('display', 'none');
-            var imageContent = $('.image-copy-content').css('display', 'none');
-            var slideContent = $('.slide-copy-content').css('display', 'none');
-
-            var lastOldContentId = $('.old-content').last().attr('id');
-            var contentCounter = lastOldContentId ?? 0;
 
             function changeContentType(select) {
                 // * remove existing content if any
                 var changedContent = $(select).parents('.card');
                 changedContent.find('.card-body').remove();
+                var changedContentId = changedContent.attr('id');
 
-                switch (select.value) {
-                    case 'text':
-                        var textCopyContent = textContent.clone().css('display', 'block');
-                        changeTextInputNames();
-                        textCopyContent.find('.editor').attr('id', 'editor-new');
-                        textCopyContent.appendTo(changedContent.find('.card-content'));
-
-                        // var quill = new Quill('#editor-new', {
-                        //     theme: 'snow'
-                        // });
-                        break;
-
-                    case 'image-small':
-                        var imageSmallCopyContent = imageContent.clone().css('display', 'block');
-                        changeImageInputNames(imageSmallCopyContent);
-                        imageSmallCopyContent.appendTo(changedContent.find('.card-content'));
-                        break;
-
-                    case 'image-big':
-                        var imageBigCopyContent = imageContent.clone().css('display', 'block');
-                        changeImageInputNames(imageBigCopyContent);
-                        imageBigCopyContent.appendTo(changedContent.find('.card-content'));
-                        break;
-
-                    case 'slide':
-                        var slideCopyContent = slideContent.clone().css('display', 'block');
-                        changeImageInputNames(slideCopyContent, true);
-                        var appendedSlide = slideCopyContent.appendTo(changedContent.find('.card-content'));
-                        appendedSlide.find('.slide-preview img').remove();
-                        break;
-                }
-
-                function changeTextInputNames() {
-                    var id = changedContent[0].id;
-                    for (let lang of avilableLangs) {
-                        textCopyContent.find('#title-' + lang).attr('name', 'content[' + id + '][title][' + lang + ']');
-                        textCopyContent.find('#description-' + lang).attr('name', 'content[' + id + '][description][' + lang + ']');
-                    }
-                    changePositionInputName(textCopyContent, id);
-                }
-
-                function changeImageInputNames(imageCopyContent, isSlideType = false) {
-                    var id = changedContent[0].id
-                    imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][image]');
-                    if (isSlideType)
-                        imageCopyContent.find('.image-input').attr('name', 'content[' + id + '][slide][]');
-                    changePositionInputName(imageCopyContent, id);
-                }
-
-                function changePositionInputName(copyContent, id) {
-                    copyContent.find('#position').attr('name', 'content[' + id + '][position]');
-                }
+                createContent(changedContentId, select.value);
             }
 
             $('.add-content-btn').on('click', function () {
-                var templateCopyContent = templateContent.clone().css('display', 'block');
-                var appendedTemplate = templateCopyContent.appendTo('.content-container');
-                ++contentCounter;
-                appendedTemplate.attr('id', contentCounter);
-                appendedTemplate.find('select').attr('name', 'content[' + contentCounter + '][type]');
+                createSingleTemplate();
             });
 
             $('.add-template-btn').on('click', function () {
-                let existingContent = $('.template-copy-content').length;
-                if (existingContent > 1) {
-                    if ($('.content-container .template-message').length === 0)
-                        $('.content-container').append('<p class="template-message text-danger">Cannot generate template. Content already exist</p>');
+                var templateMessage = $('.content-container .template-message');
+                let existingContent = $('.content-body').length;
+
+                if (existingContent === 0) {
+                    createFullTemplate();
                     return;
                 }
 
-                createTemplate();
+                if (templateMessage.length > 0)
+                    templateMessage.remove();
+
+                templateMessage = `<div class="template-message alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="mb-0"><i class="feather icon-alert-circle"></i>
+                        Cannot generate template. Content already exist
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>`;
+                $('.content-container').append(templateMessage);
             });
 
-            function createTemplate() {
+            function createFullTemplate() {
                 var contentType;
-                var template = ``;
-                for (let contentId = 1; contentId <= 6; contentId++) {
-                    if (contentId % 2 === 1)
+
+                for (let i = 1; i <= 6; i++) {
+                    if (i % 2 === 1)
                         contentType = 'text';
-                    else if (contentId === 2)
+                    else if (i === 2)
                         contentType = 'image-small';
-                    else if (contentId === 4)
+                    else if (i === 4)
                         contentType = 'slide';
-                    else if (contentId === 6)
+                    else if (i === 6)
                         contentType = 'image-big';
 
-                    template += createContent(contentId, contentType);
+                    let contentId = createSingleTemplate(contentType);
+                    createContent(contentId, contentType);
                 }
-
-                $('.content-container').append(template);
             }
 
             function createContent(contentId, contentType) {
-                if (contentId > 6)
-                    return false;
-
-                var contentStart = `<div class="card mb-1 template-copy-content" id="` + contentId + `">
-               <div class="card-header">
-                  <label for="content-type-` + contentId + `">Content type</label>
-                  <select id="content-type-` + contentId + `" class="custom-select" name="content[` + contentId + `][type]" onchange="changeContentType(this)">
-                     <option disabled="" selected="" value=""> -- select a type --</option>
-                     <option value="text" ` + (contentType === 'text' ? 'selected' : '') + `>Text</option>
-                     <option value="image-small" ` + (contentType === 'image-small' ? 'selected' : '') + `>Small Image</option>
-                     <option value="image-big" ` + (contentType === 'image-big' ? 'selected' : '') + `>Wide Image</option>
-                     <option value="slide" ` + (contentType === 'slide' ? 'selected' : '') + `>Slide</option>
-                  </select>
-               </div>`;
-
-
-                var contentEnd = `<div class="card-footer">
-                  <i class="feather icon-trash-2 text-danger pr-1 remove-content" onclick="removeContent(this)"></i>
-               </div>
-            </div>`;
-
-                var content = contentStart;
+                var content;
 
                 switch (contentType) {
                     case 'text':
-                        var textContent = `<div class="card-content pb-1">
-              <div class="card-body pb-0 text-copy-content">
+                        content = `<div class="card-body pb-0 text-copy-content">
                  <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
                     <li class="nav-item">
                        <a class="nav-link text-uppercase active ru-tab-justified" onclick="changeLangTabs(this)"
@@ -596,12 +486,10 @@
                  </div>
               </div>
            </div>`;
-                        content += textContent + contentEnd;
                         break;
 
                     case 'slide':
-                        var slideContent = `<div class="card-content pb-1">
-                  <div class="card-body pb-0 slide-copy-content">
+                        content = `<div class="card-body pb-0 slide-copy-content">
                      <div class="row mr-0 ml-0 pt-1">
                         <fieldset class="form-group col-md-8 col-8 image-input-container pl-0">
                            <label for="basicInputFile" style="position: absolute; top: -1.3rem;">Image</label>
@@ -625,18 +513,16 @@
                      </fieldset>
                   </div>
                </div>`;
-                        content += slideContent + contentEnd;
                         break;
 
                     case 'image-small':
                     case 'image-big':
-                        var image = `<div class="card-content pb-1">
-                  <div class="card-body pb-0 image-copy-content">
+                        content = `<div class="card-body pb-0 image-copy-content">
                      <div class="row mr-0 ml-0 pt-1">
                         <fieldset class="form-group col-md-6 col-6 image-input-container pl-0">
                            <label for="input-file-` + contentId + `" style="position: absolute; top: -1.3rem;">Image</label>
                            <div class="custom-file">
-                              <input type="file" class="custom-file-input image-input " name="content[1][image]" id="input-file-` + contentId + `"
+                              <input type="file" class="custom-file-input image-input " name="content[` + contentId + `][image]" id="input-file-` + contentId + `"
                                  onchange="setPreview(this)">
                               <label class="custom-file-label" for="input-file-` + contentId + `"></label>
                            </div>
@@ -655,11 +541,37 @@
                      </fieldset>
                   </div>
                </div>`;
-                        content += image + contentEnd;
                         break;
                 }
 
-                return content;
+                $('.content-body#' + contentId + ' .card-content').append(content);
+            }
+
+            function createSingleTemplate(contentType = 'none') {
+                let lastContentId = $('.content-body').last().attr('id') ?? 0;
+                ++lastContentId;
+
+                var singleTemplate = `<div class="card mb-1 content-body" id="` + lastContentId + `">
+               <div class="card-header">
+                  <label for="content-type-` + lastContentId + `">Content type</label>
+                  <select id="content-type-` + lastContentId + `" class="custom-select" name="content[` + lastContentId + `][type]" onchange="changeContentType(this)">
+                     <option disabled="" selected="" value="">-- select a type --</option>
+                     <option value="text" ` + (contentType === 'text' ? 'selected' : '') + `>Text</option>
+                     <option value="image-small" ` + (contentType === 'image-small' ? 'selected' : '') + `>Small Image</option>
+                     <option value="image-big" ` + (contentType === 'image-big' ? 'selected' : '') + `>Wide Image</option>
+                     <option value="slide" ` + (contentType === 'slide' ? 'selected' : '') + `>Slide</option>
+                  </select>
+               </div>
+
+               <div class="card-content pb-1"></div>
+
+                <div class="card-footer">
+                  <i class="feather icon-trash-2 text-danger pr-1 remove-content" onclick="removeContent(this)"></i>
+               </div>
+            </div>`;
+
+                $('.content-container').append(singleTemplate);
+                return lastContentId;
             }
 
             function changeLangTabs(obj) {
