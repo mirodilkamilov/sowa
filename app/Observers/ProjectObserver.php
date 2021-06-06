@@ -28,8 +28,6 @@ class ProjectObserver
     public function creating(Project $project): void
     {
         $project->main_image = '/assets/uploads/' . $project->main_image;
-        // * soft deletes until corresponding project content is added
-        $project->deleted_at = now();
     }
 
     public function saving(Project $project): void

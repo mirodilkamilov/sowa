@@ -27,19 +27,15 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
-        dd($request->all());
         try {
-            $project_id = StoreProjectJob::dispatchSync($request);
+            StoreProjectJob::dispatchSync($request);
         } catch (\Exception $exception) {
             $request->session()->flash('error', $exception->getMessage());
             return redirect()->route('projects.create');
         }
 
-        $request->session()->flash('success', 'Main project part was successfully saved!');
-        $request->session()->flash('info', 'Please complete the other part as well, because incomplete project will not be displayed');
-        $request->session()->put('hasCompletedFirstPart', true);
-        $request->session()->put('project_id', $project_id);
-        return redirect()->route('projects.create');
+        $request->session()->flash('success', 'Project was successfully created!');
+        return redirect()->route('projects.index');
     }
 
     public function edit(Project $project)
