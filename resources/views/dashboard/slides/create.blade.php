@@ -136,7 +136,7 @@
                                                     <input type="file"
                                                            class="custom-file-input @error('image') is-invalid @enderror"
                                                            name="image"
-                                                           id="basicInputFile" form="slide-form">
+                                                           id="basicInputFile" form="slide-form" onchange="readURL(this)">
                                                     <label class="custom-file-label"
                                                            for="basicInputFile"></label>
                                                     @error('image')
@@ -146,7 +146,7 @@
                                             </fieldset>
                                             <fieldset class="form-group col-md-12 col-12"
                                                       style="display: flex; justify-content: center; align-items: center;">
-                                                <img id="preview" src="#" alt="preview"/>
+                                                <img class="preview" src="#" alt="preview"/>
                                             </fieldset>
 
                                             <div class="col-12 mt-1">
@@ -170,28 +170,7 @@
         </div>
     </div>
 
-    @push('file-preview')
-        <script>
-            var preview = $('#preview');
-            preview.css('display', 'none');
-
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        preview.attr('src', e.target.result);
-                        preview.css('width', '300px');
-                        preview.css('display', 'block');
-                    }
-
-                    reader.readAsDataURL(input.files[0]); // convert to base64 string
-                }
-            }
-
-            $("#basicInputFile").change(function () {
-                readURL(this);
-            });
-        </script>
+    @push('image-preview')
+        <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
 @endsection

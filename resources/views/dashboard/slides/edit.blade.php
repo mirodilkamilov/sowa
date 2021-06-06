@@ -8,7 +8,7 @@
         <div class="content-wrapper">
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"
-                                :slicedSegment="$slicedSegment ?? null"/>
+                                :slicedSegment="$slicedSegment"/>
 
             <div class="content-body">
                 <section id="multiple-column-form">
@@ -134,14 +134,14 @@
                                             </div>
 
                                             <fieldset class="form-group col-md-12 col-12">
-                                                <label for="basicInputFile">{{ __('Image') }}</label>
+                                                <label for="image">{{ __('Image') }}</label>
                                                 <div class="custom-file">
                                                     <input type="file"
                                                            class="custom-file-input @error('image') is-invalid @enderror"
                                                            name="image"
-                                                           id="basicInputFile" form="slide-form">
+                                                           id="image" form="slide-form" onchange="readURL(this)">
                                                     <label class="custom-file-label"
-                                                           for="basicInputFile"></label>
+                                                           for="image"></label>
                                                     @error('image')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
@@ -150,9 +150,9 @@
 
                                             <fieldset class="form-group col-md-12 col-12"
                                                       style="display: flex; justify-content: center; align-items: center;">
-                                                <img id="preview" src="#" alt="preview"/>
-                                                <img src="{{ $slide->image }}" alt="placeholder" style="width: 300px;"
-                                                     id="placeholder">
+                                                <img class="preview" src="#" alt="preview"/>
+                                                <img src="{{ $slide->image }}" class="placeholder" alt="placeholder"
+                                                     style="width: 300px;">
                                             </fieldset>
 
                                             <div class="col-12 mt-1">
@@ -176,30 +176,7 @@
         </div>
     </div>
 
-    @push('image-preview-with-placeholder')
-        <script>
-            $("#placeholder").css('display', 'block');
-            $("#preview").css('display', 'none');
-
-            function readURL(input) {
-                $("#placeholder").css('display', 'block');
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $("#placeholder").css('display', 'none');
-                        $('#preview').attr('src', e.target.result);
-                        $("#preview").css('width', '300px');
-                        $("#preview").css('display', 'block');
-                    }
-
-                    reader.readAsDataURL(input.files[0]); // convert to base64 string
-                }
-            }
-
-            $("#basicInputFile").change(function () {
-                readURL(this);
-            });
-        </script>
+    @push('image-preview')
+        <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
 @endsection

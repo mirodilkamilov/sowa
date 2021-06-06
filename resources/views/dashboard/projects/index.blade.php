@@ -54,7 +54,7 @@
                                         @endforeach
                                     </td>
                                     <td class="product-action text-center">
-                                        <a class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
+                                        <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
                                         <a class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">
