@@ -4,7 +4,7 @@
     <fieldset class="form-group col-md-6 col-6 image-input-container pl-0">
         <label for="basicInputFile" style="position: absolute; top: -1.3rem;">{{ __('Image') }}</label>
         <div class="custom-file">
-            <input type="file" class="custom-file-input image-input @error("content.$key.image") is-invalid @enderror"
+            <input form="project-create-form" type="file" class="custom-file-input image-input @error("content.$key.image") is-invalid @enderror"
                    name="content[{{ $key }}][image]" id="basicInputFile"
                    onchange="setPreview(this)">
             <label class="custom-file-label" for="basicInputFile"></label>
@@ -16,7 +16,7 @@
 
     <div class="col-md-6 col-6 pr-0">
         <div class="form-label-group mb-0">
-            <input type="number" id="position"
+            <input form="project-create-form" type="number" id="position"
                    class="form-control @error("content.$key.position") is-invalid @enderror"
                    name="content[{{ $key }}][position]"
                    placeholder="{{ __('Position') }}"

@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyContactController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProjectContentController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\TrashController;
@@ -24,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $defaultLang = config('app.default_language');
     $langInSession = session('language');
-    $locale = isset($langInSession) ? $langInSession : $defaultLang;
+    $locale = $langInSession ?? $defaultLang;
 
     return redirect()->route('home.index', $locale);
 });
@@ -68,8 +67,6 @@ Route::group([
     Route::resource('categories', CategoryController::class)->except(['show', 'create']);
 
     Route::resource('projects', ProjectController::class)->except(['show']);
-
-    Route::resource('project-contents', ProjectContentController::class)->only(['store', 'update', 'destroy']);
 
     // * Users contacts controller (messages)
     Route::resource('contacts', ContactController::class)->except(['create', 'show', 'store']);

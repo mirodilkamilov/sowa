@@ -26,7 +26,7 @@
             <div class="card-header">
                 @php $optionValues = ['text' => 'Text', 'image-small' => 'Small Image', 'image-big' => 'Wide Image', 'slide' => 'Slide']; @endphp
                 <label for="content-type">{{ __('Content type') }}</label>
-                <select id="content-type"
+                <select form="project-create-form" id="content-type"
                         class="custom-select @error("content.$key.type") is-invalid @enderror"
                         name="content[{{ $key }}][type]"
                         onchange="changeContentType(this)">
