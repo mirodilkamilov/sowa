@@ -11,6 +11,15 @@
 
             <x-custom-alerts/>
 
+            @error("main")
+            <div class="alert alert-danger alert-dismissible mb-1" role="alert">
+                <p>{{ $message }}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                </button>
+            </div>
+            @enderror
+
             <section id="number-tabs">
                 <div class="row">
                     <div class="col-12">
@@ -36,13 +45,13 @@
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
                                                                 <input type="text" id="main_title"
-                                                                       class="form-control @error("main_title.$lang") is-invalid @enderror"
+                                                                       class="form-control @error("main.*.main_title.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
-                                                                       name="main_title[{{ $lang }}]"
-                                                                       value="{{ old("main_title.$lang") }}">
+                                                                       name="main[1][main_title][{{ $lang }}]"
+                                                                       value="{{ old("main.1.main_title.$lang") }}">
                                                                 <label
                                                                     for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
-                                                                @error("main_title.$lang")
+                                                                @error("main.*.main_title.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
                                                             </div>
@@ -50,13 +59,13 @@
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
                                                                 <input type="text" id="slug"
-                                                                       class="form-control @error("slug.$lang") is-invalid @enderror"
+                                                                       class="form-control @error("main.*.slug.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
-                                                                       name="slug[{{ $lang }}]"
-                                                                       value="{{ old("slug.$lang") }}">
+                                                                       name="main[1][slug][{{ $lang }}]"
+                                                                       value="{{ old("main.1.slug.$lang") }}">
                                                                 <label
                                                                     for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
-                                                                @error("slug.$lang")
+                                                                @error("main.*.slug.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
                                                             </div>
@@ -84,14 +93,14 @@
                                             <div class="col-md-4 col-6">
                                                 <div class="form-label-group mb-0">
                                                     <input type="text" id="client"
-                                                           class="form-control @error('client') is-invalid @enderror"
-                                                           name="client"
+                                                           class="form-control @error('main.*.client') is-invalid @enderror"
+                                                           name="main[1][client]"
                                                            placeholder="{{ __('Client') }}"
                                                            form="project-create-form"
-                                                           value="{{ old('client') }}">
+                                                           value="{{ old('main.1.client') }}">
                                                     <label
                                                         for="client">{{ __('Client') }}</label>
-                                                    @error('client')
+                                                    @error('main.*.client')
                                                     <p class="text-danger mb-0">{{ $message }}</p>
                                                     @enderror
                                                 </div>
@@ -100,14 +109,14 @@
                                             <div class="col-md-4 col-6">
                                                 <div class="form-label-group mb-0">
                                                     <input type="number" id="year"
-                                                           class="form-control @error('year') is-invalid @enderror"
-                                                           name="year"
+                                                           class="form-control @error('main.*.year') is-invalid @enderror"
+                                                           name="main[1][year]"
                                                            placeholder="{{ __('Year') }}"
                                                            form="project-create-form"
-                                                           value="{{ old('year') }}">
+                                                           value="{{ old('main.1.year') }}">
                                                     <label
                                                         for="year">{{ __('Year') }}</label>
-                                                    @error('year')
+                                                    @error('main.*.year')
                                                     <p class="text-danger mb-0">{{ $message }}</p>
                                                     @enderror
                                                 </div>
@@ -116,14 +125,14 @@
                                             <div class="col-md-4 col-6">
                                                 <div class="form-label-group">
                                                     <input type="text" id="url"
-                                                           class="form-control @error('url') is-invalid @enderror"
+                                                           class="form-control @error('main.*.url') is-invalid @enderror"
                                                            placeholder="{{ __('Url') }}"
-                                                           name="url"
+                                                           name="main[1][url]"
                                                            form="project-create-form"
-                                                           value="{{ old('url') }}">
+                                                           value="{{ old('main.1.url') }}">
                                                     <label
                                                         for="url">{{ __('Url') }}</label>
-                                                    @error('url')
+                                                    @error('main.*.url')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </div>
@@ -136,14 +145,16 @@
                                                         {{ __('Project category') }}
                                                     </label>
                                                     <select id="project-category"
-                                                            class="custom-select project-category @error('category') is-invalid @enderror"
-                                                            name="category"
+                                                            class="custom-select project-category @error('main.*.category') is-invalid @enderror"
+                                                            name="main[1][category]"
                                                             form="project-create-form">
                                                         <option disabled selected value>
                                                             -- select a category --
                                                         </option>
                                                         @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}">
+                                                            <option
+                                                                value="{{ $category->id }}"
+                                                                @if(old('main.1.category') == $category->id) selected @endif>
                                                                 {{ $category->category }}
                                                             </option>
                                                         @endforeach
@@ -151,7 +162,7 @@
                                                             -- {{ __('add new category') }} --
                                                         </option>
                                                     </select>
-                                                    @error('category')
+                                                    @error('main.*.category')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </fieldset>
@@ -160,14 +171,14 @@
                                                     <label for="basicInputFile">{{ __('Image') }}</label>
                                                     <div class="custom-file">
                                                         <input type="file"
-                                                               class="custom-file-input image-input @error('main_image') is-invalid @enderror"
-                                                               name="main_image"
+                                                               class="custom-file-input image-input @error('main.*.main_image') is-invalid @enderror"
+                                                               name="main[1][main_image]"
                                                                id="basicInputFile"
                                                                form="project-create-form"
                                                                onchange="setPreview(this)">
                                                         <label class="custom-file-label"
                                                                for="basicInputFile"></label>
-                                                        @error('main_image')
+                                                        @error('main.*.main_image')
                                                         <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
