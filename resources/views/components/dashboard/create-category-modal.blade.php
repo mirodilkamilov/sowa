@@ -63,3 +63,14 @@
         </script>
     @endpush
 @endif
+
+@push('category-modal-show-select-change')
+    <script>
+        $('.project-category').on('change', function () {
+            if ($(this).val() === 'add-category') {
+                $(this).val($('.project-category option:first').val());
+                $('#category-add').modal('show');
+            }
+        });
+    </script>
+@endpush

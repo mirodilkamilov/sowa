@@ -3,7 +3,10 @@ var placeholder = $('.placeholder');
 preview.css('display', 'none');
 placeholder.css('display', 'block');
 
-function readURL(input, preview, width = '300px') {
+function readURL(input, preview = null, width = '300px') {
+    if (preview === null)
+        preview = $(input).closest('.card-body').find('.preview');
+
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 

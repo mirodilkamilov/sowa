@@ -40,8 +40,6 @@
     <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    @stack('divider-custom-style')
-
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
