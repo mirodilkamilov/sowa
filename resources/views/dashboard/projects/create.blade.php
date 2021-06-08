@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- BEGIN: Content-->
+{{--    TODO: Make component project's main part--}}
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -25,7 +26,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header justify-content-center">
-                                <h4 class="card-title">{{ __('Create a project\'s main part') }}</h4>
+                                <h4 class="card-title">{{ __('Create project\'s main part') }}</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body pb-0">
@@ -44,13 +45,13 @@
                                                     <div class="row">
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
-                                                                <input type="text" id="main_title"
+                                                                <input type="text" id="main_title-{{ $loop->iteration }}"
                                                                        class="form-control @error("main.*.main_title.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
                                                                        name="main[1][main_title][{{ $lang }}]"
                                                                        value="{{ old("main.1.main_title.$lang") }}">
                                                                 <label
-                                                                    for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
+                                                                    for="main_title-{{ $loop->iteration }}">{{ __('Main title') . ' ('. $lang . ')' }}</label>
                                                                 @error("main.*.main_title.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
@@ -58,13 +59,13 @@
                                                         </div>
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
-                                                                <input type="text" id="slug"
+                                                                <input type="text" id="slug-{{ $loop->iteration }}"
                                                                        class="form-control @error("main.*.slug.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
                                                                        name="main[1][slug][{{ $lang }}]"
                                                                        value="{{ old("main.1.slug.$lang") }}">
                                                                 <label
-                                                                    for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
+                                                                    for="slug-{{ $loop->iteration }}">{{ __('Slug') . ' ('. $lang . ')' }}</label>
                                                                 @error("main.*.slug.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
@@ -199,7 +200,7 @@
                             </div>
                         </div>
 
-                        <h4 class="card-title text-center">{{ __('Create a project\'s content part') }}</h4>
+                        <h4 class="card-title text-center">{{ __('Create project\'s content part') }}</h4>
                         <div class="content-container">
                             @if($errors->any())
                                 <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
@@ -243,58 +244,7 @@
     @endpush
 
     @push('image-preview')
-        <script>
-            var preview = $('.preview');
-            preview.css('display', 'none');
-
-            function readURL(input, preview, width = '300px') {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        preview.attr('src', e.target.result);
-                        preview.css('width', width);
-                        preview.css('display', 'block');
-                    }
-
-                    reader.readAsDataURL(input.files[0]); // convert to base64 string
-                }
-            }
-
-            // * Multiple images preview in browser
-            function imagesPreview(input, placeToInsertImagePreview) {
-                placeToInsertImagePreview.find('img').remove();
-                if (input.files) {
-                    var filesAmount = input.files.length;
-
-                    for (var i = 0; i < filesAmount; i++) {
-                        var reader = new FileReader();
-                        reader.onload = function (event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            }
-
-            function setPreview(obj) {
-                var imageType = $(obj).parents('.card').find('.custom-select').children('option:selected').val();
-                var previewClassName = $(obj).closest('.card-body').find('.preview').hasClass('preview') ? 'preview' : 'slide-preview';
-                var preview = $(obj).closest('.card-body').find('.' + previewClassName);
-
-                switch (imageType) {
-                    case 'image-big':
-                        readURL(obj, preview, '100%');
-                        break;
-                    case 'slide':
-                        imagesPreview(obj, preview);
-                        break;
-                    default:
-                        readURL(obj, preview);
-                        break;
-                }
-            }
-        </script>
+        <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
 
     @push('project-content-manipulation')

@@ -38,9 +38,16 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
-    public function edit(Project $project)
+    public function edit($projectId)
     {
-        //
+        $project = Project::withoutEvents(function () use ($projectId) {
+            $project = Project::findOrFail($projectId);
+            $project->load('project_contents', 'categories');
+            return $project;
+        });
+        $categories = Category::all();
+
+        return view('dashboard.projects.edit', compact('project', 'categories'));
     }
 
     public function update(Request $request, Project $project)

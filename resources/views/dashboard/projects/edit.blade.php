@@ -26,7 +26,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header justify-content-center">
-                                <h4 class="card-title">{{ __('Edit a project\'s main part') }}</h4>
+                                <h4 class="card-title">{{ __('Edit project\'s main part') }}</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body pb-0">
@@ -46,13 +46,13 @@
                                                     <div class="row">
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
-                                                                <input type="text" id="main_title"
+                                                                <input type="text" id="main_title-{{$loop->iteration}}"
                                                                        class="form-control @error("main.*.main_title.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Main title') . ' ('. $lang . ')' }}"
                                                                        name="main[1][main_title][{{ $lang }}]"
                                                                        value="{{ old("main.1.main_title.$lang") ?? $project->main_title[$lang] }}">
                                                                 <label
-                                                                    for="main_title">{{ __('Main title') . ' ('. $lang . ')' }}</label>
+                                                                    for="main_title-{{$loop->iteration}}">{{ __('Main title') . ' ('. $lang . ')' }}</label>
                                                                 @error("main.*.main_title.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
@@ -60,13 +60,13 @@
                                                         </div>
                                                         <div class="col-md-6 col-12">
                                                             <div class="form-label-group">
-                                                                <input type="text" id="slug"
+                                                                <input type="text" id="slug-{{$loop->iteration}}"
                                                                        class="form-control @error("main.*.slug.$lang") is-invalid @enderror"
                                                                        placeholder="{{ __('Slug') . ' ('. $lang . ')' }}"
                                                                        name="main[1][slug][{{ $lang }}]"
                                                                        value="{{ old("main.1.slug.$lang") ?? $project->slug[$lang] }}">
                                                                 <label
-                                                                    for="slug">{{ __('Slug') . ' ('. $lang . ')' }}</label>
+                                                                    for="slug-{{$loop->iteration}}">{{ __('Slug') . ' ('. $lang . ')' }}</label>
                                                                 @error("main.*.slug.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
@@ -195,7 +195,8 @@
                                                 class="form-group col-md-6 col-6"
                                                 style="display: flex; justify-content: center; align-items: center;">
                                                 <img src="#" class="preview" alt="preview"/>
-                                                <img src="{{ $project->main_image }}" class="placeholder" alt="placeholder"
+                                                <img src="{{ $project->main_image }}" class="placeholder"
+                                                     alt="placeholder"
                                                      style="width: 300px;">
                                             </fieldset>
                                         </div>
@@ -206,10 +207,13 @@
                             </div>
                         </div>
 
-                        <h4 class="card-title text-center">{{ __('Edit a project\'s content part') }}</h4>
+                        <h4 class="card-title text-center">{{ __('Edit project\'s content part') }}</h4>
                         <div class="content-container">
                             @if($errors->any())
                                 <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
+                            @else
+                                <x-dashboard.edit-project-content :contents="$project->project_contents"
+                                                                  :availableLangs="$availableLangs"/>
                             @endif
                         </div>
 

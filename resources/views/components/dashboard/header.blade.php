@@ -10,10 +10,10 @@
                         @php $routeUrl = ''; @endphp
                         @foreach($arrayOfRoutes as $route)
                             <li class="breadcrumb-item">
-                                @if(isset($slicedSegment) && $loop->iteration == 3)
-                                    @php $routeUrl = $routeUrl . '/'.  $slicedSegment @endphp
+                                @if(isset($slicedSegment) && $loop->iteration === 3)
+                                    @php $routeUrl .= '/' . $slicedSegment @endphp
                                 @endif
-                                @php $routeUrl = $routeUrl . '/'.  $route @endphp
+                                @php $routeUrl .= '/' . $route @endphp
                                 <a href="{{ asset($routeUrl) }}">{{ __(Str::title($route)) }}</a>
                             </li>
                         @endforeach

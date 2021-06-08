@@ -3,7 +3,7 @@ var placeholder = $('.placeholder');
 preview.css('display', 'none');
 placeholder.css('display', 'block');
 
-function readURL(input, width = '300px') {
+function readURL(input, preview, width = '300px') {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 

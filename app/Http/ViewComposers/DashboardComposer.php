@@ -22,21 +22,21 @@ class DashboardComposer
         // *  remove numbers from url
         $thirdSegmentOfUrl = $request->segment(3);
         $forthSegmentOfUrl = $request->segment(4);
-        if ($forthSegmentOfUrl == 'edit') {
-            $routePath = str_replace("{$thirdSegmentOfUrl}/", '', $routePath);
+        if ($forthSegmentOfUrl === 'edit') {
+            $routePath = str_replace("$thirdSegmentOfUrl/", '', $routePath);
             $this->slicedSegment = $thirdSegmentOfUrl;
         }
 
         $this->arrayOfRoutes = explode('/', $routePath);
         $sizeOfArray = count($this->arrayOfRoutes);
-        $isRouteDashboard = $sizeOfArray == 1;
+        $isRouteDashboard = $sizeOfArray === 1;
 
         $this->currentRoute = $isRouteDashboard ? $this->arrayOfRoutes[0] : $this->arrayOfRoutes[1];
         $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->where('deleted_at', null)->count('id');
         $this->userName = Auth::user()->name;
     }
 
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $view->with('arrayOfRoutes', $this->arrayOfRoutes);
         if (isset($this->slicedSegment))
