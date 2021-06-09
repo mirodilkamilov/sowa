@@ -60,7 +60,7 @@ class ProjectController extends Controller
             return redirect()->route('projects.edit', $project->id);
         }
 
-        $request->session()->flash('success', 'Project was successfully created!');
+        $request->session()->flash('success', 'Changes were successfully saved!');
         return redirect()->route('projects.index');
     }
 

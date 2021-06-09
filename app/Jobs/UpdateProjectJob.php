@@ -39,19 +39,31 @@ class UpdateProjectJob
 
     private function updateContentPart($contents): void
     {
-        ProjectContent::withoutEvents(function () use ($contents) {
-            foreach ($contents as $key => $content) {
+        $contentIdsFromUser = array();
+        ProjectContent::withoutEvents(function () use ($contents, &$contentIdsFromUser) {
+            foreach ($contents as $key => &$content) {
                 $this->updateImageContent($content, $key);
 
                 if (!isset($content['id'])) {
                     $content['project_id'] = $this->project->id;
-                    ProjectContent::create($content);
+                    $content['id'] = ProjectContent::create($content)->id;
+                    $contentIdsFromUser[] = $content['id'];
                     continue;
                 }
 
+                $contentIdsFromUser[] = $content['id'];
                 ProjectContent::where('id', $content['id'])->update($content);
             }
+            unset($content);
         });
+
+
+        //? Check for deleted contents
+        $contentIdsFromDb = ProjectContent::where('project_id', $this->project->id)->pluck('id')->toArray();
+        $needToDeleteIds = array_diff($contentIdsFromDb, $contentIdsFromUser);
+
+        if (!empty($needToDeleteIds))
+            ProjectContent::destroy($needToDeleteIds);
     }
 
     private function updateImageContent(&$content, $key): void
