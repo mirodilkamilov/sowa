@@ -29,7 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'content' => 'required|array|min:1|max:10',
             $prefixContent . '*.type' => 'required|in:text,image-small,image-big,slide',
             $prefixContent . '*.position' => 'required|integer|min:1|max:10|distinct',
-            $prefixContent . '*.id' => 'required|integer|min:1',
+            $prefixContent . '*.id' => 'nullable|integer|min:1|max:200',
 
             $prefixContent . '*.title' => 'required_if:content.*.type,text|array|prohibited_unless:content.*.type,text',
             $prefixContent . '*.title.ru' => 'required_if:content.*.type,text|min:3|max:255',

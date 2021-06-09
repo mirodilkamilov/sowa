@@ -41,31 +41,43 @@ class UpdateProjectJob
     {
         ProjectContent::withoutEvents(function () use ($contents) {
             foreach ($contents as $key => $content) {
-                switch ($content['type']) {
-                    case 'image-small':
-                    case 'image-big':
-                        if ($this->request->hasFile("content.$key.image")) {
-                            $image = $this->request->file("content.$key.image")->store('projects');
-                            $content['image'] = ['image' => $image];
-                        }
-                        break;
-                    case 'slide':
-                        if (!isset($content['slide']))
-                            break;
+                $this->updateImageContent($content, $key);
 
-                        foreach ($content['slide'] as $i => &$img) {
-                            if ($this->request->hasFile("content.$key.slide.$i"))
-                                $img = $this->request->file("content.$key.slide.$i")->store('projects');
-                        }
-
-                        $content['image'] = ['slide' => $content['slide']];
-                        unset($img, $content['slide']);
-                        break;
+                if (!isset($content['id'])) {
+                    $content['project_id'] = $this->project->id;
+                    ProjectContent::create($content);
+                    continue;
                 }
 
                 ProjectContent::where('id', $content['id'])->update($content);
             }
         });
+    }
+
+    private function updateImageContent(&$content, $key): void
+    {
+        switch ($content['type']) {
+            case 'image-small':
+            case 'image-big':
+                if ($this->request->hasFile("content.$key.image")) {
+                    $image = $this->request->file("content.$key.image")->store('projects');
+                    $content['image'] = ['image' => $image];
+                }
+                break;
+            case 'slide':
+                if (!isset($content['slide']))
+                    break;
+
+                foreach ($content['slide'] as $i => &$img) {
+                    if ($this->request->hasFile("content.$key.slide.$i"))
+                        $img = $this->request->file("content.$key.slide.$i")->store('projects');
+                }
+
+                $content['image'] = ['slide' => $content['slide']];
+                unset($img, $content['slide']);
+                break;
+        }
+
     }
 }
 
