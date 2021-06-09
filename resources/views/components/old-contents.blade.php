@@ -39,7 +39,7 @@
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
 
-                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] }}" type="hidden" form="project-create-form">
+                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden" form="project-create-form">
                 @error("content.$key.id")
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
