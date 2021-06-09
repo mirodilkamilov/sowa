@@ -36,7 +36,7 @@
 <fieldset class="form-group col-md-12 col-12 mb-0 p-0">
     <div class="slide-preview">
         @if(isset($content))
-            @foreach($content->image as $img)
+            @foreach($content->getImagePath() as $img)
                 <img src="{{ $img }}" alt="slide image {{ $loop->count }}">
             @endforeach
         @endif

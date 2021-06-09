@@ -24,4 +24,20 @@ class ProjectContent extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getImagePath(): array|string|null
+    {
+        switch ($this->type) {
+            case 'image-small':
+            case 'image-big':
+                return '/assets/uploads/' . $this->image['image'];
+            case 'slide':
+                $slides = array();
+                foreach ($this->image['slide'] as $img) {
+                    $slides[] = '/assets/uploads/' . $img;
+                }
+                return $slides;
+        }
+        return null;
+    }
 }

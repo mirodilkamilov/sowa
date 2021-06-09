@@ -20,4 +20,8 @@ class Slide extends Model
         'description' => 'array',
     ];
 
+    public function getImageAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }

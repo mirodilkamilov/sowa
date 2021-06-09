@@ -67,18 +67,18 @@
                 @break
 
                 @case('image-small')
-                <x-project.image :image="$content->image" class="image-container--gutters"
+                <x-project.image :image="$content->getImagePath()" class="image-container--gutters"
                                  :isLastContentTypeText="$isLastContentTypeText"/>
                 @php $isLastContentTypeText = false; @endphp
                 @break
 
                 @case('image-big')
-                <x-project.image :image="$content->image" :isLastContentTypeText="$isLastContentTypeText"/>
+                <x-project.image :image="$content->getImagePath()" :isLastContentTypeText="$isLastContentTypeText"/>
                 @php $isLastContentTypeText = false; @endphp
                 @break
 
                 @case('slide')
-                <x-project.slider :images="$content->image" :isLastContentTypeText="$isLastContentTypeText"/>
+                <x-project.slider :images="$content->getImagePath()" :isLastContentTypeText="$isLastContentTypeText"/>
                 @php $isLastContentTypeText = false; @endphp
                 @break
             @endswitch

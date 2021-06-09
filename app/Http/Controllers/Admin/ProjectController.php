@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Jobs\Project\StoreProjectJob;
+use App\Jobs\UpdateProjectJob;
 use App\Models\Category;
 use App\Models\Project;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -50,9 +51,17 @@ class ProjectController extends Controller
         return view('dashboard.projects.edit', compact('project', 'categories'));
     }
 
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        try {
+            UpdateProjectJob::dispatchSync($request, $project);
+        } catch (\Exception $exception) {
+            $request->session()->flash('error', $exception->getMessage());
+            return redirect()->route('projects.edit', $project->id);
+        }
+
+        $request->session()->flash('success', 'Project was successfully created!');
+        return redirect()->route('projects.index');
     }
 
     public function destroy(Project $project)

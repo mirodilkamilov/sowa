@@ -15,7 +15,7 @@ class SlideObserver
         $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    public function retrieved(Slide $slide)
+    public function retrieved(Slide $slide): void
     {
         // gets a record with default language if a record doesn't exists with locale
         if (isset($slide->title)) {
@@ -23,16 +23,5 @@ class SlideObserver
             $slide->sub_title = $slide->sub_title[$this->locale] ?? $slide->sub_title[$this->defaultLang];
             $slide->description = $slide->description[$this->locale] ?? $slide->description[$this->defaultLang];
         }
-    }
-
-    public function updating(Slide $slide)
-    {
-        if (isset($slide->image))
-            $slide->image = '/assets/uploads/' . $slide->image;
-    }
-
-    public function creating(Slide $slide)
-    {
-        $slide->image = '/assets/uploads/' . $slide->image;
     }
 }

@@ -4,8 +4,8 @@
     <div class="card mb-1 content-body" id="{{ $loop->iteration }}">
         <div class="card-header">
             @php $optionValues = ['text' => 'Text', 'image-small' => 'Small Image', 'image-big' => 'Wide Image', 'slide' => 'Slide']; @endphp
-            <label for="content-type">{{ __('Content type') }}</label>
-            <select form="project-create-form" class="custom-select"
+            <label for="content-type-{{ $loop->iteration }}">{{ __('Content type') }}</label>
+            <select form="project-create-form" class="custom-select" id="content-type-{{ $loop->iteration }}"
                     name="content[{{ $loop->iteration }}][type]"
                     onchange="changeContentType(this)">
                 @foreach($optionValues as $val => $text)
@@ -13,6 +13,8 @@
                         value="{{ $val }}" {{ $content['type'] ===  $val ? 'selected' : '' }}>{{ __($text) }}</option>
                 @endforeach
             </select>
+
+            <input type="hidden" name="content[{{ $loop->iteration }}][id]" value="{{ $content['id'] }}" form="project-create-form">
         </div>
         <div class="card-content pb-1">
             <div class="card-body pb-0">

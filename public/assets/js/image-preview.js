@@ -6,6 +6,7 @@ placeholder.css('display', 'block');
 function readURL(input, preview = null, width = '300px') {
     if (preview === null)
         preview = $(input).closest('.card-body').find('.preview');
+        placeholder = $(input).closest('.card-body').find('.placeholder');
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();

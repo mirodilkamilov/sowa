@@ -32,7 +32,7 @@
 <fieldset class="form-group col-md-6 col-6 mb-0 pl-0" style="display: flex; justify-content: center;">
     <img class="preview" src="#" alt="preview"/>
     @if(isset($content))
-        <img class="placeholder" src="{{ $content->image }}" alt="placeholder"
+        <img class="placeholder" src="{{ $content->getImagePath() }}" alt="placeholder"
              style="width: {{ $content->type === 'image-small' ? '300px' : '100%' }};"/>
     @endif
 </fieldset>

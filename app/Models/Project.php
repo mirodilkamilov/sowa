@@ -32,4 +32,8 @@ class Project extends Model
         return $this->hasMany(ProjectContent::class)->orderBy('position');
     }
 
+    public function getMainImageAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }
