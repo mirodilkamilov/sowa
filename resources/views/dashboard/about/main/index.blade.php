@@ -8,7 +8,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <div class="content-body">
+            <div class="content-body @if(!isset($about)) fullheight-content @endif">
                 @if(isset($about))
                     <div class="content-body">
                         <button class="btn btn-success mr-1 mb-2" tabindex="0"
@@ -68,22 +68,21 @@
                             </div>
                         </section>
                     </div>
+
+{{--                    <button class="btn btn-outline-primary mb-2" tabindex="0" aria-controls="DataTables_Table_0">--}}
+{{--                        <span>--}}
+{{--                            <i class="feather icon-edit"></i>--}}
+{{--                            Edit--}}
+{{--                        </span>--}}
+{{--                    </button>--}}
                 @endif
-                <button class="btn btn-success mr-1 mb-2" tabindex="0"
+                <a href="{{ route('about.create') }}" class="btn btn-success mr-1 mb-2 " tabindex="0"
                         aria-controls="DataTables_Table_0">
                         <span>
                             <i class="feather icon-plus"></i>
-                            Add List
+                            Add Main Information
                         </span>
-                </button>
-                @if(isset($about))
-                    <button class="btn btn-outline-primary mb-2" tabindex="0" aria-controls="DataTables_Table_0">
-                        <span>
-                            <i class="feather icon-edit"></i>
-                            Edit
-                        </span>
-                    </button>
-                @endif
+                </a>
             </div>
         </div>
     </div>

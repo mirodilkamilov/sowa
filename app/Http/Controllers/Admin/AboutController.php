@@ -14,4 +14,9 @@ class AboutController extends Controller
         return view('dashboard.about.main.index', compact('about'));
     }
 
+    public function create()
+    {
+        return view('dashboard.about.main.create');
+    }
+
 }

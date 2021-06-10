@@ -37,3 +37,11 @@
     border-top: 1px solid #7367F0 !important;
 }
 
+.fullheight-content {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: calc(100vh - 4.5rem - 4.65rem - 55px);
+}

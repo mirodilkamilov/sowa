@@ -71,7 +71,7 @@ Route::group([
     // * Users contacts controller (messages)
     Route::resource('contacts', ContactController::class)->except(['create', 'show', 'store']);
 
-    Route::resource('about', AboutController::class)->except(['create', 'show', 'store']);
+    Route::resource('about', AboutController::class)->except(['show', 'store']);
 
     Route::resource('customers', CompanyContactController::class)->except(['show']);
 
