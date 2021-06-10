@@ -28,7 +28,7 @@ class SlideController extends Controller
     public function store(StoreSlideRequest $request)
     {
         try {
-            StoreSlideJob::dispatchNow($request);
+            StoreSlideJob::dispatchSync($request);
         } catch (\Exception $exception) {
             $request->session()->flash('error', $exception->getMessage());
             return redirect()->route('slides.index');
@@ -51,7 +51,7 @@ class SlideController extends Controller
     public function update(Slide $slide, UpdateSlideRequest $request)
     {
         try {
-            UpdateSlideJob::dispatchNow($slide, $request);
+            UpdateSlideJob::dispatchSync($slide, $request);
         } catch (\Exception $exception) {
             $request->session()->flash('error', $exception->getMessage());
             return redirect()->route('slides.index');

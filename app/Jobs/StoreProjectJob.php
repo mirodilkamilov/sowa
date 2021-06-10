@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Project;
+namespace App\Jobs;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
@@ -42,7 +42,8 @@ class StoreProjectJob
             switch ($content['type']) {
                 case 'image-small':
                 case 'image-big':
-                    $content['image'] = $this->request->file("content.$key.image")->store('projects');
+                    $img = $this->request->file("content.$key.image")->store('projects');
+                    $content['image'] = ['image' => $img];
                     break;
                 case 'slide':
                     foreach ($this->request->file("content.$key.slide") as $i => $image) {
@@ -50,7 +51,7 @@ class StoreProjectJob
                     }
 
                     // * rename slide to image
-                    $content['image'] = $content['slide'];
+                    $content['image'] = ['slide' => $content['slide']];
                     unset($content['slide']);
                     break;
             }

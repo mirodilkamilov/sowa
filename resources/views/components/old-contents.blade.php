@@ -38,6 +38,11 @@
                 @error("content.$key.type")
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
+
+                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden" form="project-create-form">
+                @error("content.$key.id")
+                <p class="text-danger mb-0">{{ $message }}</p>
+                @enderror
             </div>
             <div class="card-content pb-1">
                 <div class="card-body pb-0">

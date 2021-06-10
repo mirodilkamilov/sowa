@@ -40,8 +40,6 @@
     <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    @stack('divider-custom-style')
-
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -64,11 +62,10 @@
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-user.css">
     <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.css">
-    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/forms/wizard.css">
     <!-- END: Page CSS-->
 
     <link rel="stylesheet" href="/assets/styles/custom.css">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+{{--    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">--}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
             integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
@@ -351,28 +348,22 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="/app-assets/js/scripts/cards/card-statistics.js"></script>
 <script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
 <script src="/app-assets/js/scripts/datatables/datatable.js"></script>
 <script src="/app-assets/js/scripts/pages/app-todo.js"></script>
 <script src="/app-assets/js/scripts/pages/app-user.js"></script>
-<script src="/app-assets/vendors/js/extensions/dropzone.min.js"></script>
-<script src="/app-assets/js/scripts/extensions/dropzone.js"></script>
 <script src="/app-assets/js/scripts/modal/components-modal.js"></script>
 
 <script src="/app-assets/vendors/js/ui/jquery.sticky.js"></script>
 <script src="/app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
-<script src="/app-assets/js/scripts/forms/wizard-steps.js"></script>
 
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+{{--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>--}}
 <!-- END: Page JS-->
 
 @stack('category-modal-show')
 @stack('category-modal-show-select-change')
 @stack('image-preview')
-@stack('image-preview-with-placeholder')
 @stack('edit-user-message')
-@stack('wizard-steps-manipulation')
 @stack('project-content-manipulation')
 
 </body>

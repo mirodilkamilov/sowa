@@ -25,11 +25,6 @@ class ProjectObserver
             $project->main_title = $project->main_title[$this->locale] ?? $project->main_title[$this->defaultLang];
     }
 
-    public function creating(Project $project): void
-    {
-        $project->main_image = '/assets/uploads/' . $project->main_image;
-    }
-
     public function saving(Project $project): void
     {
         $slug = collect([

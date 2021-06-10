@@ -1,4 +1,5 @@
 @props(['availableLangs', 'key' => 0, 'hasMultiValuedInput' => false])
+
 <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
     @foreach($availableLangs as $lang)
         <li class="nav-item">

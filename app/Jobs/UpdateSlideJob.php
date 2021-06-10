@@ -27,7 +27,6 @@ class UpdateSlideJob implements ShouldQueue
 
         $this->validated['id'] = $slide->id;
         $this->slide = $slide;
-
     }
 
     public function handle()

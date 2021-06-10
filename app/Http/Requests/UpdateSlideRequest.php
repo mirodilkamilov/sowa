@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSlideRequest extends FormRequest
 {
-    public function rules()
+    public function rules(): array
     {
         $slide_id = $this->segment(3);
         $ignoredPosition = Slide::select(['position'])->find($slide_id)->position;
@@ -23,12 +23,12 @@ class UpdateSlideRequest extends FormRequest
             'description.en' => 'nullable|required_with:title.en|min:3|max:500',
             'description.uz' => 'nullable|required_with:title.uz|min:3|max:500',
             'url' => 'required|url',
-            'position' => "required|integer|gt:0|unique:slides,position,{$ignoredPosition},position,deleted_at,NULL",
+            'position' => "required|integer|gt:0|unique:slides,position,$ignoredPosition,position,deleted_at,NULL",
             'image' => 'nullable|image|max:4000',
         ];
     }
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
