@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Project;
+namespace App\Jobs;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;

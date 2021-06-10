@@ -44,6 +44,7 @@ class UpdateProjectJob
             foreach ($contents as $key => &$content) {
                 $this->updateImageContent($content, $key);
 
+                //? Check for created contents
                 if (!isset($content['id'])) {
                     $content['project_id'] = $this->project->id;
                     $content['id'] = ProjectContent::create($content)->id;
@@ -89,17 +90,5 @@ class UpdateProjectJob
                 unset($img, $content['slide']);
                 break;
         }
-
     }
 }
-
-
-//$array = collect($request->post('content'))->values();
-//
-//foreach ($array as $arr) {
-//
-//    Content::where('id', $arr['id'])->update($arr);
-//    echo $arr['id'];
-//}
-//
-//return;

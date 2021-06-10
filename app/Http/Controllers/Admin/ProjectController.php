@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use App\Jobs\Project\StoreProjectJob;
+use App\Jobs\StoreProjectJob;
 use App\Jobs\UpdateProjectJob;
 use App\Models\Category;
 use App\Models\Project;
