@@ -24,7 +24,13 @@
                                           method="post"
                                           enctype="multipart/form-data" id="project-create-form">
                                         @csrf
-                                        <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
+
+                                        @php $inputs = [
+                                              'main.*.main_title',
+                                              'main.*.slug',
+                                           ];
+                                        @endphp
+                                        <x-dashboard.language-tabs :availableLangs="$availableLangs" :inputs="$inputs"/>
 
                                         <x-dashboard.project-main-part :categories="$categories"
                                                                        :availableLangs="$availableLangs"/>
