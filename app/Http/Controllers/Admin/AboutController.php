@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAboutRequest;
 use App\Models\About;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,9 @@ class AboutController extends Controller
         return view('dashboard.about.main.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAboutRequest $request)
     {
-        dd($request->all());
+        dd($request->validated());
     }
 
 }
