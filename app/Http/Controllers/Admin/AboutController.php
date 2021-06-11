@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
@@ -17,6 +18,11 @@ class AboutController extends Controller
     public function create()
     {
         return view('dashboard.about.main.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 
 }

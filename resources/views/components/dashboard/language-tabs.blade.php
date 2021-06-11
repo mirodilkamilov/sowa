@@ -20,8 +20,8 @@
                         @endforeach
                     @endif
 
-                    {{--                    @php $errorCounterForSimpleInput = count($errors->get("main.*.main_title.$lang")) + count($errors->get("main.*.slug.$lang")); @endphp--}}
                     @php $errorCounter = $hasMultiValuedInput ? count($errors->get("content.$key.*.$lang")) : $errorCounterForSimpleInput; @endphp
+
                     @if($errorCounter > 0)
                         <span class="badge badge badge-danger badge-pill float-right">{{ $errorCounter }}</span>
                     @endif
