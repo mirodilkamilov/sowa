@@ -1,4 +1,4 @@
-@props(['availableLangs', 'inputs' => null, 'key' => 0, 'hasMultiValuedInput' => false])
+@props(['availableLangs', 'inputs' => null, 'key' => 0, 'hasMultiValuedInput' => false, 'hasAfterLang' => false])
 
 <ul class="nav nav-tabs language-tabs" id="myTab2" role="tablist">
     @foreach($availableLangs as $lang)
@@ -16,7 +16,11 @@
 
                     @if(isset($inputs))
                         @foreach($inputs as $input)
-                            @php $errorCounterForSimpleInput += count($errors->get("$input.$lang")); @endphp
+                            @php
+                                $inputName = "$input.$lang";
+                                $inputName .= ($hasAfterLang && $input === 'list.*.list') ? '.*' : '';
+                            @endphp
+                            @php $errorCounterForSimpleInput += count($errors->get($inputName)); @endphp
                         @endforeach
                     @endif
 
