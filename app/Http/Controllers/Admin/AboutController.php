@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAboutRequest;
+use App\Jobs\StoreAboutJob;
 use App\Models\About;
-use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
@@ -23,7 +23,17 @@ class AboutController extends Controller
 
     public function store(StoreAboutRequest $request)
     {
-        dd($request->validated());
+//        dd($request->validated());
+
+        try {
+            StoreAboutJob::dispatchSync($request);
+        } catch (\Exception $exception) {
+            $request->session()->flash('error', $exception->getMessage());
+            return redirect()->route('about.index');
+        }
+
+        $request->session()->flash('success', 'Main information was successfully saved!');
+        return redirect()->route('about.index');
     }
 
 }

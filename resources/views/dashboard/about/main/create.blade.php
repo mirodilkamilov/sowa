@@ -280,9 +280,9 @@
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
                                                                                     <input
-                                                                                        name="list[1][list][{{ $lang }}][{{ $loop->iteration }}]"
+                                                                                        name="list[1][list][{{ $lang }}][{{ $loop->index }}]"
                                                                                         value="{{ $listByLang }}"
-                                                                                        class="form-control mt-1 @error("list.1.list.$lang.*") is-invalid @enderror"
+                                                                                        class="form-control mt-1 @error("list.1.list.$lang.$loop->index") is-invalid @enderror"
                                                                                         type="text">
                                                                                 @endforeach
                                                                             @endif
@@ -329,9 +329,9 @@
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
                                                                                     <input
-                                                                                        name="list[2][list][{{ $lang }}][{{ $loop->iteration }}]"
+                                                                                        name="list[2][list][{{ $lang }}][{{ $loop->index }}]"
                                                                                         value="{{ $listByLang }}"
-                                                                                        class="form-control mt-1 @error("list.2.list.$lang.*") is-invalid @enderror"
+                                                                                        class="form-control mt-1 @error("list.2.list.$lang.$loop->index") is-invalid @enderror"
                                                                                         type="text">
                                                                                 @endforeach
                                                                             @endif
@@ -420,7 +420,7 @@
                 let listId = btnId.substring(0, 1);
                 let listLang = btnId.substring(2, 4);
 
-                $(obj).parents('.row').find('.list-container-' + btnId + ' .form-label-group').append(`<input name="list[` + listId + `][list][` + listLang + `][]" type="text" class="form-control mt-1">`)
+                $(obj).parents('.row').find('.list-container-' + btnId + ' .form-label-group').append(`<input name="list[` + listId + `][list][` + listLang + `][]" type="text" class="form-control mt-1" autofocus>`)
             }
         </script>
     @endpush
