@@ -365,6 +365,7 @@
 @stack('image-preview')
 @stack('edit-user-message')
 @stack('project-content-manipulation')
+@stack('about-content-manipulation')
 
 </body>
 <!-- END: Body-->

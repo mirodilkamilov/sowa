@@ -288,13 +288,14 @@
                                                                                         <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
                                                                                            onclick="removeListItem(this)"></i>
                                                                                     </div>
+
+                                                                                    @error("list.1.list.$lang.$loop->index")
+                                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                                    @enderror
                                                                                 @endforeach
                                                                             @endif
 
                                                                             @error("list.1.list.$lang")
-                                                                            <p class="text-danger">{{ $message }}</p>
-                                                                            @enderror
-                                                                            @error("list.1.list.$lang.*")
                                                                             <p class="text-danger">{{ $message }}</p>
                                                                             @enderror
                                                                         </div>
@@ -341,13 +342,14 @@
                                                                                         <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
                                                                                            onclick="removeListItem(this)"></i>
                                                                                     </div>
+
+                                                                                    @error("list.2.list.$lang.$loop->index")
+                                                                                    <p class="text-danger d-block">{{ $message }}</p>
+                                                                                    @enderror
                                                                                 @endforeach
                                                                             @endif
 
                                                                             @error("list.2.list.$lang")
-                                                                            <p class="text-danger">{{ $message }}</p>
-                                                                            @enderror
-                                                                            @error("list.2.list.$lang.*")
                                                                             <p class="text-danger">{{ $message }}</p>
                                                                             @enderror
                                                                         </div>
@@ -400,7 +402,7 @@
         <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
 
-    @push('project-content-manipulation')
+    @push('about-content-manipulation')
         <script>
             var avilableLangs = ['ru', 'en', 'uz'];
 
@@ -442,7 +444,6 @@
             function removeListItem(obj) {
                 $(obj).parent().remove();
             }
-
         </script>
     @endpush
 @endsection
