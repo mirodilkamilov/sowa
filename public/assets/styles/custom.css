@@ -9,6 +9,13 @@
     text-align: center;
 }
 
+.list-item-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.list-item-container .remove-list-item,
 .card-footer .remove-content {
     font-size: 1.5rem;
     z-index: 100;

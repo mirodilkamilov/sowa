@@ -279,11 +279,15 @@
                                                                             @php $listsByLang = old("list.1.list.$lang"); @endphp
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
-                                                                                    <input
-                                                                                        name="list[1][list][{{ $lang }}][{{ $loop->index }}]"
-                                                                                        value="{{ $listByLang }}"
-                                                                                        class="form-control mt-1 @error("list.1.list.$lang.$loop->index") is-invalid @enderror"
-                                                                                        type="text">
+                                                                                    <div class="list-item-container">
+                                                                                        <input
+                                                                                            name="list[1][list][{{ $lang }}][{{ $loop->index }}]"
+                                                                                            value="{{ $listByLang }}"
+                                                                                            class="form-control mt-1 @error("list.1.list.$lang.$loop->index") is-invalid @enderror"
+                                                                                            type="text">
+                                                                                        <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
+                                                                                           onclick="removeListItem(this)"></i>
+                                                                                    </div>
                                                                                 @endforeach
                                                                             @endif
 
@@ -328,11 +332,15 @@
                                                                             @php $listsByLang = old("list.2.list.$lang"); @endphp
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
-                                                                                    <input
-                                                                                        name="list[2][list][{{ $lang }}][{{ $loop->index }}]"
-                                                                                        value="{{ $listByLang }}"
-                                                                                        class="form-control mt-1 @error("list.2.list.$lang.$loop->index") is-invalid @enderror"
-                                                                                        type="text">
+                                                                                    <div class="list-item-container">
+                                                                                        <input
+                                                                                            name="list[2][list][{{ $lang }}][{{ $loop->index }}]"
+                                                                                            value="{{ $listByLang }}"
+                                                                                            class="form-control mt-1 @error("list.2.list.$lang.$loop->index") is-invalid @enderror"
+                                                                                            type="text">
+                                                                                        <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
+                                                                                           onclick="removeListItem(this)"></i>
+                                                                                    </div>
                                                                                 @endforeach
                                                                             @endif
 
@@ -420,8 +428,21 @@
                 let listId = btnId.substring(0, 1);
                 let listLang = btnId.substring(2, 4);
 
-                $(obj).parents('.row').find('.list-container-' + btnId + ' .form-label-group').append(`<input name="list[` + listId + `][list][` + listLang + `][]" type="text" class="form-control mt-1" autofocus>`)
+                var listItem = `<div class="list-item-container">
+                    <input
+                        name="list[` + listId + `][list][` + listLang + `][]"
+                        type="text"
+                        class="form-control" autofocus>
+                    <i class="feather icon-trash-2 text-danger pl-1 remove-list-item" onclick="removeListItem(this)"></i>
+                </div>`;
+
+                $(obj).parents('.row').find('.list-container-' + btnId + ' .form-label-group').append(listItem);
             }
+
+            function removeListItem(obj) {
+                $(obj).parent().remove();
+            }
+
         </script>
     @endpush
 @endsection
