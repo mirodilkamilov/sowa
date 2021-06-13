@@ -280,18 +280,20 @@
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
                                                                                     <div class="list-item-container">
-                                                                                        <input
-                                                                                            name="list[1][list][{{ $lang }}][{{ $loop->index }}]"
-                                                                                            value="{{ $listByLang }}"
-                                                                                            class="form-control mt-1 @error("list.1.list.$lang.$loop->index") is-invalid @enderror"
-                                                                                            type="text">
-                                                                                        <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
-                                                                                           onclick="removeListItem(this)"></i>
-                                                                                    </div>
+                                                                                        <div class="list-item">
+                                                                                            <input
+                                                                                                name="list[1][list][{{ $lang }}][{{ $loop->index }}]"
+                                                                                                value="{{ $listByLang }}"
+                                                                                                class="form-control mt-1 @error("list.1.list.$lang.$loop->index") is-invalid @enderror"
+                                                                                                type="text">
+                                                                                            <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
+                                                                                               onclick="removeListItem(this)"></i>
+                                                                                        </div>
 
-                                                                                    @error("list.1.list.$lang.$loop->index")
-                                                                                    <p class="text-danger">{{ $message }}</p>
-                                                                                    @enderror
+                                                                                        @error("list.1.list.$lang.$loop->index")
+                                                                                        <p class="text-danger">{{ $message }}</p>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 @endforeach
                                                                             @endif
 
@@ -334,18 +336,20 @@
                                                                             @if(isset($listsByLang))
                                                                                 @foreach($listsByLang as $listByLang)
                                                                                     <div class="list-item-container">
-                                                                                        <input
-                                                                                            name="list[2][list][{{ $lang }}][{{ $loop->index }}]"
-                                                                                            value="{{ $listByLang }}"
-                                                                                            class="form-control mt-1 @error("list.2.list.$lang.$loop->index") is-invalid @enderror"
-                                                                                            type="text">
-                                                                                        <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
-                                                                                           onclick="removeListItem(this)"></i>
-                                                                                    </div>
+                                                                                        <div class="list-item">
+                                                                                            <input
+                                                                                                name="list[2][list][{{ $lang }}][{{ $loop->index }}]"
+                                                                                                value="{{ $listByLang }}"
+                                                                                                class="form-control mt-1 @error("list.2.list.$lang.$loop->index") is-invalid @enderror"
+                                                                                                type="text">
+                                                                                            <i class="feather icon-trash-2 text-danger pl-1 remove-list-item"
+                                                                                               onclick="removeListItem(this)"></i>
+                                                                                        </div>
 
-                                                                                    @error("list.2.list.$lang.$loop->index")
-                                                                                    <p class="text-danger d-block">{{ $message }}</p>
-                                                                                    @enderror
+                                                                                        @error("list.2.list.$lang.$loop->index")
+                                                                                        <p class="text-danger d-block">{{ $message }}</p>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 @endforeach
                                                                             @endif
 
@@ -431,18 +435,21 @@
                 let listLang = btnId.substring(2, 4);
 
                 var listItem = `<div class="list-item-container">
+                  <div class="list-item">
                     <input
                         name="list[` + listId + `][list][` + listLang + `][]"
                         type="text"
                         class="form-control" autofocus>
                     <i class="feather icon-trash-2 text-danger pl-1 remove-list-item" onclick="removeListItem(this)"></i>
+                  </div>
                 </div>`;
 
                 $(obj).parents('.row').find('.list-container-' + btnId + ' .form-label-group').append(listItem);
             }
 
             function removeListItem(obj) {
-                $(obj).parent().remove();
+                $(obj).parent().find('p.text-danger').remove();
+                $(obj).parents('.list-item-container').remove();
             }
         </script>
     @endpush
