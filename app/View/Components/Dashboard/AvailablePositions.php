@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class AvailablePositions extends Component
 {
     public $positions;
-    public $arrayOfPositions;
+    public array $arrayOfPositions;
 
     public function __construct($positions)
     {
@@ -15,11 +15,7 @@ class AvailablePositions extends Component
         $this->arrayOfPositions = [];
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|string
-     */
+
     public function render()
     {
         return view('components.dashboard.available-positions');
@@ -32,8 +28,8 @@ class AvailablePositions extends Component
 
         if (isset($this->positions)) {
             foreach ($this->positions as $position) {
-                while ($position->position != $counter) {
-                    array_push($this->arrayOfPositions, $counter);
+                while ($position !== $counter) {
+                    $this->arrayOfPositions[] = $counter;
                     ++$counter;
                 }
                 ++$counter;
@@ -41,9 +37,9 @@ class AvailablePositions extends Component
             }
 
             // sets last available position
-            if (count($this->positions) == $i || empty($this->arrayOfPositions)) {
+            if (empty($this->arrayOfPositions) || count($this->positions) === $i) {
                 $lastAvailablePosition = $counter;
-                array_push($this->arrayOfPositions, $lastAvailablePosition);
+                $this->arrayOfPositions[] = $lastAvailablePosition;
             }
         }
 

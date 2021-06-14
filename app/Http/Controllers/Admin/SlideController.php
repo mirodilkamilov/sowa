@@ -20,7 +20,7 @@ class SlideController extends Controller
 
     public function create()
     {
-        $positions = Slide::select(['position'])->orderBy('position')->get();
+        $positions = Slide::orderBy('position')->pluck('position');
 
         return view('dashboard.slides.create', compact('positions'));
     }
