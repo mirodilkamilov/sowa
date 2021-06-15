@@ -361,6 +361,9 @@
 <!-- END: Page JS-->
 
 @stack('category-modal-show')
+@stack('customer-add-modal-show')
+@stack('customer-edit-modal-show')
+@stack('customer-modal-manipulation')
 @stack('category-modal-show-select-change')
 @stack('image-preview')
 @stack('edit-user-message')

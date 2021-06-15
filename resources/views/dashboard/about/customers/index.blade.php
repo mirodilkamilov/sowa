@@ -9,108 +9,107 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <div class="content-body">
-                <!-- Data list view starts -->
-                <section id="data-thumb-view" class="data-thumb-view-header">
-                    <!-- dataTable starts -->
-                    <div class="table-responsive">
-                        <table class="table data-thumb-view text-center">
-                            <thead>
-                            <tr>
-                                <th class="text-uppercase">{{ __('Image') }}</th>
-                                <th class="text-uppercase">{{ __('Position') }}</th>
-                                <th class="text-uppercase">{{ __('Customer') }}</th>
-                                <th class="text-uppercase">{{ __('Actions') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($customers as $customer)
-                                <tr>
-                                    <td class="product-img" width="200px">
-                                        <img src="{{ $customer->logo }}" alt="{{ $customer->name }}" style="width: 200px; height: 70px;">
-                                    </td>
-                                    <td class="product-price">{{ $customer->position }}</td>
-                                    <td class="product-name">{{ $customer->name }}</td>
-                                    <td class="product-action">
-                                        <a class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-                                        <a class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">
-                                            <i class="feather icon-trash-2"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- dataTable ends -->
+            <x-custom-alerts/>
 
-                    <!-- add new sidebar starts -->
-                    <div class="add-new-data-sidebar">
-                        <div class="overlay-bg"></div>
-                        <div class="add-new-data">
-                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                                <div>
-                                    <h4 class="text-uppercase">Thumb View Data</h4>
-                                </div>
-                                <div class="hide-data-sidebar">
-                                    <i class="feather icon-x"></i>
-                                </div>
-                            </div>
-                            <div class="data-items pb-3">
-                                <div class="data-fields px-2 mt-3">
-                                    <div class="row">
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-name">Name</label>
-                                            <input type="text" class="form-control" id="data-name">
+            <div class="content-body">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                        data-target="#customer-add">
+                    <span><i class="feather icon-plus"></i> Add New</span>
+                </button>
+                <div class="row mt-1">
+                    @foreach($customers as $customer)
+                        <div class="card custom-card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="content-container">
+                                        <div class="logo-container">
+                                            <img class="customer-logo card-img img-fluid mb-1"
+                                                 src="{{ $customer->logo }}"
+                                                 alt="{{ $customer->name }}">
                                         </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-category"> Category </label>
-                                            <select class="form-control" id="data-category">
-                                                <option>Audio</option>
-                                                <option>Computers</option>
-                                                <option>Fitness</option>
-                                                <option>Appliance</option>
-                                            </select>
+                                        <div class="input-container">
+                                            <input class="customer-id" value="{{ $customer->id }}" type="hidden">
+                                            <input class="customer-position" value="{{ $customer->position }}"
+                                                   type="hidden">
+                                            <h5 class="customer-name mt-1">{{ $customer->name }}</h5>
+                                            <hr class="my-1">
                                         </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-status">Order Status</label>
-                                            <select class="form-control" id="data-status">
-                                                <option>Pending</option>
-                                                <option>Canceled</option>
-                                                <option>Delivered</option>
-                                                <option>On Hold</option>
-                                            </select>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="float-left">
+                                            <button type="button"
+                                                    class="customer-edit-btn btn btn-outline-primary waves-effect waves-light"
+                                                    data-toggle="modal"
+                                                    data-target="#customer-modal">
+                                                <i class="feather icon-edit"></i>
+                                            </button>
                                         </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-price">Price</label>
-                                            <input type="text" class="form-control" id="data-price">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col data-list-upload">
-                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                                <div class="dz-message">Upload Image</div>
-                                            </form>
+                                        <div class="float-right">
+                                            <button type="button"
+                                                    class="confirm-btn btn btn-outline-danger waves-effect waves-light"
+                                                    data-toggle="modal" data-target="#confirm-modal">
+                                                <i class="feather icon-trash-2"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                <div class="add-data-btn">
-                                    <button class="btn btn-primary">Add Data</button>
-                                </div>
-                                <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <!-- add new sidebar ends -->
-                </section>
-                <!-- Data list view end -->
-
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-    <!-- END: Content-->
+
+    <x-dashboard.add-customer-modal :positions="$positions"/>
+    <x-dashboard.update-customer-modal :positions="$positions"/>
+    <!-- Delete modal -->
+    <x-dashboard.confirm-modal/>
+
+
+    @push('image-preview')
+        <script src="{{ asset('assets/js/image-preview.js') }}"></script>
+    @endpush
+
+    @push('customer-modal-manipulation')
+        <script>
+            var currentUrl = window.location.href.replace(/\/*$/gm, '');
+
+            $('.customer-edit-btn').on('click', function () {
+                var id = $(this).parents('.card-body').find('.customer-id').val();
+                var position = $(this).parents('.card-body').find('.customer-position').val();
+                var name = $(this).parents('.card-body').find('.customer-name').html();
+                var logo = $(this).parents('.card-body').find('.customer-logo').attr('src');
+
+                var modalCustomer = $('#customer-update');
+                modalCustomer.modal('show');
+                var form = modalCustomer.find('.form');
+
+                var action = currentUrl + '/' + id;
+                form.attr('action', action);
+
+                modalCustomer.find('#customer-id').val(id);
+                modalCustomer.find('#customer-position').val(position);
+                modalCustomer.find('#customer-name').val(name);
+                modalCustomer.find('#customer-logo').html('<img class="preview" src="' + logo + '"/>');
+            });
+
+            $('.confirm-btn').on('click', function () {
+                var id = $(this).parents('.card-body').find('.customer-id').val();
+                var name = $(this).parents('.card-body').find('.customer-name').html();
+                var logo = $(this).parents('.card-body').find('.customer-logo').attr('src');
+
+                var modalConfirm = $('#confirm-modal');
+                modalConfirm.modal('show');
+                var form = modalConfirm.find('.form');
+
+                var action = currentUrl + '/' + id;
+                form.attr('action', action);
+
+                modalConfirm.find('.modal-body').empty().append('<h4 class="modal-title text-danger">' + name + '<h5/>');
+                modalConfirm.find('.modal-body').append('<img class="preview" src="' + logo + '"/>');
+            });
+        </script>
+    @endpush
 @endsection
