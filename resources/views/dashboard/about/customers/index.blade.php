@@ -16,42 +16,40 @@
                         data-target="#customer-add">
                     <span><i class="feather icon-plus"></i> Add New</span>
                 </button>
-                <div class="row mt-1">
+                <div class="row custom-row">
                     @foreach($customers as $customer)
                         <div class="card custom-card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="content-container">
-                                        <div class="logo-container">
-                                            <img class="customer-logo card-img img-fluid mb-1"
-                                                 src="{{ $customer->logo }}"
-                                                 alt="{{ $customer->name }}">
-                                        </div>
-                                        <div class="input-container">
-                                            <input class="customer-id" value="{{ $customer->id }}" type="hidden">
-                                            <input class="customer-position" value="{{ $customer->position }}"
-                                                   type="hidden">
-                                            <h5 class="customer-name mt-1">{{ $customer->name }}</h5>
-                                            <hr class="my-1">
-                                        </div>
+                            <div class="card-body">
+                                <div class="content-container">
+                                    <div class="logo-container">
+                                        <img class="customer-logo card-img img-fluid mb-1"
+                                             src="{{ $customer->logo }}"
+                                             alt="{{ $customer->name }}">
                                     </div>
+                                    <div class="input-container">
+                                        <input class="customer-id" value="{{ $customer->id }}" type="hidden">
+                                        <input class="customer-position" value="{{ $customer->position }}"
+                                               type="hidden">
+                                        <h5 class="customer-name mt-1">{{ $customer->name }}</h5>
+                                        <hr class="my-1">
+                                    </div>
+                                </div>
 
-                                    <div class="d-flex justify-content-between mt-2">
-                                        <div class="float-left">
-                                            <button type="button"
-                                                    class="customer-edit-btn btn btn-outline-primary waves-effect waves-light"
-                                                    data-toggle="modal"
-                                                    data-target="#customer-modal">
-                                                <i class="feather icon-edit"></i>
-                                            </button>
-                                        </div>
-                                        <div class="float-right">
-                                            <button type="button"
-                                                    class="confirm-btn btn btn-outline-danger waves-effect waves-light"
-                                                    data-toggle="modal" data-target="#confirm-modal">
-                                                <i class="feather icon-trash-2"></i>
-                                            </button>
-                                        </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="float-left">
+                                        <button type="button"
+                                                class="customer-edit-btn btn btn-outline-primary waves-effect waves-light"
+                                                data-toggle="modal"
+                                                data-target="#customer-modal">
+                                            <i class="feather icon-edit"></i>
+                                        </button>
+                                    </div>
+                                    <div class="float-right">
+                                        <button type="button"
+                                                class="confirm-btn btn btn-outline-danger waves-effect waves-light"
+                                                data-toggle="modal" data-target="#confirm-modal">
+                                            <i class="feather icon-trash-2"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

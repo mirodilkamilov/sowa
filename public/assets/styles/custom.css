@@ -61,14 +61,21 @@
     max-width: 750px;
 }
 
+.custom-row {
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
 .custom-card {
     margin: 1rem;
     justify-content: center;
     align-content: center;
 }
 
-.custom-card .card-content,
-.custom-card .card-body {
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
 }
 
@@ -90,5 +97,5 @@
 }
 
 .logo-container .customer-logo {
-    max-width: 200px;
+    max-width: 190px;
 }
