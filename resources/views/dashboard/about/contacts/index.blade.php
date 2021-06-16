@@ -16,11 +16,11 @@
             <div class="content-body {{ !isset($contact) ? 'fullheight-content' : '' }}">
                 @if(isset($contact))
                     <button type="button" class="btn btn-primary mr-1 mb-2" data-toggle="modal"
-                            data-target="#edit-contacts">
+                            data-target="#edit-company-contacts">
                         <span><i class="feather icon-edit"></i> Edit</span>
                     </button>
 
-
+                    <x-dashboard.company-contact-edit-modal :contact="$contact"/>
                 @else
                     <button type="button" class="btn btn-success mr-1 mb-2" data-toggle="modal"
                             data-target="#add-company-contacts">
