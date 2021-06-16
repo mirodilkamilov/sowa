@@ -92,7 +92,7 @@
 </div>
 
 @if($errors->hasAny(['customer-edit', 'customer-edit.*']))
-    @push('customer-edit-modal-show')
+    @push('modal-show')
         <script>
             $('#customer-update').modal('show');
         </script>

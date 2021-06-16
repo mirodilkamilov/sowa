@@ -18,6 +18,7 @@
     align-items: center;
 }
 
+.list-item .add-list-item,
 .list-item .remove-list-item,
 .card-footer .remove-content {
     font-size: 1.5rem;

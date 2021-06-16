@@ -88,7 +88,7 @@
 </div>
 
 @if($errors->hasAny(['customer', 'customer.*']))
-    @push('customer-add-modal-show')
+    @push('modal-show')
         <script>
             $('#customer-add').modal('show');
         </script>

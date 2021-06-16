@@ -65,7 +65,7 @@
     <!-- END: Page CSS-->
 
     <link rel="stylesheet" href="/assets/styles/custom.css">
-{{--    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">--}}
+    {{--    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">--}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
             integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
@@ -360,9 +360,8 @@
 {{--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>--}}
 <!-- END: Page JS-->
 
+@stack('modal-show')
 @stack('category-modal-show')
-@stack('customer-add-modal-show')
-@stack('customer-edit-modal-show')
 @stack('customer-modal-manipulation')
 @stack('category-modal-show-select-change')
 @stack('image-preview')
@@ -370,6 +369,7 @@
 @stack('project-content-manipulation')
 @stack('change-language-tabs')
 @stack('about-list-manipulation')
+@stack('company-contacts-list-manipulation')
 
 </body>
 <!-- END: Body-->
