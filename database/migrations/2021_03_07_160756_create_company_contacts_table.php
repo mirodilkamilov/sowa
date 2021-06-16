@@ -15,8 +15,8 @@ class CreateCompanyContactsTable extends Migration
     {
         Schema::create('company_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
-            $table->string('email');
+            $table->jsonb('phone');
+            $table->jsonb('email');
             $table->string('address');
             $table->text('google_map');
         });

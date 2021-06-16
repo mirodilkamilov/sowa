@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
+use App\Models\CompanyContact;
 
 class CompanyContactController extends Controller
 {
     public function index()
     {
-        $customers = Customer::orderBy('position')->get();
+        $contacts = CompanyContact::with('socialMedia')->get();
 
-        return view('dashboard.about.customers.index', compact('customers'));
+        return view('dashboard.about.contacts.index', compact('contacts'));
     }
 }
