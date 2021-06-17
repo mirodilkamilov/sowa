@@ -17,6 +17,7 @@ class CreateSocialMediaTable extends Migration
             $table->string('name')->primary();
             $table->foreignId('company_contact_id')->constrained();
             $table->string('url');
+            $table->string('logo');
         });
     }
 

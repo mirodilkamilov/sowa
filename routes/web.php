@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TrashController;
 use App\Http\Controllers\User\AboutController as UserAboutController;
 use App\Http\Controllers\User\ContactController as UserContactController;
@@ -77,6 +78,8 @@ Route::group([
     Route::resource('customers', CustomerController::class)->except(['show']);
 
     Route::resource('company-contacts', CompanyContactController::class)->except(['show']);
+
+    Route::resource('social-media', SocialMediaController::class)->only(['store']);
 
     Route::get('/trash', [TrashController::class, 'index'])->name('trash.index');
 
