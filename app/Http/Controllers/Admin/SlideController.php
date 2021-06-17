@@ -43,7 +43,7 @@ class SlideController extends Controller
         $slide = Slide::withoutEvents(function () use ($slide) {
             return Slide::findOrFail($slide);
         });
-        $positions = Slide::select(['position'])->orderBy('position')->get();
+        $positions = Slide::orderBy('position')->pluck('position');
 
         return view('dashboard.slides.edit', compact('slide', 'positions'));
     }
