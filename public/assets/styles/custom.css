@@ -100,3 +100,8 @@
 .logo-container .customer-logo {
     max-width: 190px;
 }
+
+.empty-trash-container {
+    display: flex;
+    justify-content: flex-end;
+}

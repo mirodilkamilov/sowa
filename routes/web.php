@@ -81,8 +81,7 @@ Route::group([
 
     Route::resource('social-media', SocialMediaController::class)->only(['store']);
 
-    Route::get('/trash', [TrashController::class, 'index'])->name('trash.index');
-
+    Route::resource('trash', TrashController::class)->only(['index', 'store']);
 });
 
 require __DIR__ . '/auth.php';

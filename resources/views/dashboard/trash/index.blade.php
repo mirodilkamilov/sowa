@@ -7,6 +7,8 @@
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
 
+            <x-custom-alerts/>
+
             <div class="content-body">
                 <div class="content-header row">
                     <div class="content-header-left col-md-9 col-12 mb-2">
@@ -16,6 +18,19 @@
                 <div class="content-body">
                     <!-- Collapse start -->
                     <section id="collapsible">
+                        @foreach($errors->all() as $error)
+                            <p class="text-danger">{{ $error }}</p>
+                        @endforeach
+
+                        <div class="empty-trash-container">
+                            <button type="button" class="btn btn-danger waves-effect waves-light mb-2 p-1"
+                                    data-toggle="modal" data-target="#confirm-modal">
+                                <span><i class="feather icon-trash"></i> {{ __('Empty trash') }}</span>
+                            </button>
+                        </div>
+                        @php $message = 'Are you sure you want to empty trash?'; @endphp
+                        <x-dashboard.trash-confirm-modal/>
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card collapse-icon accordion-icon-rotate">
@@ -74,12 +89,22 @@
                                                                                         @endforeach
                                                                                     </td>
                                                                                     <td class="product-action">
-                                                                                        <a type="button"
-                                                                                           class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light"
-                                                                                           data-toggle="modal"
-                                                                                           data-target="#edit-{{ $project->name }}">
-                                                                                            <i class="feather icon-upload text-success"></i>
-                                                                                        </a>
+                                                                                        <form
+                                                                                            action="{{ route('trash.store') }}"
+                                                                                            method="post">
+                                                                                            @csrf
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[type]"
+                                                                                                   value="project">
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[id]"
+                                                                                                   value="{{ $project->id }}">
+                                                                                            <button type="submit"
+                                                                                                    class="btn btn-outline-success waves-effect waves-light">
+                                                                                                <i class="feather icon-upload text-success"></i>
+                                                                                                Restore
+                                                                                            </button>
+                                                                                        </form>
                                                                                     </td>
                                                                                 </tr>
                                                                             @endforeach
@@ -132,11 +157,21 @@
                                                                                     <td>{{ $slide->title }}</td>
                                                                                     <td>{{ $slide->sub_title }}</td>
                                                                                     <td class="product-action">
-                                                                                        <a type="button"
-                                                                                           class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light"
-                                                                                           data-toggle="modal">
-                                                                                            <i class="feather icon-upload text-success"></i>
-                                                                                        </a>
+                                                                                        <form
+                                                                                            action="{{ route('trash.store') }}"
+                                                                                            method="post">
+                                                                                            @csrf
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[type]"
+                                                                                                   value="slide">
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[id]"
+                                                                                                   value="{{ $slide->id }}">
+                                                                                            <button type="submit"
+                                                                                                    class="btn btn-outline-success waves-effect waves-light">
+                                                                                                <i class="feather icon-upload text-success"></i> {{ __('Restore') }}
+                                                                                            </button>
+                                                                                        </form>
                                                                                     </td>
                                                                                 </tr>
                                                                             @endforeach
@@ -187,11 +222,21 @@
                                                                                     <td>{{ $userContact->message }}</td>
                                                                                     <td>{{ $userContact->comment }}</td>
                                                                                     <td class="product-action">
-                                                                                        <a type="button"
-                                                                                           class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light"
-                                                                                           data-toggle="modal">
-                                                                                            <i class="feather icon-upload text-success"></i>
-                                                                                        </a>
+                                                                                        <form
+                                                                                            action="{{ route('trash.store') }}"
+                                                                                            method="post">
+                                                                                            @csrf
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[type]"
+                                                                                                   value="message">
+                                                                                            <input type="hidden"
+                                                                                                   name="trash[id]"
+                                                                                                   value="{{ $userContact->id }}">
+                                                                                            <button type="submit"
+                                                                                                    class="btn btn-outline-success waves-effect waves-light">
+                                                                                                <i class="feather icon-upload text-success"></i> {{ __('Restore') }}
+                                                                                            </button>
+                                                                                        </form>
                                                                                     </td>
                                                                                 </tr>
                                                                             @endforeach
