@@ -12,7 +12,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::orderBy('position')->get();
-        $positions = $customers->pluck('position');
+        $positions = $customers->pluck('position')->toArray();
 
         return view('dashboard.about.customers.index', compact('customers', 'positions'));
     }

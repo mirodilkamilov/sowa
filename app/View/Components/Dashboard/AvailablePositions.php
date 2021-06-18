@@ -6,13 +6,13 @@ use Illuminate\View\Component;
 
 class AvailablePositions extends Component
 {
-    public $positions;
-    public array $arrayOfPositions;
+    public array $positions;
+    public array $avilablePositions;
 
     public function __construct($positions)
     {
         $this->positions = $positions;
-        $this->arrayOfPositions = [];
+        $this->avilablePositions = [];
     }
 
 
@@ -23,26 +23,10 @@ class AvailablePositions extends Component
 
     public function getAvailablePositions(): array
     {
-        $counter = 1;
-        $i = 0;
+        $maxAvilablePosition = max($this->positions) + 1;
+        $possiblePositions = range(1, $maxAvilablePosition);
+        $this->avilablePositions = array_diff($possiblePositions, $this->positions);
 
-        if (isset($this->positions)) {
-            foreach ($this->positions as $position) {
-                while ($position !== $counter) {
-                    $this->arrayOfPositions[] = $counter;
-                    ++$counter;
-                }
-                ++$counter;
-                ++$i;
-            }
-
-            // sets last available position
-            if (empty($this->arrayOfPositions) || count($this->positions) === $i) {
-                $lastAvailablePosition = $counter;
-                $this->arrayOfPositions[] = $lastAvailablePosition;
-            }
-        }
-
-        return $this->arrayOfPositions;
+        return $this->avilablePositions;
     }
 }

@@ -20,7 +20,7 @@ class SlideController extends Controller
 
     public function create()
     {
-        $positions = Slide::orderBy('position')->pluck('position');
+        $positions = Slide::orderBy('position')->pluck('position')->toArray();
 
         return view('dashboard.slides.create', compact('positions'));
     }
@@ -43,7 +43,7 @@ class SlideController extends Controller
         $slide = Slide::withoutEvents(function () use ($slide) {
             return Slide::findOrFail($slide);
         });
-        $positions = Slide::orderBy('position')->pluck('position');
+        $positions = Slide::orderBy('position')->pluck('position')->toArray();
 
         return view('dashboard.slides.edit', compact('slide', 'positions'));
     }
