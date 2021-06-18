@@ -10,15 +10,18 @@
                     @foreach($slides as $slide)
                         <div class="swiper-slide">
                             <div class="slider__item">
-                                <h6 class="title title--overhead"><span
-                                        class="down-up"><span>{{ $slide->sub_title }}</span></span></h6>
+                                <h6 class="title title--overhead">
+                                    <span class="down-up"><span>{{ $slide->sub_title }}</span></span>
+                                </h6>
                                 <h1 class="title title--display-1 js-text-wave">{{ $slide->title }}</h1>
-                                <p class="description"><span
-                                        class="down-up"><span>{{ $slide->description }}</span></span>
+                                <p class="description">
+                                    <span class="down-up"><span>{{ $slide->description }}</span></span>
                                 </p>
-                                <a class="btn-link btn-link--circle-right" href="{{ $slide->url }}"><span
-                                        class="down-up"><span>{{ __('Learn more') }}<i
-                                                class="circle circle--right icon-right-open"></i></span></span></a>
+                                <a class="btn-link btn-link--circle-right" href="{{ $slide->url }}">
+                                    <span class="down-up">
+                                        <span>{{ __('Learn more') }}<i class="circle circle--right icon-right-open"></i></span>
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -29,8 +32,9 @@
                 <div class="swiper-wrapper">
                     @foreach($slides as $slide)
                         <div class="swiper-slide">
-                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slide->image }}"><a
-                                    class="swiper-slide__link" href="{{ $slide->url }}"></a></div>
+                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slide->image }}">
+                                <a class="swiper-slide__link" href="{{ $slide->url }}"></a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -67,12 +71,23 @@
             @if(isset($companyContact->socialMedia))
                 <div class="social social--floating">
                     @foreach($companyContact->socialMedia as $social_media)
-                        <a class="social__link" href="{{ $social_media->url }}">{{ $social_media->name }}</a>
+                        <a class="social__link" href="{{ $social_media->url }}" target="_blank">
+                            <img src="{{ $social_media->logo }}" alt="{{ $social_media->name }} icon"
+                                 style="width: 30px;">
+                        </a>
                     @endforeach
-                    <a class="social__link">{{ $companyContact->phone }}</a>
-                    <a class="social__link">{{ $companyContact->email }}</a>
                 </div>
             @endif
+
+            <div class="company">
+                <div class="company-phone">
+                    <a href="tel:{{ $companyContact?->phone[0] }}">{{ $companyContact?->phone[0] }}</a>
+                </div>
+                <div class="company-email">
+                    <a href="mailto:{{ $companyContact?->email[0] }}">{{ $companyContact?->email[0] }}</a>
+                </div>
+            </div>
+
         </div>
     </header>
     <!-- /Hero -->
