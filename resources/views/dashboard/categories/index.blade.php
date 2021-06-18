@@ -93,7 +93,7 @@
     <!-- /Delete Modal -->
 
     <script>
-        $(".confirm-btn").click(function () {
+        $('.confirm-btn').click(function () {
             var categoryId = $(this).val();
             var actionUrl = window.location.href + '/' + categoryId;
             var categoryArray = $(this).closest('.product-action').siblings('.category').map(function () {

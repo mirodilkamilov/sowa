@@ -9,21 +9,10 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <p class="mb-0"><i class="feather icon-check"></i>
-                        {{ session('success') }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+            <x-custom-alerts/>
 
             <div class="content-body">
-                <!-- Data list view starts -->
                 <section id="data-thumb-view" class="data-thumb-view-header">
-                    <!-- dataTable starts -->
                     <div class="table-responsive">
                         <a href="{{ route('projects.create')  }}" class="btn btn-outline-primary" tabindex="0"
                            aria-controls="DataTables_Table_0">
@@ -45,7 +34,7 @@
                                     <td class="product-img">
                                         <img src="{{ $project->main_image }}" alt="Img placeholder">
                                     </td>
-                                    <td class="product-category">{{ $project->slug }}</td>
+                                    <td class="product-category slug">{{ $project->slug }}</td>
                                     <td class="product-name">{{ $project->main_title }}</td>
                                     <td class="text-center">
                                         @foreach($project->categories as $category)
@@ -54,25 +43,51 @@
                                         @endforeach
                                     </td>
                                     <td class="product-action text-center">
-                                        <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
+                                        <a href="{{ route('projects.edit', $project->id) }}"
+                                           class="btn btn-outline-primary mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        <a class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">
+                                        <button type="button" value="{{ $project->id }}"
+                                                class="confirm-btn btn btn-outline-danger waves-effect waves-light mr-1 mb-1"
+                                                data-toggle="modal" data-target="#confirm-modal">
                                             <i class="feather icon-trash-2"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <!-- dataTable ends -->
                 </section>
-                <!-- Data list view end -->
 
             </div>
         </div>
     </div>
     <!-- END: Content-->
 
+    <x-dashboard.confirm-modal/>
+
+    @push('modal-show')
+        <script>
+            var currentUrl = window.location.href.replace(/\/*$/gm, '');
+
+            $('.confirm-btn').on('click', function () {
+                var id = $(this).attr('value');
+                var image = $(this).parent().siblings('.product-img').find('img').attr('src');
+                var slug = $(this).parent().siblings('.slug').html();
+                var title = $(this).parent().siblings('.product-name').html();
+
+                var modal = $('#confirm-modal');
+                var modalBody = modal.find('.modal-body');
+                modalBody.empty().append('<h4 class="modal-title text-danger">' + slug + '<h5/>');
+                modalBody.append('<img class="preview" src="' + image + '" width="200px" />');
+                modalBody.append('<p class="mt-1">' + title + '</p>');
+
+                var form = modal.find('form');
+                var action = currentUrl + '/' + id;
+                form.attr('action', action);
+            });
+
+        </script>
+    @endpush
 @endsection

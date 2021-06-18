@@ -64,7 +64,7 @@ class CategoryController extends Controller
         try {
             $category->delete();
         } catch (QueryException $exception) {
-            session()->flash('error', "Project with category: {$category->category} exist. Please edit or delete that project first");
+            session()->flash('error', "Project with category: $category->category exist. Please edit or delete that project first");
             return redirect()->route('categories.index');
         }
 

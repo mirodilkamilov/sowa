@@ -66,6 +66,14 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        //
+        try {
+            $project->delete();
+        } catch (\Exception $exception) {
+            session()->flash('error', $exception->getMessage());
+            return redirect()->route('projects.index');
+        }
+
+        session()->flash('success', 'Project was successfully deleted!');
+        return redirect()->route('projects.index');
     }
 }

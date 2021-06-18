@@ -22,11 +22,11 @@
                     @csrf
                     <button class="btn btn-danger mr-1 waves-effect waves-light"
                             type="submit">
-                        Yes, delete it!
+                        {{ __('Yes, delete it!') }}
                     </button>
                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
                             aria-label="Close">
-                        Cancel
+                        {{ __('Cancel') }}
                     </button>
                 </form>
             </div>
