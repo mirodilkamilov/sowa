@@ -13,18 +13,30 @@ class ProjectFactory extends Factory
      * @var string
      */
     protected $model = Project::class;
+    protected array $slugs = [
+        'ali',
+        'ice',
+        'kidya',
+        'somi',
+        'wisdom',
+        'yuridik'
+    ];
 
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
+        $slug = $this->faker->randomElement($this->slugs);
+        $key = array_search($slug, $this->slugs, true);
+        unset($this->slugs[$key]);
+
         return [
-            'slug' => ['ru' => $this->faker->slug(2), 'en' => $this->faker->slug(2), 'uz' => $this->faker->slug(2)],
+            'slug' => ['ru' => $slug, 'en' => $this->faker->slug(2), 'uz' => $this->faker->slug(2)],
             'main_title' => ['ru' => 'ru-' . $this->faker->sentence, 'en' => 'en-' . $this->faker->sentence, 'uz' => 'uz-' . $this->faker->sentence],
-            'main_image' => $this->faker->imageUrl('1200', '675'),
+            'main_image' => 'projects/' . $slug . '_cover.png',
             'client' => $this->faker->word,
             'year' => $this->faker->year,
             'url' => $this->faker->url,

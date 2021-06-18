@@ -16,7 +16,7 @@ class CompanyContactSeeder extends Seeder
     public function run()
     {
         CompanyContact::factory()
-            ->has(SocialMedia::factory()->count(3))
+            ->has(SocialMedia::factory()->count(4))
             ->create();
     }
 }

@@ -19,7 +19,7 @@ class AboutListFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'title' => ['ru' => $this->faker->words(2, true) . ' (ru)', 'en' => $this->faker->words(2, true) . ' (en)', 'uz' => $this->faker->words(2, true) . ' (uz)'],
