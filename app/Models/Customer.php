@@ -10,7 +10,11 @@ class Customer extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $primaryKey = 'position';
 
     protected $fillable = ['position', 'name', 'logo'];
+
+    public function getLogoAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }

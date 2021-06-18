@@ -8,83 +8,103 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <div class="content-body">
-                @if(isset($about))
-                    <div class="content-body">
-                        <button class="btn btn-success mr-1 mb-2" tabindex="0"
-                                aria-controls="DataTables_Table_0">
-                        <span>
-                            <i class="feather icon-plus"></i>
-                            Add List
-                        </span>
-                        </button>
-                        <button class="btn btn-outline-primary mb-2" tabindex="0" aria-controls="DataTables_Table_0">
-                        <span>
-                            <i class="feather icon-edit"></i>
-                            Edit
-                        </span>
-                        </button>
+            <x-custom-alerts/>
 
-                        <section id="description" class="card">
-                            <div class="card-content">
-                                <img class="card-img-top img-fluid" src="{{ $about->image }}"
-                                     alt="Card image cap">
-                                <div class="card-img-overlay overflow-hidden">
-                                    <p class="card-title position-absolute"
-                                       style="bottom: 20%;">{{ $about->image_title }}</p>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ $about->about_title }}</h4>
-                                    <div class="card-text">
-                                        <p>{{ $about->about_description }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section id="description" class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">{{ $about->help_title }}</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body pb-0">
-                                    <div class="card-text">
-                                        <p>{{ $about->help_description }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="divider">
-                            <h4 class="card-title pl-2 mb-0">Lists</h4>
-                            <div class="card-body row">
-                                @foreach($about->aboutLists as $list)
-                                    <div class="col-lg-6 col-md-12 mb-1">
-                                        <h4 class="card-title">{{ $list->title }}</h4>
-                                        <ul class="card-text list-style-circle pl-1">
-                                            @foreach($list->list as $list)
-                                                <li class="card-text">{{ $list }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </section>
-                    </div>
-                @endif
-                <button class="btn btn-success mr-1 mb-2" tabindex="0"
-                        aria-controls="DataTables_Table_0">
+            <div class="content-body @if(!isset($about)) fullheight-content @endif">
+                @if(!isset($about))
+                    <a href="{{ route('about.create') }}" class="btn btn-success mr-1 mb-2 " tabindex="0"
+                       aria-controls="DataTables_Table_0">
                         <span>
                             <i class="feather icon-plus"></i>
-                            Add List
+                            {{ __('Add Main Information') }}
                         </span>
-                </button>
+                    </a>
+                @endif
+
                 @if(isset($about))
-                    <button class="btn btn-outline-primary mb-2" tabindex="0" aria-controls="DataTables_Table_0">
-                        <span>
-                            <i class="feather icon-edit"></i>
-                            Edit
-                        </span>
-                    </button>
+                    <section id="multiple-column-form">
+                        <div class="row match-height">
+                            <div class="col-12">
+                                <div class="card mb-1">
+                                    <div class="card-content">
+                                        <div class="card-body">
+
+                                            <div class="divider">
+                                                <div class="divider-text">
+                                                    <h4 class="title text-primary">{{ __('Image') }}</h4>
+                                                </div>
+                                            </div>
+
+                                            @error('main')
+                                            <div class="alert alert-danger alert-dismissible mb-1" role="alert">
+                                                <p>{{ $message }}</p>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true"><i
+                                                            class="feather icon-x-circle"></i></span>
+                                                </button>
+                                            </div>
+                                            @enderror
+
+                                            @php $inputs = [
+                                              'main.*.image_title'
+                                           ];
+                                            @endphp
+                                            <x-dashboard.language-tabs :availableLangs="$availableLangs"
+                                                                       :inputs="$inputs"/>
+
+                                            <form class="form" action="{{ route('about.update', $about->id) }}"
+                                                  method="post"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="form-body">
+                                                    <x-dashboard.about-image-form :about="$about"
+                                                                                  :availableLangs="$availableLangs"/>
+
+                                                    <x-dashboard.about-company-form :about="$about"
+                                                                                    :availableLangs="$availableLangs"/>
+
+                                                    <x-dashboard.about-help-form :about="$about"
+                                                                                 :availableLangs="$availableLangs"/>
+
+                                                    <x-dashboard.about-list-container :availableLangs="$availableLangs"
+                                                                                      :aboutLists="$about->aboutLists"/>
+
+                                                    <div class="col-12 mt-3"
+                                                         style="display: flex; justify-content: flex-end;">
+                                                        <button type="submit"
+                                                                class="btn btn-success mr-1 mb-1 waves-effect waves-light">
+                                                            {{ __('Save') . ' ' . __('main info') }}
+                                                        </button>
+                                                        <button type="reset"
+                                                                class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">
+                                                            {{ __('Reset') }}
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 @endif
             </div>
         </div>
     </div>
+
+    @push('image-preview')
+        <script src="{{ asset('assets/js/image-preview.js') }}"></script>
+    @endpush
+
+    @push('change-language-tabs')
+        <script src="{{ asset('assets/js/change-language-tabs.js') }}"></script>
+    @endpush
+
+    @push('about-list-manipulation')
+        <script src="{{ asset('assets/js/about-list-manipulation.js') }}"></script>
+    @endpush
 @endsection

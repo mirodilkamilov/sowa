@@ -6,20 +6,16 @@ use Illuminate\View\Component;
 
 class AvailablePositions extends Component
 {
-    public $positions;
-    public $arrayOfPositions;
+    public array $positions;
+    public array $avilablePositions;
 
     public function __construct($positions)
     {
         $this->positions = $positions;
-        $this->arrayOfPositions = [];
+        $this->avilablePositions = [];
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|string
-     */
+
     public function render()
     {
         return view('components.dashboard.available-positions');
@@ -27,26 +23,10 @@ class AvailablePositions extends Component
 
     public function getAvailablePositions(): array
     {
-        $counter = 1;
-        $i = 0;
+        $maxAvilablePosition = max($this->positions) + 1;
+        $possiblePositions = range(1, $maxAvilablePosition);
+        $this->avilablePositions = array_diff($possiblePositions, $this->positions);
 
-        if (isset($this->positions)) {
-            foreach ($this->positions as $position) {
-                while ($position->position != $counter) {
-                    array_push($this->arrayOfPositions, $counter);
-                    ++$counter;
-                }
-                ++$counter;
-                ++$i;
-            }
-
-            // sets last available position
-            if (count($this->positions) == $i || empty($this->arrayOfPositions)) {
-                $lastAvailablePosition = $counter;
-                array_push($this->arrayOfPositions, $lastAvailablePosition);
-            }
-        }
-
-        return $this->arrayOfPositions;
+        return $this->avilablePositions;
     }
 }

@@ -19,11 +19,12 @@ class CustomerFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
+            'position' => $this->faker->numberBetween(1, 30),
             'name' => $this->faker->words(2, true),
-            'logo' => $this->faker->imageUrl(200, 70),
+            'logo' => 'about/customers/test-customer.png',
         ];
     }
 }

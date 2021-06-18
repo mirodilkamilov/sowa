@@ -19,7 +19,7 @@ class UserContactFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $statuses = ['not reviewed', 'reviewed', 'need action', 'spam'];
         return [

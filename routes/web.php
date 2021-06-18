@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyContactController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TrashController;
 use App\Http\Controllers\User\AboutController as UserAboutController;
 use App\Http\Controllers\User\ContactController as UserContactController;
@@ -71,14 +73,15 @@ Route::group([
     // * Users contacts controller (messages)
     Route::resource('contacts', ContactController::class)->except(['create', 'show', 'store']);
 
-    Route::resource('about', AboutController::class)->except(['create', 'show', 'store']);
+    Route::resource('about', AboutController::class)->except(['show']);
 
-    Route::resource('customers', CompanyContactController::class)->except(['show']);
+    Route::resource('customers', CustomerController::class)->except(['show']);
 
     Route::resource('company-contacts', CompanyContactController::class)->except(['show']);
 
-    Route::get('/trash', [TrashController::class, 'index'])->name('trash.index');
+    Route::resource('social-media', SocialMediaController::class)->only(['store']);
 
+    Route::resource('trash', TrashController::class)->only(['index', 'store']);
 });
 
 require __DIR__ . '/auth.php';

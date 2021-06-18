@@ -22,7 +22,7 @@ class AboutFactory extends Factory
     public function definition()
     {
         return [
-            'image' => $this->faker->imageUrl(1920, 1280),
+            'image' => 'about/about-us.jpg',
             'image_title' => ['ru' => $this->faker->sentence . ' (ru)', 'en' => $this->faker->sentence . ' (en)', 'uz' => $this->faker->sentence . ' (uz)'],
             'about_title' => ['ru' => $this->faker->sentence . ' (ru)', 'en' => $this->faker->sentence . ' (en)', 'uz' => $this->faker->sentence . ' (uz)'],
             'about_description' => ['ru' => $this->faker->text . ' (ru)', 'en' => $this->faker->text . ' (en)', 'uz' => $this->faker->text . ' (uz)'],

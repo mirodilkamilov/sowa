@@ -21,7 +21,13 @@
                                 <div class="card-content">
                                     <div class="card-body">
 
-                                        <x-dashboard.language-tabs :availableLangs="$availableLangs"/>
+                                        @php $inputs = [
+                                              'title',
+                                              'sub_title',
+                                              'description'
+                                           ];
+                                        @endphp
+                                        <x-dashboard.language-tabs :availableLangs="$availableLangs" :inputs="$inputs"/>
 
                                         <form class="form" action="{{ route('slides.update', $slide->id) }}"
                                               method="post"

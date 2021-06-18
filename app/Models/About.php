@@ -26,4 +26,9 @@ class About extends Model
     {
         return $this->hasMany(AboutList::class);
     }
+
+    public function getImageAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }

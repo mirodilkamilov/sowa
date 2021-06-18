@@ -29,14 +29,21 @@
                 </ul>
                 <ul class="listContact list-unstyled">
                     <li><h6 class="title title--h6">{{ __('Contacts') }}</h6></li>
-                    <li>{{ $companyContact?->email }}</li>
-                    <li>{{ $companyContact?->phone }}</li>
+                    @if(isset($companyContact))
+                        @foreach($companyContact->email as $email)
+                            <li>{{ $email }}</li>
+                        @endforeach
+                        @foreach($companyContact->phone as $phone)
+                            <li>{{ $phone }}</li>
+                        @endforeach
+                    @endif
                 </ul>
                 <ul class="listContact list-unstyled">
                     <li><h6 class="title title--h6">{{ __('Social networks') }}</h6></li>
                     @if(isset($companyContact->socialMedia))
-                        @foreach($companyContact?->socialMedia as $socialMedia)
-                            <li><a class="link_decoration" href="{{ $socialMedia->url }}">{{ $socialMedia->name }}</a>
+                        @foreach($companyContact->socialMedia as $socialMedia)
+                            <li>
+                                <a class="link_decoration" href="{{ $socialMedia->url }}">{{ $socialMedia->name }}</a>
                             </li>
                         @endforeach
                     @endif

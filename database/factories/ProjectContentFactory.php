@@ -14,17 +14,23 @@ class ProjectContentFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $type = $this->faker->randomElement(['text', 'image-small', 'image-big', 'slide']);
-        $slide = [$this->faker->imageUrl('1200', '610'), $this->faker->imageUrl('1200', '610'), $this->faker->imageUrl('1200', '610')];
+        $slide = [
+            'slide' => ['projects/test-content-1.png', 'projects/test-content-2.png', 'projects/test-content-3.png']
+        ];
+        $image = [
+            'image' => 'projects/test-content-' . $this->faker->numberBetween(1, 3) . '.png'
+        ];
+
         return [
             'type' => $type,
             'position' => $this->faker->randomDigitNotNull,
             'title' => ['ru' => 'ru-' . $this->faker->word, 'en' => 'en-' . $this->faker->word, 'uz' => 'uz-' . $this->faker->word],
             'description' => ['ru' => 'ru-' . $this->faker->paragraph, 'en' => 'en-' . $this->faker->paragraph, 'uz' => 'uz-' . $this->faker->paragraph],
-            'image' => $type === 'slide' ? $slide : $slide[0],
-            'project_id' => mt_rand(1, 4),
+            'image' => ($type === 'slide') ? $slide : $image,
+            'project_id' => $this->faker->numberBetween(1, 4),
         ];
     }
 }
