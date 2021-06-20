@@ -24,7 +24,7 @@ class Project extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class)->orderBy('category');
+        return $this->belongsToMany(Category::class);
     }
 
     public function project_contents()

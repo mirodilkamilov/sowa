@@ -111,19 +111,43 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div class="row mt-1">
                                             <div class="col-md-6 col-12">
-                                                <div class="form-label-group">
-                                                    <input type="text" id="url"
-                                                           class="form-control @error('url') is-invalid @enderror"
-                                                           placeholder="{{ __('Url') }}" name="url" form="slide-form"
-                                                           value="{{ old('url') ?? $slide->url }}">
-                                                    <label for="url">{{ __('Url') }}</label>
-                                                    @error('url')
+                                                <fieldset class="form-group">
+                                                    <label for="project-category"
+                                                           style="position: absolute; top: -20px;">
+                                                        {{ __('Project category') }}
+                                                    </label>
+
+                                                    <select id="project-category"
+                                                            class="custom-select project-category @error('category_id') is-invalid @enderror"
+                                                            name="category_id" form="slide-form">
+                                                        <option disabled selected value>
+                                                            -- select a category --
+                                                        </option>
+                                                        <option value="all"
+                                                                @if($slide->category_id === 'all' || old('category_id') === 'all') selected @endif>
+                                                            {{ __('All') }}
+                                                        </option>
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}"
+                                                                    @if($slide->category_id == $category->id || old('category_id') == $category->id) selected @endif>
+                                                                {{ $category->category }}
+                                                            </option>
+                                                        @endforeach
+
+                                                        <option value="add-category">
+                                                            -- {{ __('add new category') }} --
+                                                        </option>
+                                                    </select>
+                                                    @error('category_id')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
-                                                </div>
+                                                </fieldset>
                                             </div>
+
+                                            <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-label-group mb-0">
                                                     <input type="number" id="position"

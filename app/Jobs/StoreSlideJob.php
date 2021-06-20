@@ -14,7 +14,7 @@ class StoreSlideJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $validated;
+    private array $validated;
 
     public function __construct(StoreSlideRequest $request)
     {
@@ -22,8 +22,10 @@ class StoreSlideJob implements ShouldQueue
         $this->validated['image'] = $request->file('image')->store('slides');
     }
 
-    public function handle()
+    public function handle(): void
     {
+        $this->validated['category_id'] = $this->validated['category_id'] !== 'all' ? $this->validated['category_id'] : null;
+
         Slide::create($this->validated);
     }
 }

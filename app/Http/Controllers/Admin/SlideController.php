@@ -7,6 +7,7 @@ use App\Http\Requests\StoreSlideRequest;
 use App\Http\Requests\UpdateSlideRequest;
 use App\Jobs\StoreSlideJob;
 use App\Jobs\UpdateSlideJob;
+use App\Models\Category;
 use App\Models\Slide;
 
 class SlideController extends Controller
@@ -21,8 +22,9 @@ class SlideController extends Controller
     public function create()
     {
         $positions = Slide::orderBy('position')->pluck('position')->toArray();
+        $categories = Category::all();
 
-        return view('dashboard.slides.create', compact('positions'));
+        return view('dashboard.slides.create', compact('positions', 'categories'));
     }
 
     public function store(StoreSlideRequest $request)
@@ -44,8 +46,9 @@ class SlideController extends Controller
             return Slide::findOrFail($slide);
         });
         $positions = Slide::orderBy('position')->pluck('position')->toArray();
+        $categories = Category::all();
 
-        return view('dashboard.slides.edit', compact('slide', 'positions'));
+        return view('dashboard.slides.edit', compact('slide', 'positions', 'categories'));
     }
 
     public function update(Slide $slide, UpdateSlideRequest $request)

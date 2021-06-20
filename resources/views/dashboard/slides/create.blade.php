@@ -9,6 +9,8 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
+            <x-custom-alerts/>
+
             <div class="content-body">
                 <section id="multiple-column-form">
                     <div class="row match-height">
@@ -94,7 +96,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
@@ -108,19 +109,41 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div class="row mt-1">
                                             <div class="col-md-6 col-12">
-                                                <div class="form-label-group">
-                                                    <input type="text" id="url"
-                                                           class="form-control @error('url') is-invalid @enderror"
-                                                           placeholder="{{ __('Url') }}" name="url" form="slide-form"
-                                                           value="{{ old('url') }}">
-                                                    <label for="url">{{ __('Url') }}</label>
-                                                    @error('url')
+                                                <fieldset class="form-group">
+                                                    <label for="project-category"
+                                                           style="position: absolute; top: -20px;">
+                                                        {{ __('Project category') }}
+                                                    </label>
+                                                    <select id="project-category"
+                                                            class="custom-select project-category @error('category_id') is-invalid @enderror"
+                                                            name="category_id" form="slide-form">
+                                                        <option disabled selected value>
+                                                            -- select a category --
+                                                        </option>
+                                                        <option value="all" @if(old('category_id') === 'all') selected @endif>
+                                                            {{ __('All') }}
+                                                        </option>
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}"
+                                                                    @if(old('category_id') == $category->id) selected @endif>
+                                                                {{ $category->category }}
+                                                            </option>
+                                                        @endforeach
+
+                                                        <option value="add-category">
+                                                            -- {{ __('add new category') }} --
+                                                        </option>
+                                                    </select>
+                                                    @error('category_id')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
-                                                </div>
+                                                </fieldset>
                                             </div>
+
+                                            <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-label-group mb-0">
                                                     <input type="number" id="position"
@@ -142,7 +165,8 @@
                                                     <input type="file"
                                                            class="custom-file-input @error('image') is-invalid @enderror"
                                                            name="image"
-                                                           id="basicInputFile" form="slide-form" onchange="readURL(this)">
+                                                           id="basicInputFile" form="slide-form"
+                                                           onchange="readURL(this)">
                                                     <label class="custom-file-label"
                                                            for="basicInputFile"></label>
                                                     @error('image')

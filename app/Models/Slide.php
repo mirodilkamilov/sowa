@@ -24,4 +24,10 @@ class Slide extends Model
     {
         return '/assets/uploads/' . $value;
     }
+
+    public function getCategoryIdAttribute($value): string
+    {
+        return $value ?? 'all';
+
+    }
 }

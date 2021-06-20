@@ -13,7 +13,7 @@
                     <li class="filters__item active" data-filter="*"><a class="filters__link active"
                                                                         href="#filter">{{ __('All') }}</a></li>
                     @foreach($categories as $categoryForFilter)
-                        <li class="filters__item" data-filter=".category-{{ Str::slug($categoryForFilter->category) }}">
+                        <li class="filters__item" data-filter=".category-{{ $categoryForFilter->id }}">
                             <a class="filters__link" href="#filter">{{ $categoryForFilter->category }}</a>
                         </li>
                     @endforeach
@@ -25,8 +25,9 @@
         <div class="flex-grid js-masonry-project js-sort">
             @foreach($projects as $project)
                 <figure
-                    class="item-project item-masonry js-block @foreach($project->categories as $category) category-{{ Str::slug($category->category) }} @endforeach">
-                    <a href="{{ route('user.projects.show', [$locale, $project->id, $project->slug]) }}" class="onHover">
+                    class="item-project item-masonry js-block @foreach($project->categories as $category) category-{{ $category->id }} @endforeach">
+                    <a href="{{ route('user.projects.show', [$locale, $project->id, $project->slug]) }}"
+                       class="onHover">
                         <img class="item-news__image lazyload" src="{{ $project->main_image }}"
                              alt="{{ $project->main_title }}">
                         <figcaption class="onHover__details">

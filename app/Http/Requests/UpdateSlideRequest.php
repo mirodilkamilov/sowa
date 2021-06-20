@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use App\Models\Slide;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,6 +12,12 @@ class UpdateSlideRequest extends FormRequest
     {
         $slide_id = $this->segment(3);
         $ignoredPosition = Slide::select(['position'])->find($slide_id)->position;
+
+        $categories = Category::withoutEvents(function () {
+            return Category::pluck('id')->toArray();
+        });
+        $categories[] = 'all';
+        $categories = implode(',', $categories);
 
         return [
             'title.ru' => 'required|min:3|max:255',
@@ -22,7 +29,7 @@ class UpdateSlideRequest extends FormRequest
             'description.ru' => 'required|min:5|max:500',
             'description.en' => 'nullable|required_with:title.en|min:3|max:500',
             'description.uz' => 'nullable|required_with:title.uz|min:3|max:500',
-            'url' => 'required|url',
+            'category_id' => "required|in:$categories",
             'position' => "required|integer|gt:0|unique:slides,position,$ignoredPosition,position,deleted_at,NULL",
             'image' => 'nullable|image|max:4000',
         ];

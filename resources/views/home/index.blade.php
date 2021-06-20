@@ -17,7 +17,9 @@
                                 <p class="description">
                                     <span class="down-up"><span>{{ $slide->description }}</span></span>
                                 </p>
-                                <a class="btn-link btn-link--circle-right" href="{{ $slide->url }}">
+{{--                                @php $query = $slide->category_id ?? 'all'; @endphp--}}
+                                <a class="btn-link btn-link--circle-right"
+                                   href="{{ route('user.projects.index', [App::getLocale(), 'sort_by' => $slide->category_id]) }}">
                                     <span class="down-up">
                                         <span>{{ __('Learn more') }}<i class="circle circle--right icon-right-open"></i></span>
                                     </span>
@@ -33,7 +35,7 @@
                     @foreach($slides as $slide)
                         <div class="swiper-slide">
                             <div class="cover-slider lazyload overlay--45" data-bg="{{ $slide->image }}">
-                                <a class="swiper-slide__link" href="{{ $slide->url }}"></a>
+                                <a class="swiper-slide__link" href="{{ route('user.projects.index', [App::getLocale(), 'sort_by' => $slide->category_id]) }}"></a>
                             </div>
                         </div>
                     @endforeach

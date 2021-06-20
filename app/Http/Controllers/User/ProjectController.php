@@ -5,12 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Project;
+use Illuminate\Support\Facades\App;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        $categories = Category::select(['category'])->get()->sortBy('category');
+        $locale = App::getLocale();
+        $categories = Category::orderBy("category->$locale")->get();
         $projects = Project::select(['id', 'slug', 'main_image'])->with('categories')->get();
 
         return view('projects.index', compact('projects', 'categories'));
