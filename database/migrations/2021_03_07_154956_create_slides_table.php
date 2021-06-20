@@ -18,7 +18,7 @@ class CreateSlidesTable extends Migration
             $table->jsonb('title');
             $table->jsonb('sub_title')->nullable();
             $table->jsonb('description');
-            $table->string('url')->nullable();
+            $table->foreignId('category_id')->nullable();
             $table->string('image');
             $table->integer('position');
             $table->softDeletes();

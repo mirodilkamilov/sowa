@@ -21,7 +21,7 @@ class SlideFactory extends Factory
             'title' => ['ru' => 'ru-' . $this->faker->word, 'en' => 'en-' . $this->faker->word, 'uz' => 'uz-' . $this->faker->word],
             'sub_title' => ['ru' => 'ru-' . $this->faker->word, 'en' => 'en-' . $this->faker->word, 'uz' => 'uz-' . $this->faker->word],
             'description' => ['ru' => 'ru-' . $this->faker->paragraph, 'en' => 'en-' . $this->faker->paragraph, 'uz' => 'uz-' . $this->faker->paragraph],
-            'url' => $this->faker->url,
+            'category_id' => $this->faker->numberBetween(1,4),
             'image' => 'slides/slider-' . ++$this->position . '.jpg',
             'position' => $this->faker->numberBetween(1, 10),
         ];
