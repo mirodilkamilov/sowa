@@ -3,19 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompanyContact;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
-    }
+        $user = Auth::user();
 
-    public function contacts()
-    {
-        $contact = CompanyContact::with('socialMedia')->first();
-
-        return view('dashboard.about.contacts.index', compact('contact'));
+        return view('dashboard.index', compact('user'));
     }
 }

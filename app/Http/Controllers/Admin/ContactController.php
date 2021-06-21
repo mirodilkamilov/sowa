@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserContactRequest;
 use App\Models\UserContact;
 
 class ContactController extends Controller
@@ -20,7 +20,7 @@ class ContactController extends Controller
         //
     }
 
-    public function update(UpdateUserRequest $request, $userContact)
+    public function update(UpdateUserContactRequest $request, $userContact)
     {
         // * $userContact comes here as a string not as a collection
         $userContact = UserContact::findOrFail($userContact);

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TrashController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\AboutController as UserAboutController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\User\HomeController;
@@ -60,11 +61,14 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 
+
 Route::group([
     'prefix' => 'dashboard',
     'middleware' => ['auth', 'dashboardSetLocale'],
 ], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::resource('users', UserController::class)->only(['update', 'store']);
 
     Route::resource('slides', SlideController::class)->except(['show']);
 
