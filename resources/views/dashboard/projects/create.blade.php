@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header justify-content-center">
-                                <h4 class="card-title">{{ __('Create project\'s main part') }}</h4>
+                                <h4 class="card-title">{{ __('Create') }} {{ __('project\'s main part') }}</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body pb-0">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
 
-                        <h4 class="card-title text-center">{{ __('Create project\'s content part') }}</h4>
+                        <h4 class="card-title text-center">{{ __('Create') }} {{ __('project\'s content part') }}</h4>
                         <div class="content-container">
                             @if($errors->any())
                                 <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>

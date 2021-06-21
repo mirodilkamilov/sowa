@@ -13,7 +13,7 @@
 
             <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                     data-target="#category-add">
-                <span><i class="feather icon-plus"></i> Add New</span>
+                <span><i class="feather icon-plus"></i> {{ __('Add New') }}</span>
             </button>
             <div class="content-body">
                 <section id="data-list-view" class="data-list-view-header">
@@ -41,7 +41,7 @@
                                         </a>
                                         <button type="button" value="{{ $category->id }}"
                                                 class="confirm-btn btn btn-outline-danger waves-effect waves-light"
-                                                data-toggle="modal" data-target="#exampleModalCenter">
+                                                data-toggle="modal" data-target="#confirm-modal">
                                             <i class="feather icon-trash-2"></i>
                                         </button>
                                     </td>
@@ -58,44 +58,14 @@
 
     <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-             role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center">{{ __('Are you sure you want to delete?') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p id="category-title"></p>
-                </div>
-                <div class="modal-footer">
-                    <form action="" method="post" id="delete-form">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger mr-1 waves-effect waves-light"
-                                type="submit">
-                            Yes, delete it!
-                        </button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
-                                aria-label="Close">
-                            Cancel
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Delete Modal -->
+    <x-dashboard.confirm-modal/>
 
     <script>
+        var currentUrl = window.location.href.replace(/\/*$/gm, '');
+
         $('.confirm-btn').click(function () {
             var categoryId = $(this).val();
-            var actionUrl = window.location.href + '/' + categoryId;
+            var actionUrl = currentUrl + '/' + categoryId;
             var categoryArray = $(this).closest('.product-action').siblings('.category').map(function () {
                 return this.textContent;
             }).get();
@@ -108,9 +78,9 @@
                 categories = categories + categoryArray[i] + ' | ';
             }
 
-            $("#delete-form").attr("action", actionUrl);
-            var modalMessage = 'These categories is going to be deleted: ' + categories;
-            $("#category-title").text(modalMessage);
+            $('#delete-form').attr('action', actionUrl);
+            var modalMessage = 'Эти категории будут удалены: ' + `<strong>` + categories + `</strong>`;
+            $('.modal-body').empty().append(`<p>` + modalMessage + `</p>`);
         });
     </script>
 

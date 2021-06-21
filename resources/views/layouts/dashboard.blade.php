@@ -108,7 +108,7 @@
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
                                 <span class="user-name text-bold-600">{{ $name }}</span>
-                                <span class="user-status">Admin</span>
+                                <span class="user-status">{{ __('Admin') }}</span>
                             </div>
                             <div class="avatar">
                                 <span class="avatar-content">{{ Str::substr($name, 0, 1) }}</span>
@@ -117,7 +117,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{ route('dashboard.index') }}">
                                 <i class="feather icon-user"></i>
-                                Edit Profile
+                                {{ __('Edit Profile') }}
                             </a>
                             <div class="dropdown-divider"></div>
 

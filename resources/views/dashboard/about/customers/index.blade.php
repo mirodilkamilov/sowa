@@ -14,7 +14,7 @@
             <div class="content-body">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                         data-target="#customer-add">
-                    <span><i class="feather icon-plus"></i> Add New</span>
+                    <span><i class="feather icon-plus"></i> {{ __('Add New') }}</span>
                 </button>
                 <div class="row custom-row">
                     @foreach($customers as $customer)

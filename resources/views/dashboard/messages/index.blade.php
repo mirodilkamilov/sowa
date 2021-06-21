@@ -22,7 +22,7 @@
                                 <div class="sidebar-menu-list">
                                     <div class="list-group list-group-filters font-medium-1 mt-2">
                                         <a href="#" class="list-group-item list-group-item-action border-0 pt-0 active">
-                                            <i class="font-medium-5 feather icon-mail mr-50"></i> All
+                                            <i class="font-medium-5 feather icon-mail mr-50"></i> {{ __('All') }}
                                         </a>
                                     </div>
                                     <hr>
@@ -42,7 +42,7 @@
                                             <a href="#"
                                                class="list-group-item list-group-item-action border-0 d-flex align-items-center">
                                                 <span class="bullet bullet-{{ $statusColor[$status] }} mr-1"></span>
-                                                {{ Str::title($status) }}
+                                                {{ Str::title(__($status)) }}
                                             </a>
                                         @endforeach
                                     </div>
@@ -92,7 +92,7 @@
                                                                               data-value="{{ $user->status }}">
                                                                             <span
                                                                                 class="bullet bullet-{{ $statusColor[$user->status] }} bullet-xs"></span>
-                                                                            {{ $user->status }}
+                                                                            {{ __($user->status) }}
                                                                         </span>
                                                                         </div>
                                                                     </div>
@@ -103,7 +103,7 @@
                                                                 <button type="button" value="{{ $user->id }}"
                                                                         class="todo-item-delete confirm-btn"
                                                                         data-toggle="modal"
-                                                                        data-target="#exampleModalCenter"
+                                                                        data-target="#confirm-modal"
                                                                         style="cursor: pointer; font-size: 1.2rem; line-height: 1.5; color: #7367F0; background-color: transparent; border: 0 solid transparent;">
                                                                     <i class="feather icon-trash"></i>
                                                                 </button>
@@ -120,7 +120,7 @@
                                                 @endforeach
                                             </ul>
                                             <div class="no-results">
-                                                <h5>No Items Found</h5>
+                                                <h5>{{ __('No Items Found') }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" style="display: flex; flex-direction: column;">
-                                                    <h5 class="text-primary text-center">Statuses</h5>
+                                                    <h5 class="text-primary text-center">{{ __('Statuses') }}</h5>
                                                     <div class="todo-item-action">
                                                         @foreach($statuses as $status)
                                                             <div class="row pl-2">
@@ -167,7 +167,7 @@
                                                                                     <i class="vs-icon feather icon-check mr-0"></i>
                                                                                 </span>
                                                                             </span>
-                                                                            <span>{{ $status }}</span>
+                                                                            <span>{{ __($status) }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -182,14 +182,16 @@
                                                         <fieldset class="col-6 form-label-group">
                                                             <input type="text" class="edit-todo-item-title form-control"
                                                                    name="name" value="{{ old('name') }}"
-                                                                   placeholder="Title" id="name" readonly>
-                                                            <label for="name" style="left: 19px;">User name</label>
+                                                                   id="name" readonly>
+                                                            <label for="name"
+                                                                   style="left: 19px;">{{ __('User name') }}</label>
                                                         </fieldset>
                                                         <fieldset class="col-6 form-label-group">
                                                             <input type="text" class="edit-todo-item-phone form-control"
                                                                    name="phone" value="{{ old('phone') }}"
-                                                                   placeholder="Title" id="phone" readonly>
-                                                            <label for="phone" style="left: 19px;">Phone</label>
+                                                                   id="phone" readonly>
+                                                            <label for="phone"
+                                                                   style="left: 19px;">{{ __('Phone') }}</label>
                                                         </fieldset>
                                                     </div>
 
@@ -198,13 +200,14 @@
                                                                   rows="4" id="message" name="message"
                                                                   placeholder="Add description"
                                                                   readonly>{{ old('message') }}</textarea>
-                                                        <label for="message">User message</label>
+                                                        <label
+                                                            for="message">{{ __('User') }} {{ __('message') }}</label>
                                                     </fieldset>
                                                     <fieldset class="form-label-group">
                                                         <textarea class="edit-todo-item-comm form-control"
                                                                   rows="3" id="comment" name="comment"
                                                                   placeholder="Add comment">{{ old('comment') }}</textarea>
-                                                        <label for="comment">Add comment</label>
+                                                        <label for="comment">{{ __('Add') }} {{ __('comment') }}</label>
                                                         @error("comment")
                                                         <p class="text-danger pt-1 mb-0">{{ $message }}</p>
                                                         @enderror
@@ -216,13 +219,13 @@
                                                     <fieldset class="form-group position-relative has-icon-left mb-0">
                                                         <button type="submit" class="btn btn-primary">
                                                             <i class="feather icon-edit d-block d-lg-none"></i>
-                                                            <span class="d-none d-lg-block">Update</span>
+                                                            <span class="d-none d-lg-block">{{ __('Update') }}</span>
                                                         </button>
                                                     </fieldset>
                                                     <fieldset class="form-group position-relative has-icon-left mb-0">
                                                         <button type="button" class="btn" data-dismiss="modal">
                                                             <i class="feather icon-x d-block d-lg-none"></i>
-                                                            <span class="d-none d-lg-block">Cancel</span>
+                                                            <span class="d-none d-lg-block">{{ __('Cancel') }}</span>
                                                         </button>
                                                     </fieldset>
                                                 </div>
@@ -232,42 +235,7 @@
                                 </div>
                             </div>
 
-
-                            <!-- Confirm Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div
-                                    class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-                                    role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-center">{{ __('Are you sure you want to delete?') }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p id="user-name"></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form action="" method="post" id="delete-form">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-danger mr-1 waves-effect waves-light"
-                                                        type="submit">
-                                                    Yes, delete it!
-                                                </button>
-                                                <button type="button" class="btn btn-outline-primary"
-                                                        data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    Cancel
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Confirm Modal -->
+                            <x-dashboard.confirm-modal/>
 
                             <script>
                                 $('.confirm-btn').click(function () {
@@ -284,8 +252,8 @@
                                     }
 
                                     $('#delete-form').attr('action', actionUrl);
-                                    var modalMessage = value + '\'s message is going to be deleted.';
-                                    $('#user-name').text(modalMessage);
+                                    var modalMessage = `<strong>` + value + `</strong>` + '\'s message is going to be deleted.';
+                                    $('.modal-body').empty().append(`<p>` + modalMessage + `</p>`);
                                 });
                             </script>
 

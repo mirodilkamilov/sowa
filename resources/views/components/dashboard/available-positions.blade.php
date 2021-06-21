@@ -1,9 +1,9 @@
 <span class="display-block text-muted" style="margin-top: 0.5rem;">
     @php $availablePositions = $getAvailablePositions(); @endphp
     @if(empty($availablePositions))
-        No reserved positions yet
+        {{ __('No reserved positions yet') }}
     @else
-        {{ __('Available positions:') }}
+        {{ __('Available positions') }}:
         @foreach($availablePositions as $availablePosition)
             {{ $availablePosition }},
 

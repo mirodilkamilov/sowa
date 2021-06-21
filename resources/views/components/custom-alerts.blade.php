@@ -1,7 +1,7 @@
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <p class="mb-0"><i class="feather icon-check"></i>
-            {{ session('success') }}
+            {{ __(session('success')) }}
         </p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,7 +12,7 @@
 @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <p class="mb-0"><i class="feather icon-alert-octagon"></i>
-            {{ session('error') }}
+            {{ __(session('error')) }}
         </p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
 @if(session('info'))
     <div class="alert alert-info alert-dismissible fade show" role="alert">
         <p><i class="feather icon-info"></i>
-            {{ session('info') }}
+            {{ __(session('info')) }}
         </p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>

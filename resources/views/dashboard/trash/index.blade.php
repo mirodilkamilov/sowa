@@ -28,7 +28,7 @@
                                 <span><i class="feather icon-trash"></i> {{ __('Empty trash') }}</span>
                             </button>
                         </div>
-                        @php $message = 'Are you sure you want to empty trash?'; @endphp
+
                         <x-dashboard.trash-confirm-modal/>
 
                         <div class="row">
@@ -207,7 +207,7 @@
                                                                         <table class="table">
                                                                             <thead>
                                                                             <tr>
-                                                                                <th class="text-uppercase">{{ __('Name') }}</th>
+                                                                                <th class="text-uppercase">{{ __('User name') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Phone') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Message') }}</th>
                                                                                 <th class="text-uppercase">{{ __('Comment') }}</th>

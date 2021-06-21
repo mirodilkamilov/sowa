@@ -16,7 +16,7 @@
                     <div class="table-responsive">
                         <a href="{{ route('projects.create')  }}" class="btn btn-outline-primary" tabindex="0"
                            aria-controls="DataTables_Table_0">
-                            <span><i class="feather icon-plus"></i> Add New</span>
+                            <span><i class="feather icon-plus"></i> {{ __('Add New') }}</span>
                         </a>
                         <table class="table data-thumb-view">
                             <thead>
@@ -25,7 +25,7 @@
                                 <th>{{ __('Slug') }}</th>
                                 <th>{{ __('Title') }}</th>
                                 <th>{{__('Category')}}</th>
-                                <th>{{ __('Action') }}</th>
+                                <th>{{ __('Actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>

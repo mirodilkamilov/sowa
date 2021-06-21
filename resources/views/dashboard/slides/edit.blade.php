@@ -16,7 +16,7 @@
                         <div class="col-12">
                             <div class="card mb-1">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ __('Edit slide') . ': ' . $slide->title[$locale] }}</h4>
+                                    <h4 class="card-title">{{ __('Edit') }} {{ __('slide') . ': ' . $slide->title[$locale] }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -107,7 +107,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Common form fields</h4>
+                                    <h4 class="card-title mb-0">{{ __('Common form fields') }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -123,7 +123,7 @@
                                                             class="custom-select project-category @error('category_id') is-invalid @enderror"
                                                             name="category_id" form="slide-form">
                                                         <option disabled selected value>
-                                                            -- select a category --
+                                                            -- {{ __('Select a category') }} --
                                                         </option>
                                                         <option value="all"
                                                                 @if($slide->category_id === 'all' || old('category_id') === 'all') selected @endif>
@@ -137,7 +137,7 @@
                                                         @endforeach
 
                                                         <option value="add-category">
-                                                            -- {{ __('add new category') }} --
+                                                            -- {{ __('Add new category') }} --
                                                         </option>
                                                     </select>
                                                     @error('category_id')
@@ -188,11 +188,11 @@
                                             <div class="col-12 mt-1">
                                                 <button type="submit" class="btn btn-primary mr-1 mb-1"
                                                         form="slide-form">
-                                                    {{ __('Edit slide') }}
+                                                    {{ __('Edit') }} {{ __('slide') }}
                                                 </button>
                                                 <button type="reset" class="btn btn-outline-warning mr-1 mb-1"
                                                         form="slide-form">
-                                                    Reset
+                                                    {{ __('Reset') }}
                                                 </button>
                                             </div>
                                         </div>

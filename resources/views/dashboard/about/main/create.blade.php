@@ -54,7 +54,7 @@
                                                      style="display: flex; justify-content: flex-end;">
                                                     <button type="submit"
                                                             class="btn btn-success mr-1 mb-1 waves-effect waves-light">
-                                                        {{ __('Save') . ' ' . __('main info') }}
+                                                        {{ __('Save') . ' ' . __('Main Information') }}
                                                     </button>
                                                     <button type="reset"
                                                             class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">

@@ -25,7 +25,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="name">Name</label>
+                                                        <label for="name">{{ __('Full name') }}</label>
                                                         <input name="name" value="{{ old('name') ?? $user->name }}"
                                                                type="text"
                                                                class="form-control @error('name') is-invalid @enderror"
@@ -40,7 +40,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="email">Email</label>
+                                                        <label for="email">{{ __('Email') }}</label>
                                                         <input name="email" value="{{ old('email') ?? $user->email }}"
                                                                type="text"
                                                                class="form-control @error('email') is-invalid @enderror"
@@ -56,7 +56,7 @@
 
                                         <div class="divider">
                                             <div class="divider-text">
-                                                <h4 class="title text-primary">Change password</h4>
+                                                <h4 class="title text-primary">{{ __('Change password') }}</h4>
                                             </div>
                                         </div>
 
@@ -64,7 +64,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="password">New Password</label>
+                                                        <label for="password">{{ __('New Password') }}</label>
                                                         <input name="password" type="password"
                                                                class="form-control @error('password') is-invalid @enderror"
                                                                id="password" autocomplete="false">
@@ -77,7 +77,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="password_confirmation">Retype New Password</label>
+                                                        <label for="password_confirmation">{{ __('Retype') }} {{ __('New Password') }}</label>
                                                         <input name="password_confirmation" type="password"
                                                                class="form-control @error('password_confirmation') is-invalid @enderror"
                                                                id="password_confirmation"
@@ -92,11 +92,10 @@
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                 <button type="submit"
                                                         class="btn btn-primary mr-sm-1 mb-1 mb-sm-0 waves-effect waves-light">
-                                                    Save
-                                                    changes
+                                                    {{ __('Save changes') }}
                                                 </button>
-                                                <button type="reset"
-                                                        class="btn btn-outline-warning waves-effect waves-light">Cancel
+                                                <button type="reset"class="btn btn-outline-warning waves-effect waves-light">
+                                                    {{ __('Cancel') }}
                                                 </button>
                                             </div>
                                         </div>

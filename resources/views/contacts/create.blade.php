@@ -31,7 +31,7 @@
                             <div class="col-12">
                                 <div class="form-group @error('phone') has-error has-danger @enderror">
                                     <input type="tel" class="inputText" id="phone" name="phone"
-                                           placeholder="{{ __('Phone') }}"
+                                           placeholder="{{ __('Phone number') }}"
                                            autocomplete="off" value="{{ old('phone') }}">
                                     <div class="help-block with-errors phone-errors">
                                         @error('phone')
@@ -47,7 +47,7 @@
                             <div class="col-12">
                                 <div class="form-group @error('message') has-error has-danger @enderror">
 									<textarea class="textarea" id="message" name="message"
-                                              placeholder="{{ __('Message') }}"
+                                              placeholder="{{ __('Your message') }}"
                                               rows="1">{{ old('message') }}</textarea>
                                     <div class="help-block with-errors">
                                         @error('message')

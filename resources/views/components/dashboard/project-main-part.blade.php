@@ -115,7 +115,7 @@
                     name="main[1][category]"
                     form="project-create-form">
                 <option disabled selected value>
-                    -- select a category --
+                    -- {{ __('Select a category') }} --
                 </option>
                 @foreach($categories as $category)
                     <option
@@ -135,7 +135,7 @@
                 @endforeach
 
                 <option value="add-category">
-                    -- {{ __('add new category') }} --
+                    -- {{ __('Add new category') }} --
                 </option>
             </select>
             @error('main.*.category')

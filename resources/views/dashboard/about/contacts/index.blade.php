@@ -17,14 +17,14 @@
                 @if(isset($contact))
                     <button type="button" class="btn btn-primary mr-1 mb-2" data-toggle="modal"
                             data-target="#edit-company-contacts">
-                        <span><i class="feather icon-edit"></i> Edit</span>
+                        <span><i class="feather icon-edit"></i> {{ __('Edit') }}</span>
                     </button>
 
                     <x-dashboard.company-contact-edit-modal :contact="$contact"/>
                 @else
                     <button type="button" class="btn btn-success mr-1 mb-2" data-toggle="modal"
                             data-target="#add-company-contacts">
-                        <span><i class="feather icon-plus"></i> Add company contacts</span>
+                        <span><i class="feather icon-plus"></i> {{ __('Add') }} {{ __('company contacts') }}</span>
                     </button>
 
                     <x-dashboard.company-contact-add-modal/>
@@ -71,7 +71,7 @@
                             <div class="col-md-12 col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Social Media Links</h4>
+                                        <h4 class="card-title">{{ __('Social Media Links') }}</h4>
                                     </div>
                                     <div class="card-content">
                                         <div class="card-body">

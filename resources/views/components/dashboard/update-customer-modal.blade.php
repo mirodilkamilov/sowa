@@ -5,7 +5,7 @@
     <div class="update-customer-modal modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-success white">
-                <h5 class="modal-title" id="category-addTitle">{{ __('Edit a customer') }}</h5>
+                <h5 class="modal-title" id="category-addTitle">{{ __('Edit') }} {{ __('customer') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
