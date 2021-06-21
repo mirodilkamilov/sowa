@@ -83,6 +83,7 @@
                                                             <div class="todo-title-area d-flex align-items-center">
                                                                 <div class="title-wrapper d-flex">
                                                                     <h6 class="todo-title mt-50 mx-50 user-name">{{ $user->name }}</h6>
+                                                                    <h6 class="todo-title mt-50 mx-50 user-phone">{{ $user->phone }}</h6>
                                                                 </div>
                                                                 <div class="chip-wrapper">
                                                                     <div class="chip mb-0">
@@ -130,8 +131,8 @@
                             <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog"
                                  aria-labelledby="editTodoTask" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md"
-                                     role="document" style="max-width: 550px;">
-                                    <div class="modal-content" style="min-height: 70vh;">
+                                     role="document" style="max-width: 650px;">
+                                    <div class="modal-content" style="min-height: 75vh;">
                                         <section class="todo-form">
                                             <form class="todo-input user-message-form"
                                                   action="{{ route('contacts.update', old('user_contact_id') ?? 1) }}"
@@ -146,7 +147,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body" style="display: flex; flex-direction: column;">
                                                     <h5 class="text-primary text-center">Statuses</h5>
                                                     <div class="todo-item-action">
                                                         @foreach($statuses as $status)
@@ -177,12 +178,21 @@
                                                     <p class="text-danger mb-1">{{ $message }}</p>
                                                     @enderror
 
-                                                    <fieldset class="form-label-group">
-                                                        <input type="text" class="edit-todo-item-title form-control"
-                                                               name="name" value="{{ old('name') }}"
-                                                               placeholder="Title" id="name" readonly>
-                                                        <label for="name">User name</label>
-                                                    </fieldset>
+                                                    <div class="row mt-2">
+                                                        <fieldset class="col-6 form-label-group">
+                                                            <input type="text" class="edit-todo-item-title form-control"
+                                                                   name="name" value="{{ old('name') }}"
+                                                                   placeholder="Title" id="name" readonly>
+                                                            <label for="name" style="left: 19px;">User name</label>
+                                                        </fieldset>
+                                                        <fieldset class="col-6 form-label-group">
+                                                            <input type="text" class="edit-todo-item-phone form-control"
+                                                                   name="phone" value="{{ old('phone') }}"
+                                                                   placeholder="Title" id="phone" readonly>
+                                                            <label for="phone" style="left: 19px;">Phone</label>
+                                                        </fieldset>
+                                                    </div>
+
                                                     <fieldset class="form-label-group">
                                                         <textarea class="edit-todo-item-desc form-control"
                                                                   rows="4" id="message" name="message"
@@ -260,17 +270,22 @@
                             <!-- /Confirm Modal -->
 
                             <script>
-                                $(".confirm-btn").click(function () {
+                                $('.confirm-btn').click(function () {
+                                    var currentUrl = window.location.href.replace(/\/*$/gm, '');
+
                                     var userId = $(this).val();
-                                    var currentUrl = window.location.href;
-                                    currentUrl = currentUrl.replace(/\/$/, '');
                                     var actionUrl = currentUrl + '/' + userId;
 
                                     var userName = $(this).closest('.todo-item-action').siblings('.todo-title-area').find('.user-name').text();
+                                    var value = userName;
+                                    if (userName === '') {
+                                        var phone = $(this).closest('.todo-item-action').siblings('.todo-title-area').find('.user-phone').text();
+                                        value = 'Phone: ' + phone;
+                                    }
 
-                                    $("#delete-form").attr("action", actionUrl);
-                                    var modalMessage = userName + '\'s message is going to be deleted.';
-                                    $("#user-name").text(modalMessage);
+                                    $('#delete-form').attr('action', actionUrl);
+                                    var modalMessage = value + '\'s message is going to be deleted.';
+                                    $('#user-name').text(modalMessage);
                                 });
                             </script>
 
@@ -283,14 +298,16 @@
 
     @push('edit-user-message')
         <script>
+            var currentUrl = window.location.href.replace(/\/*$/gm, '');
+
             @if($errors->any())
             $('#editTaskModal').modal('show');
             @endif
 
             $('.todo-item').click(function () {
                 var userId = $(this).val();
-                var actionUrl = window.location.href + '/' + userId;
-                $(".user-message-form").attr("action", actionUrl);
+                var actionUrl = currentUrl + '/' + userId;
+                $('.user-message-form').attr('action', actionUrl);
                 $('#user_contact_id').attr('value', userId);
             });
         </script>
