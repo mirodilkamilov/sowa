@@ -4,6 +4,8 @@
     <!-- Projects -->
     <div class="container">
         <header class="header-page">
+            <x-contacts-create-alerts/>
+
             <h1 class="title title--h1 js-lines">{{ __('Projects') }}.</h1>
             <div class="select js-down">
                 <span class="placeholder">{{ __('Category of projects') }}</span>

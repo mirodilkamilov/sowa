@@ -8,11 +8,14 @@
         <div class="header-page__container-fluid align-items-end js-opacity">
             <div class="row no-gutters">
                 <div class="col-md-12 col-lg-6">
+                    <x-contacts-create-alerts/>
+
                     <div class="tail header-page__description">{{ $about->image_title }}</div>
                 </div>
                 <div class="col-md-12 col-lg-6 text-lg-right">
-                    <a class="btn-link btn-link--circle-right" href="!#start"><i
-                            class="circle circle--white circle--right icon-down-open"></i></a>
+                    <a class="btn-link btn-link--circle-right" href="!#start">
+                        <i class="circle circle--white circle--right icon-down-open"></i>
+                    </a>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ class StoreUserContactRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50',
-            'phone' => 'required|min:3|max:20',
+            'phone' => 'required|min:8|max:20',
             'message' => 'required|min:5|max:255',
         ];
     }
