@@ -9,6 +9,7 @@ use Illuminate\View\View;
 
 class DashboardComposer
 {
+    private Request $request;
     private array $arrayOfRoutes;
     private ?string $slicedSegment;
     private $currentRoute;
@@ -17,11 +18,19 @@ class DashboardComposer
 
     public function __construct(Request $request)
     {
-        $routePath = $request->path();
+        $this->request = $request;
+        $this->setCurrentRoute();
+        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->where('deleted_at', null)->count('id');
+        $this->userName = Auth::user()->name;
+    }
+
+    public function setCurrentRoute(): void
+    {
+        $routePath = $this->request->path();
 
         // *  remove numbers from url
-        $thirdSegmentOfUrl = $request->segment(3);
-        $forthSegmentOfUrl = $request->segment(4);
+        $thirdSegmentOfUrl = $this->request->segment(3);
+        $forthSegmentOfUrl = $this->request->segment(4);
         if ($forthSegmentOfUrl === 'edit') {
             $routePath = str_replace("$thirdSegmentOfUrl/", '', $routePath);
             $this->slicedSegment = $thirdSegmentOfUrl;
@@ -32,8 +41,8 @@ class DashboardComposer
         $isRouteDashboard = $sizeOfArray === 1;
 
         $this->currentRoute = $isRouteDashboard ? $this->arrayOfRoutes[0] : $this->arrayOfRoutes[1];
-        $this->numNewMessages = DB::table('user_contacts')->where('status', 'not reviewed')->where('deleted_at', null)->count('id');
-        $this->userName = Auth::user()->name;
+        if ($this->currentRoute === 'dashboard')
+            $this->currentRoute = 'account settings';
     }
 
     public function compose(View $view): void
