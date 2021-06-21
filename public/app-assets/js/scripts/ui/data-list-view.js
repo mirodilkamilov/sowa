@@ -31,7 +31,7 @@ $(document).ready(function() {
     },
     order: [[1, "asc"]],
     bInfo: false,
-    pageLength: 4,
+    pageLength: 10,
     buttons: [
       {
         text: "<i class='feather icon-plus'></i> Add New",
@@ -80,7 +80,7 @@ $(document).ready(function() {
     },
     order: [[1, "asc"]],
     bInfo: false,
-    pageLength: 4,
+    pageLength: 10,
     buttons: [
       {
         text: "<i class='feather icon-plus'></i> Add New",
