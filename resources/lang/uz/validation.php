@@ -157,5 +157,6 @@ return [
         'title' => 'Nomi',
         'username' => 'Nickname',
         'year' => 'Yil',
+        'message' => 'Xabar',
     ],
 ];
