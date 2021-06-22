@@ -3,37 +3,36 @@
 namespace App\Observers;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectObserver
 {
+    private $defaultLang;
     private $locale;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $langInUrl = $request->segment(1);
-        $this->locale = $langInUrl;
+        $this->defaultLang = config('app.default_language');
+        $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    /**
-     * Handle the Project "created" event.
-     *
-     * @param Project $project
-     * @return void
-     */
-    public function saving(Project $project)
-    {
-        //
-    }
-
-    /**
-     * @param Project $project
-     * @return void
-     */
-    public function retrieved(Project $project)
+    public function retrieved(Project $project): void
     {
         // ! These values can be null when they are not going to be retrieved (omitted in select statement)
-        $project->slug = $project->slug[$this->locale] ?? '';
-        $project->main_title = $project->main_title[$this->locale] ?? '';
+        if (isset($project->slug))
+            $project->slug = $project->slug[$this->locale] ?? $project->slug[$this->defaultLang];
+        if (isset($project->main_title))
+            $project->main_title = $project->main_title[$this->locale] ?? $project->main_title[$this->defaultLang];
+    }
+
+    public function saving(Project $project): void
+    {
+        $slug = collect([
+            'en' => isset($project->slug['en']) ? Str::slug($project->slug['en']) : $project->slug['en'],
+            'ru' => isset($project->slug['ru']) ? Str::slug($project->slug['ru']) : $project->slug['ru'],
+            'uz' => isset($project->slug['uz']) ? Str::slug($project->slug['uz']) : $project->slug['uz'],
+        ]);
+
+        $project->slug = $slug;
     }
 }

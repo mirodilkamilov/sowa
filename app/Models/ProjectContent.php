@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectContent extends Model
 {
-//    use HasFactory;
+    use HasFactory;
 
     public $timestamps = false;
     protected $guarded = ['id'];
@@ -21,5 +21,21 @@ class ProjectContent extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function getImagePath(): array|string|null
+    {
+        switch ($this->type) {
+            case 'image-small':
+            case 'image-big':
+                return '/assets/uploads/' . $this->image['image'];
+            case 'slide':
+                $slides = array();
+                foreach ($this->image['slide'] as $img) {
+                    $slides[] = '/assets/uploads/' . $img;
+                }
+                return $slides;
+        }
+        return null;
     }
 }

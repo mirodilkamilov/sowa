@@ -1,4 +1,4 @@
-{{--TODO: change contents $slider->url to something projects?sortBy=web/app/design --}}
+{{--TODO: change contents $slide->url to something projects?sortBy=web/app/design --}}
 @extends('layouts.header')
 
 @section('content')
@@ -7,18 +7,23 @@
         <div class="slider slider-horizontal">
             <div class="slider__caption swiper-container">
                 <div class="swiper-wrapper">
-                    @foreach($sliders as $slider)
+                    @foreach($slides as $slide)
                         <div class="swiper-slide">
                             <div class="slider__item">
-                                <h6 class="title title--overhead"><span
-                                        class="down-up"><span>{{ $slider->sub_title }}</span></span></h6>
-                                <h1 class="title title--display-1 js-text-wave">{{ $slider->title }}</h1>
-                                <p class="description"><span
-                                        class="down-up"><span>{{ $slider->description }}</span></span>
+                                <h6 class="title title--overhead">
+                                    <span class="down-up"><span>{{ $slide->sub_title }}</span></span>
+                                </h6>
+                                <h1 class="title title--display-1 js-text-wave">{{ $slide->title }}</h1>
+                                <p class="description">
+                                    <span class="down-up"><span>{{ $slide->description }}</span></span>
                                 </p>
-                                <a class="btn-link btn-link--circle-right" href="{{ $slider->url }}"><span
-                                        class="down-up"><span>{{ __('Learn more') }}<i
-                                                class="circle circle--right icon-right-open"></i></span></span></a>
+{{--                                @php $query = $slide->category_id ?? 'all'; @endphp--}}
+                                <a class="btn-link btn-link--circle-right"
+                                   href="{{ route('user.projects.index', [App::getLocale(), 'sort_by' => $slide->category_id]) }}">
+                                    <span class="down-up">
+                                        <span>{{ __('Learn more') }}<i class="circle circle--right icon-right-open"></i></span>
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -27,10 +32,11 @@
 
             <div class="slider__image swiper-container reveal">
                 <div class="swiper-wrapper">
-                    @foreach($sliders as $slider)
+                    @foreach($slides as $slide)
                         <div class="swiper-slide">
-                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slider->image }}"><a
-                                    class="swiper-slide__link" href="{{ $slider->url }}"></a></div>
+                            <div class="cover-slider lazyload overlay--45" data-bg="{{ $slide->image }}">
+                                <a class="swiper-slide__link" href="{{ route('user.projects.index', [App::getLocale(), 'sort_by' => $slide->category_id]) }}"></a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -64,13 +70,26 @@
             </div>
             <!-- /Control -->
 
-            <div class="social social--floating">
-                @foreach($companyContact->socialMedia as $social_media)
-                    <a class="social__link" href="{{ $social_media->url }}">{{ $social_media->name }}</a>
-                @endforeach
-                <a class="social__link">{{ $companyContact->phone }}</a>
-                <a class="social__link">{{ $companyContact->email }}</a>
+            @if(isset($companyContact->socialMedia))
+                <div class="social social--floating">
+                    @foreach($companyContact->socialMedia as $social_media)
+                        <a class="social__link" href="{{ $social_media->url }}" target="_blank">
+                            <img src="{{ $social_media->logo }}" alt="{{ $social_media->name }} icon"
+                                 style="width: 30px;">
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="company">
+                <div class="company-phone">
+                    <a href="tel:{{ $companyContact?->phone[0] }}">{{ $companyContact?->phone[0] }}</a>
+                </div>
+                <div class="company-email">
+                    <a href="mailto:{{ $companyContact?->email[0] }}">{{ $companyContact?->email[0] }}</a>
+                </div>
             </div>
+
         </div>
     </header>
     <!-- /Hero -->

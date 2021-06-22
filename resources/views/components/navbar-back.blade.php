@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-back">
     <div class="mr-auto logo-container">
-        <a class="btn-link" href="{{ route('projects.index', $locale) }}"><i class="circle icon-left-open"></i></a>
+        <a class="btn-link" href="{{ route('user.projects.index', $locale) }}"><i class="circle icon-left-open"></i></a>
         <a class="logo-link" href="{{ route('home.index', $locale) }}">
             <img class="logotype" src="{{ asset('assets/images/logo-white.svg') }}" alt="Sowa.">
         </a>

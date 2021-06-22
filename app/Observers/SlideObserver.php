@@ -3,22 +3,25 @@
 namespace App\Observers;
 
 use App\Models\Slide;
-use Illuminate\Http\Request;
 
 class SlideObserver
 {
     private $locale;
+    private $defaultLang;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $langInUrl = $request->segment(1);
-        $this->locale = $langInUrl;
+        $this->defaultLang = config('app.default_language');
+        $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    public function retrieved(Slide $slide)
+    public function retrieved(Slide $slide): void
     {
-        $slide->title = $slide->title[$this->locale];
-        $slide->sub_title = $slide->sub_title[$this->locale];
-        $slide->description = $slide->description[$this->locale];
+        // gets a record with default language if a record doesn't exists with locale
+        if (isset($slide->title)) {
+            $slide->title = $slide->title[$this->locale] ?? $slide->title[$this->defaultLang];
+            $slide->sub_title = $slide->sub_title[$this->locale] ?? $slide->sub_title[$this->defaultLang];
+            $slide->description = $slide->description[$this->locale] ?? $slide->description[$this->defaultLang];
+        }
     }
 }

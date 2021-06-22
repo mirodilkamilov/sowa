@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = [
         'id',
@@ -22,7 +24,7 @@ class Project extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class)->orderBy('category');
+        return $this->belongsToMany(Category::class);
     }
 
     public function project_contents()
@@ -30,4 +32,8 @@ class Project extends Model
         return $this->hasMany(ProjectContent::class)->orderBy('position');
     }
 
+    public function getMainImageAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }

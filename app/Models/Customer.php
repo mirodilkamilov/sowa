@@ -9,10 +9,12 @@ class Customer extends Model
 {
     use HasFactory;
 
-    public $incrementing = false;
     public $timestamps = false;
-    protected $primaryKey = 'name';
-    protected $keyType = 'string';
 
-    protected $fillable = ['name', 'logo'];
+    protected $fillable = ['position', 'name', 'logo'];
+
+    public function getLogoAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
+    }
 }

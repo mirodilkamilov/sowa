@@ -3,20 +3,21 @@
 namespace App\Observers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryObserver
 {
+    private $defaultLang;
     private $locale;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $langInUrl = $request->segment(1);
-        $this->locale = $langInUrl;
+        $this->defaultLang = config('app.default_language');
+        $this->locale = session('language') ?? $this->defaultLang;
     }
 
     public function retrieved(Category $category)
     {
-        $category->category = $category->category[$this->locale];
+        if (isset($category))
+            $category->category = $category->category[$this->locale];
     }
 }

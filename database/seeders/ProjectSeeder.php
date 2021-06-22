@@ -14,7 +14,9 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        $projects = Project::factory()->count(4)->create();
+        $projects = Project::withoutEvents(function () {
+            return Project::factory()->count(4)->create();
+        });
 
         // * category_project (pivot) table
         foreach ($projects as $project) {

@@ -16,7 +16,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Sowa">
     <meta name="twitter:title" content="Sowa">
-    <meta name="twitter:description" content="Sowa -  digital agency.">
+    <meta name="twitter:description" content="Sowa - digital agency.">
     <meta name="twitter:image" content="/assets/images/social.jpg">
 
     <!-- Open Graph data -->
@@ -39,7 +39,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/styles/style.css') }}"/>
 
 </head>
 <body>
@@ -51,7 +51,7 @@
     </div>
 </div>
 
-@if(Route::currentRouteName() == 'projects.show')
+@if(Route::currentRouteName() === 'user.projects.show')
     <x-navbar-back :projectId="$project->id" :slug="$project->slug"/>
 @else
     <x-navbar-main/>
@@ -63,24 +63,34 @@
 <div class="menu">
     <div class="menu-inner">
         <ul class="menu-list">
-            <li><a class="menu-list__item"
-                   href="{{ route('projects.index', $locale) }}"><span>{{ __('projects') }}</span></a>
+            <li>
+                <a class="menu-list__item"
+                   href="{{ route('user.projects.index', $locale) }}"><span>{{ __('projects') }}</span>
+                </a>
             </li>
-            <li><a class="menu-list__item"
-                   href="{{ route('about.index', $locale) }}"><span>{{ __('About us') }}</span></a>
+            <li>
+                <a class="menu-list__item"
+                   href="{{ route('user.about.index', $locale) }}"><span>{{ __('About us') }}</span>
+                </a>
             </li>
             <!--<li><a class="menu-list__item" href="news.html"><span>news</span></a></li>-->
-            <li><a class="menu-list__item"
-                   href="{{ route('contacts.index', $locale) }}"><span>{{ __('contacts') }}</span></a>
+            <li>
+                <a class="menu-list__item"
+                   href="{{ route('contacts.create', $locale) }}"><span>{{ __('contacts') }}</span>
+                </a>
             </li>
         </ul>
     </div>
-    {{--    TODO: Do something with that--}}
-    <div class="social social--white">
-        <a class="social__link">FB</a>
-        <a class="social__link">TW</a>
-        <a class="social__link">IG</a>
-    </div>
+
+    @if(isset($companyContact->socialMedia))
+        <div class="social social--white">
+            @foreach($companyContact->socialMedia as $social_media)
+                <a class="social__link" href="{{ $social_media->url }}" target="_blank">
+                    <img src="{{ $social_media->logo }}" alt="{{ $social_media->name }} icon" style="width: 30px;">
+                </a>
+            @endforeach
+        </div>
+    @endif
 </div>
 <div class="ef-background"></div>
 <!-- /Menu -->
@@ -91,6 +101,7 @@
 <script src="{{ asset('/assets/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugins.js') }}"></script>
 <script src="{{ asset('/assets/js/common.js') }}"></script>
+@stack('scroll-down')
 
 </body>
 </html>

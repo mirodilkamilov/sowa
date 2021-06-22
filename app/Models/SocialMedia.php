@@ -13,10 +13,15 @@ class SocialMedia extends Model
     public $timestamps = false;
     protected $primaryKey = 'name';
     protected $keyType = 'string';
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['name', 'url', 'logo'];
 
     public function companyContact()
     {
         return $this->belongsTo(CompanyContact::class);
+    }
+
+    public function getLogoAttribute($value): string
+    {
+        return '/assets/uploads/' . $value;
     }
 }

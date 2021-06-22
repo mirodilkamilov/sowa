@@ -12,6 +12,11 @@ class CompanyContact extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'phone' => 'array',
+        'email' => 'array'
+    ];
+
     public function socialMedia()
     {
         return $this->hasMany(SocialMedia::class);
