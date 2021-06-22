@@ -23,7 +23,7 @@ class UpdateSlideRequest extends FormRequest
             'title.ru' => 'required|min:3|max:255',
             'title.en' => 'nullable|required_with:description.en|min:3|max:255',
             'title.uz' => 'nullable|required_with:description.uz|min:3|max:255',
-            'sub_title.ru' => 'required|min:3|max:255',
+            'sub_title.ru' => 'nullable|min:3|max:255',
             'sub_title.en' => 'nullable|min:3|max:255',
             'sub_title.uz' => 'nullable|min:3|max:255',
             'description.ru' => 'required|min:5|max:500',

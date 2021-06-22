@@ -10,7 +10,7 @@ class StoreCustomerRequest extends FormRequest
     {
         return [
             'customer' => 'required|array',
-            'customer.name' => 'required|min:3|max:50',
+            'customer.name' => 'nullable|min:3|max:50',
             'customer.position' => 'required|integer|gt:0|unique:customers,position',
             'customer.logo' => 'required|image|max:2048',
         ];

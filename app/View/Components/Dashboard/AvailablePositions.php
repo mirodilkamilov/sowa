@@ -11,7 +11,7 @@ class AvailablePositions extends Component
 
     public function __construct($positions)
     {
-        $this->positions = $positions;
+        $this->positions = !empty($positions) ? $positions : [0];
         $this->avilablePositions = [];
     }
 
