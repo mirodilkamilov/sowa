@@ -51,7 +51,7 @@
                 </div>
             </div>
             @foreach($about->aboutLists as $aboutList)
-                <x-list :title="$aboutList->title" :lists="$aboutList->list" :isOdd="$loop->odd"/>
+                <x-about-list :title="$aboutList->title" :lists="$aboutList->list" :isOdd="$loop->odd"/>
             @endforeach
         </div>
     </article>

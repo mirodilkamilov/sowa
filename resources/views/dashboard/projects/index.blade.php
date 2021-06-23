@@ -9,7 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <div class="content-body">
                 <section id="data-thumb-view" class="data-thumb-view-header">
@@ -38,8 +38,8 @@
                                     <td class="product-name">{{ $project->main_title }}</td>
                                     <td class="text-center">
                                         @foreach($project->categories as $category)
-                                            <x-dashboard.category-component :category="$category->category"
-                                                                            :index="$category->id"/>
+                                            <x-dashboard.projects.category-colors :category="$category->category"
+                                                                                  :index="$category->id"/>
                                         @endforeach
                                     </td>
                                     <td class="product-action text-center">

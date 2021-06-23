@@ -23,18 +23,18 @@
                     <x-dashboard.language-tabs :availableLangs="$availableLangs"
                                                :key="$loop->iteration"
                                                :hasMultiValuedInput="true"/>
-                    <x-dashboard.project-text-content :availableLangs="$availableLangs"
+                    <x-dashboard.projects.text-content :availableLangs="$availableLangs"
                                                       :key="$loop->iteration"
                                                       :content="$content"/>
                     @break
 
                     @case('image-small')
                     @case('image-big')
-                    <x-dashboard.project-image-content :content="$content" :key="$loop->iteration"/>
+                    <x-dashboard.projects.image-content :content="$content" :key="$loop->iteration"/>
                     @break
 
                     @case('slide')
-                    <x-dashboard.project-slide-content :content="$content" :key="$loop->iteration"/>
+                    <x-dashboard.projects.slide-content :content="$content" :key="$loop->iteration"/>
                     @break
                 @endswitch
             </div>

@@ -9,7 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                     data-target="#category-add">
@@ -56,7 +56,7 @@
     </div>
     <!-- END: Content-->
 
-    <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
+    <x-dashboard.categories.add-modal :availableLangs="$availableLangs"/>
 
     <x-dashboard.confirm-modal/>
 

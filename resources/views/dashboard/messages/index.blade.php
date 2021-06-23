@@ -9,7 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <div class="content-area-wrapper mt-0">
                 <div class="sidebar-left">

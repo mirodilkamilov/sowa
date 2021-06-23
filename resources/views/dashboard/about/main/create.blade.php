@@ -42,13 +42,13 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <x-dashboard.about-image-form :availableLangs="$availableLangs"/>
+                                                <x-dashboard.about.main.image-form :availableLangs="$availableLangs"/>
 
-                                                <x-dashboard.about-company-form :availableLangs="$availableLangs"/>
+                                                <x-dashboard.about.main.company-form :availableLangs="$availableLangs"/>
 
-                                                <x-dashboard.about-help-form :availableLangs="$availableLangs"/>
+                                                <x-dashboard.about.main.help-form :availableLangs="$availableLangs"/>
 
-                                                <x-dashboard.about-list-container :availableLangs="$availableLangs"/>
+                                                <x-dashboard.about.main.list-form :availableLangs="$availableLangs"/>
 
                                                 <div class="col-12 mt-3"
                                                      style="display: flex; justify-content: flex-end;">

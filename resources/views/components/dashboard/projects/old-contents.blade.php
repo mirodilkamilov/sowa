@@ -1,4 +1,6 @@
-@error("content")
+@props(['oldValues', 'availableLangs'])
+
+@error('content')
 <div class="alert alert-danger alert-dismissible mb-1" role="alert">
     <p>{{ $message }}</p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -7,7 +9,7 @@
 </div>
 @enderror
 
-@error("content.*.type")
+@error('content.*.type')
 <div class="alert alert-danger alert-dismissible mb-1" role="alert">
     <p>{{ $message }}</p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -39,7 +41,8 @@
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
 
-                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden" form="project-create-form">
+                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden"
+                       form="project-create-form">
                 @error("content.$key.id")
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
@@ -51,16 +54,16 @@
                         @case('text')
                         <x-dashboard.language-tabs :availableLangs="$availableLangs" :key="$key"
                                                    :hasMultiValuedInput="true"/>
-                        <x-dashboard.project-text-content :availableLangs="$availableLangs" :key="$key"/>
+                        <x-dashboard.projects.text-content :availableLangs="$availableLangs" :key="$key"/>
                         @break
 
                         @case('image-small')
                         @case('image-big')
-                        <x-dashboard.project-image-content :key="$key"/>
+                        <x-dashboard.projects.image-content :key="$key"/>
                         @break
 
                         @case('slide')
-                        <x-dashboard.project-slide-content :key="$key"/>
+                        <x-dashboard.projects.slide-content :key="$key"/>
                         @break
                     @endswitch
 

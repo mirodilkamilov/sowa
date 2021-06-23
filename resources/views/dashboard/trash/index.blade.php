@@ -7,7 +7,7 @@
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <div class="content-body">
                 <div class="content-header row">
@@ -29,7 +29,7 @@
                             </button>
                         </div>
 
-                        <x-dashboard.trash-confirm-modal/>
+                        <x-dashboard.trash.confirm-modal/>
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -83,7 +83,7 @@
                                                                                     <td>{{ $project->main_title }}</td>
                                                                                     <td class="text-center">
                                                                                         @foreach($project->categories as $category)
-                                                                                            <x-dashboard.category-component
+                                                                                            <x-dashboard.projects.category-colors
                                                                                                 :category="$category->category"
                                                                                                 :index="$category->id"/>
                                                                                         @endforeach

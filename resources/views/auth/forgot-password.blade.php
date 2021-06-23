@@ -1,8 +1,8 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
+    <x-laravel.auth-card>
+        <x-slot name="logo">k
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-laravel.application-logo class="w-20 h-20 fill-current text-gray-500"/>
             </a>
         </x-slot>
 
@@ -11,26 +11,27 @@
         </div>
 
         <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <x-laravel.auth-session-status class="mb-4" :status="session('status')"/>
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <x-laravel.auth-validation-errors class="mb-4" :errors="$errors"/>
 
         <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+        @csrf
 
-            <!-- Email Address -->
+        <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-laravel.label for="email" :value="__('Email')"/>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-laravel.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                                 required autofocus/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
+                <x-laravel.button>
                     {{ __('Email Password Reset Link') }}
-                </x-button>
+                </x-laravel.button>
             </div>
         </form>
-    </x-auth-card>
+    </x-laravel.auth-card>
 </x-guest-layout>

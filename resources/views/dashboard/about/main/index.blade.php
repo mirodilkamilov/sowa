@@ -8,7 +8,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <div class="content-body @if(!isset($about)) fullheight-content @endif">
                 @if(!isset($about))
@@ -59,16 +59,16 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-body">
-                                                    <x-dashboard.about-image-form :about="$about"
+                                                    <x-dashboard.about.main.image-form :about="$about"
                                                                                   :availableLangs="$availableLangs"/>
 
-                                                    <x-dashboard.about-company-form :about="$about"
+                                                    <x-dashboard.about.main.company-form :about="$about"
                                                                                     :availableLangs="$availableLangs"/>
 
-                                                    <x-dashboard.about-help-form :about="$about"
+                                                    <x-dashboard.about.main.help-form :about="$about"
                                                                                  :availableLangs="$availableLangs"/>
 
-                                                    <x-dashboard.about-list-container :availableLangs="$availableLangs"
+                                                    <x-dashboard.about.main.list-form :availableLangs="$availableLangs"
                                                                                       :aboutLists="$about->aboutLists"/>
 
                                                     <div class="col-12 mt-3"

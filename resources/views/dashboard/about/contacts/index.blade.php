@@ -8,7 +8,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <!-- BEGIN: Content-->
             <div class="content-header row">
@@ -20,14 +20,14 @@
                         <span><i class="feather icon-edit"></i> {{ __('Edit') }}</span>
                     </button>
 
-                    <x-dashboard.company-contact-edit-modal :contact="$contact"/>
+                    <x-dashboard.about.contacts.edit-modal :contact="$contact"/>
                 @else
                     <button type="button" class="btn btn-success mr-1 mb-2" data-toggle="modal"
                             data-target="#add-company-contacts">
                         <span><i class="feather icon-plus"></i> {{ __('Add') }} {{ __('company contacts') }}</span>
                     </button>
 
-                    <x-dashboard.company-contact-add-modal/>
+                    <x-dashboard.about.contacts.add-modal/>
                 @endif
 
                 <section class="page-users-view">
@@ -77,7 +77,7 @@
                                         <div class="card-body">
                                             @php $socialMedia = count($contact->socialMedia) ? $contact->socialMedia : null; @endphp
 
-                                            <x-dashboard.social-media-form :contact="$contact"
+                                            <x-dashboard.about.contacts.social-media-form :contact="$contact"
                                                                            :socialMedia="$socialMedia"/>
                                         </div>
                                     </div>

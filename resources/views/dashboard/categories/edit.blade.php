@@ -35,14 +35,14 @@
                                                         <div class="col-md-4 col-12 mt-1 mb-1">
                                                             <div class="form-label-group">
                                                                 <input type="text"
-                                                                       name="{{ "category[{$lang}]" }}"
-                                                                       class="form-control @error("category.{$lang}") is-invalid @enderror"
+                                                                       name="{{ "category[$lang]" }}"
+                                                                       class="form-control @error("category.$lang") is-invalid @enderror"
                                                                        id="validationTooltip01"
                                                                        placeholder="{{ __('Category') . ' ('. $lang . ')' }}"
-                                                                       value="{{ old("category.{$lang}") ?? $category->category[$lang] }}">
+                                                                       value="{{ old("category.$lang") ?? $category->category[$lang] }}">
                                                                 <label
                                                                     for="validationTooltip01">{{ __('Category') . ' ('. $lang . ')' }}</label>
-                                                                @error("category.{$lang}")
+                                                                @error("category.$lang")
                                                                 <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
                                                             </div>

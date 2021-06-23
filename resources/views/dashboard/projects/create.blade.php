@@ -9,7 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <section id="number-tabs">
                 <div class="row">
@@ -32,11 +32,11 @@
                                         @endphp
                                         <x-dashboard.language-tabs :availableLangs="$availableLangs" :inputs="$inputs"/>
 
-                                        <x-dashboard.project-main-part :categories="$categories"
+                                        <x-dashboard.projects.main-part :categories="$categories"
                                                                        :availableLangs="$availableLangs"/>
                                     </form>
 
-                                    <x-dashboard.create-category-modal :availableLangs="$availableLangs"/>
+                                    <x-dashboard.categories.add-modal :availableLangs="$availableLangs"/>
                                 </div>
                             </div>
                         </div>
@@ -44,11 +44,11 @@
                         <h4 class="card-title text-center">{{ __('Create') }} {{ __('project\'s content part') }}</h4>
                         <div class="content-container">
                             @if($errors->any())
-                                <x-old-contents :oldValues="old()" :availableLangs="$availableLangs"/>
+                                <x-dashboard.projects.old-contents :oldValues="old()['content']" :availableLangs="$availableLangs"/>
                             @endif
                         </div>
 
-                        <x-dashboard.project-buttons/>
+                        <x-dashboard.projects.buttons/>
                     </div>
                 </div>
             </section>

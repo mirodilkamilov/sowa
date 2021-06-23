@@ -9,7 +9,7 @@
 
             <x-dashboard.header :currentRoute="$currentRoute" :arrayOfRoutes="$arrayOfRoutes"/>
 
-            <x-custom-alerts/>
+            <x-dashboard.alerts/>
 
             <div class="content-body">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
@@ -60,8 +60,8 @@
         </div>
     </div>
 
-    <x-dashboard.add-customer-modal :positions="$positions"/>
-    <x-dashboard.update-customer-modal :positions="$positions"/>
+    <x-dashboard.about.customers.add-modal :positions="$positions"/>
+    <x-dashboard.about.customers.update-modal :positions="$positions"/>
     <!-- Delete modal -->
     <x-dashboard.confirm-modal/>
 

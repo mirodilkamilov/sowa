@@ -10,7 +10,7 @@
         @foreach(config('app.languages') as $language)
             <a class="logo-link m-3 title--overhead"
                href="{{ route(Route::currentRouteName(), [$language, $projectId, $slug]) }}"
-               @if ($language == $locale) style="font-weight: 900; color: black" @endif>{{ $language }}</a>
+               @if ($language === $locale) style="font-weight: 900; color: black" @endif>{{ $language }}</a>
         @endforeach
     </div>
     <div class="ml-sm-auto">
