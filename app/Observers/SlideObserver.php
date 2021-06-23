@@ -6,8 +6,8 @@ use App\Models\Slide;
 
 class SlideObserver
 {
-    private $locale;
-    private $defaultLang;
+    private string $locale;
+    private string $defaultLang;
 
     public function __construct()
     {

@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 
 class ProjectObserver
 {
-    private $defaultLang;
-    private $locale;
+    private string $defaultLang;
+    private string $locale;
 
     public function __construct()
     {

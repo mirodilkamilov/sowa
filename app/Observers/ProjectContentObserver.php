@@ -6,8 +6,8 @@ use App\Models\ProjectContent;
 
 class ProjectContentObserver
 {
-    private $defaultLang;
-    private $locale;
+    private string $defaultLang;
+    private string $locale;
 
     public function __construct()
     {
@@ -22,5 +22,5 @@ class ProjectContentObserver
         if (isset($projectContent->description))
             $projectContent->description = $projectContent->description[$this->locale] ?? $projectContent->description[$this->defaultLang];
     }
-    
+
 }

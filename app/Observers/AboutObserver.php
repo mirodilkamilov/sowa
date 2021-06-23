@@ -6,8 +6,8 @@ use App\Models\About;
 
 class AboutObserver
 {
-    private $defaultLang;
-    private $locale;
+    private string $defaultLang;
+    private string $locale;
 
     public function __construct()
     {
@@ -15,7 +15,7 @@ class AboutObserver
         $this->locale = session('language') ?? $this->defaultLang;
     }
 
-    public function retrieved(About $companyDetail)
+    public function retrieved(About $companyDetail): void
     {
         $companyDetail->image_title = $companyDetail->image_title[$this->locale] ?? $companyDetail->image_title[$this->defaultLang];
         $companyDetail->about_title = $companyDetail->about_title[$this->locale] ?? $companyDetail->about_title[$this->defaultLang];
