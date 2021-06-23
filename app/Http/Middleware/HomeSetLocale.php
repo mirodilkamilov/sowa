@@ -4,8 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class HomeSetLocale
 {
@@ -18,9 +16,6 @@ class HomeSetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        $titleOfPage = $request->segment(2) ?? 'Digital agency';
-        $titleOfPage = Str::title($titleOfPage);
-
         // * Language in URL always valid (because of regex check in web.php)
         $langInUrl = $request->segment(1);
         $langInSession = $request->session()->get('language');
@@ -29,11 +24,7 @@ class HomeSetLocale
         if ($langInSession !== $langInUrl)
             $request->session()->put('language', $langInUrl);
 
-        $locale = $langInUrl;
-        app()->setLocale($locale);
-
-        View::share('titleOfPage', $titleOfPage);
-        View::share('locale', session('language'));
+        app()->setLocale($langInUrl);
         return $next($request);
     }
 }
