@@ -32,8 +32,7 @@ class CategoryController extends Controller
         $request->session()->flash('success', 'Category was successfully added!');
         return redirect()->back();
     }
-
-
+    
     public function edit($category)
     {
         $category = Category::withoutEvents(function () use ($category) {

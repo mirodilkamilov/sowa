@@ -190,8 +190,8 @@
                     <span class="menu-title">{{ __('Projects') }}</span>
                 </a>
             </li>
-            <li class="nav-item @if($currentRoute === 'contacts') active @endif">
-                <a href="{{ route('contacts.index') }}">
+            <li class="nav-item @if($currentRoute === 'user-contacts') active @endif">
+                <a href="{{ route('user-contacts.index') }}">
                     <i class="feather icon-message-square"></i>
                     <span class="menu-title">{{ __('Messages') }}</span>
                     @if($numNewMessages > 0)

@@ -68,7 +68,7 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::resource('users', UserController::class)->only(['update', 'store']);
+    Route::resource('users', UserController::class)->only(['update']);
 
     Route::resource('slides', SlideController::class)->except(['show']);
 
@@ -77,13 +77,13 @@ Route::group([
     Route::resource('projects', ProjectController::class)->except(['show']);
 
     // * Users contacts controller (messages)
-    Route::resource('contacts', ContactController::class)->except(['create', 'show', 'store']);
+    Route::resource('user-contacts', ContactController::class)->except(['create', 'show', 'store', 'edit']);
 
-    Route::resource('about', AboutController::class)->except(['show']);
+    Route::resource('about', AboutController::class)->except(['show', 'edit', 'destroy']);
 
-    Route::resource('customers', CustomerController::class)->except(['show']);
+    Route::resource('customers', CustomerController::class)->except(['show', 'edit', 'create']);
 
-    Route::resource('company-contacts', CompanyContactController::class)->except(['show']);
+    Route::resource('company-contacts', CompanyContactController::class)->except(['show', 'create', 'edit', 'destroy']);
 
     Route::resource('social-media', SocialMediaController::class)->only(['store']);
 

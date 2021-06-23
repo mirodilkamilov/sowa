@@ -14,7 +14,6 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        //   TODO: Sort by category (this not working)
         $projects = Project::with('categories')->get()->sortBy('categories');
 
         return view('dashboard.projects.index', compact('projects'));

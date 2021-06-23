@@ -25,7 +25,7 @@ class CompanyContactController extends Controller
         return redirect()->route('company-contacts.index');
     }
 
-    public function update(CompanyContact $companyContact, UpdateCompanyContactsRequest $request)
+    public function update(UpdateCompanyContactsRequest $request, CompanyContact $companyContact)
     {
         $validated = $request->validated()['contacts'];
         $companyContact->update($validated);

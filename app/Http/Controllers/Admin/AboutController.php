@@ -38,7 +38,7 @@ class AboutController extends Controller
         return redirect()->route('about.index');
     }
 
-    public function update(About $about, UpdateAboutRequest $request)
+    public function update(UpdateAboutRequest $request, About $about)
     {
         try {
             UpdateAboutJob::dispatchSync($about, $request);

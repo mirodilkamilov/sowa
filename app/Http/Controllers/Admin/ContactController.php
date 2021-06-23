@@ -15,15 +15,8 @@ class ContactController extends Controller
         return view('dashboard.messages.index', compact('users'));
     }
 
-    public function edit(UserContact $userContact)
+    public function update(UpdateUserContactRequest $request, UserContact $userContact)
     {
-        //
-    }
-
-    public function update(UpdateUserContactRequest $request, $userContact)
-    {
-        // * $userContact comes here as a string not as a collection
-        $userContact = UserContact::findOrFail($userContact);
         $validated = $request->validated();
         $userContact->comment = $validated['comment'];
         $userContact->status = $validated['status'];
@@ -36,15 +29,14 @@ class ContactController extends Controller
         }
 
         $request->session()->flash('success', 'Changed successfully!');
-        return redirect()->route('contacts.index');
+        return redirect()->route('user-contacts.index');
     }
 
-    public function destroy($userContact)
+    public function destroy(UserContact $userContact)
     {
-        $userContact = UserContact::findOrFail($userContact);
         $userContact->delete();
 
         session()->flash('success', 'User message was successfully deleted!');
-        return redirect()->route('contacts.index');
+        return redirect()->route('user-contacts.index');
     }
 }

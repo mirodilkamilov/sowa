@@ -135,7 +135,7 @@
                                     <div class="modal-content" style="min-height: 75vh;">
                                         <section class="todo-form">
                                             <form class="todo-input user-message-form"
-                                                  action="{{ route('contacts.update', old('user_contact_id') ?? 1) }}"
+                                                  action="{{ route('user-contacts.update', old('user_contact_id') ?? 1) }}"
                                                   method="post"
                                                   id="form-edit-todo">
                                                 @method('PUT')
@@ -161,7 +161,7 @@
                                                                                    data-value="{{ $status }}"
                                                                                    value="{{ $status }}"
                                                                                    class="user-status"
-                                                                                   @if(old('status') == $status) checked @endif>
+                                                                                   @if(old('status') === $status) checked @endif>
                                                                             <span class="vs-checkbox">
                                                                                 <span class="vs-checkbox--check">
                                                                                     <i class="vs-icon feather icon-check mr-0"></i>
