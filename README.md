@@ -1,62 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h1 align="center">My first CRUD, multi-language application using Laravel</h1>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center"><img src="public/assets/images/dashboard-screenshot.png"></p>
 
-## About Laravel
+## About the project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Sowa** is a digital agency in Tashkent, which offers various services on digital projects in any field.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Important functionalities of this application:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Multi-language (Russian, English, Uzbek)
+- Website is dynamic and can be modified by Admin
+- Admin can create, update, delete and restore (some contents) interacting with user-friendly UI (dashboard)
+- User can leave their contacts and messages
 
-## Learning Laravel
+Database design of the application:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<img src="https://raw.githubusercontent.com/mirodil1999/sowa/main/Sowa_ER-Diagram.png">
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## How to locally host the project?
 
-## Laravel Sponsors
+*Why it is not hosted anywhere?*
+>As the application is dynamic (fully customizable), anyone can add anything that may include numerous inappropriate things. 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Technology requirements
 
-### Premium Partners
+```json
+{
+    "php": "^8.0",
+    "mysql": "^5.7",
+    "composer": "^2.0"
+}
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+If you are using Windows, you can install only [XAMPP](https://www.apachefriends.org/index.html), [Composer](https://getcomposer.org/) and you are good to go.
 
-## Contributing
+First of all, clone this repository
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/mirodil1999/sowa.git
 
-## Code of Conduct
+cd sowa
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Install all the dependencies
 
-## Security Vulnerabilities
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Create new database and configure the application. You can create database from [phpMyAdmin](http://localhost/phpmyadmin/) or from terminal/cmd
 
-## License
+```bash
+mysql -u db_user -p
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+CREATE DATABASE sowa;
+```
+
+Where `db_user` is your actual database user (most cases it is `root`) and type your password (if any)
+
+Now search `.env.example` file from the directory you cloned the application. If cannot find it, you can [download](https://raw.githubusercontent.com/mirodil1999/sowa/main/.env.example) and paste it to the directory (where the README located)
+
+Rename this `.env.example` file to `.env` and edit following contents:
+
+```dotenv
+DB_DATABASE=sowa
+DB_USERNAME=your database username
+DB_PASSWORD=your database password
+```
+
+Now you finished all the configuration, and you can fill the tables with some testing data by
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Now you may start Laravel's local development server
+
+```bash
+php artisan serve
+```
+
+http://127.0.0.1:8000/dashboard is the URL for the dashboard. Here is the admin credentials:
+
+```
+mirodil@gmail.com
+Admin123
+```
+
+For those who read so far, I really want to share these two articles:
+
+- [4 Mistakes I Made as a Programmer, but I Had To Become a CTO To See Them](https://medium.com/@kubut/4-mistakes-i-made-as-a-programmer-but-i-had-to-become-a-cto-to-see-them-19a41ba70411)
+
+- [Programmers, Stop Thinking About Yourself as an Artist — You’re an Architect](https://betterprogramming.pub/programmers-stop-thinking-about-yourself-as-an-artist-youre-an-architect-e4d415142dce)
+
+
+
