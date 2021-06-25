@@ -40,8 +40,8 @@ class DashboardSetLocale
 
     private function isValidLanguageQuery($language): bool|int
     {
-        $availableLanguages = config('app.languages');
-        $pattern = '/' . implode('|', $availableLanguages) . '/';
+        $availableLangs = config('app.languages');
+        $pattern = '/^' . implode('$|^', $availableLangs) . '$/';
         $isValid = preg_match($pattern, $language);
 
         return $isValid;

@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 Route::group([
     'prefix' => '{locale}',
-    'where' => ['locale' => implode('|', config('app.languages'))],
+    'where' => ['locale' => '/^' . implode('$|^', config('app.languages')) . '$/'],
     'middleware' => 'homeSetLocale',
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
