@@ -52,4 +52,8 @@
     @push('image-preview')
         <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
+
+    @push('ckeditor')
+        <script src="{{ asset('assets/js/ckeditor-add.js') }}"></script>
+    @endpush
 @endsection

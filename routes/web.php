@@ -61,7 +61,6 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 
-
 Route::group([
     'prefix' => 'dashboard',
     'middleware' => ['auth', 'dashboardSetLocale'],

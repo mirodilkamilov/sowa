@@ -69,4 +69,7 @@
         <script src="{{ asset('assets/js/project-content-manipulation.js') }}"></script>
     @endpush
 
+    @push('ckeditor-in-projects')
+        <script src="{{ asset('assets/js/ckeditor-in-projects.js') }}"></script>
+    @endpush
 @endsection

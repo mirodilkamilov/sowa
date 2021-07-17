@@ -1,3 +1,5 @@
+@props(['availableLangs', 'key' => 0, 'content' => null])
+
 <div class="tab-content pt-2 col-md-12 col-12 pr-0 pl-0 text-content">
     @foreach($availableLangs as $lang)
         <div class="tab-pane @if($loop->first) active @endif tab-pane-{{$lang}}" role="tabpanel"
@@ -17,12 +19,12 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-12">
-                    <div class="form-label-group">
+                    <div class="form-label-group small-ckeditor">
                         <textarea
                             form="project-create-form" id="description-{{$lang}}-{{$key}}"
                             class="form-control @error("content.$key.description.$lang") is-invalid @enderror"
                             placeholder="{{ __('Description') . ' ('. $lang . ')' }}" rows="4"
-                            name="content[{{ $key }}][description][{{ $lang }}]">{{ old("content.$key.description.$lang") ?? $content?->description[$lang] }}</textarea>
+                            name="content[{{ $key }}][description][{{ $lang }}]">{!! old("content.$key.description.$lang") ?? $content?->description[$lang] !!}</textarea>
                         <label for="description-{{$lang}}-{{$key}}">{{ __('Description') . ' ('. $lang . ')' }}</label>
                         @error("content.$key.description.$lang")
                         <p class="text-danger">{{ $message }}</p>
@@ -47,10 +49,3 @@
         </div>
     </div>
 </div>
-
-{{--<!-- Create the editor container -->--}}
-{{--<div id="editor" class="editor">--}}
-{{--    <p>Hello World!</p>--}}
-{{--    <p>Some initial <strong>bold</strong> text</p>--}}
-{{--    <p><br></p>--}}
-{{--</div>--}}

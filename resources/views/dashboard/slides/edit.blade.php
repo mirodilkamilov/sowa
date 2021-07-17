@@ -16,7 +16,7 @@
                         <div class="col-12">
                             <div class="card mb-1">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{ __('Edit') }} {{ __('slide') . ': ' . $slide->title[$locale] }}</h4>
+                                    <h4 class="card-title">{{ __('Edit') }} {{ __('slide') }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -53,5 +53,9 @@
 
     @push('image-preview')
         <script src="{{ asset('assets/js/image-preview.js') }}"></script>
+    @endpush
+
+    @push('ckeditor')
+        <script src="{{ asset('assets/js/ckeditor-add.js') }}"></script>
     @endpush
 @endsection

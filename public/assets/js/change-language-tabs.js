@@ -1,5 +1,3 @@
-var avilableLangs = ['ru', 'en', 'uz'];
-
 function changeLangTabs(obj) {
     var allClassNames = obj.className;
     var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);

@@ -18,7 +18,6 @@
 </div>
 @enderror
 
-
 @if(isset($oldValues))
     @foreach($oldValues as $key => $oldValue)
         @if(!isset($oldValue['type']))
@@ -27,8 +26,8 @@
         <div class="card mb-1 content-body" id="{{ $key }}">
             <div class="card-header">
                 @php $optionValues = ['text' => 'Text', 'image-small' => 'Small Image', 'image-big' => 'Wide Image', 'slide' => 'Slide']; @endphp
-                <label for="content-type">{{ __('Content type') }}</label>
-                <select form="project-create-form" id="content-type"
+                <label for="content-type-{{$key}}">{{ __('Content type') }}</label>
+                <select form="project-create-form" id="content-type-{{$key}}"
                         class="custom-select @error("content.$key.type") is-invalid @enderror"
                         name="content[{{ $key }}][type]"
                         onchange="changeContentType(this)">
@@ -41,11 +40,11 @@
                 <p class="text-danger mb-0">{{ $message }}</p>
                 @enderror
 
-                <input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden"
+                {{--<input name="content[{{ $loop->iteration }}][id]" value="{{ $oldValue['id'] ?? '' }}" type="hidden"
                        form="project-create-form">
                 @error("content.$key.id")
                 <p class="text-danger mb-0">{{ $message }}</p>
-                @enderror
+                @enderror--}}
             </div>
             <div class="card-content pb-1">
                 <div class="card-body pb-0">

@@ -85,4 +85,8 @@
     @push('about-list-manipulation')
         <script src="{{ asset('assets/js/about-list-manipulation.js') }}"></script>
     @endpush
+
+    @push('ckeditor')
+        <script src="{{ asset('assets/js/ckeditor-add.js') }}"></script>
+    @endpush
 @endsection

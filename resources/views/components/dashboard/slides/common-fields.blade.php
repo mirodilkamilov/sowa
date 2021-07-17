@@ -88,7 +88,7 @@
                             <div class="col-12 mt-1">
                                 <button type="submit" class="btn btn-primary mr-1 mb-1"
                                         form="slide-form">
-                                    {{ __('Edit') }} {{ __('slide') }}
+                                    {{ isset($slide) ? __('Edit') : __('Create') }} {{ __('slide') }}
                                 </button>
                                 <button type="reset" class="btn btn-outline-warning mr-1 mb-1"
                                         form="slide-form">
