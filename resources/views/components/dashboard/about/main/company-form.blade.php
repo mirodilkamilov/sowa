@@ -24,12 +24,12 @@
                         <div class="form-label-group">
                             <input
                                 name="main[1][about_title][{{ $lang }}]"
-                                type="text" id="about-title"
+                                type="text" id="about-title-{{ $lang }}"
                                 class="form-control @error("main.*.about_title.$lang") is-invalid @enderror"
                                 placeholder="{{ __('Company title') }} ({{ $lang }})"
                                 value="{{ old("main.1.about_title.$lang") ?? $about?->about_title[$lang] }}">
                             <label
-                                for="about-title">{{ __('Company title') }}
+                                for="about-title-{{ $lang }}">{{ __('Company title') }}
                                 ({{ $lang }})</label>
                             @error("main.*.about_title.$lang")
                             <p class="text-danger">{{ $message }}</p>
@@ -39,15 +39,12 @@
 
                     <div class="col-md-12 col-12">
                         <fieldset class="form-label-group">
-                            <textarea
-                                class="form-control @error("main.*.about_description.$lang") is-invalid @enderror"
-                                rows="5"
-                                placeholder="{{ __('Company description') . ' ('. $lang . ')' }}"
-                                id="about-description"
-                                spellcheck="false"
-                                name="main[1][about_description][{{ $lang }}]">{{ old("main.1.about_description.$lang") ?? $about?->about_description[$lang] }}</textarea>
-                            <label
-                                for="about-description">{{ __('Company description') . ' ('. $lang . ')' }}</label>
+                            <textarea id="about-description-{{ $lang }}"
+                                      class="form-control @error("main.*.about_description.$lang") is-invalid @enderror"
+                                      placeholder="{{ __('Company description') . ' ('. $lang . ')' }}"
+                                      spellcheck="false"
+                                      name="main[1][about_description][{{ $lang }}]">{!! old("main.1.about_description.$lang") ?? $about?->about_description[$lang] !!}</textarea>
+                            <label for="about-description-{{ $lang }}">{{ __('Company description') . ' ('. $lang . ')' }}</label>
                             @error("main.*.about_description.$lang")
                             <p class="text-danger">{{ $message }}</p>
                             @enderror

@@ -60,13 +60,13 @@
                                                 @method('PUT')
                                                 <div class="form-body">
                                                     <x-dashboard.about.main.image-form :about="$about"
-                                                                                  :availableLangs="$availableLangs"/>
+                                                                                       :availableLangs="$availableLangs"/>
 
                                                     <x-dashboard.about.main.company-form :about="$about"
-                                                                                    :availableLangs="$availableLangs"/>
+                                                                                         :availableLangs="$availableLangs"/>
 
                                                     <x-dashboard.about.main.help-form :about="$about"
-                                                                                 :availableLangs="$availableLangs"/>
+                                                                                      :availableLangs="$availableLangs"/>
 
                                                     <x-dashboard.about.main.list-form :availableLangs="$availableLangs"
                                                                                       :aboutLists="$about->aboutLists"/>
@@ -106,5 +106,9 @@
 
     @push('about-list-manipulation')
         <script src="{{ asset('assets/js/about-list-manipulation.js') }}"></script>
+    @endpush
+
+    @push('ckeditor')
+        <script src="{{ asset('assets/js/ckeditor-add.js') }}"></script>
     @endpush
 @endsection

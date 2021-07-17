@@ -10,14 +10,12 @@
                 <div class="row">
                     <div class="col-md-12 col-12">
                         <div class="form-label-group">
-                            <input type="text" id="image-title"
+                            <input type="text" id="image-title-{{ $lang }}"
                                    class="form-control @error("main.*.image_title.$lang") is-invalid @enderror"
                                    placeholder="{{ __('Image title') }} ({{ $lang }})"
                                    name="main[1][image_title][{{ $lang }}]"
                                    value="{{ old("main.1.image_title.$lang") ?? $about?->image_title[$lang] }}">
-                            <label
-                                for="image-title">{{ __('Image title') }}
-                                ({{ $lang }})</label>
+                            <label for="image-title-{{ $lang }}">{{ __('Image title') }} ({{ $lang }})</label>
                             @error("main.*.image_title.$lang")
                             <p class="text-danger">{{ $message }}</p>
                             @enderror

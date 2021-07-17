@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-9">
             <h2 class="title title--h4 js-lines">{{ $content->title }}</h2>
             <div class="description js-block">
-                <p>{{ $content->description }}</p>
+                <p>{!! $content->description !!}</p>
             </div>
         </div>
     </div>

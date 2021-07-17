@@ -14,7 +14,8 @@
                 @endforeach
             </select>
 
-            <input type="hidden" name="content[{{ $loop->iteration }}][id]" value="{{ $content['id'] }}" form="project-create-form">
+            <input type="hidden" name="content[{{ $loop->iteration }}][id]" value="{{ $content['id'] }}"
+                   form="project-create-form">
         </div>
         <div class="card-content pb-1">
             <div class="card-body pb-0">
@@ -24,8 +25,8 @@
                                                :key="$loop->iteration"
                                                :hasMultiValuedInput="true"/>
                     <x-dashboard.projects.text-content :availableLangs="$availableLangs"
-                                                      :key="$loop->iteration"
-                                                      :content="$content"/>
+                                                       :key="$loop->iteration"
+                                                       :content="$content"/>
                     @break
 
                     @case('image-small')

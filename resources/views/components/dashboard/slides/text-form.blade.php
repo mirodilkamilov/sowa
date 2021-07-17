@@ -11,13 +11,13 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-label-group">
-                                <input type="text" id="title"
+                                <input type="text" id="title-{{ $lang }}"
                                        class="form-control @error("title.$lang") is-invalid @enderror"
                                        placeholder="{{ __('Title') . ' ('. $lang . ')' }}"
                                        name="title[{{ $lang }}]"
                                        value="{{ old("title.$lang") ?? $slide?->title[$lang] }}">
                                 <label
-                                    for="title">{{ __('Title') . ' ('. $lang . ')' }}</label>
+                                    for="title-{{ $lang }}">{{ __('Title') . ' ('. $lang . ')' }}</label>
                                 @error("title.{$lang}")
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -25,13 +25,13 @@
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-label-group">
-                                <input type="text" id="sub-title"
+                                <input type="text" id="sub-title-{{ $lang }}"
                                        class="form-control @error("sub_title.$lang") is-invalid @enderror"
                                        placeholder="{{ __('Sub-title') . ' ('. $lang . ')' }}"
                                        name="sub_title[{{ $lang }}]"
                                        value="{{ old("sub_title.$lang") ?? $slide?->sub_title[$lang] }}">
                                 <label
-                                    for="sub-title">{{ __('Sub-title') . ' ('. $lang . ')' }}</label>
+                                    for="sub-title-{{ $lang }}">{{ __('Sub-title') . ' ('. $lang . ')' }}</label>
                                 @error("sub_title.$lang")
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -39,15 +39,14 @@
                         </div>
                         <div class="col-md-12 col-12">
                             <fieldset class="form-label-group">
-                                                                            <textarea
-                                                                                class="form-control @error("description.$lang") is-invalid @enderror"
-                                                                                rows="4"
-                                                                                placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
-                                                                                id="description"
-                                                                                spellcheck="false"
-                                                                                name="description[{{ $lang }}]">{{ old("description.$lang") ?? $slide?->description[$lang] }}</textarea>
+                                <textarea
+                                    id="description-{{ $lang }}"
+                                    class="form-control @error("description.$lang") is-invalid @enderror"
+                                    placeholder="{{ __('Description') . ' ('. $lang . ')' }}"
+                                    spellcheck="false"
+                                    name="description[{{ $lang }}]">{!! old("description.$lang") ?? $slide?->description[$lang] !!}</textarea>
                                 <label
-                                    for="description">{{ __('Description') . ' ('. $lang . ')' }}</label>
+                                    for="description-{{ $lang }}">{{ __('Description') . ' ('. $lang . ')' }}</label>
                                 @error("description.$lang")
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror

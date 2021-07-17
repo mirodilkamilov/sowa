@@ -59,8 +59,15 @@
         <script src="{{ asset('assets/js/image-preview.js') }}"></script>
     @endpush
 
+    @push('change-language-tabs')
+        <script src="{{ asset('assets/js/change-language-tabs.js') }}"></script>
+    @endpush
+
     @push('project-content-manipulation')
         <script src="{{ asset('assets/js/project-content-manipulation.js') }}"></script>
     @endpush
 
+    @push('ckeditor-in-projects')
+        <script src="{{ asset('assets/js/ckeditor-in-projects.js') }}"></script>
+    @endpush
 @endsection

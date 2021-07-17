@@ -9,10 +9,8 @@
 @error('list')
 <div class="alert alert-danger alert-dismissible mb-1" role="alert">
     <p>{{ $message }}</p>
-    <button type="button" class="close" data-dismiss="alert"
-            aria-label="Close">
-                                                        <span aria-hidden="true"><i
-                                                                class="feather icon-x-circle"></i></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
     </button>
 </div>
 @enderror
@@ -55,7 +53,7 @@
                                     @endif
 
                                     <input type="text"
-                                           id="help-title-{{ $i }}"
+                                           id="list-title-{{ $i }}-{{ $lang }}"
                                            class="form-control @error("list.$i.title.$lang") is-invalid @enderror"
                                            placeholder="{{ __('Title') }} ({{ $lang }})"
                                            name="list[{{ $i }}][title][{{ $lang }}]"
@@ -67,9 +65,7 @@
                                            @php $value = $listItems->title[$lang] ?? (($lang === 'ru') ? 'Креатив и Дизайн' : '');  @endphp
                                            @endif
                                            value="{{ old("list.$i.title.$lang") ?? $value }}">
-                                    <label for="help-title-{{ $i }}">
-                                        {{ __('Title') }}({{ $lang }})
-                                    </label>
+                                    <label for="list-title-{{ $i }}-{{ $lang }}">{{ __('Title') }} ({{ $lang }})</label>
                                     @error("list.$i.title.$lang")
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -122,7 +118,7 @@
                                     @endif
 
                                     <input type="text"
-                                           id="help-title-{{ $i }}"
+                                           id="list-title-{{ $i }}-{{ $lang }}"
                                            class="form-control @error("list.$i.title.$lang") is-invalid @enderror"
                                            placeholder="{{ __('Title') }} ({{ $lang }})"
                                            name="list[{{ $i }}][title][{{ $lang }}]"

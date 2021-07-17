@@ -105,3 +105,27 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.ck-editor__editable_inline {
+    min-height: 150px;
+}
+
+.small-ckeditor .ck-editor__editable_inline {
+    min-height: 68px;
+}
+
+.header-navbar {
+    z-index: 10;
+}
+
+.ck-editor__editable_inline {
+    min-height: 150px;
+}
+
+.small-ckeditor .ck-editor__editable_inline {
+    min-height: 68px;
+}
+
+.header-navbar {
+    z-index: 10;
+}

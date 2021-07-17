@@ -1,5 +1,3 @@
-var avilableLangs = ['ru', 'en', 'uz'];
-
 function changeContentType(select) {
     // * remove existing content if any
     var changedContent = $(select).parents('.card');
@@ -119,7 +117,7 @@ function createContent(contentId, contentType) {
                              </div>
                           </div>
                           <div class="col-md-6 col-12">
-                             <div class="form-label-group">
+                             <div class="form-label-group small-ckeditor">
                                 <textarea form="project-create-form" id="description-ru-` + contentId + `" class="form-control " placeholder="Description (ru)" rows="4"
                                    name="content[` + contentId + `][description][ru]"></textarea>
                                 <label for="description-ru-` + contentId + `">Description (ru)</label>
@@ -137,7 +135,7 @@ function createContent(contentId, contentType) {
                              </div>
                           </div>
                           <div class="col-md-6 col-12">
-                             <div class="form-label-group">
+                             <div class="form-label-group small-ckeditor">
                                 <textarea form="project-create-form" id="description-en-` + contentId + `" class="form-control " placeholder="Description (en)" rows="4"
                                    name="content[` + contentId + `][description][en]"></textarea>
                                 <label for="description-en-` + contentId + `">Description (en)</label>
@@ -155,7 +153,7 @@ function createContent(contentId, contentType) {
                              </div>
                           </div>
                           <div class="col-md-6 col-12">
-                             <div class="form-label-group">
+                             <div class="form-label-group small-ckeditor">
                                 <textarea form="project-create-form" id="description-uz-` + contentId + `" class="form-control " placeholder="Description (uz)" rows="4"
                                    name="content[` + contentId + `][description][uz]"></textarea>
                                 <label for="description-uz-` + contentId + `">Description (uz)</label>
@@ -232,23 +230,18 @@ function createContent(contentId, contentType) {
     }
 
     $('.content-body#' + contentId + ' .card-content').append(content);
-}
 
-function changeLangTabs(obj) {
-    var allClassNames = obj.className;
-    var currentLang = allClassNames.substring(allClassNames.length - 16, allClassNames.length - 14);
-
-    if (!avilableLangs.includes(currentLang))
-        return;
-
-    for (let lang of avilableLangs) {
-        if (currentLang === lang) {
-            $('.' + currentLang + '-tab-justified').addClass('active');
-            $('.tab-pane-' + currentLang).addClass('active');
-            continue;
+    // ? Initialize ckeditor
+    if (contentType === 'text') {
+        for (let lang of avilableLangs) {
+            ClassicEditor
+                .create(document.querySelector('#description-' + lang + '-' + contentId), {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo']
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
-        $('.' + lang + '-tab-justified').removeClass('active');
-        $('.tab-pane-' + lang).removeClass('active');
     }
 }
 

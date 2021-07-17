@@ -1,4 +1,3 @@
-{{--TODO: change contents $slide->url to something projects?sortBy=web/app/design --}}
 @extends('layouts.header')
 
 @section('content')
@@ -15,11 +14,10 @@
                                 </h6>
                                 <h1 class="title title--display-1 js-text-wave">{{ $slide->title }}</h1>
                                 <p class="description">
-                                    <span class="down-up"><span>{{ $slide->description }}</span></span>
+                                    <span class="down-up"><span>{!! $slide->description !!}</span></span>
                                 </p>
-{{--                                @php $query = $slide->category_id ?? 'all'; @endphp--}}
                                 <a class="btn-link btn-link--circle-right"
-                                   href="{{ route('user.projects.index', [App::getLocale(), 'sort_by' => $slide->category_id]) }}">
+                                   href="{{ route('user.projects.index', [$locale, 'sort_by' => $slide->category_id]) }}">
                                     <span class="down-up">
                                         <span>{{ __('Learn more') }}<i class="circle circle--right icon-right-open"></i></span>
                                     </span>

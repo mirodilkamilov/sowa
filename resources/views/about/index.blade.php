@@ -31,7 +31,7 @@
             <div class="col-12 col-lg-9">
                 <h2 class="title title--h4 js-lines">{{ $about->about_title }}</h2>
                 <div class="description noGutters-Bottom js-block">
-                    <p class="paragraph noGutters-Bottom">{{ $about->about_description }}</p>
+                    <p class="paragraph noGutters-Bottom">{!! $about->about_description !!}</p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="col-12 col-lg-9">
                 <h2 class="title title--h4 js-lines">{{ $about->help_title }}</h2>
                 <div class="description js-block">
-                    <p class="paragraph">{{ $about->help_description }}</p>
+                    <p class="paragraph">{!! $about->help_description !!}</p>
                 </div>
             </div>
             @foreach($about->aboutLists as $aboutList)
