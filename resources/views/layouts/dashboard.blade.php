@@ -49,25 +49,23 @@
    <!-- END: Vendor CSS-->
 
    <!-- BEGIN: Theme CSS-->
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/colors.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.min.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/colors.min.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/components.min.css">
 
    <!-- BEGIN: Page CSS-->
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/core/colors/palette-gradient.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/core/colors/palette-gradient.min.css">
 
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-user.css">
-   <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/app-todo.min.css">
+   <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/data-list-view.min.css">
    <!-- END: Page CSS-->
 
    <link rel="stylesheet" href="/assets/styles/custom.css">
-   {{--    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">--}}
 
-   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-           integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <!-- END: Head-->
 
@@ -254,19 +252,17 @@
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="/app-assets/js/core/app-menu.js"></script>
-<script src="/app-assets/js/core/app.js"></script>
-<script src="/app-assets/js/scripts/components.js"></script>
+<script src="/app-assets/js/core/app-menu.min.js"></script>
+<script src="/app-assets/js/core/app.min.js"></script>
+<script src="/app-assets/js/scripts/components.min.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="/app-assets/js/scripts/ui/data-list-view.js"></script>
+<script src="/app-assets/js/scripts/ui/data-list-view.min.js"></script>
 <script src="/app-assets/js/scripts/datatables/datatable.js"></script>
-<script src="/app-assets/js/scripts/pages/app-todo.js"></script>
-<script src="/app-assets/js/scripts/pages/app-user.js"></script>
-<script src="/app-assets/js/scripts/modal/components-modal.js"></script>
+<script src="/app-assets/js/scripts/pages/app-todo.min.js"></script>
+<script src="/app-assets/js/scripts/modal/components-modal.min.js"></script>
 
-<script src="/app-assets/vendors/js/ui/jquery.sticky.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <!-- END: Page JS-->
 
