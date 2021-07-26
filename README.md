@@ -15,7 +15,7 @@ Important functionalities of this application:
 
 Database design of the application:
 
-<img src="https://raw.githubusercontent.com/mirodil1999/sowa/main/Sowa_ER-Diagram.png">
+<img src="Sowa_ER-Diagram.png">
 
 ## How to locally host the project?
 
